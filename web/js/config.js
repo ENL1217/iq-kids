@@ -5,12 +5,12 @@
  * 回饋送出 endpoint (Google Apps Script Web App URL)
  * 設定步驟見 docs/architecture.md §6.5
  *
- * 為空字串時:
- *   - 回饋按鈕仍可開啟 modal、收集資料
- *   - 送出時資料只存 localStorage queue,不上傳
- *   - 設定頁可手動「匯出回饋 JSON」
+ * Endpoint 對應 George 的 Google Sheet (IQ-Kids Feedback)。
+ * 送出失敗時自動 fallback 到 localStorage queue (feedback-form.js)。
+ *
+ * 若要換 endpoint:直接改這裡,不用動其他檔案。
  */
-export const FEEDBACK_ENDPOINT = '';
+export const FEEDBACK_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzgCxJ6ssvM9JaEyNr8OXdz8jSBODAlWf2IFcNDtKIbo0PB1a-Z_hs0Nfwd2duNMNKh/exec';
 
 /** 每關預設抽幾題;題庫不足會自動降為實際題數 */
 export const QUESTIONS_PER_LEVEL = 5;
