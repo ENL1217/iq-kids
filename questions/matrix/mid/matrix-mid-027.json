@@ -1,0 +1,102 @@
+{
+  "id": "matrix-mid-027",
+  "topic": "matrix",
+  "difficulty": "mid",
+  "sub_type": "dual-shape-rotation",
+  "skill_codes": [
+    "pattern-bidirectional"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀跟方向都在變,?選哪個?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 0
+      },
+      {
+        "shape": "arrow",
+        "color": "yellow",
+        "rotation": 0
+      },
+      {
+        "shape": "arrow",
+        "color": "teal",
+        "rotation": 0
+      },
+      {
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 90
+      },
+      {
+        "shape": "arrow",
+        "color": "yellow",
+        "rotation": 90
+      },
+      {
+        "shape": "arrow",
+        "color": "teal",
+        "rotation": 90
+      },
+      {
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 180
+      },
+      {
+        "shape": "arrow",
+        "color": "yellow",
+        "rotation": 180
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍綠↓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "teal",
+        "rotation": 180
+      }
+    },
+    {
+      "text": "藍↓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 180
+      }
+    },
+    {
+      "text": "藍綠↑",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "teal",
+        "rotation": 0
+      }
+    },
+    {
+      "text": "藍↑",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 0
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "顏色橫向變,箭頭方向直向變。? 應該是哪個顏色 + 哪個方向?",
+  "explanation": "<strong>顏色</strong>橫向變:藍→黃→<strong>藍綠</strong>。<strong>方向</strong>直向變:↑→→→<strong>↓</strong>。答案:<strong>藍綠↓</strong>。",
+  "skill": "雙向(顏色+方向)"
+}

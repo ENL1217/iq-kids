@@ -1,0 +1,90 @@
+{
+  "id": "matrix-easy-026",
+  "topic": "matrix",
+  "difficulty": "easy",
+  "sub_type": "dual-variable-bidirectional",
+  "skill_codes": [
+    "pattern-bidirectional"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "橫向跟直向各有規律,?要選哪個?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "diamond",
+        "color": "blue"
+      },
+      {
+        "shape": "circle",
+        "color": "blue"
+      },
+      {
+        "shape": "hex",
+        "color": "blue"
+      },
+      {
+        "shape": "diamond",
+        "color": "pink"
+      },
+      {
+        "shape": "circle",
+        "color": "pink"
+      },
+      {
+        "shape": "hex",
+        "color": "pink"
+      },
+      {
+        "shape": "diamond",
+        "color": "yellow"
+      },
+      {
+        "shape": "circle",
+        "color": "yellow"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "黃六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "黃菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "藍菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "blue"
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "橫向看每排的形狀怎麼變,直向看每行的顏色怎麼變。?在第 3 排第 3 行,形狀跟顏色各是?",
+  "explanation": "<strong>橫向</strong>每排形狀依序是 菱形→圓→六邊形。<strong>直向</strong>每行顏色依序是 藍→粉紅→黃。? 在第 3 排第 3 行,所以是 <strong>黃六邊形</strong>。",
+  "skill": "雙向規律推理"
+}

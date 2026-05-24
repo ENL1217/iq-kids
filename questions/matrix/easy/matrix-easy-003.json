@@ -1,0 +1,90 @@
+{
+  "id": "matrix-easy-003",
+  "topic": "matrix",
+  "difficulty": "easy",
+  "sub_type": "single-variable-row",
+  "skill_codes": [
+    "pattern-row-identification"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "橫向看一下,每一排有什麼規律?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "square",
+        "color": "teal"
+      },
+      {
+        "shape": "square",
+        "color": "teal"
+      },
+      {
+        "shape": "square",
+        "color": "teal"
+      },
+      {
+        "shape": "star",
+        "color": "pink"
+      },
+      {
+        "shape": "star",
+        "color": "pink"
+      },
+      {
+        "shape": "star",
+        "color": "pink"
+      },
+      {
+        "shape": "circle",
+        "color": "orange"
+      },
+      {
+        "shape": "circle",
+        "color": "orange"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "橘圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "藍綠方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "橘方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "藍綠圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "teal"
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "每一排的 3 個東西都長一樣。第 3 排前 2 個是橘圓,第 3 格呢?",
+  "explanation": "每一排的 3 格是<strong>同樣的</strong>東西。第 3 排前 2 個是<strong>橘圓</strong>,第 3 格也要是 <strong>橘圓</strong>。",
+  "skill": "橫向規律識別"
+}

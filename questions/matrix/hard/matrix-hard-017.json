@@ -1,0 +1,102 @@
+{
+  "id": "matrix-hard-017",
+  "topic": "matrix",
+  "difficulty": "hard",
+  "sub_type": "three-variable-latin",
+  "skill_codes": [
+    "pattern-three-variable"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀、顏色、數量 3 個變數每排每行各出現一次,?是?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "circle",
+        "color": "yellow",
+        "count": 1
+      },
+      {
+        "shape": "star",
+        "color": "orange",
+        "count": 3
+      },
+      {
+        "shape": "diamond",
+        "color": "pink",
+        "count": 2
+      },
+      {
+        "shape": "star",
+        "color": "pink",
+        "count": 2
+      },
+      {
+        "shape": "diamond",
+        "color": "yellow",
+        "count": 1
+      },
+      {
+        "shape": "circle",
+        "color": "orange",
+        "count": 3
+      },
+      {
+        "shape": "diamond",
+        "color": "orange",
+        "count": 3
+      },
+      {
+        "shape": "circle",
+        "color": "pink",
+        "count": 2
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "2 個黃星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "yellow",
+        "count": 2
+      }
+    },
+    {
+      "text": "2 個橘星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "orange",
+        "count": 2
+      }
+    },
+    {
+      "text": "2 個橘圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "orange",
+        "count": 2
+      }
+    },
+    {
+      "text": "黃星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "yellow",
+        "count": 1
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "形狀、顏色、數量 3 個變數,每排每行 3 種各出現一次。? 該填什麼?",
+  "explanation": "<strong>形狀</strong>:每排每行三種 圓/星星/菱形 各一次。<strong>顏色</strong>同理。<strong>數量</strong> 1/2/3 同理。右下角 = <strong>黃星星</strong>。",
+  "skill": "三變數拉丁方陣"
+}
