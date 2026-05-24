@@ -1,0 +1,64 @@
+{
+  "id": "spatial-mid-021",
+  "topic": "spatial",
+  "difficulty": "mid",
+  "sub_type": "cube-counting-stacked",
+  "skill_codes": [
+    "spatial-cube-counting"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "下面這堆積木,總共有幾塊?(包括看不到、被擋住的)",
+  "visual": {
+    "type": "cubeStack",
+    "layout": [
+      [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ],
+    "size": 24
+  },
+  "options": [
+    {
+      "text": "9 塊"
+    },
+    {
+      "text": "8 塊"
+    },
+    {
+      "text": "7 塊"
+    },
+    {
+      "text": "10 塊"
+    }
+  ],
+  "answer": 0,
+  "hint": "這堆形狀是「4 層階梯 (3+3+2+1=9)」。記得也要算被擋住、看不到的方塊。",
+  "explanation": "這堆是「4 層階梯 (3+3+2+1=9)」,合計 <strong>9 塊</strong>。<strong>有些在後排或底層的方塊會被前面擋住,但還是要算進去。</strong>",
+  "skill": "立體方塊計數 (含遮擋)"
+}

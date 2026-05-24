@@ -1,0 +1,70 @@
+{
+  "id": "spatial-hard-004",
+  "topic": "spatial",
+  "difficulty": "hard",
+  "sub_type": "volume-arithmetic",
+  "skill_codes": [
+    "spatial-volume-arithmetic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "要堆成 3×3×3 的大立方體 (總共 27 塊小立方),目前堆好了下面的部分,還缺幾塊才能堆滿?",
+  "visual": {
+    "type": "cubeStack",
+    "layout": [
+      [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ]
+    ],
+    "size": 24
+  },
+  "options": [
+    {
+      "text": "9 塊"
+    },
+    {
+      "text": "27 塊"
+    },
+    {
+      "text": "18 塊"
+    },
+    {
+      "text": "10 塊"
+    }
+  ],
+  "answer": 0,
+  "hint": "目標:堆成 <strong>3×3×3</strong> 大立方體。算一下:3³ = ? 已經有 ? 塊,還差幾塊?",
+  "explanation": "3×3×3 = <strong>27 塊</strong>(目標)。目前 2 層 × 3×3 = <strong>18 塊</strong>(已完成)。還缺 <strong>27 − 18 = 9 塊</strong>。",
+  "skill": "立體乘法 (還缺幾塊)"
+}
