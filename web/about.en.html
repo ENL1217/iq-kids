@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- CSP: limit allowed sources to reduce XSS impact. GitHub Pages can't set HTTP headers; meta tag is the only channel. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://translate.google.com https://translate.googleapis.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; frame-src https://translate.google.com https://www.google.com; connect-src 'self' https://script.google.com https://translate.googleapis.com; form-action 'self' https://script.google.com">
 <title>A little dessert of thinking, in everyday life · Brain Explorer</title>
 <meta name="description" content="An open-source brain practice site for kids — built from a family, for families. Not just a score, but a chance to open more doors of thinking.">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">

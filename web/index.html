@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- CSP: 限制可載入來源，降低 XSS 注入影響面。GitHub Pages 無法設 HTTP header，meta tag 為唯一管道。 -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://translate.google.com https://translate.googleapis.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; frame-src https://translate.google.com https://www.google.com; connect-src 'self' https://script.google.com https://translate.googleapis.com; form-action 'self' https://script.google.com">
 <title>腦力探險家 · IQ 練習場</title>
 <meta name="description" content="給國小孩童的互動式 IQ 練習網頁。引導式解析,玩中學、想中玩。">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
