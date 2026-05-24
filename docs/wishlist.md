@@ -98,15 +98,36 @@ ABCD 按鍵選答案,enter 下一題,esc 回主選單
 **注意**:不要做成 gamification 焦慮源,要溫和
 
 ### 進階雷達圖 (skill 細項)  `P2` 💭
-不只六大題型,而是每個 skill_code 一個維度
+不只六大題型,而是每個 skill_code 一個維度。可切換「總覽 6 軸」/「細項依題型展開」兩種模式
 **前提**:題庫要有大量題目,且 skill_code 規範完整
 
-### 學習曲線圖  `P3` 💭
+### 學習熱度 / 連續打卡  `P2` 💭
+「已連續練習 N 天」「本週練了 N 題」「總會話 N 次」做正向回饋
+**注意**:不要弄成壓力源,溫和呈現,不要 streak 中斷的紅色警示
+
+### 進步曲線圖  `P2` 💭
+SVG 折線圖,每題型在時間軸上的答對率
 「我這個月在 spatial 從 40% 進步到 70%」這種
 
 ### 成績單 PDF 匯出  `P2` 💭
 測驗結束可下載一張漂亮的 PDF 給家長/老師
 **注意**:不要只是 html2canvas 截圖,要真的 PDF (jsPDF / pdfkit)
+
+### 多語言介面切換  `P1` 💭
+**結合瀏覽器 `navigator.language` 偵測 + localStorage 記偏好**
+
+設計建議:
+- Phase 1 (P1): UI 文字 i18n (主選單 / 按鈕 / modal labels / 設定頁 / about 頁)
+  - 新增 `web/js/i18n.js`,定義 `messages = { 'zh-TW': {...}, 'en': {...} }`
+  - 偵測順序:localStorage `iq-kids:lang` > URL `?lang=` > `navigator.language` > 'zh-TW' 預設
+  - HTML 標 `data-i18n="key"` 自動翻譯
+  - 設定頁加語言下拉選單
+- Phase 2 (P2): 題庫內容 i18n
+  - 題目 JSON 加 `prompt_en` / `hint_en` / `explanation_en` 欄位
+  - 或 build 時透過翻譯 pipeline 自動產生
+
+**為什麼放 P1**:程式碼面成本不高(主要是 UI 字串集中化),但對國際擴散影響大。
+不結合 `<html lang>` 自動切換而是用 localStorage 是因為瀏覽器語言不一定代表使用者偏好(e.g. 在英文系統上看中文網站)
 
 ---
 

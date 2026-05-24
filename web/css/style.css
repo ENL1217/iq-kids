@@ -1148,6 +1148,28 @@ body {
   opacity: 0.85;
 }
 
+/* about 頁連結 */
+.about-link-row {
+  text-align: center;
+  margin-top: 18px;
+  padding-bottom: 10px;
+}
+.about-link {
+  display: inline-block;
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 999px;
+  transition: all 0.15s;
+}
+.about-link:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.5);
+  text-decoration: underline;
+}
+
 /* ============ TEST SETUP ============ */
 .test-setup-card { margin-top: 16px; padding-top: 36px; }
 .setup-h2 {
