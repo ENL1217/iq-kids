@@ -937,3 +937,38 @@ hard-018 (correctPair (1,6)): 1-6 相對 ✓ / 2-3 相鄰 / 4-3 相鄰 / 6-5 相
 每題 1 真 3 假,無多解。
 
 **教訓**:寫 distractor 時不只要「結構對但語義錯」,還要驗證每個 distractor 真的是錯的。立方體相對面這種「對」的 statement,跨 pair 排列出來會自動踩雷。
+
+### v4 fix — symmetry-fold 多解 bug (reviewer 試玩 mid-033 抓到)
+
+**問題**:reviewer 試 mid-033 回報「B 跟 C 看起來都可以是正解」。掃 5 題 symmetry-fold 發現 **3 題有 bug**:
+- mid-031: B = C 完全相同 (因 config.x=0.5, 1-x=x)
+- mid-032: B = C 完全相同 (同上)
+- mid-033: B 跟 C 物理上同個 fold (half-v 視覺沒標 fold edge,所以 half-v(0.4) 跟 half-v(0.6) 是「同一張紙從左半看 vs 右半看」)
+
+**Root cause (兩層)**:
+1. **D1 = (1-cx, cy) 對 vertical fold 是物理等價** — half-v 沒標 fold edge,kid 可解讀半張紙是「左半」也可是「右半」,half-v(cx) ≡ half-v(1-cx) 物理上同個 fold
+2. **genSymmetryFold bypass 了 placeOptions assertion** — 我之前在 PR #5 學到 placeOptions assert 4 unique,但這個 function 沒用,所以 mid-031/032 的 literal 重複沒被抓到
+
+**修法**:
+1. D1 改根據 fold 方向選擇換軸:
+   ```
+   horizontal fold (ambiguity 在 y): D1 換 x → 安全
+   vertical fold   (ambiguity 在 x): D1 換 y → 安全
+   ```
+   具體 d1Hole 計算:`y_new = cy > 0.5 ? cy - 0.3 : cy + 0.3` (vertical fold) 或對應 x (horizontal fold)。這樣 D1 跟 correct 的 unfold 一定差至少 0.3 在某軸,絕不會物理等價
+
+2. **改用 placeOptions** 取代 inline shuffle,自動 assert 4 unique (lesson from PR #5 內化)
+
+**驗證 (5 題全部 spot-check)**:
+```
+mid-030 (horiz,0.3,0.4): D1=(0.6,0.4) — x 不同,無多解 ✓
+mid-031 (vert,0.5,0.35): D1=(0.5,0.65) — y 不同 ✓ (B 跟 C 不再相同)
+mid-032 (horiz,0.5,0.3):  D1=(0.8,0.3) — x 不同 ✓
+mid-033 (vert,0.4,0.6):  D1=(0.4,0.3) — y 不同,B 跟 C 不再 mirror 等價 ✓
+mid-034 (horiz,0.7,0.5): D1=(0.4,0.5) — x 不同 ✓
+```
+
+**新內化教訓**:
+1. **每個 sub_type generator 都該用 placeOptions / 等價 assertion** — 不要 inline shuffle bypass。批量檢查 batch 7 其他 generator (genCubeNetOpposite / genCubeNetInvalid) 也有 inline shuffle 但因 distractor pool 結構不會撞 correct,沒踩雷
+2. **half-paper render 沒標 fold edge → kid 可解讀任一側** — 設計 distractor 時要把這當「合法解讀」一起算,不只看 generator 內的 mathematical unfold。Renderer 改 (system Claude 領地) 是更好的長期解法 (例如 fold edge 畫粗黑線或加箭頭),但目前用 generator-side 約束處理
+3. **物理等價 ≠ 數值相等** — 同一個物理 fold-and-punch 可以有多種數值表示 (因 half-paper side 解讀)。distractor 必須跟 correct 在「全部物理表示」都不同,不能只看一個

@@ -424,10 +424,25 @@ function genSymmetryFold(id, configIdx) {
   };
 
   // 選項:4 個 (foldDir + hole on half) 配置,1 對 3 錯
-  // 對的:cfg.foldDir + cfg.halfHole
   const halfLayout = cfg.foldDir === 'horizontal' ? 'half-h' : 'half-v';
   const wrongLayout = cfg.foldDir === 'horizontal' ? 'half-v' : 'half-h';
   const wrongDir = cfg.foldDir === 'horizontal' ? 'vertical' : 'horizontal';
+
+  // 設計 D1 (對的方向但 hole 位置錯):
+  // ⚠️ v1 bug 教訓:不能用 (1-x, y) — 對 vertical fold 是物理等價 (half-v 視覺沒標 fold edge,
+  //    半張紙可被解讀為「左半」或「右半」,half-v(0.4) 跟 half-v(0.6) 物理上 = 同個 fold)
+  // 對 horizontal fold 也類似:half-h(x, y) ≡ half-h(x, 1-y) 物理等價
+  // 所以 D1 必須改「不沿 fold 軸對稱的」位置:
+  //   vertical fold → 換 y (沿 fold 軸方向換,不在等價軸上)
+  //   horizontal fold → 換 x (沿 fold 軸方向換)
+  let d1Hole;
+  if (cfg.foldDir === 'horizontal') {
+    // 橫摺 fold axis is x;ambiguity 在 y(top/bottom 解讀)。換 x 是安全的
+    d1Hole = { x: cfg.halfHole.x > 0.5 ? cfg.halfHole.x - 0.3 : cfg.halfHole.x + 0.3, y: cfg.halfHole.y };
+  } else {
+    // 直摺 fold axis is y;ambiguity 在 x(left/right 解讀)。換 y 安全
+    d1Hole = { x: cfg.halfHole.x, y: cfg.halfHole.y > 0.5 ? cfg.halfHole.y - 0.3 : cfg.halfHole.y + 0.3 };
+  }
 
   const correctOpt = {
     type: 'composite',
@@ -436,12 +451,11 @@ function genSymmetryFold(id, configIdx) {
       { type: 'foldedPaper', layout: halfLayout, holes: [cfg.halfHole], label: cfg.foldDir === 'horizontal' ? '橫摺' : '直摺' }
     ]
   };
-  // D1: 對的方向但 hole 位置錯
   const D1 = {
     type: 'composite',
     arrangement: 'horizontal',
     items: [
-      { type: 'foldedPaper', layout: halfLayout, holes: [{ x: 1 - cfg.halfHole.x, y: cfg.halfHole.y }], label: cfg.foldDir === 'horizontal' ? '橫摺' : '直摺' }
+      { type: 'foldedPaper', layout: halfLayout, holes: [d1Hole], label: cfg.foldDir === 'horizontal' ? '橫摺' : '直摺' }
     ]
   };
   // D2: 錯的方向但 hole 位置對
@@ -461,10 +475,8 @@ function genSymmetryFold(id, configIdx) {
     ]
   };
 
-  const allOpts = [correctOpt, D1, D2, D3];
-  const seed = [...id].reduce((s, c) => (s * 31 + c.charCodeAt(0)) >>> 0, 0);
-  const shuffled = rngShuffle(makeRng(seed), allOpts);
-  const answerIdx = shuffled.findIndex(o => JSON.stringify(o) === JSON.stringify(correctOpt));
+  // 用 placeOptions 確保 4 unique (lesson from PR #5 — 之前 bypass 這個 assertion 造成 mid-031/032 出 B==C)
+  const { options: shuffled, answerIdx } = placeOptions(correctOpt, [D1, D2, D3], id);
 
   return makeQ(id, 'mid', 'symmetry-fold', 'spatial-symmetry-fold', '對稱折紙還原',
     visual,
