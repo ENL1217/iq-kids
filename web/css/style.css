@@ -569,12 +569,81 @@ body {
 }
 
 @media (max-width: 520px) {
+  /* ───── 基礎佈局 ───── */
+  body { padding: 14px; }
+
+  /* 題目視覺相關 */
   .options.shape-options { grid-template-columns: repeat(2, 1fr); }
   .question-text { font-size: 16px; }
   .matrix-3x3 { max-width: 260px; }
   .matrix-cell svg { width: 80%; height: 80%; }
   .shape-cell { width: 52px; height: 52px; }
   .num-cell { min-width: 48px; height: 48px; font-size: 18px; padding: 0 10px; }
+
+  /* ───── Card 跟結算頁邊距收緊 ───── */
+  .card { padding: 28px 16px 18px; }
+  .final-screen { padding: 24px 16px; }
+
+  /* ───── 題型卡片 ───── */
+  .topic-card { padding: 18px 16px; }
+  .topic-card .topic-emoji { font-size: 36px; }
+  .topic-card .topic-name { font-size: 18px; }
+
+  /* ───── Mute 按鈕縮一點,避開 title ───── */
+  .mute-btn { width: 38px; height: 38px; font-size: 18px; top: 10px; right: 10px; }
+
+  /* ───── Test mode banner ───── */
+  .test-mode-banner { padding: 14px 16px; gap: 12px; }
+  .banner-emoji { font-size: 32px; }
+  .banner-title { font-size: 17px; }
+  .banner-sub { font-size: 12px; }
+  .banner-arrow { font-size: 22px; }
+
+  /* ───── 測驗設定 chips 收緊 ───── */
+  .setup-section { margin-bottom: 14px; }
+  .setup-chip { padding: 7px 11px; font-size: 12px; }
+  .chip-emoji { font-size: 14px; }
+  .setup-h2 { font-size: 19px; }
+
+  /* ───── Test 答題 3 按鈕避免擠爆 ───── */
+  .test-actions { gap: 6px; }
+  .test-actions .btn { font-size: 13px; padding: 10px 8px; min-width: 70px; }
+
+  /* ───── Stats 數字小一點 ───── */
+  .stats .stat-value { font-size: 22px; }
+  .stat-box { padding: 10px 4px; }
+
+  /* ───── 雷達圖 SVG 縮到容器寬 (主要修法) ───── */
+  .radar-chart { max-width: 100%; height: auto; display: block; }
+  .radar-section { padding: 16px 12px 12px; }
+
+  /* ───── 錯題回顧 row 在窄畫面換行 ───── */
+  .review-row { flex-wrap: wrap; }
+  .wrong-item { flex-wrap: wrap; padding: 8px; gap: 8px; }
+  .wrong-meta { margin-left: 0; width: 100%; padding-left: 38px; font-size: 11px; }
+
+  /* ───── 測驗結果 review-item 收一點 ───── */
+  .review-item { padding: 10px 12px; }
+  .review-prompt { font-size: 13px; }
+
+  /* ───── 回饋 modal ───── */
+  .fb-modal { padding: 18px 16px 14px; }
+  .fb-chip { padding: 7px 10px; font-size: 12px; }
+  .fb-chip-emoji { font-size: 14px; }
+
+  /* ───── 系統回饋 banner 收緊 ───── */
+  .system-feedback-row { padding: 14px 12px; }
+  .system-feedback-btn { padding: 9px 16px; font-size: 13px; }
+}
+
+/* 真的很窄的螢幕 (iPhone SE 1st gen, 舊 Android,320px) */
+@media (max-width: 360px) {
+  .title { font-size: 22px; }
+  .banner-title { font-size: 16px; }
+  .banner-sub { font-size: 11px; }
+  .banner-emoji { font-size: 28px; }
+  .test-actions { flex-direction: column; }
+  .test-actions .btn { min-width: 100%; }
 }
 
 .hide { display: none !important; }
