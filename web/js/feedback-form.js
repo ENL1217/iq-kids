@@ -6,7 +6,8 @@ import { FEEDBACK_ENDPOINT, LS_PREFIX } from './config.js';
 
 const QUEUE_KEY = `${LS_PREFIX}feedback-queue`;
 
-const FEEDBACK_CHIPS = [
+// 針對單題的 chips (沿用)
+const FEEDBACK_CHIPS_QUESTION = [
   { id: 'too-hard',     emoji: '😵', label: '太難了' },
   { id: 'too-easy',     emoji: '😴', label: '太簡單' },
   { id: 'unclear',      emoji: '🤔', label: '題目敘述不清楚' },
@@ -16,14 +17,25 @@ const FEEDBACK_CHIPS = [
   { id: 'other',        emoji: '💡', label: '其他想法' }
 ];
 
+// 針對整個系統 / 網站的 chips
+const FEEDBACK_CHIPS_SYSTEM = [
+  { id: 'feature',         emoji: '💡', label: '功能建議' },
+  { id: 'bug',             emoji: '🐛', label: '網站 bug' },
+  { id: 'ui',              emoji: '🎨', label: 'UI / 視覺問題' },
+  { id: 'mobile',          emoji: '📱', label: '手機體驗' },
+  { id: 'topic-suggestion',emoji: '🎯', label: '希望多哪類題目' },
+  { id: 'praise',          emoji: '🌟', label: '稱讚 / 感謝' },
+  { id: 'other',           emoji: '💭', label: '其他想法' }
+];
+
 let _activeModal = null;
 
 /**
  * 開啟回饋 modal。
  * @param {object} ctx - 當前題目 context
  *   ctx.question  — 題目物件 (id/topic/difficulty)
- *   ctx.mode      — 'learn' | 'test'
- *   ctx.status    — 'unanswered' | 'correct' | 'wrong'
+ *   ctx.mode      — 'learn' | 'test' | 'system'
+ *   ctx.status    — 'unanswered' | 'correct' | 'wrong' | 'n/a'
  *   ctx.picked_idx — 0-based,使用者選了哪個 (若已答)
  */
 export function openFeedbackForm(ctx) {
@@ -33,6 +45,19 @@ export function openFeedbackForm(ctx) {
   _activeModal = modal;
   // 動畫:fade in
   requestAnimationFrame(() => modal.classList.add('show'));
+}
+
+/**
+ * 系統 / 網站層級的回饋 (非針對單題)。
+ * 送到同一個 Google Sheet,但 question_id = "__system__" 方便篩選。
+ */
+export function openSystemFeedback() {
+  openFeedbackForm({
+    question: { id: '__system__', topic: '__system__', difficulty: '__system__' },
+    mode: 'system',
+    status: 'n/a',
+    picked_idx: null
+  });
 }
 
 function closeModal() {
@@ -47,7 +72,14 @@ function buildModal(ctx) {
   const root = document.createElement('div');
   root.className = 'fb-modal-root';
 
-  const chipsHtml = FEEDBACK_CHIPS.map(c => `
+  const isSystem = ctx.mode === 'system';
+  const chips = isSystem ? FEEDBACK_CHIPS_SYSTEM : FEEDBACK_CHIPS_QUESTION;
+  const title = isSystem ? '💡 對網站有想法?' : '💬 回饋這一題';
+  const placeholder = isSystem
+    ? '想分享什麼都歡迎:功能建議、bug、想多看到什麼題目、整體感想...'
+    : '告訴我們你的想法,讓題目更好...';
+
+  const chipsHtml = chips.map(c => `
     <button type="button" class="fb-chip" data-chip="${c.id}">
       <span class="fb-chip-emoji">${c.emoji}</span>
       <span class="fb-chip-label">${c.label}</span>
@@ -55,19 +87,23 @@ function buildModal(ctx) {
   `).join('');
 
   const qid = ctx.question?.id || '(unknown)';
+  // 系統回饋不顯示題目 ID,顯示「整個網站」標籤
+  const headerSubHtml = isSystem
+    ? `<div class="fb-qid"><span class="fb-tag fb-tag-sys">🌐 對整個網站的回饋</span></div>`
+    : `<div class="fb-qid">題目編號:<code>${qid}</code></div>`;
 
   root.innerHTML = `
     <div class="fb-backdrop"></div>
-    <div class="fb-modal" role="dialog" aria-label="回饋這題">
+    <div class="fb-modal" role="dialog" aria-label="${title}">
       <div class="fb-header">
-        <div class="fb-title">💬 回饋這一題</div>
+        <div class="fb-title">${title}</div>
         <button type="button" class="fb-close" aria-label="關閉">×</button>
       </div>
-      <div class="fb-qid">題目編號:<code>${qid}</code></div>
+      ${headerSubHtml}
       <div class="fb-section-label">想說什麼?可以多選</div>
       <div class="fb-chips">${chipsHtml}</div>
       <div class="fb-section-label">補充說明 (選填)</div>
-      <textarea class="fb-textarea" placeholder="告訴我們你的想法,讓題目更好..." maxlength="500"></textarea>
+      <textarea class="fb-textarea" placeholder="${placeholder}" maxlength="500"></textarea>
       <div class="fb-footer">
         <button type="button" class="btn btn-ghost fb-cancel">取消</button>
         <button type="button" class="btn btn-primary fb-send">送出 ✨</button>

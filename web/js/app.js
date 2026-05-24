@@ -8,7 +8,7 @@ import {
   playCorrect, playWrong, playClick, burstConfetti, highlightCorrect,
   soundEnabled, toggleSound, unlockAudio
 } from './feedback.js';
-import { openFeedbackForm } from './feedback-form.js';
+import { openFeedbackForm, openSystemFeedback } from './feedback-form.js';
 import {
   recordAttempt, aggregateByTopic, getWrongSince,
   lifetimeStats, exportAttempts, clearAttempts
@@ -59,7 +59,7 @@ async function init() {
   // 把流程函數掛上 window 供 inline onclick 呼叫
   Object.assign(window, {
     startLevel, goMenu, restartLevel, selectAnswer, nextQuestion,
-    onMuteClick, onFeedbackClick,
+    onMuteClick, onFeedbackClick, openSystemFeedback,
     onExportRecords, onClearRecords, onReviewWrong,
     // 測驗模式
     openTestSetup, startTest, confirmExitTest, startNewTest,
