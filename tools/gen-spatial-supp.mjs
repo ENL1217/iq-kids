@@ -228,31 +228,54 @@ function genCubeNetOpposite(id, configIdx, difficulty) {
   // 但 face 排列是 top=1, front=2, right=3, back=4, left=5, bottom=6
   // 所以 top↔bottom 是 1↔6, front↔back 是 2↔4, left↔right 是 5↔3
 
-  // 隨機選一組相對 pair 當正解
-  const PAIRS = [['1', '6'], ['2', '4'], ['3', '5']];
-  const correctPair = PAIRS[configIdx % 3];
+  // cross layout 相對面只有 3 組:(top,bottom)=(1,6), (front,back)=(2,4), (left,right)=(3,5)
+  // 隨機選一組當正解
+  const OPPOSITE_PAIRS = [['1', '6'], ['2', '4'], ['3', '5']];
+  const correctPair = OPPOSITE_PAIRS[configIdx % 3];
   const correctText = `${correctPair[0]} 號與 ${correctPair[1]} 號相對`;
 
-  // 干擾:其他 2 組相對 pair (錯位但合理),加 1 組相鄰 pair
-  const wrongPairs = PAIRS.filter((_, i) => i !== configIdx % 3);
-  const adjacent = correctPair[0] === '1' ? ['1', '2'] : ['1', String((parseInt(correctPair[0]) % 6) + 1)];
+  // 干擾池 (per reviewer 修正):
+  // 用 12 組相鄰面當 distractor — 「X 號與 Y 號相對」但實際 X Y 相鄰才是合理錯答
+  // 絕對不能用「其他 2 組相對」當 distractor (那 2 組陳述也是真的,造成多解)
+  //
+  // 立方體相鄰面:每個面有 4 個相鄰,12 組(unordered)
+  //   top(1) 鄰 front(2)/right(3)/back(4)/left(5)
+  //   bottom(6) 鄰 front(2)/right(3)/back(4)/left(5)
+  //   front(2) 鄰 right(3)/left(5)
+  //   back(4) 鄰 right(3)/left(5)
+  const ADJACENT_PAIRS = [
+    ['1', '2'], ['1', '3'], ['1', '4'], ['1', '5'],
+    ['6', '2'], ['6', '3'], ['6', '4'], ['6', '5'],
+    ['2', '3'], ['2', '5'],
+    ['4', '3'], ['4', '5']
+  ];
+  // 從 12 組相鄰中抽 3 個當 distractor (seed-deterministic)
+  const distractorSeed = [...id].reduce((s, c) => (s * 31 + c.charCodeAt(0)) >>> 0, 0);
+  const pickedAdj = rngShuffle(makeRng(distractorSeed + 99), ADJACENT_PAIRS).slice(0, 3);
 
   const optTexts = [
     correctText,
-    `${wrongPairs[0][0]} 號與 ${wrongPairs[0][1]} 號相對`,
-    `${wrongPairs[1][0]} 號與 ${wrongPairs[1][1]} 號相對`,
-    `${adjacent[0]} 號與 ${adjacent[1]} 號相對`
+    `${pickedAdj[0][0]} 號與 ${pickedAdj[0][1]} 號相對`,
+    `${pickedAdj[1][0]} 號與 ${pickedAdj[1][1]} 號相對`,
+    `${pickedAdj[2][0]} 號與 ${pickedAdj[2][1]} 號相對`
   ];
   const seed = [...id].reduce((s, c) => (s * 31 + c.charCodeAt(0)) >>> 0, 0);
   const shuffled = rngShuffle(makeRng(seed), optTexts);
   const answerIdx = shuffled.indexOf(correctText);
 
+  // 給孩子的 explanation 解釋為何「correctPair 才是相對」+ 為何 distractor (相鄰) 不對
+  const pairDesc = {
+    '1,6': '頂面跟底面 (top-bottom)',
+    '2,4': '前面跟後面 (front-back)',
+    '3,5': '右面跟左面 (right-left)'
+  }[correctPair.join(',')] || '相對面';
+
   return makeQ(id, difficulty, 'cube-net-opposite', 'spatial-cube-net', '立方體展開想像 (相對面)',
     { type: 'cubeNet', layout: 'cross', faces },
     shuffled.map(t => ({ text: t })),
     answerIdx,
-    `cross 展開圖中,中間那排折起來變成<strong>四個側面</strong>。最上面的 face 跟最下面的 face 折起來是相對的。哪兩個是?`,
-    `cross 展開圖摺起來後:中間 4 個 (位置 left/front/right/back) 變成<strong>四個側面</strong>,上面那個 (top) 跟下面那個 (bottom) 變成<strong>頂面跟底面</strong>。頂面跟底面互為對面。其他相對組:left 跟 right,front 跟 back。本題正解:<strong>${correctText}</strong>。`
+    `cross 展開圖中,中間那排 (位置 left/front/right/back) 折起來變成<strong>四個側面</strong>。立方體只有<strong>3 組相對面</strong>:頂底、前後、左右。摺起來想想哪兩個 label 會剛好背對背?`,
+    `cross 展開圖摺起來後,只有 <strong>3 組</strong>相對面:1-6 (頂底)、2-4 (前後)、3-5 (左右)。本題的正解是 <strong>${correctText}</strong> — 就是<strong>${pairDesc}</strong>那一組。其他三個選項裡的兩個 label 其實是<strong>相鄰</strong>而不是相對 (它們在立方體上共用一條摺邊)。`
   );
 }
 
@@ -401,10 +424,25 @@ function genSymmetryFold(id, configIdx) {
   };
 
   // 選項:4 個 (foldDir + hole on half) 配置,1 對 3 錯
-  // 對的:cfg.foldDir + cfg.halfHole
   const halfLayout = cfg.foldDir === 'horizontal' ? 'half-h' : 'half-v';
   const wrongLayout = cfg.foldDir === 'horizontal' ? 'half-v' : 'half-h';
   const wrongDir = cfg.foldDir === 'horizontal' ? 'vertical' : 'horizontal';
+
+  // 設計 D1 (對的方向但 hole 位置錯):
+  // ⚠️ v1 bug 教訓:不能用 (1-x, y) — 對 vertical fold 是物理等價 (half-v 視覺沒標 fold edge,
+  //    半張紙可被解讀為「左半」或「右半」,half-v(0.4) 跟 half-v(0.6) 物理上 = 同個 fold)
+  // 對 horizontal fold 也類似:half-h(x, y) ≡ half-h(x, 1-y) 物理等價
+  // 所以 D1 必須改「不沿 fold 軸對稱的」位置:
+  //   vertical fold → 換 y (沿 fold 軸方向換,不在等價軸上)
+  //   horizontal fold → 換 x (沿 fold 軸方向換)
+  let d1Hole;
+  if (cfg.foldDir === 'horizontal') {
+    // 橫摺 fold axis is x;ambiguity 在 y(top/bottom 解讀)。換 x 是安全的
+    d1Hole = { x: cfg.halfHole.x > 0.5 ? cfg.halfHole.x - 0.3 : cfg.halfHole.x + 0.3, y: cfg.halfHole.y };
+  } else {
+    // 直摺 fold axis is y;ambiguity 在 x(left/right 解讀)。換 y 安全
+    d1Hole = { x: cfg.halfHole.x, y: cfg.halfHole.y > 0.5 ? cfg.halfHole.y - 0.3 : cfg.halfHole.y + 0.3 };
+  }
 
   const correctOpt = {
     type: 'composite',
@@ -413,12 +451,11 @@ function genSymmetryFold(id, configIdx) {
       { type: 'foldedPaper', layout: halfLayout, holes: [cfg.halfHole], label: cfg.foldDir === 'horizontal' ? '橫摺' : '直摺' }
     ]
   };
-  // D1: 對的方向但 hole 位置錯
   const D1 = {
     type: 'composite',
     arrangement: 'horizontal',
     items: [
-      { type: 'foldedPaper', layout: halfLayout, holes: [{ x: 1 - cfg.halfHole.x, y: cfg.halfHole.y }], label: cfg.foldDir === 'horizontal' ? '橫摺' : '直摺' }
+      { type: 'foldedPaper', layout: halfLayout, holes: [d1Hole], label: cfg.foldDir === 'horizontal' ? '橫摺' : '直摺' }
     ]
   };
   // D2: 錯的方向但 hole 位置對
@@ -438,10 +475,8 @@ function genSymmetryFold(id, configIdx) {
     ]
   };
 
-  const allOpts = [correctOpt, D1, D2, D3];
-  const seed = [...id].reduce((s, c) => (s * 31 + c.charCodeAt(0)) >>> 0, 0);
-  const shuffled = rngShuffle(makeRng(seed), allOpts);
-  const answerIdx = shuffled.findIndex(o => JSON.stringify(o) === JSON.stringify(correctOpt));
+  // 用 placeOptions 確保 4 unique (lesson from PR #5 — 之前 bypass 這個 assertion 造成 mid-031/032 出 B==C)
+  const { options: shuffled, answerIdx } = placeOptions(correctOpt, [D1, D2, D3], id);
 
   return makeQ(id, 'mid', 'symmetry-fold', 'spatial-symmetry-fold', '對稱折紙還原',
     visual,
