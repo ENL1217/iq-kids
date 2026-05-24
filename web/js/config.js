@@ -15,10 +15,12 @@ export const FEEDBACK_ENDPOINT = '';
 /** 每關預設抽幾題;題庫不足會自動降為實際題數 */
 export const QUESTIONS_PER_LEVEL = 5;
 
-/** 音效預設音量 (0-1) */
+/** 音效預設音量 (0-1)。
+ *  playCorrect/playWrong 內部還會再乘 1.3-1.4 倍 (因為 user feedback 認為太小聲)。
+ *  之後想再調大,改這裡或 feedback.js 的 multiplier 都可以。 */
 export const SOUND_VOLUME = {
-  correct: 0.3,
-  wrong:   0.25
+  correct: 0.4,
+  wrong:   0.32
 };
 
 /** localStorage key prefix */
