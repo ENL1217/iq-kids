@@ -140,6 +140,34 @@ export function validateQuestion(q, opts = {}) {
     errors.push('visual must be an object');
   }
 
+  // single-shape 必須有 shape 欄位 (抓 generator 沒填齊的 bug)
+  // 也檢查 options[].visual 裡的 single-shape
+  const checkSingleShape = (spec, where) => {
+    if (spec && spec.type === 'single-shape' && !spec.shape) {
+      errors.push(`${where}: single-shape visual missing 'shape' field`);
+    }
+  };
+  if (q.visual) checkSingleShape(q.visual, 'visual');
+  if (Array.isArray(q.options)) {
+    q.options.forEach((opt, i) => {
+      if (opt.visual) checkSingleShape(opt.visual, `options[${i}].visual`);
+    });
+  }
+
+  // text 不可含字面 "undefined" / "null" / "NaN" (generator 模板字串炸了的訊號)
+  const checkLiteral = (text, where) => {
+    if (typeof text !== 'string') return;
+    for (const bad of ['undefined', 'null', 'NaN']) {
+      if (text.includes(bad)) errors.push(`${where} contains literal "${bad}" (generator template likely failed)`);
+    }
+  };
+  if (Array.isArray(q.options)) {
+    q.options.forEach((opt, i) => checkLiteral(opt.text, `options[${i}].text`));
+  }
+  checkLiteral(q.prompt, 'prompt');
+  checkLiteral(q.hint, 'hint');
+  checkLiteral(q.explanation, 'explanation');
+
   // skill_codes 至少 1 個,且都在 canonical
   if (!Array.isArray(q.skill_codes) || q.skill_codes.length === 0) {
     errors.push('skill_codes must be a non-empty array');
