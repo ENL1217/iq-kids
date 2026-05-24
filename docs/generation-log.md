@@ -636,3 +636,221 @@ User 指示「後面全部做完一次檢查」,沒分 planning-PR + done-PR 兩
 - spatial sub_type 只覆蓋 2 個 skill code,雷達圖 spatial 那一軸維度單薄
 - 等 foldedPaper helper / cubeNet 完整測試後再 batch 7 補(預期 paper-fold + cube-net 各 ~20 題)
 
+
+---
+
+# Long-term Roadmap — 擴到 2000 題的階段計畫
+
+> 寫於 batch 6 完成後 (450 題)。reviewer 提問「2000 題怎麼做」,本段是我的 plan。
+> 每個 phase 完成時把對應段勾 ✅,進度透明。
+
+## 紅線:不爬商業 IQ 站
+
+即使有 browser 控制權限,**不爬 Mensa / IQ Test Prep / 商業題庫**:
+- 著作權:題目敘述 / 選項 / 解析受版權保護,「結構性閱讀」跟「擷取衍生作品」界線模糊
+- ToS:多數商業 IQ 站 robots.txt 跟 ToS 禁止 scraping
+- 兒童產品審查更嚴,輿論一旦質疑「抄」品牌信任崩盤
+- **不需要爬就有路可走**:公開學術資源 + 課綱 + CC-licensed 資料集足夠
+
+OK 的「結構性閱讀」清單:
+- RAVEN / I-RAVEN 論文 (已用於 batch 3)
+- GeeksforGeeks 等教育 blog 的 taxonomy (已用於 batch 2)
+- CogAT K-2 sample 描述 (已用於 batch 2)
+- TIMSS / PISA 釋出題庫 (公開授權,還沒用)
+- K-12 課綱 (公開,還沒用)
+
+## Phase A — 現有 generator 擴量 + 補既有 sub_type (預估 +400,總 850)
+
+每個 generator 隨機 pool / 配置空間都還有擴充空間:
+- numseries 75 → 200:對數型 / 2 階等比 / 雙串差等差
+- matrix 75 → 150:更多 shape×color 組合 + dual-shape-rotation 擴
+- sequence 75 → 150:週期更多變化,4-attribute 同步
+- multivar 55 → 100:2x2 / 3x3 沒做的組合
+- analogy 75 → 100:補 GeeksforGeeks 提的 `group` / `item-to-category`
+- spatial 55 → 短期飽和,等 Phase B
+
+**抗重複機制要先到位**:擴 generator 前要先有 structural fingerprint 比對,不然容易出近似題。
+
+## Phase B — 補齊未覆蓋 skill_code + 新 visual.type (預估 +500,總 1350)
+
+| Skill code | 為什麼還沒做 | 解法 |
+|---|---|---|
+| `spatial-paper-fold` | foldedPaper renderer 完成 (batch 7) ✅ | batch 7 起做 |
+| `spatial-cube-net` | cubeNet 已測,batch 7 大膽用 | batch 7 起做 |
+| `spatial-cube-net-invalid` | 同上 | batch 7 起做 |
+| `spatial-symmetry-fold` | 同 paper-fold | batch 7 起做 |
+| `spatial-mirror` | 純結構 cell + 鏡像規則 | batch 7 起做 |
+| `analogy-group` | 我漏了 | 純詞對 pool,~30 題 |
+| `analogy-category-member` | 我漏了 | 同上 |
+| `pattern-rotation` (matrix) | 只做 6 題 | 擴到 30,加更多角度組合 |
+
+每 sub_type 寫 generator 後 5-30 題,Phase B 總共加 ~500 題。
+
+## Phase C — 外部結構化資料引入 (預估 +600,總 ~2000)
+
+純結構參考,**不抄內容**:
+1. **TIMSS 釋出題庫** (IEA,公開授權):看 4/8 年級 pattern/number 題的 difficulty calibration → 校正我們的 3-bucket 難度
+2. **K-12 課綱對應**:臺灣 110 課綱、Common Core,看小三會什麼數列、小五會什麼空間
+3. **CC-licensed AI 資料集**:RAVEN / I-RAVEN / CLEVR / BIG-Bench-Hard 子集,看 attribute 怎麼組合(只看 algorithm)
+4. **教育部素養題**:公開 PDF,可讀
+
+## Phase D — 抗重複 + 品質基礎建設 (與 Phase B/C 平行)
+
+到 1500+ 題 reviewer 沒辦法逐題 spot-check,需要:
+
+```
+1. 結構指紋 (structural fingerprint):
+   每題算 hash(shape順序, color順序, rule type, count chain),
+   新題加入前比對前 N 題,similarity > 0.9 reject
+
+2. 答對率追蹤 (從線上紀錄系統 #9 拉):
+   定期看哪些題目答對率 100% (太簡單) 或 < 20% (壞題或太難),
+   標記人工 review
+
+3. 多樣性 audit:
+   每 100 新題自動產 report — shape/color/sub_type/難度分布,
+   確保新批沒偏移到單一 region
+
+4. reviewer 流程工程化:
+   - 自動抽 5% spot-check 跑視覺渲染截圖
+   - 自動算 I-RAVEN distance + 顯示 outlier
+   - reviewer 只看「outlier + 5% 隨機」≈ 30 題/批,不再看全部
+```
+
+## Phase E — 眾包 + 多語 (長路)
+
+> 2000 題後的真正擴展路徑:
+
+- GitHub Issue template「家長/老師投稿一題」,CI auto-validate + reviewer 審
+- 多語化:analogy/sound 本土性強的可開英文版只做 visual 題
+- 學校產品的護城河
+
+## 預估時程
+
+| Phase | 內容 | 工作量 | 預估完成題數 |
+|---|---|---|---|
+| 完成 | batch 1-6 | (已完成) | 450 |
+| Batch 7 | spatial 補完 | 1-2 天 | 480 |
+| Phase A | generator 擴量 + 抗重複 | 2-3 天 | 850 |
+| Phase B | 新 sub_type + visual.type | 1 週 | 1350 |
+| Phase C | 外部結構引入 + 課綱校正 | 2-3 週 | 2000 |
+| Phase D | 工程化 (與 B/C 平行) | 1-2 週 | (品質基建) |
+| Phase E | 眾包 (持續) | 永遠 | (長期擴展) |
+
+---
+
+
+## Batch 7 — spatial 補強 (planning, 2026-05-24) 📝 待 review
+
+### 觸發條件
+- system Claude 完成 `foldedPaper` renderer (commit 565a758)
+- reviewer 給綠燈大膽用 cubeNet (seed 已驗證 2 題)
+- Batch 6 留下的「spatial 雷達圖維度單薄」要修
+
+### 目標 31 題,5 個新 sub_type
+| 難度 | 數量 | sub_type 分布 | 視覺手法 |
+|------|------|-------------|--------|
+| easy | 4 | paper-fold-once (4) | composite + foldedPaper |
+| mid  | 15 | paper-fold-twice (4) / cube-net-opposite (3) / symmetry-fold (5) / mirror (3) | composite/cubeNet/single-shape |
+| hard | 12 | cube-net-opposite (4) / cube-net-invalid (6) / mirror (2) | cubeNet/single-shape |
+| **總計** | **31** | 5 新 sub_type | |
+
+### ID 分配
+- spatial-easy-023 ~ -026 (4 paper-fold-once)
+- spatial-mid-023 ~ -037 (15):
+  - -023~-026 paper-fold-twice
+  - -027~-029 cube-net-opposite
+  - -030~-034 symmetry-fold
+  - -035~-037 mirror
+- spatial-hard-018 ~ -029 (12):
+  - -018~-021 cube-net-opposite
+  - -022~-027 cube-net-invalid
+  - -028~-029 mirror
+
+### skill_code 覆蓋(全 spatial-* 7 個 canonical)
+
+| skill_code | Batch 1-6 | Batch 7 | 全 coverage |
+|---|---|---|---|
+| `spatial-paper-fold` | ❌ | ✅ (4+4 題) | ✅ |
+| `spatial-cube-counting` | ✅ 40 題 | — | ✅ |
+| `spatial-cube-net` | ✅ seed 2 題 | ✅ (3+4 題) | ✅ |
+| `spatial-cube-net-invalid` | ❌ | ✅ (6 題) | ✅ |
+| `spatial-volume-arithmetic` | ✅ 15 題 | — | ✅ |
+| `spatial-mirror` | ❌ | ✅ (3+2 題) | ✅ |
+| `spatial-symmetry-fold` | ❌ | ✅ (5 題) | ✅ |
+
+→ batch 7 後 spatial 7 個 skill_code 全覆蓋,雷達圖維度齊。
+
+### 視覺設計策略
+
+**paper-fold (8 題)** — composite 多步驟
+```
+[flat + fold hint] → [folded half-h] → [folded + hole] → "展開?"
+options: 4 個 flat foldedPaper,各自 holes 不同
+```
+- easy 4 題:1 次對摺 (horizontal 或 vertical) + 1 個洞
+- mid 4 題:2 次對摺 = quarter + 1 個洞 (展開後 4 對稱位置)
+
+**cube-net (7 題)** — 純 cubeNet visual
+- 7 題都是「哪兩面相對」類型 (跟 seed mid-002 同套路,但 face 配色不同)
+- layout 用 `cross`(已驗證);變化是 6 face 上的 label/color 排列
+
+**cube-net-invalid (6 題)** — cubeNet visual + text options
+- visual 顯示一個 cubeNet
+- prompt: 「下面說法哪個錯?」
+- options 是 4 個關於「折起來後哪面跟哪面相對 / 相鄰」的陳述,3 對 1 錯
+- 不需要新 visual.type — 純用 cubeNet + text 描述
+
+**symmetry-fold (5 題)** — 反向 paper-fold
+- 給「展開後」(flat + 多 holes 對稱排列)
+- 問「下列哪種折法+打洞會產生這個結果?」
+- options 是 4 個 composite (折法 + 洞位置),選對的
+- 比 paper-fold 多一層逆推,難度上 mid 合理
+
+**mirror (5 題)** — single-shape arrow + 鏡像
+- 全部用 arrow shape
+- prompt: 「下面這個箭頭的鏡像是?」
+- visual: 原箭頭 (single-shape)
+- options: 4 個 arrow,1 個是對的鏡像,3 個是不同 rotation
+- 對「水平鏡像」(across horizontal axis): 0° → 180°, 45° → 135°, 90° → 90°, 135° → 45°...
+- 對「垂直鏡像」(across vertical axis): 0° → 0°, 45° → 315°, 90° → 270°...
+- mid 3 用水平鏡像 (較簡單,半數角度不變很直觀)
+- hard 2 用垂直鏡像 + 角度組合更微妙
+
+### 干擾選項設計 (per sub_type)
+
+| sub_type | D1 (規則內錯位) | D2 (部分對) | D3 (跳出規則) |
+|---|---|---|---|
+| paper-fold | 對稱方向錯 (水平 vs 垂直) | 洞位置對但少 1 個 | 多出洞 / 隨機位置 |
+| cube-net (opposite) | 取相鄰兩面 (錯位但合理) | 取相鄰但是頂底組合 | 完全錯位 |
+| cube-net-invalid | 跟對的陳述近似但細節錯 | 表面看似對但忽略 cross 排列 | 完全胡亂陳述 |
+| symmetry-fold | 折法對 + 洞位置錯 | 折法錯 + 洞位置對 | 全錯 |
+| mirror | 反方向鏡像 (水平錯成垂直) | 旋轉 90° 不是鏡像 | 完全不相關角度 |
+
+每個錯答對應一種具體誤解 — 不踩 RAVEN 漏洞 (沿用 batch 3-6 的 I-RAVEN 約束精神)。
+
+### 工程內化 (從 batch 3-6 學到的)
+
+新 `tools/gen-spatial-supp.mjs` 會帶以下 sanity check (自動跑):
+- `describe()` 對 missing 欄位 throw
+- `placeOptions()` assert 4 unique (避免 distractor 撞 correct)
+- PROMPTS key EXACTLY = sub_type 字串 + throw on missing
+- foldedPaper holes[] 用 helper 生成,4 對稱模式 enumerate 出來成 const,不靠 magic number
+
+### 開工前問題 (blocking)
+
+1. **paper-fold 的 visual 太占空間怎麼辦?** composite 內 4 個 foldedPaper 並排,加上 4 個 option 也是 foldedPaper,一題視覺塞 8+ 個圖。需要 reviewer 確認 renderer 處理得了 (我猜 OK 因為 80×80 固定容器,但要確認)。
+
+2. **cube-net-invalid 「陳述」用什麼語氣?** options 是文字描述如「1 號跟 6 號相對」。我計畫:
+   - 「1 號跟 6 號相對」(對的)
+   - 「2 號跟 5 號相對」(對的)
+   - 「3 號跟 4 號相對」(對的)
+   - 「1 號跟 3 號相對」(錯 — 它們相鄰不是相對)
+   options 文字太統一可能機械,reviewer 看一下口味 OK 嗎?
+
+3. **mirror sub_type 命名**:我把 mid 3 + hard 2 全部 sub_type 設成 `mirror-arrow`(因為都用 arrow shape)。若 reviewer 要分開可改為 `mirror-horizontal` (mid 3) + `mirror-vertical` (hard 2)。
+
+### 等 review,不寫 generator
+
+push 後等回覆。OK 後再生 31 題、跑三層自驗、push 同 PR add commit。
+
