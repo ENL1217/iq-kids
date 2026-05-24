@@ -1,0 +1,81 @@
+{
+  "id": "sequence-easy-024",
+  "topic": "sequence",
+  "difficulty": "easy",
+  "sub_type": "rotation-equal-angle",
+  "skill_codes": [
+    "sequence-rotation"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看箭頭怎麼轉,下一個指向哪裡?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "arrow",
+        "rotation": 0,
+        "color": "teal"
+      },
+      {
+        "shape": "arrow",
+        "rotation": 90,
+        "color": "teal"
+      },
+      {
+        "shape": "arrow",
+        "rotation": 180,
+        "color": "teal"
+      },
+      {
+        "shape": "arrow",
+        "rotation": 270,
+        "color": "teal"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍綠↑",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "teal",
+        "rotation": 0
+      }
+    },
+    {
+      "text": "粉紅←",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "pink",
+        "rotation": 270
+      }
+    },
+    {
+      "text": "藍綠→",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "teal",
+        "rotation": 90
+      }
+    },
+    {
+      "text": "藍綠圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "teal"
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "每次轉 90°。前 4 格指 藍綠↑→藍綠→→藍綠↓→藍綠←,下一格指?",
+  "explanation": "箭頭每次<strong>順時針轉 90°</strong>。第 5 格在 270° + 90° = <strong>0°</strong>(藍綠↑)。",
+  "skill": "等角度旋轉追蹤"
+}

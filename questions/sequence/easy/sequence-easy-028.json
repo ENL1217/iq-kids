@@ -1,0 +1,81 @@
+{
+  "id": "sequence-easy-028",
+  "topic": "sequence",
+  "difficulty": "easy",
+  "sub_type": "rotation-equal-angle",
+  "skill_codes": [
+    "sequence-rotation"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看箭頭怎麼轉,下一個指向哪裡?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "arrow",
+        "rotation": 90,
+        "color": "blue"
+      },
+      {
+        "shape": "arrow",
+        "rotation": 135,
+        "color": "blue"
+      },
+      {
+        "shape": "arrow",
+        "rotation": 180,
+        "color": "blue"
+      },
+      {
+        "shape": "arrow",
+        "rotation": 225,
+        "color": "blue"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "粉紅↙",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "pink",
+        "rotation": 225
+      }
+    },
+    {
+      "text": "藍↖",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 315
+      }
+    },
+    {
+      "text": "藍←",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 270
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "每次轉 45°。前 4 格指 藍→→藍↘→藍↓→藍↙,下一格指?",
+  "explanation": "箭頭每次<strong>順時針轉 45°</strong>。第 5 格在 225° + 45° = <strong>270°</strong>(藍←)。",
+  "skill": "等角度旋轉追蹤"
+}

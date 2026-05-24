@@ -1,0 +1,78 @@
+{
+  "id": "sequence-easy-022",
+  "topic": "sequence",
+  "difficulty": "easy",
+  "sub_type": "cyclic-ABC",
+  "skill_codes": [
+    "sequence-cyclic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "三個一組重複,下一個應該是?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "square",
+        "color": "purple"
+      },
+      {
+        "shape": "triangle",
+        "color": "blue"
+      },
+      {
+        "shape": "hex",
+        "color": "yellow"
+      },
+      {
+        "shape": "square",
+        "color": "purple"
+      },
+      {
+        "shape": "triangle",
+        "color": "blue"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "黃六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "藍三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "黃方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "粉紅圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "pink"
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "三個一組重複:紫方→藍三角→黃六邊形→紫方→藍三角→?。下一個輪到哪一個?",
+  "explanation": "這是<strong>ABC ABC</strong> 三項循環:紫方→藍三角→黃六邊形 一直重複。前 5 格走完 ABCAB,第 6 格輪到 <strong>黃六邊形</strong>。",
+  "skill": "ABC 循環追蹤"
+}

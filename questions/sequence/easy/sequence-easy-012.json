@@ -1,0 +1,74 @@
+{
+  "id": "sequence-easy-012",
+  "topic": "sequence",
+  "difficulty": "easy",
+  "sub_type": "cyclic-AB",
+  "skill_codes": [
+    "sequence-cyclic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀和顏色在輪換,下一個是什麼?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "shape": "star",
+        "color": "orange"
+      },
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "shape": "star",
+        "color": "orange"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "粉紅圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "橘星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "藍方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "橘方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "orange"
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "兩個一組重複:藍方→橘星星→藍方→橘星星→?。第 5 個應該回到哪一個?",
+  "explanation": "這是<strong>AB AB</strong> 循環:<strong>藍方</strong> 跟 <strong>橘星星</strong> 兩個輪流。前 4 格是 藍方→橘星星→藍方→橘星星,第 5 格輪到 <strong>藍方</strong>。",
+  "skill": "AB 循環追蹤"
+}

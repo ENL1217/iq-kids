@@ -1,0 +1,78 @@
+{
+  "id": "sequence-hard-014",
+  "topic": "sequence",
+  "difficulty": "hard",
+  "sub_type": "grouped-pattern",
+  "skill_codes": [
+    "sequence-grouped"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "把它兩兩分組看,下一個應該是?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "diamond",
+        "color": "blue"
+      },
+      {
+        "shape": "hex",
+        "color": "blue"
+      },
+      {
+        "shape": "circle",
+        "color": "yellow"
+      },
+      {
+        "shape": "square",
+        "color": "yellow"
+      },
+      {
+        "shape": "triangle",
+        "color": "orange"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "橘星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "粉紅菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "橘三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "藍菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "blue"
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "兩兩分組看:(第1,2格同色)(第3,4格同色)(第5,6格也應該同色)。組內形狀都不同。第 6 格是?",
+  "explanation": "<strong>分組看</strong>:1-2 都是 藍 (但形狀不同),3-4 都是 黃 (但形狀不同),5-6 應該都是 <strong>橘</strong> 但形狀不同。第 5 已經是 橘三角,第 6 必須是 <strong>橘</strong> 但<strong>不是 三角</strong>:<strong>橘星星</strong>。",
+  "skill": "分組模式辨識"
+}

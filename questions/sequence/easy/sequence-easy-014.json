@@ -1,0 +1,78 @@
+{
+  "id": "sequence-easy-014",
+  "topic": "sequence",
+  "difficulty": "easy",
+  "sub_type": "cyclic-ABC",
+  "skill_codes": [
+    "sequence-cyclic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "三個一組重複,下一個應該是?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "star",
+        "color": "blue"
+      },
+      {
+        "shape": "circle",
+        "color": "orange"
+      },
+      {
+        "shape": "diamond",
+        "color": "purple"
+      },
+      {
+        "shape": "star",
+        "color": "blue"
+      },
+      {
+        "shape": "circle",
+        "color": "orange"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "粉紅方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "紫星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "purple"
+      }
+    },
+    {
+      "text": "橘圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "紫菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "purple"
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "三個一組重複:藍星星→橘圓→紫菱形→藍星星→橘圓→?。下一個輪到哪一個?",
+  "explanation": "這是<strong>ABC ABC</strong> 三項循環:藍星星→橘圓→紫菱形 一直重複。前 5 格走完 ABCAB,第 6 格輪到 <strong>紫菱形</strong>。",
+  "skill": "ABC 循環追蹤"
+}

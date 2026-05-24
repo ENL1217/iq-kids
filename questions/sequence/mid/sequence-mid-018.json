@@ -1,0 +1,78 @@
+{
+  "id": "sequence-mid-018",
+  "topic": "sequence",
+  "difficulty": "mid",
+  "sub_type": "dual-attribute-cycle",
+  "skill_codes": [
+    "sequence-cyclic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀跟顏色各有自己的節奏,下一個是?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "star",
+        "color": "pink"
+      },
+      {
+        "shape": "square",
+        "color": "orange"
+      },
+      {
+        "shape": "hex",
+        "color": "pink"
+      },
+      {
+        "shape": "star",
+        "color": "orange"
+      },
+      {
+        "shape": "square",
+        "color": "pink"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "粉紅方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "粉紅六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "橘六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "橘圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "orange"
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "形狀依 星星→方→六邊形 三個一輪;顏色依 粉紅→橘 兩個一輪。第 6 格的形狀跟顏色各應該是什麼?",
+  "explanation": "<strong>形狀</strong>三個一輪 (週期 3):星星→方→六邊形→星星→方→<strong>六邊形</strong>。<strong>顏色</strong>兩個一輪 (週期 2):粉紅→橘→粉紅→橘→粉紅→<strong>橘</strong>。合起來:<strong>橘六邊形</strong>。",
+  "skill": "雙屬性異步循環"
+}

@@ -1,0 +1,74 @@
+{
+  "id": "sequence-easy-008",
+  "topic": "sequence",
+  "difficulty": "easy",
+  "sub_type": "cyclic-AB",
+  "skill_codes": [
+    "sequence-cyclic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀和顏色在輪換,下一個是什麼?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "hex",
+        "color": "yellow"
+      },
+      {
+        "shape": "diamond",
+        "color": "pink"
+      },
+      {
+        "shape": "hex",
+        "color": "yellow"
+      },
+      {
+        "shape": "diamond",
+        "color": "pink"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "粉紅菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "藍綠圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "粉紅六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "黃六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "yellow"
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "兩個一組重複:黃六邊形→粉紅菱形→黃六邊形→粉紅菱形→?。第 5 個應該回到哪一個?",
+  "explanation": "這是<strong>AB AB</strong> 循環:<strong>黃六邊形</strong> 跟 <strong>粉紅菱形</strong> 兩個輪流。前 4 格是 黃六邊形→粉紅菱形→黃六邊形→粉紅菱形,第 5 格輪到 <strong>黃六邊形</strong>。",
+  "skill": "AB 循環追蹤"
+}

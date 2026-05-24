@@ -1,0 +1,74 @@
+{
+  "id": "sequence-easy-005",
+  "topic": "sequence",
+  "difficulty": "easy",
+  "sub_type": "cyclic-AB",
+  "skill_codes": [
+    "sequence-cyclic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀和顏色在輪換,下一個是什麼?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "circle",
+        "color": "yellow"
+      },
+      {
+        "shape": "square",
+        "color": "pink"
+      },
+      {
+        "shape": "circle",
+        "color": "yellow"
+      },
+      {
+        "shape": "square",
+        "color": "pink"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍綠三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "粉紅方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "粉紅圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "黃圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "yellow"
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "兩個一組重複:黃圓→粉紅方→黃圓→粉紅方→?。第 5 個應該回到哪一個?",
+  "explanation": "這是<strong>AB AB</strong> 循環:<strong>黃圓</strong> 跟 <strong>粉紅方</strong> 兩個輪流。前 4 格是 黃圓→粉紅方→黃圓→粉紅方,第 5 格輪到 <strong>黃圓</strong>。",
+  "skill": "AB 循環追蹤"
+}

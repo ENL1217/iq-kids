@@ -1,0 +1,78 @@
+{
+  "id": "sequence-easy-013",
+  "topic": "sequence",
+  "difficulty": "easy",
+  "sub_type": "cyclic-ABC",
+  "skill_codes": [
+    "sequence-cyclic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "三個一組重複,下一個應該是?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "circle",
+        "color": "purple"
+      },
+      {
+        "shape": "triangle",
+        "color": "pink"
+      },
+      {
+        "shape": "diamond",
+        "color": "blue"
+      },
+      {
+        "shape": "circle",
+        "color": "purple"
+      },
+      {
+        "shape": "triangle",
+        "color": "pink"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "粉紅三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "藍綠方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "藍圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "藍菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "blue"
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "三個一組重複:紫圓→粉紅三角→藍菱形→紫圓→粉紅三角→?。下一個輪到哪一個?",
+  "explanation": "這是<strong>ABC ABC</strong> 三項循環:紫圓→粉紅三角→藍菱形 一直重複。前 5 格走完 ABCAB,第 6 格輪到 <strong>藍菱形</strong>。",
+  "skill": "ABC 循環追蹤"
+}
