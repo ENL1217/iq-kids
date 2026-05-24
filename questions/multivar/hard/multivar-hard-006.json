@@ -1,0 +1,102 @@
+{
+  "id": "multivar-hard-006",
+  "topic": "multivar",
+  "difficulty": "hard",
+  "sub_type": "4var",
+  "skill_codes": [
+    "multivar-4var"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀、顏色、數量、方向 4 個都在變,? 是?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "triangle",
+        "color": "pink",
+        "count": 1
+      },
+      {
+        "shape": "star",
+        "color": "pink",
+        "count": 2
+      },
+      {
+        "shape": "hex",
+        "color": "pink",
+        "count": 3
+      },
+      {
+        "shape": "triangle",
+        "color": "orange",
+        "count": 2
+      },
+      {
+        "shape": "star",
+        "color": "orange",
+        "count": 3
+      },
+      {
+        "shape": "hex",
+        "color": "orange",
+        "count": 1
+      },
+      {
+        "shape": "triangle",
+        "color": "blue",
+        "count": 3
+      },
+      {
+        "shape": "star",
+        "color": "blue",
+        "count": 1
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "3 個藍三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "blue",
+        "count": 3
+      }
+    },
+    {
+      "text": "2 個藍六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "blue",
+        "count": 2
+      }
+    },
+    {
+      "text": "2 個粉紅六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "pink",
+        "count": 2
+      }
+    },
+    {
+      "text": "粉紅三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "pink",
+        "count": 1
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "橫變形狀,直變顏色,數量隨對角線變化。? 是?",
+  "explanation": "形狀 三角→星星→六邊形 (橫)。顏色 粉紅→橘→藍 (直)。數量隨對角線 (r+c) % 3 + 1。右下 r=2 c=2: count=2。答案 <strong>2 個藍六邊形</strong>。",
+  "skill": "四變數規律"
+}

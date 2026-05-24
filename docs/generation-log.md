@@ -584,3 +584,27 @@ User 指示「後面全部做完一次檢查」,沒分 planning-PR + done-PR 兩
 1. `genArithmeticRowAdd` 第一版 D3 用 `picked[2][0] * picked[2][1] || 1`,當 a=b=1 時 D3=1 = a = b,觸發我自己加的 `placeCellOptions` assertion (3 distractor 不重複)。改用「count ± 1 換色 + count ± 2 + 換 shape」三套無重複的方案
 - 這個 assertion 是從 batch 3 教訓內化來的,**第一次跑就抓到**,沒讓壞題流出
 
+---
+
+## Batch 5 — multivar (2026-05-24) ✅ DONE
+
+### 統計
+| 難度 | 數量 | sub_type |
+|------|------|----------|
+| easy | 20 | 2var-shape-color 10 / 2var-count-color 10 |
+| mid  | 20 | 3var-independent 10 / latin-square-3var 10 |
+| hard | 15 | 4var 5 / position-swap 5 / attribute-inheritance 5 |
+| **總計** | **55** | 7 sub_type,覆蓋 schema §3 全部 6 個 multivar-* canonical |
+
+### 設計
+- easy 用 `matrix-2x2` (2×2 = 4 cells),其餘用 `matrix-3x3`
+- 從 multivar-easy-003 起跳,seed -001/-002 不動
+
+### 自驗
+- L1 strict validate: 61/61 pass(含 6 seed)
+- L3 假設 I-RAVEN distance ≥ 2:每個 generator 的 D1 都刻意 2 attr diff
+
+### 修 bug 過程
+- `genAttributeInheritance` 第一版 sh/co 隨機抽,可能包含 baseShape='circle' 或 baseColor='white' → 跟 D3/D2 collision → assertion 抓到。改 filter 排除 base
+- 又是 placeCellOptions 的 assertion 救了我,沒讓壞題流出
+

@@ -1,0 +1,70 @@
+{
+  "id": "multivar-easy-007",
+  "topic": "multivar",
+  "difficulty": "easy",
+  "sub_type": "2var-shape-color",
+  "skill_codes": [
+    "multivar-2var"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "橫向看一個變數,直向看另一個。? 應該是?",
+  "visual": {
+    "type": "matrix-2x2",
+    "cells": [
+      {
+        "shape": "diamond",
+        "color": "yellow"
+      },
+      {
+        "shape": "hex",
+        "color": "yellow"
+      },
+      {
+        "shape": "diamond",
+        "color": "orange"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "橘菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "黃菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "橘六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "黃六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "yellow"
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "橫向變形狀 (菱形→六邊形),直向變顏色 (黃→橘)。? 是?",
+  "explanation": "橫向:菱形→六邊形。直向:黃→橘。右下角 = <strong>橘六邊形</strong>。",
+  "skill": "雙變數獨立 (形+色)"
+}

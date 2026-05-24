@@ -1,0 +1,77 @@
+{
+  "id": "multivar-easy-020",
+  "topic": "multivar",
+  "difficulty": "easy",
+  "sub_type": "2var-count-color",
+  "skill_codes": [
+    "multivar-2var"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "橫向看顏色,直向看數量。? 是?",
+  "visual": {
+    "type": "matrix-2x2",
+    "cells": [
+      {
+        "shape": "hex",
+        "color": "yellow",
+        "count": 1
+      },
+      {
+        "shape": "hex",
+        "color": "yellow",
+        "count": 2
+      },
+      {
+        "shape": "hex",
+        "color": "teal",
+        "count": 1
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍綠六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "teal",
+        "count": 1
+      }
+    },
+    {
+      "text": "2 個藍綠六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "teal",
+        "count": 2
+      }
+    },
+    {
+      "text": "2 個黃六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "yellow",
+        "count": 2
+      }
+    },
+    {
+      "text": "黃六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "yellow",
+        "count": 1
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "橫向數量 1→2,直向顏色 黃→藍綠。? 是?",
+  "explanation": "橫向 +1 個,直向換色。右下角 = <strong>2 個藍綠六邊形</strong>。",
+  "skill": "雙變數獨立 (數+色)"
+}

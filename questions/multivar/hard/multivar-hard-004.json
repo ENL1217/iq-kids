@@ -1,0 +1,102 @@
+{
+  "id": "multivar-hard-004",
+  "topic": "multivar",
+  "difficulty": "hard",
+  "sub_type": "4var",
+  "skill_codes": [
+    "multivar-4var"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀、顏色、數量、方向 4 個都在變,? 是?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "star",
+        "color": "orange",
+        "count": 1
+      },
+      {
+        "shape": "square",
+        "color": "orange",
+        "count": 2
+      },
+      {
+        "shape": "triangle",
+        "color": "orange",
+        "count": 3
+      },
+      {
+        "shape": "star",
+        "color": "teal",
+        "count": 2
+      },
+      {
+        "shape": "square",
+        "color": "teal",
+        "count": 3
+      },
+      {
+        "shape": "triangle",
+        "color": "teal",
+        "count": 1
+      },
+      {
+        "shape": "star",
+        "color": "blue",
+        "count": 3
+      },
+      {
+        "shape": "square",
+        "color": "blue",
+        "count": 1
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "3 個藍星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "blue",
+        "count": 3
+      }
+    },
+    {
+      "text": "2 個藍三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "blue",
+        "count": 2
+      }
+    },
+    {
+      "text": "橘星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "orange",
+        "count": 1
+      }
+    },
+    {
+      "text": "2 個橘三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "orange",
+        "count": 2
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "橫變形狀,直變顏色,數量隨對角線變化。? 是?",
+  "explanation": "形狀 星星→方→三角 (橫)。顏色 橘→藍綠→藍 (直)。數量隨對角線 (r+c) % 3 + 1。右下 r=2 c=2: count=2。答案 <strong>2 個藍三角</strong>。",
+  "skill": "四變數規律"
+}

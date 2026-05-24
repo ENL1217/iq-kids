@@ -1,0 +1,90 @@
+{
+  "id": "multivar-hard-009",
+  "topic": "multivar",
+  "difficulty": "hard",
+  "sub_type": "position-swap",
+  "skill_codes": [
+    "multivar-position-swap"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看每排的位置怎麼輪轉,? 應該是哪一個?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "hex",
+        "color": "blue"
+      },
+      {
+        "shape": "diamond",
+        "color": "blue"
+      },
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "shape": "hex",
+        "color": "blue"
+      },
+      {
+        "shape": "diamond",
+        "color": "blue"
+      },
+      {
+        "shape": "diamond",
+        "color": "blue"
+      },
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "粉紅菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "藍六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "藍方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "粉紅六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "pink"
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "每一排是上一排向右輪轉 1 格。Row 2 是 菱形/方/?,? 應該是?",
+  "explanation": "位置每排右輪轉一格:Row 0: 六邊形/菱形/方 → Row 1: 方/六邊形/菱形 → Row 2: 菱形/方/<strong>六邊形</strong>。答案 <strong>藍六邊形</strong>。",
+  "skill": "位置輪轉"
+}

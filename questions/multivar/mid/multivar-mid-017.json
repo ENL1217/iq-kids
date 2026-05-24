@@ -1,0 +1,90 @@
+{
+  "id": "multivar-mid-017",
+  "topic": "multivar",
+  "difficulty": "mid",
+  "sub_type": "latin-square-3var",
+  "skill_codes": [
+    "multivar-latin"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "每排每行 3 種形狀各出現一次,? 該填什麼?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "circle",
+        "color": "yellow"
+      },
+      {
+        "shape": "hex",
+        "color": "orange"
+      },
+      {
+        "shape": "star",
+        "color": "blue"
+      },
+      {
+        "shape": "hex",
+        "color": "blue"
+      },
+      {
+        "shape": "star",
+        "color": "yellow"
+      },
+      {
+        "shape": "circle",
+        "color": "orange"
+      },
+      {
+        "shape": "star",
+        "color": "orange"
+      },
+      {
+        "shape": "circle",
+        "color": "blue"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "橘六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "黃圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "黃六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "橘圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "orange"
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "每排每行 3 種形狀各 1 次,3 種顏色也各 1 次。? 填?",
+  "explanation": "這是雙拉丁方陣。形狀缺 <strong>六邊形</strong>,顏色缺 <strong>黃</strong>。答案 <strong>黃六邊形</strong>。",
+  "skill": "拉丁方陣 (3 形+3 色)"
+}
