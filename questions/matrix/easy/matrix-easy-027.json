@@ -1,0 +1,90 @@
+{
+  "id": "matrix-easy-027",
+  "topic": "matrix",
+  "difficulty": "easy",
+  "sub_type": "dual-variable-bidirectional",
+  "skill_codes": [
+    "pattern-bidirectional"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "橫向跟直向各有規律,?要選哪個?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "circle",
+        "color": "purple"
+      },
+      {
+        "shape": "hex",
+        "color": "purple"
+      },
+      {
+        "shape": "triangle",
+        "color": "purple"
+      },
+      {
+        "shape": "circle",
+        "color": "orange"
+      },
+      {
+        "shape": "hex",
+        "color": "orange"
+      },
+      {
+        "shape": "triangle",
+        "color": "orange"
+      },
+      {
+        "shape": "circle",
+        "color": "yellow"
+      },
+      {
+        "shape": "hex",
+        "color": "yellow"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "黃圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "黃三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "紫圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "purple"
+      }
+    },
+    {
+      "text": "紫三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "purple"
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "橫向看每排的形狀怎麼變,直向看每行的顏色怎麼變。?在第 3 排第 3 行,形狀跟顏色各是?",
+  "explanation": "<strong>橫向</strong>每排形狀依序是 圓→六邊形→三角。<strong>直向</strong>每行顏色依序是 紫→橘→黃。? 在第 3 排第 3 行,所以是 <strong>黃三角</strong>。",
+  "skill": "雙向規律推理"
+}

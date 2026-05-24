@@ -1,0 +1,90 @@
+{
+  "id": "matrix-mid-017",
+  "topic": "matrix",
+  "difficulty": "mid",
+  "sub_type": "latin-square",
+  "skill_codes": [
+    "pattern-latin-square"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "每一排每一行都有 3 種不同的東西,?填什麼?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "circle",
+        "color": "teal"
+      },
+      {
+        "shape": "diamond",
+        "color": "teal"
+      },
+      {
+        "shape": "square",
+        "color": "teal"
+      },
+      {
+        "shape": "diamond",
+        "color": "teal"
+      },
+      {
+        "shape": "square",
+        "color": "teal"
+      },
+      {
+        "shape": "circle",
+        "color": "teal"
+      },
+      {
+        "shape": "square",
+        "color": "teal"
+      },
+      {
+        "shape": "circle",
+        "color": "teal"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍綠圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "粉紅菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "粉紅圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "藍綠菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "teal"
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "每一排都有 圓/菱形/方 三種,每一行也都有。? 那一格少了哪種?",
+  "explanation": "這是<strong>拉丁方陣</strong>:每 row 跟每 col 三種形狀各出現一次。第 3 排前 2 格是 方 跟 圓,第 3 格必須是 <strong>菱形</strong>。色全部都是 藍綠。答案:<strong>藍綠菱形</strong>。",
+  "skill": "拉丁方陣 (形狀)"
+}

@@ -1,0 +1,90 @@
+{
+  "id": "matrix-easy-010",
+  "topic": "matrix",
+  "difficulty": "easy",
+  "sub_type": "single-variable-row",
+  "skill_codes": [
+    "pattern-row-identification"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "橫向看一下,每一排有什麼規律?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "shape": "diamond",
+        "color": "teal"
+      },
+      {
+        "shape": "diamond",
+        "color": "teal"
+      },
+      {
+        "shape": "diamond",
+        "color": "teal"
+      },
+      {
+        "shape": "triangle",
+        "color": "yellow"
+      },
+      {
+        "shape": "triangle",
+        "color": "yellow"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "藍方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "黃方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "黃三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "yellow"
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "每一排的 3 個東西都長一樣。第 3 排前 2 個是黃三角,第 3 格呢?",
+  "explanation": "每一排的 3 格是<strong>同樣的</strong>東西。第 3 排前 2 個是<strong>黃三角</strong>,第 3 格也要是 <strong>黃三角</strong>。",
+  "skill": "橫向規律識別"
+}

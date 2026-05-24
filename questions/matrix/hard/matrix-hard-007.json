@@ -1,0 +1,102 @@
+{
+  "id": "matrix-hard-007",
+  "topic": "matrix",
+  "difficulty": "hard",
+  "sub_type": "arithmetic-row-add",
+  "skill_codes": [
+    "pattern-arithmetic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "每一排前兩格的數量加起來等於第三格,?是?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "star",
+        "color": "yellow",
+        "count": 1
+      },
+      {
+        "shape": "star",
+        "color": "yellow",
+        "count": 2
+      },
+      {
+        "shape": "star",
+        "color": "yellow",
+        "count": 3
+      },
+      {
+        "shape": "star",
+        "color": "yellow",
+        "count": 3
+      },
+      {
+        "shape": "star",
+        "color": "yellow",
+        "count": 1
+      },
+      {
+        "shape": "star",
+        "color": "yellow",
+        "count": 4
+      },
+      {
+        "shape": "star",
+        "color": "yellow",
+        "count": 1
+      },
+      {
+        "shape": "star",
+        "color": "yellow",
+        "count": 3
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "3 個粉紅星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "pink",
+        "count": 3
+      }
+    },
+    {
+      "text": "4 個黃圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "yellow",
+        "count": 4
+      }
+    },
+    {
+      "text": "4 個黃星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "yellow",
+        "count": 4
+      }
+    },
+    {
+      "text": "2 個黃星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "yellow",
+        "count": 2
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "每一排:前兩格的數量加起來等於第三格。第 3 排前兩格是 1 跟 3 個,第 3 格應該是?",
+  "explanation": "每一排<strong>第 1 + 第 2 = 第 3</strong>:Row 1: 1+2=3 ✓。Row 2: 3+1=4 ✓。Row 3: 1+3=<strong>4</strong>。答案:<strong>4 個黃星星</strong>。",
+  "skill": "橫向相加規律"
+}

@@ -1,0 +1,90 @@
+{
+  "id": "matrix-easy-022",
+  "topic": "matrix",
+  "difficulty": "easy",
+  "sub_type": "dual-variable-bidirectional",
+  "skill_codes": [
+    "pattern-bidirectional"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "橫向跟直向各有規律,?要選哪個?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "triangle",
+        "color": "blue"
+      },
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "shape": "star",
+        "color": "blue"
+      },
+      {
+        "shape": "triangle",
+        "color": "yellow"
+      },
+      {
+        "shape": "square",
+        "color": "yellow"
+      },
+      {
+        "shape": "star",
+        "color": "yellow"
+      },
+      {
+        "shape": "triangle",
+        "color": "purple"
+      },
+      {
+        "shape": "square",
+        "color": "purple"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "紫三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "purple"
+      }
+    },
+    {
+      "text": "紫星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "purple"
+      }
+    },
+    {
+      "text": "藍三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "藍星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "blue"
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "橫向看每排的形狀怎麼變,直向看每行的顏色怎麼變。?在第 3 排第 3 行,形狀跟顏色各是?",
+  "explanation": "<strong>橫向</strong>每排形狀依序是 三角→方→星星。<strong>直向</strong>每行顏色依序是 藍→黃→紫。? 在第 3 排第 3 行,所以是 <strong>紫星星</strong>。",
+  "skill": "雙向規律推理"
+}

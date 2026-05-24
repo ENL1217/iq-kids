@@ -554,3 +554,33 @@ Reviewer 對 batch 2 給了 3 個調整,本次全部修完:
 3. degree 難度
 
 push 後等回覆。
+
+---
+
+## Batch 4 — matrix (2026-05-24) ✅ DONE
+
+User 指示「後面全部做完一次檢查」,沒分 planning-PR + done-PR 兩階段,直接生 + push。
+
+### 統計
+| 難度 | 數量 | sub_type |
+|------|------|----------|
+| easy | 30 | single-variable-row 10 / dual-variable-bidirectional 15 / dual-variable-count-row 5 |
+| mid  | 25 | three-variable-independent 10 / latin-square 10 / dual-shape-rotation 5 |
+| hard | 20 | arithmetic-row-add 8 / rotation-grid 6 / three-variable-latin 6 |
+| **總計** | **75** | 9 sub_type, 覆蓋 schema §3 全部 6 個 pattern-* canonical |
+
+### 設計
+- 從 matrix-easy-003 起跳,seed -001/-002 不動
+- `tools/gen-matrix.mjs` 沿用 sequence 經驗:`describe()` guard, `placeCellOptions` 用 assertion 替 silent fallback, PROMPTS key 直接用 sub_type 字串
+- matrix-3x3 9 cells,? 永遠在右下角 (idx 8)
+- distractor I-RAVEN 約束:D1 至少 2 attr diff from correct
+
+### 自驗
+- L1 strict validate: 81/81 pass (含 6 seed)
+- L2 答案: 抽查 3 題 (easy-003 same-row, mid-018 latin, hard-003 arithmetic),邏輯正確
+- L3 I-RAVEN distance 掃: 0 題踩漏洞
+
+### 修 bug 過程
+1. `genArithmeticRowAdd` 第一版 D3 用 `picked[2][0] * picked[2][1] || 1`,當 a=b=1 時 D3=1 = a = b,觸發我自己加的 `placeCellOptions` assertion (3 distractor 不重複)。改用「count ± 1 換色 + count ± 2 + 換 shape」三套無重複的方案
+- 這個 assertion 是從 batch 3 教訓內化來的,**第一次跑就抓到**,沒讓壞題流出
+

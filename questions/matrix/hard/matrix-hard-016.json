@@ -1,0 +1,102 @@
+{
+  "id": "matrix-hard-016",
+  "topic": "matrix",
+  "difficulty": "hard",
+  "sub_type": "rotation-grid",
+  "skill_codes": [
+    "pattern-rotation"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "橫向跟直向箭頭都在轉,?指哪裡?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 0
+      },
+      {
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 45
+      },
+      {
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 90
+      },
+      {
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 45
+      },
+      {
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 90
+      },
+      {
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 135
+      },
+      {
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 90
+      },
+      {
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 135
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "粉紅↘",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "pink",
+        "rotation": 135
+      }
+    },
+    {
+      "text": "藍↘",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 135
+      }
+    },
+    {
+      "text": "粉紅↓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "pink",
+        "rotation": 180
+      }
+    },
+    {
+      "text": "藍↓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 180
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "橫向看每格箭頭轉 45°,直向看也轉 45°。? 在右下角,指?",
+  "explanation": "從左上 (0°) 開始,橫向 +45° 跟直向 +45° 都是 +45°。右下角 = 4 × 45° = <strong>180°</strong>(藍↓)。",
+  "skill": "矩陣中的等角度旋轉"
+}

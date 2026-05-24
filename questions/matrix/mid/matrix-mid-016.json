@@ -1,0 +1,90 @@
+{
+  "id": "matrix-mid-016",
+  "topic": "matrix",
+  "difficulty": "mid",
+  "sub_type": "latin-square",
+  "skill_codes": [
+    "pattern-latin-square"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "每一排每一行都有 3 種不同的東西,?填什麼?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "hex",
+        "color": "pink"
+      },
+      {
+        "shape": "star",
+        "color": "pink"
+      },
+      {
+        "shape": "square",
+        "color": "pink"
+      },
+      {
+        "shape": "star",
+        "color": "pink"
+      },
+      {
+        "shape": "square",
+        "color": "pink"
+      },
+      {
+        "shape": "hex",
+        "color": "pink"
+      },
+      {
+        "shape": "square",
+        "color": "pink"
+      },
+      {
+        "shape": "hex",
+        "color": "pink"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "粉紅六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "粉紅星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "藍綠星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "藍綠六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "teal"
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "每一排都有 六邊形/星星/方 三種,每一行也都有。? 那一格少了哪種?",
+  "explanation": "這是<strong>拉丁方陣</strong>:每 row 跟每 col 三種形狀各出現一次。第 3 排前 2 格是 方 跟 六邊形,第 3 格必須是 <strong>星星</strong>。色全部都是 粉紅。答案:<strong>粉紅星星</strong>。",
+  "skill": "拉丁方陣 (形狀)"
+}

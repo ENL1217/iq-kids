@@ -1,0 +1,102 @@
+{
+  "id": "matrix-mid-008",
+  "topic": "matrix",
+  "difficulty": "mid",
+  "sub_type": "three-variable-independent",
+  "skill_codes": [
+    "pattern-three-variable"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀、顏色、數量各有規律,?是什麼?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "diamond",
+        "color": "teal",
+        "count": 1
+      },
+      {
+        "shape": "diamond",
+        "color": "purple",
+        "count": 1
+      },
+      {
+        "shape": "diamond",
+        "color": "yellow",
+        "count": 1
+      },
+      {
+        "shape": "circle",
+        "color": "teal",
+        "count": 2
+      },
+      {
+        "shape": "circle",
+        "color": "purple",
+        "count": 2
+      },
+      {
+        "shape": "circle",
+        "color": "yellow",
+        "count": 2
+      },
+      {
+        "shape": "square",
+        "color": "teal",
+        "count": 3
+      },
+      {
+        "shape": "square",
+        "color": "purple",
+        "count": 3
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍綠菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "teal",
+        "count": 1
+      }
+    },
+    {
+      "text": "3 個藍綠方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "teal",
+        "count": 3
+      }
+    },
+    {
+      "text": "3 個黃方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "yellow",
+        "count": 3
+      }
+    },
+    {
+      "text": "2 個黃方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "yellow",
+        "count": 2
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "形狀直向變,顏色橫向變,數量直向也在變。第 3 排第 3 行的 3 個屬性各是?",
+  "explanation": "<strong>形狀</strong>每 row 同:菱形/圓/<strong>方</strong>。<strong>顏色</strong>每 col 同,第 3 col 是 <strong>黃</strong>。<strong>數量</strong>每 row 同:1/2/<strong>3</strong>。組起來:<strong>3 個黃方</strong>。",
+  "skill": "三變數獨立規律"
+}
