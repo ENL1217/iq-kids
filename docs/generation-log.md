@@ -554,3 +554,32 @@ Reviewer 對 batch 2 給了 3 個調整,本次全部修完:
 3. degree 難度
 
 push 後等回覆。
+
+---
+
+## Batch 6 — spatial (2026-05-24) ✅ DONE
+
+### 統計
+| 難度 | 數量 | sub_type |
+|------|------|----------|
+| easy | 20 | cube-counting-flat (20 個 curated layout) |
+| mid  | 20 | cube-counting-stacked (20 個 curated layout) |
+| hard | 15 | volume-arithmetic (N=3/4/5 三種,layerCount 1-4 變化) |
+| **總計** | **55** | 3 sub_type,覆蓋 schema §3 的 spatial-cube-counting 跟 spatial-volume-arithmetic |
+
+### 設計
+**全部 cubeStack visual,無 cubeNet 無 raw-html。** 理由:
+- reviewer 警告 cubeNet 只跑過 1 題,可能有 edge case
+- foldedPaper renderer 是 stub,折紙題目前用 raw-html (但本批不做折紙)
+
+未覆蓋的 spatial-* skill codes:`spatial-paper-fold`, `spatial-cube-net`, `spatial-cube-net-invalid`, `spatial-mirror`, `spatial-symmetry-fold`。這些等對應 renderer/helper 完成再開 batch 7 補。
+
+### 自驗
+- L1 strict validate: 61/61 pass (seed easy-002 hint `!` 非我的)
+- L2 layout cube count 用 `countCubes()` helper 從 layout 計算,跟 hint/explanation 一致
+- L3 distractor: ±1/±2/2倍 等常見誤算,volume-arithmetic 額外加「忘了減」「倒減」「用單層」三種具體誤解
+
+### 已知限制
+- spatial sub_type 只覆蓋 2 個 skill code,雷達圖 spatial 那一軸維度單薄
+- 等 foldedPaper helper / cubeNet 完整測試後再 batch 7 補(預期 paper-fold + cube-net 各 ~20 題)
+

@@ -1,0 +1,48 @@
+{
+  "id": "spatial-easy-011",
+  "topic": "spatial",
+  "difficulty": "easy",
+  "sub_type": "cube-counting-flat",
+  "skill_codes": [
+    "spatial-cube-counting"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "下面這堆積木,總共有幾塊?",
+  "visual": {
+    "type": "cubeStack",
+    "layout": [
+      [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ]
+    ],
+    "size": 28
+  },
+  "options": [
+    {
+      "text": "5 塊"
+    },
+    {
+      "text": "4 塊"
+    },
+    {
+      "text": "3 塊"
+    },
+    {
+      "text": "2 塊"
+    }
+  ],
+  "answer": 1,
+  "hint": "仔細數每一塊。提示:T 形 4 塊倒過來。",
+  "explanation": "這堆積木是「T 形 4 塊倒過來」,合計 <strong>4 塊</strong>。",
+  "skill": "立體方塊計數"
+}
