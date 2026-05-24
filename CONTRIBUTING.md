@@ -61,11 +61,17 @@ D:\AI_Project\IQ-content      ← 內容 Claude(題庫),feat/question-bank-batch
 ```bash
 cd D:\AI_Project\IQ
 git worktree add ..\IQ-content feat/question-bank-batch-2-analogy
+```
 
-# 之後內容 Claude 開新分支
+之後內容 Claude 開新分支(從 `IQ-content` 內):
+```bash
 cd D:\AI_Project\IQ-content
-git checkout main && git pull
-git checkout -b feat/question-bank-batch-3-sequence
+
+# ⚠ 不能用 git checkout main, 因為 main 被 IQ 主資料夾鎖住
+# (一個分支只能在一個 worktree 裡 checkout)
+# 改用 fetch + branch from origin/main:
+git fetch origin
+git checkout -b feat/question-bank-batch-3-sequence origin/main
 ```
 
 優點:
@@ -73,6 +79,12 @@ git checkout -b feat/question-bank-batch-3-sequence
 - 兩邊 working tree 完全獨立
 - 共用 .git/ objects,push/pull 都通同一個 origin
 - 移除:`git worktree remove ..\IQ-content`
+
+注意事項:
+- **EOL CRLF/LF 噪音**:Windows worktree 切換時 git 可能顯示一堆 modified 檔案,
+  實際 `git diff` 是 0 字節差異(純行尾符號)。不 add 那些檔案即可,別擔心。
+- **分支唯一**:同一個分支只能在一個 worktree 裡 checkout。要切回 main 必須先
+  `cd D:\AI_Project\IQ` (主 worktree)。
 
 詳見 `git help worktree`。
 
