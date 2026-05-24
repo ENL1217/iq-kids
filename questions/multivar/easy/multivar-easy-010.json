@@ -1,0 +1,70 @@
+{
+  "id": "multivar-easy-010",
+  "topic": "multivar",
+  "difficulty": "easy",
+  "sub_type": "2var-shape-color",
+  "skill_codes": [
+    "multivar-2var"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "橫向看一個變數,直向看另一個。? 應該是?",
+  "visual": {
+    "type": "matrix-2x2",
+    "cells": [
+      {
+        "shape": "triangle",
+        "color": "teal"
+      },
+      {
+        "shape": "star",
+        "color": "teal"
+      },
+      {
+        "shape": "triangle",
+        "color": "yellow"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍綠三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "黃星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "藍綠星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "黃三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "yellow"
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "橫向變形狀 (三角→星星),直向變顏色 (藍綠→黃)。? 是?",
+  "explanation": "橫向:三角→星星。直向:藍綠→黃。右下角 = <strong>黃星星</strong>。",
+  "skill": "雙變數獨立 (形+色)"
+}

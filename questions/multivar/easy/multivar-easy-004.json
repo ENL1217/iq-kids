@@ -1,0 +1,70 @@
+{
+  "id": "multivar-easy-004",
+  "topic": "multivar",
+  "difficulty": "easy",
+  "sub_type": "2var-shape-color",
+  "skill_codes": [
+    "multivar-2var"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "橫向看一個變數,直向看另一個。? 應該是?",
+  "visual": {
+    "type": "matrix-2x2",
+    "cells": [
+      {
+        "shape": "hex",
+        "color": "teal"
+      },
+      {
+        "shape": "square",
+        "color": "teal"
+      },
+      {
+        "shape": "hex",
+        "color": "yellow"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "黃方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "藍綠六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "黃六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "藍綠方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "teal"
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "橫向變形狀 (六邊形→方),直向變顏色 (藍綠→黃)。? 是?",
+  "explanation": "橫向:六邊形→方。直向:藍綠→黃。右下角 = <strong>黃方</strong>。",
+  "skill": "雙變數獨立 (形+色)"
+}

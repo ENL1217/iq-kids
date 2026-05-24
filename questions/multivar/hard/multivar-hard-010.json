@@ -1,0 +1,90 @@
+{
+  "id": "multivar-hard-010",
+  "topic": "multivar",
+  "difficulty": "hard",
+  "sub_type": "position-swap",
+  "skill_codes": [
+    "multivar-position-swap"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看每排的位置怎麼輪轉,? 應該是哪一個?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "square",
+        "color": "pink"
+      },
+      {
+        "shape": "diamond",
+        "color": "pink"
+      },
+      {
+        "shape": "circle",
+        "color": "pink"
+      },
+      {
+        "shape": "circle",
+        "color": "pink"
+      },
+      {
+        "shape": "square",
+        "color": "pink"
+      },
+      {
+        "shape": "diamond",
+        "color": "pink"
+      },
+      {
+        "shape": "diamond",
+        "color": "pink"
+      },
+      {
+        "shape": "circle",
+        "color": "pink"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍綠菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "藍綠方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "粉紅方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "粉紅圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "pink"
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "每一排是上一排向右輪轉 1 格。Row 2 是 菱形/圓/?,? 應該是?",
+  "explanation": "位置每排右輪轉一格:Row 0: 方/菱形/圓 → Row 1: 圓/方/菱形 → Row 2: 菱形/圓/<strong>方</strong>。答案 <strong>粉紅方</strong>。",
+  "skill": "位置輪轉"
+}

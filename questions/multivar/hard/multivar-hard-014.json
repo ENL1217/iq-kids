@@ -1,0 +1,90 @@
+{
+  "id": "multivar-hard-014",
+  "topic": "multivar",
+  "difficulty": "hard",
+  "sub_type": "attribute-inheritance",
+  "skill_codes": [
+    "multivar-attribute-inheritance"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "前兩格的特徵組合到第三格,? 是?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "diamond",
+        "color": "white"
+      },
+      {
+        "shape": "circle",
+        "color": "yellow"
+      },
+      {
+        "shape": "diamond",
+        "color": "yellow"
+      },
+      {
+        "shape": "hex",
+        "color": "white"
+      },
+      {
+        "shape": "circle",
+        "color": "pink"
+      },
+      {
+        "shape": "hex",
+        "color": "pink"
+      },
+      {
+        "shape": "star",
+        "color": "white"
+      },
+      {
+        "shape": "circle",
+        "color": "teal"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "黃菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "藍綠星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "白星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "white"
+      }
+    },
+    {
+      "text": "藍綠圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "teal"
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "每排第 3 格繼承前兩格的特徵 (第 1 格的形狀 + 第 2 格的顏色)。? 是?",
+  "explanation": "Row 2 第 1 格 shape = 星星,第 2 格 color = 藍綠。組合 = <strong>藍綠星星</strong>。",
+  "skill": "屬性繼承"
+}

@@ -1,0 +1,102 @@
+{
+  "id": "multivar-mid-006",
+  "topic": "multivar",
+  "difficulty": "mid",
+  "sub_type": "3var-independent",
+  "skill_codes": [
+    "multivar-3var"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀、顏色、數量 3 個變數一起變,? 是?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "square",
+        "color": "teal",
+        "count": 1
+      },
+      {
+        "shape": "diamond",
+        "color": "teal",
+        "count": 1
+      },
+      {
+        "shape": "circle",
+        "color": "teal",
+        "count": 1
+      },
+      {
+        "shape": "square",
+        "color": "blue",
+        "count": 2
+      },
+      {
+        "shape": "diamond",
+        "color": "blue",
+        "count": 2
+      },
+      {
+        "shape": "circle",
+        "color": "blue",
+        "count": 2
+      },
+      {
+        "shape": "square",
+        "color": "orange",
+        "count": 3
+      },
+      {
+        "shape": "diamond",
+        "color": "orange",
+        "count": 3
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍綠方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "teal",
+        "count": 1
+      }
+    },
+    {
+      "text": "3 個藍綠圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "teal",
+        "count": 3
+      }
+    },
+    {
+      "text": "3 個橘圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "orange",
+        "count": 3
+      }
+    },
+    {
+      "text": "3 個橘方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "orange",
+        "count": 3
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "形狀橫向變,顏色直向變,數量每排 +1。? 是?",
+  "explanation": "形狀:方→菱形→圓。顏色:藍綠→藍→橘。數量 1→2→3。右下角 = <strong>3 個橘圓</strong>。",
+  "skill": "三變數獨立"
+}

@@ -1,0 +1,90 @@
+{
+  "id": "multivar-hard-015",
+  "topic": "multivar",
+  "difficulty": "hard",
+  "sub_type": "attribute-inheritance",
+  "skill_codes": [
+    "multivar-attribute-inheritance"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "前兩格的特徵組合到第三格,? 是?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "square",
+        "color": "white"
+      },
+      {
+        "shape": "circle",
+        "color": "blue"
+      },
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "shape": "hex",
+        "color": "white"
+      },
+      {
+        "shape": "circle",
+        "color": "teal"
+      },
+      {
+        "shape": "hex",
+        "color": "teal"
+      },
+      {
+        "shape": "star",
+        "color": "white"
+      },
+      {
+        "shape": "circle",
+        "color": "pink"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "粉紅圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "藍方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "粉紅星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "白星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "white"
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "每排第 3 格繼承前兩格的特徵 (第 1 格的形狀 + 第 2 格的顏色)。? 是?",
+  "explanation": "Row 2 第 1 格 shape = 星星,第 2 格 color = 粉紅。組合 = <strong>粉紅星星</strong>。",
+  "skill": "屬性繼承"
+}

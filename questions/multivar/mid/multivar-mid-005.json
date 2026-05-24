@@ -1,0 +1,102 @@
+{
+  "id": "multivar-mid-005",
+  "topic": "multivar",
+  "difficulty": "mid",
+  "sub_type": "3var-independent",
+  "skill_codes": [
+    "multivar-3var"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀、顏色、數量 3 個變數一起變,? 是?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "triangle",
+        "color": "yellow",
+        "count": 1
+      },
+      {
+        "shape": "star",
+        "color": "yellow",
+        "count": 1
+      },
+      {
+        "shape": "circle",
+        "color": "yellow",
+        "count": 1
+      },
+      {
+        "shape": "triangle",
+        "color": "pink",
+        "count": 2
+      },
+      {
+        "shape": "star",
+        "color": "pink",
+        "count": 2
+      },
+      {
+        "shape": "circle",
+        "color": "pink",
+        "count": 2
+      },
+      {
+        "shape": "triangle",
+        "color": "purple",
+        "count": 3
+      },
+      {
+        "shape": "star",
+        "color": "purple",
+        "count": 3
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "3 個紫圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "purple",
+        "count": 3
+      }
+    },
+    {
+      "text": "3 個紫三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "purple",
+        "count": 3
+      }
+    },
+    {
+      "text": "3 個黃圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "yellow",
+        "count": 3
+      }
+    },
+    {
+      "text": "黃三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "yellow",
+        "count": 1
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "形狀橫向變,顏色直向變,數量每排 +1。? 是?",
+  "explanation": "形狀:三角→星星→圓。顏色:黃→粉紅→紫。數量 1→2→3。右下角 = <strong>3 個紫圓</strong>。",
+  "skill": "三變數獨立"
+}

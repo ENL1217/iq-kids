@@ -1,0 +1,102 @@
+{
+  "id": "multivar-mid-011",
+  "topic": "multivar",
+  "difficulty": "mid",
+  "sub_type": "3var-independent",
+  "skill_codes": [
+    "multivar-3var"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀、顏色、數量 3 個變數一起變,? 是?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "diamond",
+        "color": "purple",
+        "count": 1
+      },
+      {
+        "shape": "star",
+        "color": "purple",
+        "count": 1
+      },
+      {
+        "shape": "triangle",
+        "color": "purple",
+        "count": 1
+      },
+      {
+        "shape": "diamond",
+        "color": "orange",
+        "count": 2
+      },
+      {
+        "shape": "star",
+        "color": "orange",
+        "count": 2
+      },
+      {
+        "shape": "triangle",
+        "color": "orange",
+        "count": 2
+      },
+      {
+        "shape": "diamond",
+        "color": "blue",
+        "count": 3
+      },
+      {
+        "shape": "star",
+        "color": "blue",
+        "count": 3
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "3 個紫三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "purple",
+        "count": 3
+      }
+    },
+    {
+      "text": "紫菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "purple",
+        "count": 1
+      }
+    },
+    {
+      "text": "3 個藍三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "blue",
+        "count": 3
+      }
+    },
+    {
+      "text": "3 個藍菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "blue",
+        "count": 3
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "形狀橫向變,顏色直向變,數量每排 +1。? 是?",
+  "explanation": "形狀:菱形→星星→三角。顏色:紫→橘→藍。數量 1→2→3。右下角 = <strong>3 個藍三角</strong>。",
+  "skill": "三變數獨立"
+}

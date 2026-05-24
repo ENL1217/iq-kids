@@ -1,0 +1,90 @@
+{
+  "id": "multivar-mid-014",
+  "topic": "multivar",
+  "difficulty": "mid",
+  "sub_type": "latin-square-3var",
+  "skill_codes": [
+    "multivar-latin"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "每排每行 3 種形狀各出現一次,? 該填什麼?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "shape": "circle",
+        "color": "orange"
+      },
+      {
+        "shape": "star",
+        "color": "yellow"
+      },
+      {
+        "shape": "circle",
+        "color": "yellow"
+      },
+      {
+        "shape": "star",
+        "color": "blue"
+      },
+      {
+        "shape": "square",
+        "color": "orange"
+      },
+      {
+        "shape": "star",
+        "color": "orange"
+      },
+      {
+        "shape": "square",
+        "color": "yellow"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "藍方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "橘方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "橘圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "orange"
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "每排每行 3 種形狀各 1 次,3 種顏色也各 1 次。? 填?",
+  "explanation": "這是雙拉丁方陣。形狀缺 <strong>圓</strong>,顏色缺 <strong>藍</strong>。答案 <strong>藍圓</strong>。",
+  "skill": "拉丁方陣 (3 形+3 色)"
+}

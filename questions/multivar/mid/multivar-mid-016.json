@@ -1,0 +1,90 @@
+{
+  "id": "multivar-mid-016",
+  "topic": "multivar",
+  "difficulty": "mid",
+  "sub_type": "latin-square-3var",
+  "skill_codes": [
+    "multivar-latin"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "每排每行 3 種形狀各出現一次,? 該填什麼?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "star",
+        "color": "orange"
+      },
+      {
+        "shape": "square",
+        "color": "purple"
+      },
+      {
+        "shape": "triangle",
+        "color": "blue"
+      },
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "shape": "triangle",
+        "color": "orange"
+      },
+      {
+        "shape": "star",
+        "color": "purple"
+      },
+      {
+        "shape": "triangle",
+        "color": "purple"
+      },
+      {
+        "shape": "star",
+        "color": "blue"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "紫方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "purple"
+      }
+    },
+    {
+      "text": "紫星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "purple"
+      }
+    },
+    {
+      "text": "橘方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "橘星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "orange"
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "每排每行 3 種形狀各 1 次,3 種顏色也各 1 次。? 填?",
+  "explanation": "這是雙拉丁方陣。形狀缺 <strong>方</strong>,顏色缺 <strong>橘</strong>。答案 <strong>橘方</strong>。",
+  "skill": "拉丁方陣 (3 形+3 色)"
+}

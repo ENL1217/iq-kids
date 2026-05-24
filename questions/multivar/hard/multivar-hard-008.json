@@ -1,0 +1,90 @@
+{
+  "id": "multivar-hard-008",
+  "topic": "multivar",
+  "difficulty": "hard",
+  "sub_type": "position-swap",
+  "skill_codes": [
+    "multivar-position-swap"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看每排的位置怎麼輪轉,? 應該是哪一個?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "shape": "star",
+        "color": "orange"
+      },
+      {
+        "shape": "triangle",
+        "color": "orange"
+      },
+      {
+        "shape": "square",
+        "color": "orange"
+      },
+      {
+        "shape": "square",
+        "color": "orange"
+      },
+      {
+        "shape": "star",
+        "color": "orange"
+      },
+      {
+        "shape": "triangle",
+        "color": "orange"
+      },
+      {
+        "shape": "triangle",
+        "color": "orange"
+      },
+      {
+        "shape": "square",
+        "color": "orange"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "粉紅星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "橘方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "橘星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "粉紅三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "pink"
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "每一排是上一排向右輪轉 1 格。Row 2 是 三角/方/?,? 應該是?",
+  "explanation": "位置每排右輪轉一格:Row 0: 星星/三角/方 → Row 1: 方/星星/三角 → Row 2: 三角/方/<strong>星星</strong>。答案 <strong>橘星星</strong>。",
+  "skill": "位置輪轉"
+}
