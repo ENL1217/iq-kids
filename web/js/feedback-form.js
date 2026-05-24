@@ -166,6 +166,8 @@ function showToast(root, msg, kind = 'ok') {
 }
 
 function buildPayload(ctx, types, comment) {
+  // 不收集 user_agent / viewport (隱私 — 跟 "🔒 不收個資" 標語對齊)
+  // 多數回饋是邏輯/題目問題,UA/viewport 用處有限,Apps Script 端會把空欄寫成空字串
   return {
     question_id: ctx.question?.id || 'unknown',
     topic: ctx.question?.topic || '',
@@ -176,8 +178,6 @@ function buildPayload(ctx, types, comment) {
     picked_idx: ctx.picked_idx ?? null,
     correct_idx: ctx.question?.answer ?? null,
     mode: ctx.mode || 'learn',
-    viewport: `${window.innerWidth}x${window.innerHeight}`,
-    user_agent: navigator.userAgent,
     ts: new Date().toISOString()
   };
 }
