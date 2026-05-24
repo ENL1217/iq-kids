@@ -45,6 +45,37 @@ iq-kids/
 - Node.js (建議 18+) — 跑 `tools/*.mjs` 需要
 - 任何能服務靜態檔的方式(本地預覽用)
 
+### 🌳 多 Agent / 多分支同時工作 (Worktree)
+
+本專案有時會有**多個 AI agent 平行作業**(系統開發 + 題庫生成)。
+如果只用一個資料夾共用 git repo,HEAD 會互搶導致 commit 跑錯分支。
+
+正規解法:**git worktree** — 一個 repo,多個資料夾,各自鎖定不同分支。
+
+```
+D:\AI_Project\IQ              ← 系統 Claude(主開發者),永遠 main
+D:\AI_Project\IQ-content      ← 內容 Claude(題庫),feat/question-bank-batch-X
+```
+
+設定:
+```bash
+cd D:\AI_Project\IQ
+git worktree add ..\IQ-content feat/question-bank-batch-2-analogy
+
+# 之後內容 Claude 開新分支
+cd D:\AI_Project\IQ-content
+git checkout main && git pull
+git checkout -b feat/question-bank-batch-3-sequence
+```
+
+優點:
+- HEAD 不會被另一個 agent 切走
+- 兩邊 working tree 完全獨立
+- 共用 .git/ objects,push/pull 都通同一個 origin
+- 移除:`git worktree remove ..\IQ-content`
+
+詳見 `git help worktree`。
+
 ### 本地預覽
 靜態網頁,選一個方法:
 
