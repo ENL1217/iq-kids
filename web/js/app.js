@@ -4,6 +4,12 @@
 
 import { renderVisual } from './renderer.js';
 import { loadManifest, loadQuestions, pickQuestionIds } from './loader.js';
+import {
+  playCorrect, playWrong, playClick, burstConfetti, highlightCorrect,
+  soundEnabled, toggleSound, unlockAudio
+} from './feedback.js';
+import { openFeedbackForm } from './feedback-form.js';
+import { QUESTIONS_PER_LEVEL } from './config.js';
 
 const TOPICS = {
   matrix:    { emoji: '🎯', name: '矩陣推理',   desc: '3×3 經典題型,找出橫和直的規律', cls: 'matrix' },
@@ -16,7 +22,6 @@ const TOPICS = {
 
 const LEVEL_LABEL = { easy: '⭐ 入門', mid: '⭐⭐ 中階', hard: '⭐⭐⭐ 挑戰' };
 const LEVEL_SHORT = { easy: '入門', mid: '中階', hard: '挑戰' };
-const QUESTIONS_PER_LEVEL = 5;  // 預設每關 5 題,題庫不足時自動降為實際題數
 
 const state = {
   topic: null,
@@ -25,6 +30,7 @@ const state = {
   idx: 0,
   correct: 0,
   answered: false,
+  lastPicked: null,
   manifest: null
 };
 
@@ -37,9 +43,43 @@ async function init() {
     return;
   }
   renderMenu();
+  renderMuteButton();
 
   // 把流程函數掛上 window 供 inline onclick 呼叫
-  Object.assign(window, { startLevel, goMenu, restartLevel, selectAnswer, nextQuestion });
+  Object.assign(window, {
+    startLevel, goMenu, restartLevel, selectAnswer, nextQuestion,
+    onMuteClick, onFeedbackClick
+  });
+
+  // 任意 user gesture 後解鎖 audio (iOS Safari)
+  document.addEventListener('pointerdown', unlockAudio, { once: true });
+  document.addEventListener('keydown',     unlockAudio, { once: true });
+}
+
+function renderMuteButton() {
+  const btn = document.getElementById('muteBtn');
+  if (!btn) return;
+  btn.textContent = soundEnabled() ? '🔊' : '🔇';
+  btn.title = soundEnabled() ? '音效開啟(點擊靜音)' : '音效靜音(點擊開啟)';
+}
+
+function onMuteClick() {
+  toggleSound();
+  renderMuteButton();
+  if (soundEnabled()) playClick();
+}
+
+function onFeedbackClick() {
+  const q = state.qList[state.idx];
+  if (!q) return;
+  const status = !state.answered ? 'unanswered'
+                : state.lastPicked === q.answer ? 'correct' : 'wrong';
+  openFeedbackForm({
+    question: q,
+    mode: 'learn',
+    status,
+    picked_idx: state.lastPicked ?? null
+  });
 }
 
 function showFatalError(msg) {
@@ -147,6 +187,9 @@ function renderQuestion() {
           ${state.idx < state.qList.length - 1 ? '下一題 →' : '看成績 🏁'}
         </button>
       </div>
+      <button class="feedback-btn" onclick="onFeedbackClick()" title="回饋這一題">
+        💬 回饋這題
+      </button>
     </div>
   `;
 }
@@ -155,11 +198,13 @@ function renderQuestion() {
 function selectAnswer(idx) {
   if (state.answered) return;
   state.answered = true;
+  state.lastPicked = idx;
   const q = state.qList[state.idx];
   const correct = idx === q.answer;
   if (correct) state.correct++;
 
-  document.querySelectorAll('.option').forEach((btn, i) => {
+  const optionEls = document.querySelectorAll('.option');
+  optionEls.forEach((btn, i) => {
     btn.disabled = true;
     if (i === idx) btn.classList.add(correct ? 'correct' : 'incorrect');
     if (i === q.answer && !correct) btn.classList.add('correct');
@@ -174,7 +219,10 @@ function selectAnswer(idx) {
       <div class="explanation">${q.explanation}</div>
       <div class="skill-tag">✨ 練到的能力:${q.skill}</div>
     `;
+    // 視聽回饋:音效 + 大 emoji + confetti 粒子
+    playCorrect();
     showCelebration();
+    burstConfetti(10);
   } else {
     feedback.innerHTML = `
       <div class="feedback-header"><span class="feedback-emoji">💪</span>沒關係,我們一起想想!</div>
@@ -182,6 +230,9 @@ function selectAnswer(idx) {
       <div class="explanation">${q.explanation}</div>
       <div class="skill-tag">✨ 練習重點:${q.skill}</div>
     `;
+    // 答錯回饋:溫和音效 + 正解高亮 (shake 已在 .option.incorrect CSS)
+    playWrong();
+    highlightCorrect(optionEls[q.answer]);
   }
   document.getElementById('actions').style.display = 'flex';
 }

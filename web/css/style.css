@@ -588,3 +588,235 @@ body {
   color: #8B2C2C;
   font-size: 13px;
 }
+
+/* ============ MUTE BUTTON ============ */
+.mute-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  background: white;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-family: inherit;
+}
+.mute-btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(45, 42, 74, 0.15);
+}
+.mute-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 rgba(45, 42, 74, 0.15);
+}
+
+/* ============ FEEDBACK BUTTON (per-question) ============ */
+.feedback-btn {
+  position: absolute;
+  bottom: -16px;
+  right: 24px;
+  background: white;
+  border: 2.5px solid var(--ink);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s;
+  color: var(--ink-soft);
+  font-family: inherit;
+}
+.feedback-btn:hover {
+  background: #FFFBF0;
+  color: var(--ink);
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 rgba(45, 42, 74, 0.15);
+}
+
+/* ============ FEEDBACK MODAL ============ */
+.fb-modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.fb-modal-root.show { opacity: 1; }
+
+.fb-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(45, 42, 74, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.fb-modal {
+  position: relative;
+  background: var(--bg-paper);
+  border: 4px solid var(--ink);
+  border-radius: 24px;
+  padding: 22px 22px 18px;
+  max-width: 460px;
+  width: 100%;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.fb-modal-root.show .fb-modal {
+  transform: translateY(0) scale(1);
+}
+
+.fb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.fb-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--ink);
+}
+.fb-close {
+  background: white;
+  border: 2.5px solid var(--ink);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-family: inherit;
+  line-height: 1;
+}
+.fb-close:hover { background: var(--error); color: white; }
+
+.fb-qid {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+.fb-qid code {
+  background: #FFFBF0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #E5E2F0;
+  font-size: 11px;
+  font-family: 'Fredoka', monospace;
+}
+
+.fb-section-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+
+.fb-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.fb-chip {
+  background: white;
+  border: 2.5px solid var(--ink);
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.12s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.fb-chip:hover {
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 rgba(45, 42, 74, 0.15);
+}
+.fb-chip.selected {
+  background: var(--secondary);
+  color: white;
+  border-color: #2EA89C;
+}
+.fb-chip-emoji { font-size: 16px; }
+
+.fb-textarea {
+  width: 100%;
+  min-height: 70px;
+  background: white;
+  border: 2.5px solid var(--ink);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  resize: vertical;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 16px;
+}
+.fb-textarea:focus { border-color: var(--primary); }
+
+.fb-footer {
+  display: flex;
+  gap: 10px;
+}
+.fb-footer .btn {
+  flex: 1;
+  margin: 0;
+  font-size: 14px;
+  padding: 10px 14px;
+}
+
+.fb-toast {
+  position: absolute;
+  left: 50%;
+  bottom: -42px;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  max-width: 90vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fb-toast.show { opacity: 1; }
+.fb-toast.ok { background: var(--success); }
+.fb-toast.warn { background: var(--orange); }
+
+/* card 加 position:relative 讓 feedback-btn 能 absolute 定位 */
+.card { position: relative; }
