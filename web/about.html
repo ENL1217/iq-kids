@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>讓孩子的思考被點亮 · 腦力探險家</title>
-<meta name="description" content="一個給孩子的開源腦力練習網站。不只給分數,而是陪孩子打開更多思考的門。">
+<title>讓孩子在日常裡多一點思考的甜味 · 腦力探險家</title>
+<meta name="description" content="一個從家庭出發的兒童腦力練習網站。不只給分數，而是陪孩子打開更多思考的門。">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css?v=__VERSION__">
 <style>
@@ -44,10 +44,10 @@
     letter-spacing: 4px;
   }
   .about-hero-title {
-    font-size: clamp(28px, 6vw, 42px);
+    font-size: clamp(26px, 5.5vw, 38px);
     font-weight: 900;
     color: var(--ink);
-    line-height: 1.3;
+    line-height: 1.35;
     margin-bottom: 14px;
     position: relative;
     z-index: 1;
@@ -178,37 +178,6 @@
     flex: 1;
   }
 
-  /* AI 協作示意 */
-  .ai-flow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin: 22px 0;
-    padding: 18px;
-    background: #FAFAFF;
-    border: 2px dashed #D5D2EC;
-    border-radius: 18px;
-  }
-  .ai-bubble {
-    background: white;
-    border: 3px solid var(--ink);
-    border-radius: 16px;
-    padding: 14px 18px;
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-    min-width: 140px;
-  }
-  .ai-bubble .ai-emoji { font-size: 36px; display: block; margin-bottom: 6px; }
-  .ai-bubble .ai-name { font-size: 13px; font-weight: 800; color: var(--ink); margin-bottom: 2px; }
-  .ai-bubble .ai-role { font-size: 11px; color: var(--ink-soft); font-weight: 600; line-height: 1.5; }
-  .ai-arrow {
-    font-size: 24px;
-    color: var(--ink-soft);
-    font-weight: 700;
-  }
-
   /* 設計原則卡片 */
   .principle-grid {
     display: grid;
@@ -282,14 +251,6 @@
   }
   .cta-btn.primary:hover { background: var(--primary-deep); }
 
-  /* 裝飾性 cubes */
-  .deco-cubes {
-    text-align: center;
-    margin: 10px 0;
-    opacity: 0.6;
-  }
-  .deco-cubes svg { display: inline-block; }
-
   /* RWD */
   @media (max-width: 520px) {
     body { padding: 12px; }
@@ -300,8 +261,6 @@
     .section-header { gap: 10px; padding-bottom: 12px; margin-bottom: 14px; }
     .section-emoji { font-size: 30px; }
     .about-section p { font-size: 14px; line-height: 1.8; }
-    .ai-flow { flex-direction: column; }
-    .ai-arrow { transform: rotate(90deg); }
     .quote-block { padding: 14px 16px; font-size: 14px; }
     .about-cta { padding: 22px 18px; }
     .cta-btn { padding: 10px 16px; font-size: 14px; }
@@ -315,9 +274,9 @@
 
   <!-- HERO -->
   <header class="about-hero">
-    <div class="about-hero-emojis">🧠✨🌈</div>
-    <h1 class="about-hero-title">讓孩子的思考被點亮</h1>
-    <p class="about-hero-subtitle">一個給孩子的開源腦力練習網站</p>
+    <div class="about-hero-emojis">🍰🧠✨</div>
+    <h1 class="about-hero-title">讓孩子在日常裡多一點思考的甜味</h1>
+    <p class="about-hero-subtitle">一個從家庭出發的兒童腦力練習網站</p>
     <div class="about-hero-tags">
       <span class="hero-tag">🆓 完全免費</span>
       <span class="hero-tag">🔒 不收個資</span>
@@ -332,43 +291,93 @@
       <span class="section-emoji">📖</span>
       <h2 class="section-title">從一本文具行的題庫開始</h2>
     </div>
-    <p>上週五,太太在文具行偶然翻到一套國小奧林匹亞數學的題庫本。從小一到小六,每個年級各有一本。她翻了幾頁,覺得這些題目也許很適合我們家的孩子,尤其妹妹現在讀國小一年級,正是好奇心旺盛、思考能力快速發展的年紀。</p>
+    <p>某天太太在文具行偶然看到一套國小奧林匹亞數學的題庫本。從小一到小六，每個年級各有一本。她翻了幾頁，覺得裡面有些題目還滿有趣，也許很適合我們家的孩子。尤其妹妹現在讀國小一年級，正是好奇心旺盛、思考能力快速發展的年紀。</p>
 
-    <p>我們原本也曾想過,如果孩子未來有機會參加學校資優班的鑑定或相關測驗,也許可以讓她早一點接觸各種不同型態的思考題。不是為了強迫孩子考高分,也不是為了把孩子推向競爭,而是希望她有機會遇見一些平常課本裡不一定會出現的題型:<em>觀察、分類、規律、推理、空間感、圖形變化、邏輯關係</em>。</p>
-
-    <p>太太打電話問我,要不要上網找找類似的練習材料。一開始,我的想法很單純:現在網路資料這麼多,AI 又這麼方便,也許找一些題目,整理成一個簡單的小測驗就好了。孩子有興趣就寫,沒興趣也不用勉強。</p>
+    <p>當下的想法其實很單純。不是要孩子準備什麼考試，也不是希望她每天被題目追著跑，而是想說，孩子平常完成學校作業之後，如果還有一點時間與精神，也許可以玩一些有趣的小題目。</p>
 
     <div class="quote-block">
-      可是做著做著,我開始覺得,這件事也許不只是我們自己家的需求。
+      那種感覺比較像是<strong>飯後甜點</strong>。
     </div>
+
+    <p>正餐已經吃完了，功課也已經完成了，接下來如果有一點輕鬆的小挑戰，讓孩子看一看、想一想、猜一猜、討論一下，也許會是一件很好的事。它不應該是壓力，也不應該是額外的負擔，而是一種<em>帶著遊戲感的思考練習</em>。</p>
   </section>
 
-  <!-- 從測驗到練習場 -->
+  <!-- 不是考試，是日常的小挑戰 -->
+  <section class="about-section">
+    <div class="section-header">
+      <span class="section-emoji">🌱</span>
+      <h2 class="section-title">不是考試，是日常的小挑戰</h2>
+    </div>
+    <p>有些題目可能是觀察圖形，有些是尋找規律，有些是數字推理，有些是空間想像，有些是分類比較。孩子不一定要一次做很多題，也不一定要每天固定完成多少。只要偶爾遇到一題有趣的問題，願意停下來想一下，甚至和爸爸媽媽討論一下：</p>
+
+    <ul class="belief-list">
+      <li class="belief-item">
+        <span class="belief-icon">💭</span>
+        <span class="belief-text">「為什麼會這樣？」</span>
+      </li>
+      <li class="belief-item">
+        <span class="belief-icon">👀</span>
+        <span class="belief-text">「還有沒有別的看法？」</span>
+      </li>
+      <li class="belief-item">
+        <span class="belief-icon">🔄</span>
+        <span class="belief-text">「如果換一個角度想呢？」</span>
+      </li>
+    </ul>
+
+    <p>這樣其實就已經很有價值了。</p>
+
+    <p>我們後來也想到，如果孩子未來剛好有機會接觸學校的能力測驗、資優鑑定或其他需要邏輯與觀察能力的情境，這些平常的小練習也許多少會有幫助。但那並不是最主要的目的。<em>真正重要的，不是提早準備某個測驗，而是讓孩子在日常生活裡，有機會接觸課本之外的思考形式</em>。</p>
+  </section>
+
+  <!-- 從「測驗」到「練習場」 -->
   <section class="about-section">
     <div class="section-header">
       <span class="section-emoji">💡</span>
       <h2 class="section-title">從「測驗」到「練習場」</h2>
     </div>
-    <p>很多父母其實都會有類似的想法:想讓孩子多接觸不同的題目,多刺激一些思考能力,但又不希望變成<em>補習式、考試式、壓力式</em>的訓練。孩子做題目時,最需要的往往不是一個冷冰冰的分數,而是「為什麼」、「怎麼想」、「原來還可以這樣看」。</p>
+    <p>一開始，我只是想上網找一些類似的題目，整理成簡單的小測驗給孩子玩。可是找著找著，我開始發現，網路上雖然有不少智力測驗、邏輯測驗或兒童測驗網站，但很多網站的形式都很相似：孩子做完題目之後，網站給一個分數，然後就結束了。</p>
 
-    <p>我後來發現,網路上有許多智力測驗、邏輯測驗或兒童測驗網站,但不少網站的形式都很像:做完題目,給一個分數,然後就結束了。它可能告訴你答對幾題,甚至告訴你 IQ 大約多少,可是孩子真正需要的,並不是被判定聰明或不聰明,而是在過程中得到<em>即時的回饋與啟發</em>。</p>
+    <div class="quote-block">
+      可是對孩子來說，<strong>真正重要的可能不是那個分數</strong>。
+    </div>
 
     <ul class="belief-list">
       <li class="belief-item">
         <span class="belief-icon">😕</span>
-        <span class="belief-text">孩子如果答錯了,他需要知道自己<strong>哪裡想偏了</strong>。</span>
+        <span class="belief-text">孩子答錯時，他需要知道自己<strong>哪裡想偏了</strong>。</span>
       </li>
       <li class="belief-item">
         <span class="belief-icon">😊</span>
-        <span class="belief-text">孩子如果答對了,他也可以知道自己<strong>用了什麼好的觀察方式</strong>。</span>
+        <span class="belief-text">孩子答對時，他也可以知道自己<strong>用了什麼好的觀察方式</strong>。</span>
       </li>
       <li class="belief-item">
         <span class="belief-icon">🤔</span>
-        <span class="belief-text">孩子如果遇到不會的題目,更重要的是有人<strong>陪他把那個思路打開</strong>。</span>
+        <span class="belief-text">孩子卡住時，更需要有人把那個<strong>思路輕輕打開</strong>。</span>
       </li>
     </ul>
 
-    <p>所以,我慢慢把這個想法從「做一個測驗」改成「做一個練習場」。</p>
+    <p>如果一個測驗只告訴孩子「你答對幾題」或「你得幾分」，那它比較像是在<em>評量</em>孩子，而不是在<em>啟發</em>孩子。可是我希望做的，不只是測驗，而是一個可以讓孩子練習思考的地方。</p>
+
+    <p>所以，這個想法慢慢從「做一個小測驗」變成「做一個<strong>腦力練習場</strong>」。</p>
+  </section>
+
+  <!-- 智力是一個過程 -->
+  <section class="about-section">
+    <div class="section-header">
+      <span class="section-emoji">🚪</span>
+      <h2 class="section-title">智力不是結果，是一段過程</h2>
+    </div>
+    <p>我越來越相信，很多所謂的能力，並不是孩子天生有或沒有而已。孩子有時候只是沒有遇過那樣的問題，沒有被引導去看見某一種規律，沒有機會練習某一種推理方式。當他第一次看到這類題目時，可能會覺得陌生；但如果有合適的題目、合適的提示、合適的回饋，他的思路就可能慢慢被打開。</p>
+
+    <div class="quote-block teal">
+      <strong>智力不應該只被看成一個測驗結果。</strong><br>
+      它也可以是一個被刺激、被啟發、被拓展的過程。
+    </div>
+
+    <p>孩子不是因為被測驗才變得會思考，而是因為在一次又一次有趣的挑戰中，慢慢學會觀察、比較、推論、轉換角度，最後發現：<em>原來問題可以這樣想，原來我也可以想得出來</em>。</p>
+
+    <p>這就是我最想做的事情。不是幫孩子貼標籤，不是區分誰聰明、誰不聰明，而是<strong>讓孩子多遇見一些思考的入口</strong>。</p>
   </section>
 
   <!-- 腦力探險家 -->
@@ -377,18 +386,20 @@
       <span class="section-emoji">🌈</span>
       <h2 class="section-title">「腦力探險家」誕生</h2>
     </div>
-    <p>這個網站後來命名為 <strong>「腦力探險家」</strong>。目前網站的定位是<em>「六大題型 × 三種難度」</em>的 IQ 練習場,裡面分成<strong>學習模式</strong>與<strong>綜合測驗</strong>:</p>
+    <p>於是，我做了一個很簡單的網站，叫做 <strong>「腦力探險家」</strong>。</p>
+
+    <p>它目前是一個給孩子使用的 IQ 練習場，設計上盡量保持簡單、乾淨、容易進入。網站裡有不同題型、不同難度，也有學習模式與綜合測驗。孩子可以先在學習模式中慢慢練習，也可以在測驗模式中挑戰自己。</p>
 
     <div class="principle-grid">
       <div class="principle-card">
         <span class="principle-emoji">📚</span>
         <div class="principle-label">學習模式</div>
-        <div style="font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.5;">每題有引導提示,答錯後有完整解析</div>
+        <div style="font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.5;">逐步熟悉題型，有提示與解析</div>
       </div>
       <div class="principle-card">
         <span class="principle-emoji">📝</span>
         <div class="principle-label">綜合測驗</div>
-        <div style="font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.5;">無提示,做完才看答案,可設定時限</div>
+        <div style="font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.5;">沒有提示，做完才看答案</div>
       </div>
       <div class="principle-card">
         <span class="principle-emoji">🌈</span>
@@ -402,133 +413,133 @@
       </div>
     </div>
 
-    <p>我希望它是一個很簡單、很乾淨、很好玩的工具。</p>
+    <p>我希望這個工具的使用感是<em>輕鬆的</em>。</p>
 
     <ul class="belief-list">
-      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">不需要登入</span></li>
-      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">不需要廣告</span></li>
-      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">不需要後台</span></li>
-      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">不需要把孩子的資料送到不知道哪裡去</span></li>
+      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">不用登入。</span></li>
+      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">不用安裝。</span></li>
+      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">不用廣告。</span></li>
+      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">不用後台。</span></li>
+      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">不用把孩子的資料送到遠端伺服器。</span></li>
     </ul>
 
     <div class="quote-block green">
-      打開網頁,就可以開始玩、開始想、開始練習。
+      打開網頁，就可以開始玩。資料也只存在使用者自己的瀏覽器裡，<strong>不會上傳</strong>。
     </div>
+
+    <p>這一點對我來說很重要，因為這本來就是一個從家庭出發、給孩子使用的小工具，沒有必要把事情弄得太複雜。</p>
   </section>
 
-  <!-- 核心信念 -->
+  <!-- 題目的精神 -->
   <section class="about-section">
     <div class="section-header">
-      <span class="section-emoji">🚪</span>
-      <h2 class="section-title">不是「測聰明」,而是「打開門」</h2>
+      <span class="section-emoji">📐</span>
+      <h2 class="section-title">參考題目的精神，不複製別人的題目</h2>
     </div>
-    <p>這個網站的核心目的不是「測出孩子有多聰明」,而是「<em>讓孩子有機會被不同的題型刺激</em>」。</p>
+    <p>在題目設計上，我也希望盡量避免侵權疑慮。市面上和網路上當然有很多既有題庫，但這些題目有它們的著作權，不應該直接照抄，也不應該只是改幾個字就拿來使用。</p>
 
-    <p>我越來越相信,很多所謂的能力,並不是孩子天生有或沒有而已。很多時候,孩子只是沒有遇過那樣的問題,沒有被引導去看見某一種規律,沒有機會練習某一種推理方式。當他第一次接觸時,可能會覺得困難;但如果有合適的提示、合適的回饋、合適的題目難度,他的思路就可能慢慢被打開。</p>
-
-    <div class="quote-block teal">
-      <strong>智力不應該只被當成一個測驗結果。</strong><br>
-      它也可以是一個被啟發、被刺激、被拓展的過程。
-    </div>
-
-    <p>這也是我最想做的事情:<em>不是幫孩子貼標籤,而是幫孩子打開更多思考的門</em>。</p>
-  </section>
-
-  <!-- AI 協作 -->
-  <section class="about-section">
-    <div class="section-header">
-      <span class="section-emoji">🤖</span>
-      <h2 class="section-title">兩個 AI 協作做出來的</h2>
-    </div>
-    <p>在設計上,我刻意不想把系統做得太複雜。我的想法是,用<strong>兩個 AI 協作</strong>就好:</p>
-
-    <div class="ai-flow">
-      <div class="ai-bubble">
-        <span class="ai-emoji">📚</span>
-        <div class="ai-name">題庫 AI</div>
-        <div class="ai-role">理解題型結構<br>重新原創題目</div>
-      </div>
-      <div class="ai-arrow">→</div>
-      <div class="ai-bubble">
-        <span class="ai-emoji">💻</span>
-        <div class="ai-name">系統 AI</div>
-        <div class="ai-role">前端 / 互動<br>頁面 / 練習流程</div>
-      </div>
-    </div>
-
-    <p>一個 AI 負責閱讀、整理、拆解網路上常見的題型,理解題目的類別、結構與思考方式;<strong>但所有題目都不能照抄</strong>,也不能改幾個字就拿來用,而是要重新設計、重新創作,避免侵犯既有題庫或出版品的著作權。另一個 AI 則負責前端程式,把題目、互動、頁面與練習流程做出來。</p>
+    <p>因此，我比較在意的是整理「題型」與「思考方式」，例如<em>圖形觀察、規律推理、空間想像、分類比較、數字關係</em>等，再依照這些思考方向重新創作新的題目。</p>
 
     <div class="quote-block purple">
-      圖形自己畫,內容自己創作,題庫自己整理。
+      換句話說，我希望參考的是「<strong>題目的精神</strong>」，<br>
+      而不是複製「<strong>別人的題目</strong>」。
     </div>
 
-    <p>這樣不只是比較安心,也更符合這個專案的精神:<em>我們不是要複製別人的教材,而是希望建立一個可以持續成長、可以被大家共同改善的開放題庫</em>。</p>
+    <p>這樣做比較辛苦，但比較安心，也比較符合這個專案的初衷。因為我希望它未來可以開放給更多人使用，如果一開始就混入有版權疑慮的內容，那這件事情就不乾淨，也不長久。<em>題目應該重新設計，圖形應該重新繪製，內容應該可以被公開分享</em>，這樣才有可能成為一個真正開放的兒童思考練習資源。</p>
   </section>
 
   <!-- 開源 -->
   <section class="about-section">
     <div class="section-header">
       <span class="section-emoji">🌍</span>
-      <h2 class="section-title">開源,給每個願意一起的人</h2>
+      <h2 class="section-title">開源，給每個願意一起的人</h2>
     </div>
-    <p>也因為這樣,我不打算把它做成封閉的商業網站。我想把它放在 GitHub 上,<em>簡單、透明、開源</em>。</p>
+    <p>我也不想把這個網站做成封閉的商業服務。它不需要廣告，不需要會員制度，不需要把孩子的作答資料拿去做什麼商業分析。</p>
+
+    <p>我的想法很簡單：如果這個東西對我家的孩子有幫助，<em>也許它也可能對別人家的孩子有幫助</em>。既然如此，那就不如把它開放出來。</p>
+
+    <p>所以，我希望把程式碼、題庫、架構與設計方式都盡量公開。有人想使用，就可以使用；有人想改，就可以改；有人想擴充題目，也歡迎一起加入。</p>
+
+    <p>我本身不是幼兒教育或國小教育階段的專業工作者，所以我很清楚，這個網站一定還有很多可以修正的地方：題目的難度是否合適？提示是否清楚？孩子是否覺得有趣？介面是否足夠直覺？題型是否能真正刺激思考？這些都需要更多人使用、回饋、討論，才可能慢慢變好。</p>
 
     <ul class="belief-list">
-      <li class="belief-item"><span class="belief-icon">📥</span><span class="belief-text">如果有人覺得這個系統有用,可以直接取用。</span></li>
-      <li class="belief-item"><span class="belief-icon">➕</span><span class="belief-text">如果有人想擴充題目,可以加入。</span></li>
-      <li class="belief-item"><span class="belief-icon">🔀</span><span class="belief-text">如果有人想改成自己的版本,也歡迎。</span></li>
-      <li class="belief-item"><span class="belief-icon">🤝</span><span class="belief-text">如果有老師、家長、工程師、教育工作者願意一起改進,那就更好。</span></li>
+      <li class="belief-item"><span class="belief-icon">👩‍🏫</span><span class="belief-text">也許有老師可以讓題目<strong>更符合孩子的認知發展</strong>。</span></li>
+      <li class="belief-item"><span class="belief-icon">👨‍👩‍👧</span><span class="belief-text">也許有家長可以提出<strong>孩子實際使用時的反應</strong>。</span></li>
+      <li class="belief-item"><span class="belief-icon">💻</span><span class="belief-text">也許有工程師可以讓<strong>介面更順、更漂亮、更像遊戲</strong>。</span></li>
+      <li class="belief-item"><span class="belief-icon">🎨</span><span class="belief-text">也許有設計者可以讓孩子在答題時<strong>更有探索感</strong>。</span></li>
+      <li class="belief-item"><span class="belief-icon">➕</span><span class="belief-text">也許有人可以擴充更多題型，讓孩子<strong>接觸更豐富的思考方式</strong>。</span></li>
     </ul>
 
-    <p>我自己並不是幼兒教育或國小教育的專業工作者,但我相信這個方向是有價值的。真正懂兒童發展、懂教學現場、懂孩子學習節奏的人,如果願意一起參與,一定可以把它做得比我一個人想像的更好。</p>
-
-    <p>也許題目的語氣可以更貼近孩子,也許提示可以更有層次,也許題型可以更豐富,也許介面可以更像遊戲,也許未來還可以依照孩子的作答歷程,推薦更適合他的練習路線。</p>
-
-    <p><strong>但第一步,我想先把它做出來。</strong></p>
+    <p>我希望這個專案不是一個人關起門來完成的作品，而是一個<strong>可以被大家集思廣益、共同改善的小平台</strong>。</p>
   </section>
 
   <!-- AI 時代 -->
   <section class="about-section">
     <div class="section-header">
       <span class="section-emoji">⚡</span>
-      <h2 class="section-title">AI 時代,小需求也值得被做</h2>
+      <h2 class="section-title">AI 時代，小需求也值得被做</h2>
     </div>
-    <p>這也是 AI 時代很有意思的一件事。以前要做一個網站、題庫、互動測驗系統,即使不是非常困難,也需要不少時間與技術門檻。現在有了 AI agent,有了可以協同開發的工具,一個原本很小、很個人的想法,居然可以<em>很快被做成一個可以使用的雛形</em>。</p>
+    <p>這件事情也讓我對 AI 時代有更深的感受。</p>
 
-    <p>當然,AI 不是一次就能把複雜系統做好。它還是需要人類不斷和它討論、修正、決策、檢查。需求要被拆解,架構要被規劃,功能要被取捨,錯誤要被修正,題目要被檢查,介面要被調整。這個過程像是人和 AI 一起完成一件作品:</p>
+    <p>以前，一個父母如果突然想到：「我想幫孩子做一個簡單的腦力練習網站」，多半只是想想而已。因為真的要做出來，需要會設計、會寫程式、會整理題庫、會畫圖、會處理介面，還要有時間慢慢實作。對多數人來說，這個門檻不算低。</p>
+
+    <p>可是現在不一樣了。透過各種數位工具與 AI 輔助，一個原本很小、很生活化的需求，可以很快變成一個可以使用的雛形。當然，工具不會自動知道我們真正想要的是什麼。<em>人還是要負責觀察需求、描述問題、判斷方向、檢查結果、取捨功能</em>。很多複雜的事情也不是一次就能完成，而是需要反覆討論、修正與迭代。</p>
 
     <div class="quote-block">
-      <strong>人</strong>負責意圖、價值、判斷與方向。<br>
-      <strong>AI</strong> 負責快速生成、整理、實作與迭代。
+      但這件事情本身<strong>很有意義</strong>。<br>
+      它代表未來的創作門檻會越來越低。
     </div>
 
-    <p>軟體工程師正在被某種程度上解放。過去很多小眾需求,因為市場太小、成本太高,不值得被開發。可是現在,一個父母為了自己的孩子想到的小工具,一個老師為了一堂課想做的練習網站,一個社群為了某種特殊需求想做的服務,都可能透過 AI 快速被實作出來。</p>
+    <p>很多過去不值得被開發的小眾需求，現在都有機會被做出來。也許是一個老師想做給學生的小工具，也許是一位家長想做給孩子的練習網站，也許是一個社群想解決自己的問題。只要有人看見需求，願意把想法說清楚，就有機會把它變成實際可用的東西。</p>
 
-    <p>這代表未來的能力重點,也許會慢慢轉移:</p>
+    <p>這也讓我開始思考，未來孩子真正需要培養的能力，也許會和過去不太一樣。知識當然仍然重要，基本能力也仍然重要，但在 AI 越來越能協助人類完成各種工作之後，更珍貴的能力可能是：</p>
 
     <ul class="belief-list">
-      <li class="belief-item"><span class="belief-icon">👀</span><span class="belief-text">不只是誰會寫程式,而是<strong>誰能觀察到需求</strong>。</span></li>
-      <li class="belief-item"><span class="belief-icon">❓</span><span class="belief-text">不只是誰記得最多知識,而是<strong>誰能提出有意義的問題</strong>。</span></li>
-      <li class="belief-item"><span class="belief-icon">🛠️</span><span class="belief-text">不只是誰會操作工具,而是<strong>誰能把模糊的想法描述清楚</strong>。</span></li>
-      <li class="belief-item"><span class="belief-icon">✨</span><span class="belief-text">誰能和 AI 一起<strong>把想像變成可用的東西</strong>。</span></li>
+      <li class="belief-item"><span class="belief-icon">👀</span><span class="belief-text">能不能<strong>觀察到問題</strong>？</span></li>
+      <li class="belief-item"><span class="belief-icon">❓</span><span class="belief-text">能不能<strong>提出好的問題</strong>？</span></li>
+      <li class="belief-item"><span class="belief-icon">🔍</span><span class="belief-text">能不能<strong>發現別人的需求</strong>？</span></li>
+      <li class="belief-item"><span class="belief-icon">💬</span><span class="belief-text">能不能<strong>把模糊的想法說清楚</strong>？</span></li>
+      <li class="belief-item"><span class="belief-icon">🛠️</span><span class="belief-text">能不能把一個突發奇想，<strong>慢慢整理成可以實踐的方向</strong>？</span></li>
     </ul>
+
+    <p>也就是說，未來的孩子不只是要會回答問題，更要會<em>發現問題</em>。不只是要會使用工具，更要知道自己<em>想用工具完成什麼</em>。不只是要會接受標準答案，更要能夠<em>探索不同的可能</em>。</p>
   </section>
 
-  <!-- 教育翻轉 -->
+  <!-- 教育實驗 -->
   <section class="about-section">
     <div class="section-header">
-      <span class="section-emoji">🌱</span>
-      <h2 class="section-title">給孩子的不只是答題,還有觀察與思考</h2>
+      <span class="section-emoji">🍰</span>
+      <h2 class="section-title">像一口甜點：好的思考可以從遊戲開始</h2>
     </div>
-    <p>教育也可能因此被重新翻轉。孩子未來要面對的世界,不一定只是「學會標準答案」的世界,而是一個需要他們<em>觀察、提問、想像、組合、創造</em>的世界。當 AI 越來越會執行,人類就更需要知道自己想解決什麼問題,想服務什麼人,想創造什麼價值。</p>
-
-    <p>所以,這個網站表面上是一個孩子的腦力練習網站,但對我來說,它也有另一層意義:它是一個小小的 <strong>AI 時代教育實驗</strong>。</p>
+    <p>從這個角度來看，「腦力探險家」表面上是一個兒童腦力練習網站，但對我來說，它也帶著一點小小的<strong>教育實驗意味</strong>。</p>
 
     <div class="quote-block green">
-      我希望孩子在裡面練習的不只是答題,而是<strong>觀察</strong>。<br>
-      不是只追求正確,而是<strong>學會思考</strong>。<br>
-      不是害怕答錯,而是<strong>從錯誤中得到新的線索</strong>。<br>
-      不是被分數定義,而是<strong>慢慢發現自己的腦袋原來可以這樣轉動</strong>。
+      我希望孩子在裡面練習的不只是答題，而是<strong>觀察</strong>。<br>
+      不只是追求正確，而是<strong>學會思考</strong>。<br>
+      不只是害怕答錯，而是<strong>從錯誤中得到新的線索</strong>。<br>
+      不只是被分數定義，而是<strong>慢慢發現自己的腦袋原來可以這樣轉動</strong>。
+    </div>
+
+    <ul class="belief-list">
+      <li class="belief-item"><span class="belief-icon">🔢</span><span class="belief-text">一題小小的圖形題，也許能讓孩子第一次注意到「<strong>順序</strong>」的重要。</span></li>
+      <li class="belief-item"><span class="belief-icon">🔁</span><span class="belief-text">一題簡單的規律題，也許能讓孩子發現「<strong>變化</strong>」背後有規則。</span></li>
+      <li class="belief-item"><span class="belief-icon">🗂️</span><span class="belief-text">一題分類題，也許能讓孩子理解「相同」與「不同」可以有<strong>很多層次</strong>。</span></li>
+      <li class="belief-item"><span class="belief-icon">🧊</span><span class="belief-text">一題空間題，也許能讓孩子試著在腦中<strong>旋轉、翻面、想像</strong>。</span></li>
+    </ul>
+
+    <p>這些看似很小的練習，<em>累積起來，其實就是思考能力的一部分</em>。</p>
+
+    <p>我不期待孩子每一題都答對，也不希望這個網站變成另一種壓力來源。相反地，我希望它可以是一個輕鬆的地方，一個孩子完成作業後，可以<strong>像吃一口甜點那樣</strong>，玩一題、想一題、笑一下、討論一下的地方。</p>
+
+    <ul class="belief-list">
+      <li class="belief-item"><span class="belief-icon">🎉</span><span class="belief-text">如果孩子答對了，可以得到一點成就感。</span></li>
+      <li class="belief-item"><span class="belief-icon">💡</span><span class="belief-text">如果孩子答錯了，也可以知道原來還有另一種想法。</span></li>
+      <li class="belief-item"><span class="belief-icon">🌤️</span><span class="belief-text">如果孩子暫時不想玩，那也沒關係。</span></li>
+    </ul>
+
+    <div class="quote-block teal">
+      好的學習，<strong>不一定都要嚴肅</strong>。<br>
+      好的思考，<strong>也可以從遊戲開始</strong>。
     </div>
   </section>
 
@@ -538,29 +549,28 @@
       <span class="section-emoji">💗</span>
       <h2 class="section-title">給每一個願意一起的你</h2>
     </div>
-    <p>這個專案沒有什麼了不起的商業野心,也不打算藏私。它只是從一個很普通的家庭情境開始:<em>一位媽媽在文具行翻到一本題庫,一位爸爸想到也許可以用 AI 做點什麼,然後慢慢變成一個希望對更多孩子有幫助的小工具</em>。</p>
+    <p>這個專案沒有什麼了不起的商業野心，也沒有打算藏私。它只是從一個很普通的家庭情境開始：<em>一位媽媽在文具行翻到一本題庫，一位爸爸想到也許可以做個小工具給孩子玩</em>，然後慢慢變成一個希望對更多孩子也有幫助的開源網站。</p>
 
     <ul class="belief-list">
-      <li class="belief-item"><span class="belief-icon">🎁</span><span class="belief-text">如果這個工具對你有用,歡迎使用。</span></li>
-      <li class="belief-item"><span class="belief-icon">💬</span><span class="belief-text">如果你有想法,歡迎回饋。</span></li>
-      <li class="belief-item"><span class="belief-icon">🤝</span><span class="belief-text">如果你想擴充,歡迎一起參與。</span></li>
-      <li class="belief-item"><span class="belief-icon">🍴</span><span class="belief-text">如果你想拿去改、拿去教、拿去做成更好的版本,也歡迎。</span></li>
+      <li class="belief-item"><span class="belief-icon">🌟</span><span class="belief-text">如果它能幫助我們家的孩子，那很好。</span></li>
+      <li class="belief-item"><span class="belief-icon">🌟🌟</span><span class="belief-text">如果它也能幫助別人家的孩子，那更好。</span></li>
+      <li class="belief-item"><span class="belief-icon">🌟🌟🌟</span><span class="belief-text">如果有更多人願意一起讓它變得更好，那就是我最期待的事情。</span></li>
     </ul>
 
-    <p>因為真正重要的不是這個網站本身,而是<strong>我們能不能一起為孩子創造更多被啟發的機會</strong>。</p>
+    <p>因為真正重要的不是這個網站本身，而是<strong>我們能不能一起為孩子創造更多被啟發的機會</strong>。</p>
 
     <div class="quote-block teal" style="text-align:center; font-weight:700;">
-      讓孩子多看見一種題型,也許就多打開一扇門。<br>
-      讓孩子多經歷一次思考,也許就多長出一條路。<br>
-      讓孩子知道「我可以試著想想看」,<br>
+      讓孩子多看見一種題型，也許就多打開一扇門。<br>
+      讓孩子多經歷一次思考，也許就多長出一條路。<br>
+      讓孩子知道「我可以試著想想看」，<br>
       也許就是<strong>未來最珍貴的能力</strong>。
     </div>
   </section>
 
   <!-- CTA -->
   <div class="about-cta">
-    <div class="cta-title">準備好開始探險了嗎? 🚀</div>
-    <p class="cta-sub">不用註冊,不用下載。打開就玩。</p>
+    <div class="cta-title">準備好開始探險了嗎？🚀</div>
+    <p class="cta-sub">不用註冊，不用下載。打開就玩。</p>
     <div class="cta-buttons">
       <a href="index.html" class="cta-btn primary">🧠 開始玩</a>
       <a href="https://github.com/ENL1217/iq-kids" target="_blank" rel="noopener" class="cta-btn">⭐ GitHub Repo</a>
