@@ -3,6 +3,8 @@
 > 一個給國小孩童的互動式 IQ 練習網頁。
 > 目標不是「測驗鑑別」,而是「玩中學、想中玩」——讓孩子在解題後,還能透過引導式解析學會「為什麼這樣想」。
 
+**English version** → [README.en.md](README.en.md)
+
 ## 🌐 立即試玩
 
 **[https://enl1217.github.io/iq-kids/](https://enl1217.github.io/iq-kids/)**

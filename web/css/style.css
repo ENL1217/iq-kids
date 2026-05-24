@@ -589,8 +589,11 @@ body {
   .topic-card .topic-emoji { font-size: 36px; }
   .topic-card .topic-name { font-size: 18px; }
 
-  /* ───── Mute 按鈕縮一點,避開 title ───── */
+  /* ───── Mute + Lang 按鈕縮一點,避開 title ───── */
   .mute-btn { width: 38px; height: 38px; font-size: 18px; top: 10px; right: 10px; }
+  .lang-switcher { top: 10px; right: 58px; }
+  .lang-btn { width: 38px; height: 38px; font-size: 17px; }
+  .lang-menu { min-width: 200px; max-width: 240px; padding: 12px; top: 46px; }
 
   /* ───── Test mode banner ───── */
   .test-mode-banner { padding: 14px 16px; gap: 12px; }
@@ -664,6 +667,95 @@ body {
   color: #8B2C2C;
   font-size: 13px;
 }
+
+/* ============ LANG SWITCHER (Google Translate widget) ============ */
+.lang-switcher {
+  position: fixed;
+  top: 16px;
+  right: 70px;  /* mute 按鈕左邊 */
+  z-index: 50;
+}
+.lang-btn {
+  width: 44px;
+  height: 44px;
+  background: white;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-family: inherit;
+}
+.lang-btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(45, 42, 74, 0.15);
+  background: #FFFBF0;
+}
+.lang-menu {
+  position: absolute;
+  top: 54px;
+  right: 0;
+  background: white;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+  min-width: 220px;
+  max-width: 280px;
+}
+.lang-menu-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 10px;
+  text-align: center;
+}
+.lang-menu-hint {
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* Google Translate widget 樣式覆蓋 — 讓它跟我們風格一致 */
+#google_translate_element .goog-te-gadget {
+  font-family: inherit !important;
+  font-size: 13px !important;
+  color: var(--ink) !important;
+}
+#google_translate_element .goog-te-gadget-simple {
+  background: #FFFBF0 !important;
+  border: 2px solid var(--ink) !important;
+  border-radius: 10px !important;
+  padding: 6px 10px !important;
+  font-size: 13px !important;
+  cursor: pointer;
+  display: block !important;
+  text-align: center;
+}
+#google_translate_element .goog-te-menu-value {
+  color: var(--ink) !important;
+  font-weight: 700 !important;
+}
+#google_translate_element .goog-te-menu-value span {
+  color: var(--ink) !important;
+}
+/* 隱藏 "Powered by Google" 因為它佔空間,而且我們有 hint 寫 */
+#google_translate_element .goog-logo-link,
+#google_translate_element .goog-te-gadget > span > a {
+  display: none !important;
+}
+/* 避免被 Translate 加的頂部 banner 干擾佈局 */
+body { top: 0 !important; }
+.goog-te-banner-frame.skiptranslate { display: none !important; }
 
 /* ============ MUTE BUTTON ============ */
 .mute-btn {

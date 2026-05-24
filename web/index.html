@@ -33,6 +33,38 @@
 <div class="container">
   <button class="mute-btn" id="muteBtn" onclick="onMuteClick()" title="切換音效">🔊</button>
 
+  <!-- 語言切換 (Google Translate widget,棄用警告:Google 2022 年宣布停止支援,但目前仍可用) -->
+  <div class="lang-switcher">
+    <button class="lang-btn" id="langBtn" onclick="toggleLangMenu()" title="翻譯 / Translate">🌐</button>
+    <div class="lang-menu hide" id="langMenu">
+      <div class="lang-menu-title">🌐 Translate / 翻譯</div>
+      <div id="google_translate_element"></div>
+      <div class="lang-menu-hint">由 Google Translate 提供,翻譯品質可能不完美</div>
+    </div>
+  </div>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'zh-TW',
+        includedLanguages: 'en,ja,ko,zh-CN,vi,id,th,ms,es,fr,de',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+    function toggleLangMenu() {
+      document.getElementById('langMenu').classList.toggle('hide');
+    }
+    // 點 menu 外面關閉
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('langMenu');
+      const btn = document.getElementById('langBtn');
+      if (menu && !menu.contains(e.target) && e.target !== btn) {
+        menu.classList.add('hide');
+      }
+    });
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+
   <div class="header">
     <h1 class="title"><span class="title-emoji">🧠</span>腦力探險家</h1>
     <p class="subtitle">六大題型 × 三種難度 · IQ 練習場</p>
