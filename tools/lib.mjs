@@ -168,6 +168,112 @@ export function validateQuestion(q, opts = {}) {
   checkLiteral(q.hint, 'hint');
   checkLiteral(q.explanation, 'explanation');
 
+  // ─── visual structural integrity ───
+  if (q.visual && typeof q.visual === 'object') {
+    const v = q.visual;
+
+    // matrix-3x3 / matrix-2x2: 數量 + 必有恰好 1 個 unknown
+    if (v.type === 'matrix-3x3' || v.type === 'matrix-2x2') {
+      const expected = v.type === 'matrix-3x3' ? 9 : 4;
+      if (!Array.isArray(v.cells)) {
+        errors.push(`${v.type} must have cells array`);
+      } else {
+        if (v.cells.length !== expected) {
+          errors.push(`${v.type} expects ${expected} cells, got ${v.cells.length}`);
+        }
+        const unknowns = v.cells.filter(c => c && c.unknown).length;
+        if (unknowns !== 1) errors.push(`${v.type} must have exactly 1 unknown cell, got ${unknowns}`);
+        // 每個非 unknown cell 必須有 shape 或 raw (或 dots 當 shape)
+        v.cells.forEach((c, i) => {
+          if (!c || typeof c !== 'object') {
+            errors.push(`visual.cells[${i}] must be an object`);
+            return;
+          }
+          if (c.unknown) return;
+          if (!c.shape && !c.raw) {
+            errors.push(`visual.cells[${i}] has no shape, raw, or unknown — empty cell will render blank`);
+          }
+        });
+      }
+    }
+
+    // sequence-row: 必有恰好 1 個 unknown,所有 items 都要有 shape 或 raw 或 unknown
+    if (v.type === 'sequence-row') {
+      if (!Array.isArray(v.items)) {
+        errors.push('sequence-row must have items array');
+      } else {
+        const unknowns = v.items.filter(it => it && it.unknown).length;
+        if (unknowns !== 1) errors.push(`sequence-row must have exactly 1 unknown item, got ${unknowns}`);
+        v.items.forEach((it, i) => {
+          if (!it || typeof it !== 'object') {
+            errors.push(`visual.items[${i}] must be an object`);
+            return;
+          }
+          if (it.unknown) return;
+          if (!it.shape && !it.raw) {
+            errors.push(`visual.items[${i}] has no shape, raw, or unknown`);
+          }
+        });
+      }
+    }
+
+    // number-sequence: 必有恰好 1 個 "?" (或 null) 表示未知
+    if (v.type === 'number-sequence') {
+      if (!Array.isArray(v.items)) {
+        errors.push('number-sequence must have items array');
+      } else {
+        const unknowns = v.items.filter(it => it === '?' || it === null).length;
+        if (unknowns !== 1) errors.push(`number-sequence must have exactly 1 unknown item, got ${unknowns}`);
+        v.items.forEach((it, i) => {
+          if (it === '?' || it === null) return;
+          if (typeof it !== 'number') {
+            errors.push(`visual.items[${i}] must be number or "?", got ${typeof it}`);
+          }
+        });
+      }
+    }
+
+    // analogy-row: pairs 結構 + 必有恰好 1 個 unknown
+    if (v.type === 'analogy-row') {
+      if (!Array.isArray(v.pairs)) {
+        errors.push('analogy-row must have pairs array');
+      } else {
+        let unknowns = 0;
+        v.pairs.forEach((p, i) => {
+          if (!p || typeof p !== 'object') {
+            errors.push(`pairs[${i}] must be an object`);
+            return;
+          }
+          ['a', 'b'].forEach(side => {
+            const term = p[side];
+            if (!term) {
+              errors.push(`pairs[${i}].${side} missing`);
+              return;
+            }
+            if (term.unknown) { unknowns++; return; }
+            if (!term.text) errors.push(`pairs[${i}].${side} has no text or unknown`);
+          });
+        });
+        if (unknowns !== 1) errors.push(`analogy-row must have exactly 1 unknown term, got ${unknowns}`);
+      }
+    }
+
+    // cubeStack: layout 必須是 array (1D / 2D / 3D)
+    if (v.type === 'cubeStack') {
+      if (!Array.isArray(v.layout) || v.layout.length === 0) {
+        errors.push('cubeStack must have non-empty layout array');
+      }
+    }
+  }
+
+  // 正解選項的 visual 若是 single-shape 也要 shape (有些 generator 可能漏)
+  if (Array.isArray(q.options) && Number.isInteger(q.answer)) {
+    const ansOpt = q.options[q.answer];
+    if (ansOpt && ansOpt.visual && ansOpt.visual.type === 'single-shape' && !ansOpt.visual.shape) {
+      errors.push(`answer option's visual is single-shape but has no shape — auto-grading will look broken`);
+    }
+  }
+
   // skill_codes 至少 1 個,且都在 canonical
   if (!Array.isArray(q.skill_codes) || q.skill_codes.length === 0) {
     errors.push('skill_codes must be a non-empty array');
