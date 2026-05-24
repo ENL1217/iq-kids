@@ -264,20 +264,49 @@ emoji 選填,有的話畫面更豐富。
 - `position` 取值:`top / front / right / back / left / bottom`
 - 每面可有 `label`(文字)、`color`、或 `icon`(emoji)
 
-### 4.8 `foldedPaper` (future)
-折紙打洞題。
+### 4.8 `foldedPaper` ⭐ 已實作
+折紙打洞題。實際使用通常配合 `composite` 串多個狀態。
 
 ```json
 {
   "type": "foldedPaper",
-  "folds": ["horizontal", "vertical"],
-  "holes": [{"x": 0.25, "y": 0.25}],
-  "step": "before-unfold"
+  "layout": "flat",
+  "foldHint": "horizontal",
+  "label": "對摺線"
 }
 ```
-- `folds`:依序執行的對摺
-- `holes`:打洞位置,座標 0-1
-- `step`:`"before-fold" | "after-fold" | "after-punch" | "after-unfold"`
+
+**欄位**:
+- `layout`:
+  - `"flat"` (預設) — 完整方形
+  - `"half-h"` — 上下對摺後的半張 (高度 1/2)
+  - `"half-v"` — 左右對摺後的半張 (寬度 1/2)
+  - `"quarter"` — 對摺兩次的 1/4
+- `foldHint`: `"horizontal"` | `"vertical"` | array of those — 在 flat 紙上畫虛線提示「對摺線」
+- `holes`: `[{x: 0-1, y: 0-1}]` — 洞的相對位置 (粉紅圓 + 黑邊)
+- `label`: 紙下方的說明文字
+
+**容器尺寸固定** (80×80 + padding,所有 layout 都用相同容器),這樣多步驟在 `composite` 內並排時對齊。
+
+**多步驟用法範例**:
+
+```json
+{
+  "type": "composite",
+  "arrangement": "horizontal",
+  "items": [
+    {"type": "foldedPaper", "layout": "flat", "foldHint": "horizontal", "label": "對摺線"},
+    {"type": "text", "content": "→"},
+    {"type": "foldedPaper", "layout": "half-h", "holes": [{"x": 0.33, "y": 0.5}]},
+    {"type": "text", "content": "展開?"}
+  ]
+}
+```
+
+**已知限制 (v1)**:
+- 不自動計算「展開後」洞的對稱位置 — 由出題者在 options 裡分別指定各種對稱結果 (這也是 IQ 題的本質:讓孩子推理出對稱結果)
+- 只支援 0/1/2 次對摺 (`quarter`)
+- 洞顏色固定粉紅。日後若要多種顏色再擴 `holeColor`
 
 ### 4.9 `single-shape`
 單一形狀,主要用於選項。

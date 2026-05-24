@@ -48,6 +48,25 @@ jobs:
           echo "--- manifest summary ---"
           node -e "const m=require('./questions/manifest.json'); const c=Object.entries(m.topics).map(([k,v])=>k+':'+(v.easy.length+v.mid.length+v.hard.length)).join(' '); console.log('Total topics:', c);"
 
+      - name: Cache-bust JS modules and CSS
+        # Inject the commit SHA into HTML files (replaces __VERSION__) and
+        # into all JS import statements so submodules also bust on each
+        # deploy. Without this, browser ES-module cache could keep the
+        # frontend stuck on an old version after deploys.
+        run: |
+          VERSION=$(git rev-parse --short HEAD)
+          echo "Injecting version: $VERSION"
+          # Replace __VERSION__ placeholder in HTML files
+          find _site -name "*.html" -exec sed -i "s/__VERSION__/$VERSION/g" {} \;
+          # Add ?v=$VERSION to every relative .js import in JS files
+          # Matches: from './foo.js' OR from "./foo.js"  (we use single quotes by convention)
+          find _site/js -name "*.js" -exec sed -i "s|from '\\./\\([^']*\\.js\\)'|from './\\1?v=$VERSION'|g" {} \;
+          # Sanity check: show how many imports got versioned
+          echo "Versioned imports:"
+          grep -rh "from '\\./[^']*\\.js?v=" _site/js | wc -l
+          echo "Example HTML script tag:"
+          grep -h "script.*src=.js" _site/index.html || true
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

@@ -187,12 +187,82 @@ function renderCubeNet(spec) {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// Folded Paper (折紙打洞示意,目前用 raw-html 過渡,後續實作)
+// Folded Paper — 折紙打洞示意圖
+//
+// spec:
+//   layout: 'flat'    完整方形 (預設)
+//         | 'half-h'  上下對摺後的半張 (高度 1/2)
+//         | 'half-v'  左右對摺後的半張 (寬度 1/2)
+//         | 'quarter' 對摺兩次後的 1/4 (寬高都 1/2)
+//   foldHint: 'horizontal' | 'vertical' | [...] 畫虛線表示「對摺線」
+//   holes: [{x, y}] 0-1 範圍的洞位置 (相對於當前 layout 的紙面)
+//   label: 紙下方文字 (例如「對摺線」、「展開?」)
+//
+// 用法 — composite 把多步驟串起來:
+//   { type: 'composite', arrangement: 'horizontal', items: [
+//       { type: 'foldedPaper', layout: 'flat', foldHint: 'horizontal',
+//         label: '對摺線' },
+//       { type: 'text', content: '→' },
+//       { type: 'foldedPaper', layout: 'half-h', holes: [{x:0.33,y:0.5}] },
+//       { type: 'text', content: '展開?' }
+//   ]}
 // ─────────────────────────────────────────────────────────────────
 function renderFoldedPaper(spec) {
-  // 暫用占位,實作待 wishlist 項目處理
-  if (spec.raw_html) return spec.raw_html;
-  return `<div class="render-stub">[foldedPaper helper 待實作]</div>`;
+  if (spec.raw_html) return spec.raw_html;  // 過渡用 escape hatch
+
+  const INK = '#2D2A4A';
+  const PINK = '#FF6B9D';
+  const FOLD_LINE = '#9B98B5';
+
+  // 不同 layout 對應不同尺寸
+  const baseW = 60;
+  const baseH = 60;
+  let w = baseW, h = baseH;
+  if (spec.layout === 'half-h')  h = baseH / 2;
+  if (spec.layout === 'half-v')  w = baseW / 2;
+  if (spec.layout === 'quarter') { w = baseW / 2; h = baseH / 2; }
+
+  const padding = 10;
+  // 永遠用 baseW × baseH 容器,讓不同 layout 的紙在 composite 排列時對齊
+  const containerW = baseW + padding * 2;
+  const containerH = baseH + padding * 2 + (spec.label ? 16 : 0);
+  // 在容器內把紙置中
+  const paperX = padding + (baseW - w) / 2;
+  const paperY = padding + (baseH - h) / 2;
+
+  const parts = [];
+
+  // 紙張矩形
+  parts.push(`<rect x="${paperX}" y="${paperY}" width="${w}" height="${h}" fill="white" stroke="${INK}" stroke-width="2.5" rx="2"/>`);
+
+  // 對摺線提示 (虛線)
+  if (spec.foldHint) {
+    const hints = Array.isArray(spec.foldHint) ? spec.foldHint : [spec.foldHint];
+    hints.forEach(f => {
+      if (f === 'horizontal') {
+        const y = paperY + h / 2;
+        parts.push(`<line x1="${paperX}" y1="${y}" x2="${paperX + w}" y2="${y}" stroke="${FOLD_LINE}" stroke-width="1.5" stroke-dasharray="3,3"/>`);
+      } else if (f === 'vertical') {
+        const x = paperX + w / 2;
+        parts.push(`<line x1="${x}" y1="${paperY}" x2="${x}" y2="${paperY + h}" stroke="${FOLD_LINE}" stroke-width="1.5" stroke-dasharray="3,3"/>`);
+      }
+    });
+  }
+
+  // 洞 (粉紅小圓,有黑邊框)
+  (spec.holes || []).forEach(hole => {
+    const cx = paperX + (hole.x || 0) * w;
+    const cy = paperY + (hole.y || 0) * h;
+    parts.push(`<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="4" fill="${PINK}" stroke="${INK}" stroke-width="1.5"/>`);
+  });
+
+  // 標籤
+  if (spec.label) {
+    const labelY = paperY + h + 14;
+    parts.push(`<text x="${padding + baseW / 2}" y="${labelY}" text-anchor="middle" font-size="11" font-weight="700" fill="${INK}">${spec.label}</text>`);
+  }
+
+  return `<svg width="${containerW}" height="${containerH}" viewBox="0 0 ${containerW} ${containerH}" xmlns="http://www.w3.org/2000/svg">${parts.join('')}</svg>`;
 }
 
 // ─────────────────────────────────────────────────────────────────
