@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A little dessert of thinking, in everyday life · Brain Explorer</title>
+<meta name="description" content="An open-source brain practice site for kids — built from a family, for families. Not just a score, but a chance to open more doors of thinking.">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=__VERSION__">
+<style>
+  /* ============ ABOUT PAGE STYLES (same as zh-TW) ============ */
+  .about-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 20px 0 40px;
+  }
+
+  .about-hero {
+    text-align: center;
+    padding: 40px 20px 30px;
+    background: var(--bg-paper);
+    border: 4px solid var(--ink);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(circle at 15% 25%, rgba(255, 217, 61, 0.25) 0%, transparent 35%),
+      radial-gradient(circle at 85% 75%, rgba(255, 107, 157, 0.20) 0%, transparent 35%),
+      radial-gradient(circle at 50% 50%, rgba(78, 205, 196, 0.15) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .about-hero-emojis {
+    font-size: 56px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 4px;
+  }
+  .about-hero-title {
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .about-hero-subtitle {
+    font-size: clamp(15px, 3.5vw, 18px);
+    color: var(--ink-soft);
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+    line-height: 1.6;
+  }
+  .about-hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-tag {
+    background: white;
+    border: 2.5px solid var(--ink);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .about-section {
+    background: var(--bg-paper);
+    border: 3px solid var(--ink);
+    border-radius: 22px;
+    padding: 26px 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 2px dashed var(--ink-soft);
+  }
+  .section-emoji {
+    font-size: 36px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: clamp(20px, 4.5vw, 26px);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .about-section p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .about-section p:last-child { margin-bottom: 0; }
+  .about-section em {
+    background: var(--accent);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .quote-block {
+    background: linear-gradient(135deg, #FFFBF0, #FFF3D6);
+    border-left: 5px solid var(--primary);
+    border-radius: 0 14px 14px 0;
+    padding: 16px 20px;
+    margin: 18px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+  .quote-block.green {
+    background: linear-gradient(135deg, #F0FCEF, #E8F8E0);
+    border-left-color: var(--success);
+  }
+  .quote-block.teal {
+    background: linear-gradient(135deg, #E8FCFB, #D0F5F2);
+    border-left-color: var(--secondary);
+  }
+  .quote-block.purple {
+    background: linear-gradient(135deg, #F4F0FC, #E5DEFB);
+    border-left-color: var(--purple);
+  }
+
+  .belief-list {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0;
+  }
+  .belief-item {
+    display: flex;
+    gap: 14px;
+    padding: 12px 14px;
+    background: #FFFCF0;
+    border: 2.5px solid var(--ink);
+    border-radius: 14px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow-sm);
+    align-items: flex-start;
+  }
+  .belief-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    line-height: 1.3;
+  }
+  .belief-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink);
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .principle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin: 18px 0;
+  }
+  .principle-card {
+    background: white;
+    border: 2.5px solid var(--ink);
+    border-radius: 14px;
+    padding: 14px 12px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .principle-emoji { font-size: 28px; display: block; margin-bottom: 6px; }
+  .principle-label { font-size: 13px; font-weight: 700; color: var(--ink); }
+
+  .about-cta {
+    background: linear-gradient(135deg, var(--accent), var(--orange));
+    border: 4px solid var(--ink);
+    border-radius: 24px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    margin-top: 28px;
+  }
+  .cta-title {
+    font-size: clamp(20px, 5vw, 26px);
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .cta-sub {
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 18px;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-btn {
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--ink);
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cta-btn:hover {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(45, 42, 74, 0.15);
+    background: #FFFBF0;
+  }
+  .cta-btn.primary {
+    background: var(--primary);
+    color: white;
+  }
+  .cta-btn.primary:hover { background: var(--primary-deep); }
+
+  @media (max-width: 520px) {
+    body { padding: 12px; }
+    .about-container { padding: 8px 0 24px; }
+    .about-hero { padding: 30px 16px 24px; border-radius: 22px; }
+    .about-hero-emojis { font-size: 44px; }
+    .about-section { padding: 20px 16px; border-radius: 18px; }
+    .section-header { gap: 10px; padding-bottom: 12px; margin-bottom: 14px; }
+    .section-emoji { font-size: 30px; }
+    .about-section p { font-size: 14px; line-height: 1.75; }
+    .quote-block { padding: 14px 16px; font-size: 14px; }
+    .about-cta { padding: 22px 18px; }
+    .cta-btn { padding: 10px 16px; font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Language switcher (back to zh-TW + other languages via Google Translate) -->
+<div class="lang-switcher">
+  <button class="lang-btn" id="langBtn" onclick="toggleLangMenu()" title="Translate / 翻譯">🌐</button>
+  <div class="lang-menu hide" id="langMenu">
+    <div class="lang-menu-title">🌐 Language / 語言</div>
+    <div style="margin: 10px 0;">
+      <a href="about.html" style="display:inline-block; padding:8px 14px; background:var(--primary); color:white; border-radius:10px; text-decoration:none; font-weight:700; font-size:13px;">🇹🇼 繁體中文 (原版)</a>
+    </div>
+    <div style="border-top:1px solid #eee; margin:10px 0; padding-top:10px;">
+      <div style="font-size:11px; color:var(--ink-soft); margin-bottom:6px;">Other languages:</div>
+      <div id="google_translate_element"></div>
+    </div>
+    <div class="lang-menu-hint">Other languages powered by Google Translate (quality may vary)</div>
+  </div>
+</div>
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'zh-TW,zh-CN,ja,ko,vi,id,th,ms,es,fr,de',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+  function toggleLangMenu() {
+    document.getElementById('langMenu').classList.toggle('hide');
+  }
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('langMenu');
+    const btn = document.getElementById('langBtn');
+    if (menu && !menu.contains(e.target) && e.target !== btn) {
+      menu.classList.add('hide');
+    }
+  });
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+
+<div class="about-container">
+  <a href="index.html" class="back-btn" style="display:inline-flex; align-items:center; gap:6px;">← Back to home</a>
+
+  <!-- HERO -->
+  <header class="about-hero">
+    <div class="about-hero-emojis">🍰🧠✨</div>
+    <h1 class="about-hero-title">A little dessert of thinking, every day</h1>
+    <p class="about-hero-subtitle">An open-source brain practice site, built from a family</p>
+    <div class="about-hero-tags">
+      <span class="hero-tag">🆓 Free</span>
+      <span class="hero-tag">🔒 No tracking</span>
+      <span class="hero-tag">📂 MIT open source</span>
+      <span class="hero-tag">🚫 No ads</span>
+    </div>
+  </header>
+
+  <!-- Origin -->
+  <section class="about-section">
+    <div class="section-header">
+      <span class="section-emoji">📖</span>
+      <h2 class="section-title">It started with a workbook from a stationery shop</h2>
+    </div>
+    <p>One day, my wife stumbled across a set of elementary-school Math Olympiad workbooks at a stationery shop — one volume for each grade, from first through sixth. She flipped through a few pages and thought some of the problems looked genuinely interesting. Maybe they'd suit our kids, especially our daughter, who's in first grade right now — that age when curiosity runs wild and thinking is developing fast.</p>
+
+    <p>The thought was simple. Not to prep her for any test. Not to push her to grind through problems every day. Just — when she's done with her schoolwork and still has a little time and energy, maybe she could play with a few fun puzzles.</p>
+
+    <div class="quote-block">
+      The feeling we wanted was more like <strong>dessert after dinner</strong>.
+    </div>
+
+    <p>The main meal is done. Homework is done. And now, if there's a small, light challenge — something to look at, think about, guess, talk over — that could be a really nice thing. It shouldn't be pressure. It shouldn't be an extra burden. It should feel like <em>thinking with a sense of play</em>.</p>
+  </section>
+
+  <!-- Not a test, just a daily challenge -->
+  <section class="about-section">
+    <div class="section-header">
+      <span class="section-emoji">🌱</span>
+      <h2 class="section-title">Not a test. Just a small daily challenge.</h2>
+    </div>
+    <p>Some of the problems are about spotting shapes. Some are about finding patterns. Some are number puzzles, some are spatial imagination, some are about classification and comparison. A child doesn't need to do a lot at once, and doesn't need to hit a daily quota. As long as they occasionally meet a problem that sparks them — and they pause to think, or even discuss it with a parent:</p>
+
+    <ul class="belief-list">
+      <li class="belief-item">
+        <span class="belief-icon">💭</span>
+        <span class="belief-text">"Why does it work this way?"</span>
+      </li>
+      <li class="belief-item">
+        <span class="belief-icon">👀</span>
+        <span class="belief-text">"Is there another way to see it?"</span>
+      </li>
+      <li class="belief-item">
+        <span class="belief-icon">🔄</span>
+        <span class="belief-text">"What if I look at it from a different angle?"</span>
+      </li>
+    </ul>
+
+    <p>— that, on its own, is already valuable.</p>
+
+    <p>It crossed our minds later that if she ever runs into school aptitude tests, gifted-program assessments, or anything else that asks for logic and observation, these small everyday exercises might help a little. But that's not the point. <em>What really matters isn't getting an early start on some test — it's giving a child a chance, in everyday life, to encounter forms of thinking that don't usually show up in textbooks.</em></p>
+  </section>
+
+  <!-- From "test" to "playground" -->
+  <section class="about-section">
+    <div class="section-header">
+      <span class="section-emoji">💡</span>
+      <h2 class="section-title">From "a test" to "a thinking playground"</h2>
+    </div>
+    <p>At first, I just wanted to find some problems online and bundle them into a small quiz for the kids. But the more I looked, the more I noticed something: there are plenty of IQ tests, logic tests, and kids' assessment sites out there, but most of them share the same shape — the child finishes some problems, the site spits out a score, and that's the end.</p>
+
+    <div class="quote-block">
+      But for a child, <strong>the score is probably not the important part</strong>.
+    </div>
+
+    <ul class="belief-list">
+      <li class="belief-item">
+        <span class="belief-icon">😕</span>
+        <span class="belief-text">When a child gets one wrong, they need to know <strong>where their thinking went sideways</strong>.</span>
+      </li>
+      <li class="belief-item">
+        <span class="belief-icon">😊</span>
+        <span class="belief-text">When they get one right, they should also know <strong>what good observation got them there</strong>.</span>
+      </li>
+      <li class="belief-item">
+        <span class="belief-icon">🤔</span>
+        <span class="belief-text">When they're stuck, what they need most is someone to <strong>gently open the path of thought</strong>.</span>
+      </li>
+    </ul>
+
+    <p>A test that only says "you got 7 right" or "your IQ is roughly X" feels more like <em>measuring</em> the child than <em>sparking</em> the child. What I wanted to make is not just a test — it's a place where a child can <strong>practice thinking</strong>.</p>
+
+    <p>So the idea slowly shifted from "let's build a small quiz" to "let's build a <strong>brain practice playground</strong>".</p>
+  </section>
+
+  <!-- Intelligence as a process -->
+  <section class="about-section">
+    <div class="section-header">
+      <span class="section-emoji">🚪</span>
+      <h2 class="section-title">Intelligence isn't a result. It's a process.</h2>
+    </div>
+    <p>The more I work on this, the more I believe that what we call "ability" is often less about whether a child has it innately, and more about whether they've ever encountered that kind of problem, been guided to notice a particular pattern, or had a chance to practice a particular way of reasoning. The first time, it might feel unfamiliar. But with the right problem, the right hint, and the right kind of feedback, the path slowly opens up.</p>
+
+    <div class="quote-block teal">
+      <strong>Intelligence shouldn't be reduced to a test result.</strong><br>
+      It can also be a process — stimulated, sparked, and stretched.
+    </div>
+
+    <p>A child doesn't learn to think because they were tested. They learn to think because, through one engaging challenge after another, they slowly pick up how to observe, compare, reason, and shift perspective — until they discover: <em>oh, this is how you can look at this problem. And I can figure it out, too.</em></p>
+
+    <p>That's the part I most want to do. Not to label kids. Not to sort smart from not-smart. Just to <strong>let a child meet more entryways into thinking</strong>.</p>
+  </section>
+
+  <!-- Brain Explorer -->
+  <section class="about-section">
+    <div class="section-header">
+      <span class="section-emoji">🌈</span>
+      <h2 class="section-title">"Brain Explorer" was born</h2>
+    </div>
+    <p>So I built a very simple website called <strong>"Brain Explorer" (腦力探險家)</strong>.</p>
+
+    <p>It's currently an IQ practice playground for kids — kept as simple, clean, and approachable as I could make it. The site has different question types, different difficulty levels, and two main modes: <strong>learning mode</strong> and <strong>test mode</strong>. A child can warm up in learning mode with hints and explanations, then challenge themselves in test mode without any help.</p>
+
+    <div class="principle-grid">
+      <div class="principle-card">
+        <span class="principle-emoji">📚</span>
+        <div class="principle-label">Learning mode</div>
+        <div style="font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.5;">Step-by-step practice with hints and explanations</div>
+      </div>
+      <div class="principle-card">
+        <span class="principle-emoji">📝</span>
+        <div class="principle-label">Test mode</div>
+        <div style="font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.5;">No hints. Answers only at the end.</div>
+      </div>
+      <div class="principle-card">
+        <span class="principle-emoji">🌈</span>
+        <div class="principle-label">Skill radar</div>
+        <div style="font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.5;">See your progress across six domains</div>
+      </div>
+      <div class="principle-card">
+        <span class="principle-emoji">💪</span>
+        <div class="principle-label">Wrong-answer review</div>
+        <div style="font-size:12px;color:var(--ink-soft);margin-top:4px;line-height:1.5;">Go back and see where your thinking veered off</div>
+      </div>
+    </div>
+
+    <p>I wanted using it to feel <em>light</em>.</p>
+
+    <ul class="belief-list">
+      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">No login.</span></li>
+      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">No installation.</span></li>
+      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">No ads.</span></li>
+      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">No backend.</span></li>
+      <li class="belief-item"><span class="belief-icon">✅</span><span class="belief-text">No sending kids' data to remote servers.</span></li>
+    </ul>
+
+    <div class="quote-block green">
+      Open the page, and you can play. Your data lives only in your own browser — <strong>nothing is uploaded</strong>.
+    </div>
+
+    <p>That part matters to me, because this was always meant to be a small tool built from a family for families. No need to make it more complicated than that.</p>
+  </section>
+
+  <!-- Spirit of a problem, not someone's problems -->
+  <section class="about-section">
+    <div class="section-header">
+      <span class="section-emoji">📐</span>
+      <h2 class="section-title">Borrow the spirit of a problem — never copy someone else's</h2>
+    </div>
+    <p>For the question design, I wanted to stay clear of any copyright concerns. There are plenty of existing problem banks in print and online, but those problems belong to their authors. I shouldn't copy them, and I shouldn't paraphrase them lightly either.</p>
+
+    <p>So what I focus on is the <em>kind</em> of thinking — shape observation, pattern recognition, spatial imagination, classification, numerical relationships — and then write fresh, original problems in that spirit.</p>
+
+    <div class="quote-block purple">
+      In other words, I want to borrow <strong>the spirit of a problem</strong>,<br>
+      not copy <strong>someone else's problem</strong>.
+    </div>
+
+    <p>This makes the work harder, but it sits better with me — and it's truer to the project's intent. If I want this thing to be open to others, mixing in content with murky copyright would poison it from the start. The problems should be redesigned, the figures redrawn, the contents shareable in the open. Only then can this grow into a genuinely open resource for kids' thinking practice.</p>
+  </section>
+
+  <!-- Open source -->
+  <section class="about-section">
+    <div class="section-header">
+      <span class="section-emoji">🌍</span>
+      <h2 class="section-title">Open source, for anyone who wants to join</h2>
+    </div>
+    <p>I also don't want to make this into a closed, commercial service. No ads. No membership tiers. No analyzing kids' answers for business intelligence.</p>
+
+    <p>My thinking is simple: if this helps my kids, <em>it might help someone else's kids too</em>. If that's true, then I'd rather open it up.</p>
+
+    <p>So I'm putting the code, the question bank, the architecture, the design — all of it — out in the open. If you want to use it, use it. If you want to fork it, fork it. If you want to add more questions, please do.</p>
+
+    <p>I'm not a professional in early-childhood or elementary education, so I know perfectly well that this site has a lot of room to improve. Is the difficulty calibrated right? Are the hints clear enough? Do kids actually find it fun? Is the interface intuitive enough? Are the problems stimulating thinking in real ways? These all need more people using it, giving feedback, and discussing — slowly, this gets better.</p>
+
+    <ul class="belief-list">
+      <li class="belief-item"><span class="belief-icon">👩‍🏫</span><span class="belief-text">A teacher might make the problems <strong>better match how kids actually think</strong>.</span></li>
+      <li class="belief-item"><span class="belief-icon">👨‍👩‍👧</span><span class="belief-text">A parent might share <strong>how their kid actually reacts</strong> when using it.</span></li>
+      <li class="belief-item"><span class="belief-icon">💻</span><span class="belief-text">An engineer might make the interface <strong>smoother, prettier, more like a game</strong>.</span></li>
+      <li class="belief-item"><span class="belief-icon">🎨</span><span class="belief-text">A designer might give the experience <strong>more of a sense of exploration</strong>.</span></li>
+      <li class="belief-item"><span class="belief-icon">➕</span><span class="belief-text">Someone might expand into more question types, exposing kids to <strong>richer kinds of thinking</strong>.</span></li>
+    </ul>
+
+    <p>I'd love this project to be not one person's closed-door work, but <strong>a small platform that improves through everyone's input</strong>.</p>
+  </section>
+
+  <!-- The AI age -->
+  <section class="about-section">
+    <div class="section-header">
+      <span class="section-emoji">⚡</span>
+      <h2 class="section-title">In the AI age, small needs are worth building</h2>
+    </div>
+    <p>This whole experience has also deepened how I feel about the AI era.</p>
+
+    <p>In the past, if a parent suddenly thought, "I want to build a small brain-practice website for my kid," that usually stayed a thought. To actually do it, you'd need design skills, programming skills, content curation, drawing, UI work — plus a lot of time. For most people, the bar was too high.</p>
+
+    <p>Now it's different. With modern digital tools and AI assistance, a tiny, very personal need can become a working prototype surprisingly fast. Of course, the tools don't automatically know what we really want. <em>A human still has to observe the need, articulate the problem, choose a direction, check the results, and make trade-offs.</em> Most non-trivial things still need many rounds of discussion, correction, and iteration.</p>
+
+    <div class="quote-block">
+      But this shift is <strong>meaningful</strong>.<br>
+      The barrier to creation keeps getting lower.
+    </div>
+
+    <p>So many niche needs that weren't "worth building" before are now reachable. Maybe a teacher wants a small tool for one specific lesson. Maybe a parent wants a practice site for their child. Maybe a community wants to solve a problem unique to itself. As long as someone sees the need and can articulate the idea, they have a path to making it real.</p>
+
+    <p>And this gets me thinking about what kids might actually need to cultivate, going forward. Knowledge still matters. Foundational skills still matter. But as AI gets better at executing on tasks, more precious abilities might be:</p>
+
+    <ul class="belief-list">
+      <li class="belief-item"><span class="belief-icon">👀</span><span class="belief-text">Can you <strong>see a problem</strong>?</span></li>
+      <li class="belief-item"><span class="belief-icon">❓</span><span class="belief-text">Can you <strong>ask a good question</strong>?</span></li>
+      <li class="belief-item"><span class="belief-icon">🔍</span><span class="belief-text">Can you <strong>notice what someone else needs</strong>?</span></li>
+      <li class="belief-item"><span class="belief-icon">💬</span><span class="belief-text">Can you <strong>turn a fuzzy idea into clear words</strong>?</span></li>
+      <li class="belief-item"><span class="belief-icon">🛠️</span><span class="belief-text">Can you take a spark of an idea and <strong>slowly shape it into something workable</strong>?</span></li>
+    </ul>
+
+    <p>In other words, the kids of the future won't just need to answer questions — they'll need to <em>find</em> them. Not just use tools, but know <em>what they want to build with them</em>. Not just accept standard answers, but explore <em>other possibilities</em>.</p>
+  </section>
+
+  <!-- Like a dessert -->
+  <section class="about-section">
+    <div class="section-header">
+      <span class="section-emoji">🍰</span>
+      <h2 class="section-title">Like a bite of dessert: good thinking can begin as play</h2>
+    </div>
+    <p>Seen from this angle, "Brain Explorer" looks like a kids' brain-practice site on the surface, but to me it also carries a little <strong>educational experiment</strong> in spirit.</p>
+
+    <div class="quote-block green">
+      I hope what kids practice here isn't just answering — it's <strong>observing</strong>.<br>
+      Not just being correct — it's <strong>learning to think</strong>.<br>
+      Not fearing wrong answers — but <strong>finding new clues in them</strong>.<br>
+      Not being defined by a score — but slowly discovering <strong>how their own mind can turn</strong>.
+    </div>
+
+    <ul class="belief-list">
+      <li class="belief-item"><span class="belief-icon">🔢</span><span class="belief-text">A small shape problem might be the first time a kid notices that <strong>order</strong> matters.</span></li>
+      <li class="belief-item"><span class="belief-icon">🔁</span><span class="belief-text">A simple pattern problem might let a kid discover that <strong>change</strong> follows rules.</span></li>
+      <li class="belief-item"><span class="belief-icon">🗂️</span><span class="belief-text">A classification problem might help a kid see that "same" and "different" come in <strong>many layers</strong>.</span></li>
+      <li class="belief-item"><span class="belief-icon">🧊</span><span class="belief-text">A spatial problem might be a kid's first chance to <strong>rotate, flip, and imagine</strong> in their head.</span></li>
+    </ul>
+
+    <p>These look tiny on their own. But added together, <em>that's a chunk of what we call thinking</em>.</p>
+
+    <p>I don't expect kids to get every problem right. And I really don't want this site to turn into another source of pressure. Quite the opposite — I'd love it to feel like a relaxed corner, where a kid, after homework is done, can <strong>take a bite like dessert</strong>: try one, think about one, laugh a little, talk a little.</p>
+
+    <ul class="belief-list">
+      <li class="belief-item"><span class="belief-icon">🎉</span><span class="belief-text">If they get it right, they feel a small sense of achievement.</span></li>
+      <li class="belief-item"><span class="belief-icon">💡</span><span class="belief-text">If they get it wrong, they discover there was another way to see it.</span></li>
+      <li class="belief-item"><span class="belief-icon">🌤️</span><span class="belief-text">If they don't feel like playing today, that's fine too.</span></li>
+    </ul>
+
+    <div class="quote-block teal">
+      Good learning <strong>doesn't have to be serious</strong>.<br>
+      Good thinking <strong>can start as play</strong>.
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <section class="about-section">
+    <div class="section-header">
+      <span class="section-emoji">💗</span>
+      <h2 class="section-title">For everyone willing to join</h2>
+    </div>
+    <p>This project has no grand commercial ambition, and nothing to hide. It started from a very ordinary family moment: <em>a mom flipping through a workbook at a stationery shop, a dad thinking maybe he could put together a small tool for their kids</em>, and slowly turning into an open-source site that hopes to help other families' kids too.</p>
+
+    <ul class="belief-list">
+      <li class="belief-item"><span class="belief-icon">🌟</span><span class="belief-text">If it helps our own kids, that's already good.</span></li>
+      <li class="belief-item"><span class="belief-icon">🌟🌟</span><span class="belief-text">If it helps someone else's kids too, that's better.</span></li>
+      <li class="belief-item"><span class="belief-icon">🌟🌟🌟</span><span class="belief-text">If more people are willing to make it better together, that's the thing I'm most looking forward to.</span></li>
+    </ul>
+
+    <p>Because what really matters isn't this website itself. It's <strong>whether we can, together, create more chances for kids to be sparked</strong>.</p>
+
+    <div class="quote-block teal" style="text-align:center; font-weight:700;">
+      One more kind of problem a kid meets — maybe one more door opens.<br>
+      One more moment of thinking — maybe one more path grows.<br>
+      One more time a kid says "let me try thinking about it" —<br>
+      maybe that's <strong>the most precious skill for the future</strong>.
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="about-cta">
+    <div class="cta-title">Ready to start exploring? 🚀</div>
+    <p class="cta-sub">No sign-up. No download. Just open and play.</p>
+    <div class="cta-buttons">
+      <a href="index.html" class="cta-btn primary">🧠 Start playing</a>
+      <a href="https://github.com/ENL1217/iq-kids" target="_blank" rel="noopener" class="cta-btn">⭐ GitHub Repo</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -269,6 +269,54 @@
 </head>
 <body>
 
+<!-- 語言切換 (Google Translate widget,跟主頁一致) -->
+<div class="lang-switcher">
+  <button class="lang-btn" id="langBtn" onclick="toggleLangMenu()" title="翻譯 / Translate">🌐</button>
+  <div class="lang-menu hide" id="langMenu">
+    <div class="lang-menu-title">🌐 Translate / 翻譯</div>
+    <div style="margin: 10px 0;">
+      <a href="about.en.html" style="display:inline-block; padding:8px 14px; background:var(--primary); color:white; border-radius:10px; text-decoration:none; font-weight:700; font-size:13px;">🇬🇧 LLM English version (高品質手翻)</a>
+    </div>
+    <div style="border-top:1px solid #eee; margin:10px 0; padding-top:10px;">
+      <div style="font-size:11px; color:var(--ink-soft); margin-bottom:6px;">其他語言:</div>
+      <div id="google_translate_element"></div>
+    </div>
+    <div class="lang-menu-hint">由 Google Translate 提供,翻譯品質可能不完美</div>
+  </div>
+</div>
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'zh-TW',
+      includedLanguages: 'en,ja,ko,zh-CN,vi,id,th,ms,es,fr,de',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+  function toggleLangMenu() {
+    document.getElementById('langMenu').classList.toggle('hide');
+  }
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('langMenu');
+    const btn = document.getElementById('langBtn');
+    if (menu && !menu.contains(e.target) && e.target !== btn) {
+      menu.classList.add('hide');
+    }
+  });
+  // 偵測瀏覽器語言:英文使用者自動跳醒提示有 English 版
+  (function() {
+    const lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    if (lang.startsWith('en')) {
+      // 顯示英文跳轉提示 (非 redirect,讓使用者自己選)
+      const banner = document.createElement('div');
+      banner.style.cssText = 'position:fixed; top:64px; right:12px; background:white; border:3px solid #2D2A4A; border-radius:14px; padding:10px 14px; box-shadow:0 4px 12px rgba(0,0,0,0.15); z-index:1000; max-width:240px; font-size:13px; line-height:1.5;';
+      banner.innerHTML = '<div style="font-weight:700; margin-bottom:6px;">🇬🇧 English available</div><a href="about.en.html" style="color:#FF6B9D; font-weight:700; text-decoration:none;">→ Read in English</a> <button onclick="this.parentElement.remove()" style="float:right; background:none; border:none; cursor:pointer; color:#888; font-size:18px; line-height:1;">×</button>';
+      document.body.appendChild(banner);
+    }
+  })();
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+
 <div class="about-container">
   <a href="index.html" class="back-btn" style="display:inline-flex; align-items:center; gap:6px;">← 回主選單</a>
 
