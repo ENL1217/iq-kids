@@ -1,0 +1,40 @@
+{
+  "id": "numseries-easy-024",
+  "topic": "numseries",
+  "difficulty": "easy",
+  "sub_type": "square-numbers",
+  "skill_codes": [
+    "number-square"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "這串數字藏著乘法的祕密,下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      16,
+      25,
+      36,
+      49,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "65"
+    },
+    {
+      "text": "62"
+    },
+    {
+      "text": "64"
+    },
+    {
+      "text": "49"
+    }
+  ],
+  "answer": 2,
+  "hint": "1×1=1, 2×2=4, 3×3=9... 看到了嗎?每一個都是<strong>同樣的數字相乘</strong>。下一個應該是 8×8。",
+  "explanation": "這是<strong>平方數</strong>:1², 2², 3²... 接下來是 8² = 8×8 = <strong>64</strong>。",
+  "skill": "平方數規律"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "analogy-hard-001",
+  "topic": "analogy",
+  "difficulty": "hard",
+  "sub_type": "material-source",
+  "skill_codes": ["analogy-material"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "這題的關係很微妙,看你能不能抓到!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {"a": {"text": "紙"}, "b": {"text": "樹"}},
+      {"a": {"text": "麵包"}, "b": {"unknown": true}}
+    ]
+  },
+  "options": [
+    {"text": "麵粉"},
+    {"text": "小麥"},
+    {"text": "吐司"},
+    {"text": "麵包店"}
+  ],
+  "answer": 1,
+  "hint": "紙是由什麼<strong>原料</strong>做的?是<strong>樹</strong>。那麵包是由什麼<strong>原料</strong>做的?要追溯到「最源頭」!",
+  "explanation": "「紙 → 樹」不是「成品→工廠」,而是<strong>「成品 → 最初的天然原料」</strong>。紙的最源頭是樹(不是木漿)。麵包的最源頭是<strong>小麥</strong>(不是麵粉,因為麵粉也是加工品)。這題的關鍵是追<strong>「最原始的天然來源」</strong>。",
+  "skill": "原料追溯類比"
+}

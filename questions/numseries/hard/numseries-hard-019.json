@@ -1,0 +1,41 @@
+{
+  "id": "numseries-hard-019",
+  "topic": "numseries",
+  "difficulty": "hard",
+  "sub_type": "mixed-multiply-add",
+  "skill_codes": [
+    "number-mixed-operation"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "這串數字每一步做了兩件事,下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      1,
+      4,
+      10,
+      22,
+      46,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "94"
+    },
+    {
+      "text": "48"
+    },
+    {
+      "text": "92"
+    },
+    {
+      "text": "138"
+    }
+  ],
+  "answer": 0,
+  "hint": "1 變成 4:可能是 <strong>×2 再 +2</strong>。試試看 4 ×2+2 對不對?最後一個套同樣公式。",
+  "explanation": "每一步是<strong>先 ×2,再 +2</strong>。46 × 2 + 2 = <strong>94</strong>。",
+  "skill": "混合運算數列(×N+M)"
+}

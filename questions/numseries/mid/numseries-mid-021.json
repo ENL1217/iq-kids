@@ -1,0 +1,41 @@
+{
+  "id": "numseries-mid-021",
+  "topic": "numseries",
+  "difficulty": "mid",
+  "sub_type": "geometric-x3",
+  "skill_codes": [
+    "number-geometric-series"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "這串數字每一步都變成原本的幾倍?下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      1,
+      3,
+      9,
+      27,
+      81,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "243"
+    },
+    {
+      "text": "162"
+    },
+    {
+      "text": "108"
+    },
+    {
+      "text": "244"
+    }
+  ],
+  "answer": 0,
+  "hint": "1 到 3 變幾倍?3 到 9 呢?都是<strong>×3</strong>!81 × 3 是?",
+  "explanation": "每一格都是前一格的 <strong>3 倍</strong>。81 × 3 = <strong>243</strong>。",
+  "skill": "等比數列(×3)"
+}

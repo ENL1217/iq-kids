@@ -1,0 +1,40 @@
+{
+  "id": "numseries-easy-001",
+  "topic": "numseries",
+  "difficulty": "easy",
+  "sub_type": "arithmetic-ascending",
+  "skill_codes": [
+    "number-arithmetic-series"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看看這串數字,每次都加同一個數字,下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      1,
+      3,
+      5,
+      7,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "11"
+    },
+    {
+      "text": "9"
+    },
+    {
+      "text": "8"
+    },
+    {
+      "text": "10"
+    }
+  ],
+  "answer": 1,
+  "hint": "從第一個數字到第二個,加了多少?到第三個呢?都是<strong>+2</strong>。最後一個是 7,再加 2 是多少?",
+  "explanation": "每一格都比前一格<strong>多 2</strong>。7 + 2 = <strong>9</strong>。",
+  "skill": "等差數列"
+}

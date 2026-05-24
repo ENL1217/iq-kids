@@ -1,0 +1,40 @@
+{
+  "id": "numseries-easy-018",
+  "topic": "numseries",
+  "difficulty": "easy",
+  "sub_type": "arithmetic-descending",
+  "skill_codes": [
+    "number-arithmetic-series"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看看這串數字,每次都減同一個數字,下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      50,
+      44,
+      38,
+      32,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "26"
+    },
+    {
+      "text": "25"
+    },
+    {
+      "text": "27"
+    },
+    {
+      "text": "32"
+    }
+  ],
+  "answer": 0,
+  "hint": "第一個是 50,第二個是 44,少了多少?都是<strong>−6</strong>。最後是 32,再減 6 是多少?",
+  "explanation": "每一格都比前一格<strong>少 6</strong>。32 − 6 = <strong>26</strong>。",
+  "skill": "等差遞減"
+}

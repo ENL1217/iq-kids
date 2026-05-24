@@ -1,0 +1,40 @@
+{
+  "id": "numseries-hard-017",
+  "topic": "numseries",
+  "difficulty": "hard",
+  "sub_type": "mixed-multiply-add",
+  "skill_codes": [
+    "number-mixed-operation"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "這串數字每一步做了兩件事,下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      1,
+      5,
+      13,
+      29,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "61"
+    },
+    {
+      "text": "32"
+    },
+    {
+      "text": "58"
+    },
+    {
+      "text": "87"
+    }
+  ],
+  "answer": 0,
+  "hint": "1 變成 5:可能是 <strong>×2 再 +3</strong>。試試看 5 ×2+3 對不對?最後一個套同樣公式。",
+  "explanation": "每一步是<strong>先 ×2,再 +3</strong>。29 × 2 + 3 = <strong>61</strong>。",
+  "skill": "混合運算數列(×N+M)"
+}

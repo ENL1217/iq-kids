@@ -1,0 +1,27 @@
+{
+  "id": "analogy-easy-002",
+  "topic": "analogy",
+  "difficulty": "easy",
+  "sub_type": "antonym",
+  "skill_codes": ["analogy-antonym"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "想想看,前面兩個是怎麼變的?",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {"a": {"text": "熱"}, "b": {"text": "冷"}},
+      {"a": {"text": "高"}, "b": {"unknown": true}}
+    ]
+  },
+  "options": [
+    {"text": "矮"},
+    {"text": "大"},
+    {"text": "小"},
+    {"text": "長"}
+  ],
+  "answer": 0,
+  "hint": "熱的相反是冷,高的相反是?",
+  "explanation": "「熱 ↔ 冷」是<strong>相反詞</strong>,所以「高」對應的也應該是相反詞 = <strong>矮</strong>。",
+  "skill": "反義詞類比"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "numseries-mid-002",
+  "topic": "numseries",
+  "difficulty": "mid",
+  "sub_type": "second-order-arithmetic",
+  "skill_codes": [
+    "number-second-order"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看看相鄰的差,藏著什麼規律?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      2,
+      3,
+      5,
+      8,
+      12,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "18"
+    },
+    {
+      "text": "45"
+    },
+    {
+      "text": "17"
+    },
+    {
+      "text": "16"
+    }
+  ],
+  "answer": 2,
+  "hint": "2→3 差多少?3→5 差多少?5→8 差多少?<strong>差本身</strong>是不是一直在加 1?",
+  "explanation": "相鄰兩個的差是 <strong>1, 2, 3...</strong> 每次多 1。最後一個差是 5,所以 12 + 5 = <strong>17</strong>。",
+  "skill": "二階等差(差再變化)"
+}

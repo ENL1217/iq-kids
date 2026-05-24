@@ -1,0 +1,27 @@
+{
+  "id": "analogy-mid-001",
+  "topic": "analogy",
+  "difficulty": "mid",
+  "sub_type": "location-workplace",
+  "skill_codes": ["analogy-location"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "這次的關係比較細,動動腦!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {"a": {"text": "廚師"}, "b": {"text": "廚房"}},
+      {"a": {"text": "醫生"}, "b": {"unknown": true}}
+    ]
+  },
+  "options": [
+    {"text": "病人"},
+    {"text": "醫院"},
+    {"text": "藥"},
+    {"text": "聽診器"}
+  ],
+  "answer": 1,
+  "hint": "廚師<strong>工作的地方</strong>是廚房,那醫生工作的地方是?",
+  "explanation": "「廚師 → 廚房」是<strong>「人 → 工作地點」</strong>,所以「醫生 →」應該是工作地點 = <strong>醫院</strong>。注意陷阱:聽診器是「工具」,病人是「對象」,都不是「地點」。",
+  "skill": "排除干擾選項"
+}

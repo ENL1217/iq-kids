@@ -1,0 +1,41 @@
+{
+  "id": "numseries-mid-001",
+  "topic": "numseries",
+  "difficulty": "mid",
+  "sub_type": "second-order-arithmetic",
+  "skill_codes": [
+    "number-second-order"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看看相鄰的差,藏著什麼規律?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      1,
+      2,
+      4,
+      7,
+      11,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "44"
+    },
+    {
+      "text": "16"
+    },
+    {
+      "text": "17"
+    },
+    {
+      "text": "15"
+    }
+  ],
+  "answer": 1,
+  "hint": "1→2 差多少?2→4 差多少?4→7 差多少?<strong>差本身</strong>是不是一直在加 1?",
+  "explanation": "相鄰兩個的差是 <strong>1, 2, 3...</strong> 每次多 1。最後一個差是 5,所以 11 + 5 = <strong>16</strong>。",
+  "skill": "二階等差(差再變化)"
+}

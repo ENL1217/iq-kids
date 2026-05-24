@@ -1,0 +1,40 @@
+{
+  "id": "numseries-easy-004",
+  "topic": "numseries",
+  "difficulty": "easy",
+  "sub_type": "arithmetic-ascending",
+  "skill_codes": [
+    "number-arithmetic-series"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看看這串數字,每次都加同一個數字,下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      5,
+      8,
+      11,
+      14,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "18"
+    },
+    {
+      "text": "16"
+    },
+    {
+      "text": "20"
+    },
+    {
+      "text": "17"
+    }
+  ],
+  "answer": 3,
+  "hint": "從第一個數字到第二個,加了多少?到第三個呢?都是<strong>+3</strong>。最後一個是 14,再加 3 是多少?",
+  "explanation": "每一格都比前一格<strong>多 3</strong>。14 + 3 = <strong>17</strong>。",
+  "skill": "等差數列"
+}

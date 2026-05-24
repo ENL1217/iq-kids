@@ -1,0 +1,41 @@
+{
+  "id": "numseries-hard-007",
+  "topic": "numseries",
+  "difficulty": "hard",
+  "sub_type": "fibonacci-like",
+  "skill_codes": [
+    "number-fibonacci"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看看相鄰幾個數字,有沒有特別的關係?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      3,
+      4,
+      7,
+      11,
+      18,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "30"
+    },
+    {
+      "text": "25"
+    },
+    {
+      "text": "29"
+    },
+    {
+      "text": "36"
+    }
+  ],
+  "answer": 2,
+  "hint": "3 + 4 = 7?4 + 7 = 11?是不是<strong>每一個都等於前兩個相加</strong>?",
+  "explanation": "這是<strong>費氏型數列</strong>:每一項 = 前兩項相加。11 + 18 = <strong>29</strong>。",
+  "skill": "費氏型相加數列"
+}

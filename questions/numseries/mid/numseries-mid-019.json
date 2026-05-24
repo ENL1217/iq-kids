@@ -1,0 +1,40 @@
+{
+  "id": "numseries-mid-019",
+  "topic": "numseries",
+  "difficulty": "mid",
+  "sub_type": "geometric-x3",
+  "skill_codes": [
+    "number-geometric-series"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "這串數字每一步都變成原本的幾倍?下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      2,
+      6,
+      18,
+      54,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "72"
+    },
+    {
+      "text": "163"
+    },
+    {
+      "text": "162"
+    },
+    {
+      "text": "108"
+    }
+  ],
+  "answer": 2,
+  "hint": "2 到 6 變幾倍?6 到 18 呢?都是<strong>×3</strong>!54 × 3 是?",
+  "explanation": "每一格都是前一格的 <strong>3 倍</strong>。54 × 3 = <strong>162</strong>。",
+  "skill": "等比數列(×3)"
+}

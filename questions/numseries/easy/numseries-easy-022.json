@@ -1,0 +1,41 @@
+{
+  "id": "numseries-easy-022",
+  "topic": "numseries",
+  "difficulty": "easy",
+  "sub_type": "square-numbers",
+  "skill_codes": [
+    "number-square"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "這串數字藏著乘法的祕密,下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      1,
+      4,
+      9,
+      16,
+      25,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "34"
+    },
+    {
+      "text": "37"
+    },
+    {
+      "text": "36"
+    },
+    {
+      "text": "25"
+    }
+  ],
+  "answer": 2,
+  "hint": "1×1=1, 2×2=4, 3×3=9... 看到了嗎?每一個都是<strong>同樣的數字相乘</strong>。下一個應該是 6×6。",
+  "explanation": "這是<strong>平方數</strong>:1², 2², 3²... 接下來是 6² = 6×6 = <strong>36</strong>。",
+  "skill": "平方數規律"
+}

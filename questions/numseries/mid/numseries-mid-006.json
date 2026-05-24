@@ -1,0 +1,41 @@
+{
+  "id": "numseries-mid-006",
+  "topic": "numseries",
+  "difficulty": "mid",
+  "sub_type": "second-order-arithmetic",
+  "skill_codes": [
+    "number-second-order"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看看相鄰的差,藏著什麼規律?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      2,
+      5,
+      9,
+      14,
+      20,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "26"
+    },
+    {
+      "text": "28"
+    },
+    {
+      "text": "55"
+    },
+    {
+      "text": "27"
+    }
+  ],
+  "answer": 3,
+  "hint": "2→5 差多少?5→9 差多少?9→14 差多少?<strong>差本身</strong>是不是一直在加 1?",
+  "explanation": "相鄰兩個的差是 <strong>3, 4, 5...</strong> 每次多 1。最後一個差是 7,所以 20 + 7 = <strong>27</strong>。",
+  "skill": "二階等差(差再變化)"
+}

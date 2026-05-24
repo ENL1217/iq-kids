@@ -1,0 +1,40 @@
+{
+  "id": "numseries-easy-025",
+  "topic": "numseries",
+  "difficulty": "easy",
+  "sub_type": "geometric-x2",
+  "skill_codes": [
+    "number-geometric-series"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "這串數字每一步變成原本的兩倍,下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      1,
+      2,
+      4,
+      8,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "16"
+    },
+    {
+      "text": "9"
+    },
+    {
+      "text": "15"
+    },
+    {
+      "text": "24"
+    }
+  ],
+  "answer": 0,
+  "hint": "1 到 2 變成幾倍?2 到 4 呢?都是<strong>×2</strong>。8 × 2 是多少?",
+  "explanation": "每一格都是前一格的<strong>2 倍</strong>。8 × 2 = <strong>16</strong>。",
+  "skill": "等比數列(×2)"
+}

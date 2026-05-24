@@ -1,0 +1,41 @@
+{
+  "id": "numseries-mid-015",
+  "topic": "numseries",
+  "difficulty": "mid",
+  "sub_type": "alternating-two-streams",
+  "skill_codes": [
+    "number-alternating"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "這串數字藏著兩條規律,看一個跳一個,下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      2,
+      1,
+      5,
+      5,
+      8,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "11"
+    },
+    {
+      "text": "30"
+    },
+    {
+      "text": "9"
+    },
+    {
+      "text": "37"
+    }
+  ],
+  "answer": 2,
+  "hint": "只看第 1、3、5 個位置:2, 5, 8 ── 規律是什麼?第 2、4 個位置又是什麼規律?",
+  "explanation": "把它拆成兩串:奇數位是 <strong>2, 5, 8...</strong> (每次 +3);偶數位是 <strong>1, 5, 9...</strong> (每次 +4)。下一個輪到偶數位,是 <strong>9</strong>。",
+  "skill": "交錯雙串數列"
+}

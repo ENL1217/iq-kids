@@ -1,0 +1,34 @@
+{
+  "id": "matrix-hard-001",
+  "topic": "matrix",
+  "difficulty": "hard",
+  "sub_type": "three-variable-rotation",
+  "skill_codes": ["pattern-three-variable", "pattern-latin-square"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "這題比較難!三個元素都在變化,你能全部抓出來嗎?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {"shape": "circle", "color": "pink", "radius": 13, "dots": 1},
+      {"shape": "square", "color": "teal", "dots": 2},
+      {"shape": "triangle", "color": "yellow", "dots": 3},
+      {"shape": "circle", "color": "teal", "radius": 13, "dots": 2},
+      {"shape": "square", "color": "yellow", "dots": 3},
+      {"shape": "triangle", "color": "pink", "dots": 1},
+      {"shape": "circle", "color": "yellow", "radius": 13, "dots": 3},
+      {"shape": "square", "color": "pink", "dots": 1},
+      {"unknown": true}
+    ]
+  },
+  "options": [
+    {"text": "綠三角+2點", "visual": {"type": "single-shape", "shape": "triangle", "color": "teal", "dots": 2}},
+    {"text": "粉三角+2點", "visual": {"type": "single-shape", "shape": "triangle", "color": "pink", "dots": 2}},
+    {"text": "黃三角+2點", "visual": {"type": "single-shape", "shape": "triangle", "color": "yellow", "dots": 2}},
+    {"text": "綠圓+2點", "visual": {"type": "single-shape", "shape": "circle", "color": "teal", "radius": 13, "dots": 2}}
+  ],
+  "answer": 0,
+  "hint": "橫向看:形狀都是圓→方→三角。但顏色和點數每排都「<strong>輪換</strong>」!第三排第三格的顏色和點數是什麼?",
+  "explanation": "形狀:每排都是圓→方→三角。顏色:每排是粉/綠/黃輪換,第三排第三格是<strong>綠色</strong>。點數:每排是 1/2/3 輪換,第三排第三格是 <strong>2 點</strong>。所以是 <strong>綠色三角形 + 2 點</strong>。",
+  "skill": "三變數同時推理(顏色×形狀×數量)"
+}

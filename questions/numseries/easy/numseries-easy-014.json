@@ -1,0 +1,40 @@
+{
+  "id": "numseries-easy-014",
+  "topic": "numseries",
+  "difficulty": "easy",
+  "sub_type": "arithmetic-descending",
+  "skill_codes": [
+    "number-arithmetic-series"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看看這串數字,每次都減同一個數字,下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      30,
+      27,
+      24,
+      21,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "19"
+    },
+    {
+      "text": "21"
+    },
+    {
+      "text": "18"
+    },
+    {
+      "text": "17"
+    }
+  ],
+  "answer": 2,
+  "hint": "第一個是 30,第二個是 27,少了多少?都是<strong>−3</strong>。最後是 21,再減 3 是多少?",
+  "explanation": "每一格都比前一格<strong>少 3</strong>。21 − 3 = <strong>18</strong>。",
+  "skill": "等差遞減"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "numseries-mid-025",
+  "topic": "numseries",
+  "difficulty": "mid",
+  "sub_type": "geometric-x3",
+  "skill_codes": [
+    "number-geometric-series"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "這串數字每一步都變成原本的幾倍?下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      10,
+      30,
+      90,
+      270,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "540"
+    },
+    {
+      "text": "360"
+    },
+    {
+      "text": "810"
+    },
+    {
+      "text": "811"
+    }
+  ],
+  "answer": 2,
+  "hint": "10 到 30 變幾倍?30 到 90 呢?都是<strong>×3</strong>!270 × 3 是?",
+  "explanation": "每一格都是前一格的 <strong>3 倍</strong>。270 × 3 = <strong>810</strong>。",
+  "skill": "等比數列(×3)"
+}

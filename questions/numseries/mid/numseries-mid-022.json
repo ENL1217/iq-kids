@@ -1,0 +1,40 @@
+{
+  "id": "numseries-mid-022",
+  "topic": "numseries",
+  "difficulty": "mid",
+  "sub_type": "geometric-x3",
+  "skill_codes": [
+    "number-geometric-series"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "這串數字每一步都變成原本的幾倍?下一個是什麼?",
+  "visual": {
+    "type": "number-sequence",
+    "items": [
+      4,
+      12,
+      36,
+      108,
+      "?"
+    ]
+  },
+  "options": [
+    {
+      "text": "324"
+    },
+    {
+      "text": "325"
+    },
+    {
+      "text": "144"
+    },
+    {
+      "text": "216"
+    }
+  ],
+  "answer": 0,
+  "hint": "4 到 12 變幾倍?12 到 36 呢?都是<strong>×3</strong>!108 × 3 是?",
+  "explanation": "每一格都是前一格的 <strong>3 倍</strong>。108 × 3 = <strong>324</strong>。",
+  "skill": "等比數列(×3)"
+}

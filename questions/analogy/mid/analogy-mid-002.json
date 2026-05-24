@@ -1,0 +1,27 @@
+{
+  "id": "analogy-mid-002",
+  "topic": "analogy",
+  "difficulty": "mid",
+  "sub_type": "sound",
+  "skill_codes": ["analogy-sound"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "這題要想兩層關係!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {"a": {"text": "小狗"}, "b": {"text": "汪"}},
+      {"a": {"text": "小貓"}, "b": {"unknown": true}}
+    ]
+  },
+  "options": [
+    {"text": "魚"},
+    {"text": "喵"},
+    {"text": "可愛"},
+    {"text": "抓老鼠"}
+  ],
+  "answer": 1,
+  "hint": "小狗的<strong>叫聲</strong>是「汪」,小貓的叫聲是?",
+  "explanation": "「動物 → 叫聲」的對應。小狗叫「汪」,小貓叫「<strong>喵</strong>」。",
+  "skill": "聲音類比"
+}
