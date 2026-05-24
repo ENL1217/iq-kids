@@ -47,20 +47,20 @@
   },
   "options": [
     {
-      "text": "1 號與 2 號相對"
+      "text": "6 號與 3 號相對"
     },
     {
-      "text": "2 號與 4 號相對"
+      "text": "2 號與 5 號相對"
     },
     {
       "text": "1 號與 6 號相對"
     },
     {
-      "text": "3 號與 5 號相對"
+      "text": "2 號與 3 號相對"
     }
   ],
   "answer": 2,
-  "hint": "cross 展開圖中,中間那排折起來變成<strong>四個側面</strong>。最上面的 face 跟最下面的 face 折起來是相對的。哪兩個是?",
-  "explanation": "cross 展開圖摺起來後:中間 4 個 (位置 left/front/right/back) 變成<strong>四個側面</strong>,上面那個 (top) 跟下面那個 (bottom) 變成<strong>頂面跟底面</strong>。頂面跟底面互為對面。其他相對組:left 跟 right,front 跟 back。本題正解:<strong>1 號與 6 號相對</strong>。",
+  "hint": "cross 展開圖中,中間那排 (位置 left/front/right/back) 折起來變成<strong>四個側面</strong>。立方體只有<strong>3 組相對面</strong>:頂底、前後、左右。摺起來想想哪兩個 label 會剛好背對背?",
+  "explanation": "cross 展開圖摺起來後,只有 <strong>3 組</strong>相對面:1-6 (頂底)、2-4 (前後)、3-5 (左右)。本題的正解是 <strong>1 號與 6 號相對</strong> — 就是<strong>頂面跟底面 (top-bottom)</strong>那一組。其他三個選項裡的兩個 label 其實是<strong>相鄰</strong>而不是相對 (它們在立方體上共用一條摺邊)。",
   "skill": "立方體展開想像 (相對面)"
 }

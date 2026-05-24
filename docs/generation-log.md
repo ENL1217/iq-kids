@@ -910,3 +910,30 @@ push 後等回覆。OK 後再生 31 題、跑三層自驗、push 同 PR add comm
 - paper-fold 目前 hole 數限 1-3。若擴 hard 用 4-5 個洞 + 三次對摺 (eighth) 可加 5-10 題
 - mirror sub-pool 可擴 horizontal/vertical 各 10 題 (現只 5 題);需更多 (角度, axis) 組合
 - cube-net 可考慮多面對應陳述題型 (除了 opposite/adjacent,還有「哪 3 個面圍著 X」)
+
+### v3 fix — cube-net-opposite distractor 多解 bug (PR #9 reviewer 抓到)
+
+**問題**:`genCubeNetOpposite` 第一版 distractor 用「其他 2 組相對 pair + 1 組相鄰 pair」。但**立方體只有 3 組相對面**,其他 2 組「相對 pair」(例如 correctPair=(1,6),distractor=(2,4) 跟 (3,5))**也是真的相對面**! 4 個選項裡有 3 個都是 true,多解 bug。
+
+**修法**:distractor 池改成 **12 組相鄰面**:
+```
+立方體相鄰面 (12 unordered pairs):
+  top(1)    鄰 front(2)/right(3)/back(4)/left(5)
+  bottom(6) 鄰 front(2)/right(3)/back(4)/left(5)
+  front(2)  鄰 right(3)/left(5)
+  back(4)   鄰 right(3)/left(5)
+```
+每題從 12 組相鄰中 seed-shuffle 抽 3 組,陳述為「X 號與 Y 號相對」 — 句型對但實際 X Y 相鄰,kid 選了就是「沒在腦中折立方體,只看 label 數字湊配對」的具體誤解。
+
+**也修了** explanation:之前寫死 (1,6) 案例,改成根據 `correctPair` 動態描述 (頂底 / 前後 / 左右)。
+
+**驗證** (3 題 spot-check 都對):
+```
+mid-027 (correctPair (1,6)): 1-6 相對 ✓ / 4-3 相鄰 / 6-4 相鄰 / 6-2 相鄰
+mid-028 (correctPair (2,4)): 2-4 相對 ✓ / 1-4 相鄰 / 1-2 相鄰 / 6-4 相鄰
+hard-018 (correctPair (1,6)): 1-6 相對 ✓ / 2-3 相鄰 / 4-3 相鄰 / 6-5 相鄰
+```
+
+每題 1 真 3 假,無多解。
+
+**教訓**:寫 distractor 時不只要「結構對但語義錯」,還要驗證每個 distractor 真的是錯的。立方體相對面這種「對」的 statement,跨 pair 排列出來會自動踩雷。
