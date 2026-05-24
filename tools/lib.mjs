@@ -18,7 +18,8 @@ export const VALID_VISUAL_TYPES = [
   'foldedPaper',
   'single-shape',
   'composite',
-  'text'  // 純文字節點 (組合視覺中使用)
+  'text',     // 純文字節點 (組合視覺中使用)
+  'raw-html'  // 過渡用 escape hatch (折紙、custom 立方體展開圖等手刻 SVG)。新題目應優先用結構化 type
 ];
 
 // 從 schema.md §3 同步而來。新增 skill code 要先更新 schema.md。
