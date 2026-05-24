@@ -1,0 +1,51 @@
+{
+  "id": "analogy-easy-009",
+  "topic": "analogy",
+  "difficulty": "easy",
+  "sub_type": "function-animal-part",
+  "skill_codes": [
+    "analogy-function"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "左邊是「動物跟牠最特別的身體部位」,右邊也要對!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "烏龜"
+        },
+        "b": {
+          "text": "硬殼"
+        }
+      },
+      {
+        "a": {
+          "text": "大象"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "長耳朵"
+    },
+    {
+      "text": "耳朵"
+    },
+    {
+      "text": "長鼻子"
+    },
+    {
+      "text": "水"
+    }
+  ],
+  "answer": 2,
+  "hint": "烏龜的特別身體部位是硬殼。那大象的特別部位是什麼?",
+  "explanation": "<strong>烏龜</strong>最特別的身體部位是<strong>硬殼</strong>,<strong>大象</strong>最特別的身體部位是<strong>長鼻子</strong>。題目在問「<strong>動物身上最顯眼的部位</strong>」。",
+  "skill": "動物特徵類比"
+}

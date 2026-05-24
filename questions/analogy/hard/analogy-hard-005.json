@@ -1,0 +1,51 @@
+{
+  "id": "analogy-hard-005",
+  "topic": "analogy",
+  "difficulty": "hard",
+  "sub_type": "material-source",
+  "skill_codes": [
+    "analogy-material"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "前面是「成品跟它的原料」,後面也要找原料!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "雞蛋"
+        },
+        "b": {
+          "text": "雞"
+        }
+      },
+      {
+        "a": {
+          "text": "衣服"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "棉花"
+    },
+    {
+      "text": "衣架"
+    },
+    {
+      "text": "乳牛"
+    },
+    {
+      "text": "工廠"
+    }
+  ],
+  "answer": 0,
+  "hint": "雞蛋是用什麼做的?那衣服呢?要追到「原料」,不是中間步驟。",
+  "explanation": "<strong>雞蛋</strong>是從<strong>雞</strong>做出來的,<strong>衣服</strong>是從<strong>棉花</strong>做出來的。要追到「<strong>最一開始</strong>的材料」,不是中間的加工步驟。",
+  "skill": "原料追溯類比"
+}

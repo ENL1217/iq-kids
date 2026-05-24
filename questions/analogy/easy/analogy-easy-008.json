@@ -1,0 +1,51 @@
+{
+  "id": "analogy-easy-008",
+  "topic": "analogy",
+  "difficulty": "easy",
+  "sub_type": "function-animal-part",
+  "skill_codes": [
+    "analogy-function"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "左邊是「動物跟牠最特別的身體部位」,右邊也要對!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "螃蟹"
+        },
+        "b": {
+          "text": "鉗子"
+        }
+      },
+      {
+        "a": {
+          "text": "刺蝟"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "敵人"
+    },
+    {
+      "text": "小腳"
+    },
+    {
+      "text": "長耳朵"
+    },
+    {
+      "text": "尖刺"
+    }
+  ],
+  "answer": 3,
+  "hint": "螃蟹的特別身體部位是鉗子。那刺蝟的特別部位是什麼?",
+  "explanation": "<strong>螃蟹</strong>最特別的身體部位是<strong>鉗子</strong>,<strong>刺蝟</strong>最特別的身體部位是<strong>尖刺</strong>。題目在問「<strong>動物身上最顯眼的部位</strong>」。",
+  "skill": "動物特徵類比"
+}

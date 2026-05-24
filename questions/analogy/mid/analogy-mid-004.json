@@ -1,0 +1,51 @@
+{
+  "id": "analogy-mid-004",
+  "topic": "analogy",
+  "difficulty": "mid",
+  "sub_type": "location-workplace",
+  "skill_codes": [
+    "analogy-location"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "左邊是「人或動物跟牠常在的地方」,右邊也要對!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "蜘蛛"
+        },
+        "b": {
+          "text": "蜘蛛網"
+        }
+      },
+      {
+        "a": {
+          "text": "螞蟻"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "糖"
+    },
+    {
+      "text": "觸角"
+    },
+    {
+      "text": "蟻穴"
+    },
+    {
+      "text": "教室"
+    }
+  ],
+  "answer": 2,
+  "hint": "蜘蛛常在蜘蛛網。那螞蟻常在哪裡?",
+  "explanation": "<strong>蜘蛛</strong>常待的地方是<strong>蜘蛛網</strong>,<strong>螞蟻</strong>常待的地方是<strong>蟻穴</strong>。題目在問「<strong>地方</strong>」,不是工具或對象。",
+  "skill": "工作/生活地點類比"
+}

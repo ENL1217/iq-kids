@@ -1,0 +1,51 @@
+{
+  "id": "analogy-mid-015",
+  "topic": "analogy",
+  "difficulty": "mid",
+  "sub_type": "sound",
+  "skill_codes": [
+    "analogy-sound"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "左邊是「動物跟牠的叫聲」,右邊也要對!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "烏鴉"
+        },
+        "b": {
+          "text": "嘎嘎"
+        }
+      },
+      {
+        "a": {
+          "text": "麻雀"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "啾啾"
+    },
+    {
+      "text": "樹枝"
+    },
+    {
+      "text": "羽毛"
+    },
+    {
+      "text": "哞"
+    }
+  ],
+  "answer": 0,
+  "hint": "烏鴉的叫聲是嘎嘎。那麻雀的叫聲呢?",
+  "explanation": "<strong>烏鴉</strong>的叫聲是「<strong>嘎嘎</strong>」,所以同樣的關係,<strong>麻雀</strong>的叫聲是「<strong>啾啾</strong>」。題目在問的是<strong>動物發出的聲音</strong>。",
+  "skill": "動物叫聲類比"
+}

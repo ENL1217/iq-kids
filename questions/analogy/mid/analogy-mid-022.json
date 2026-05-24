@@ -1,0 +1,51 @@
+{
+  "id": "analogy-mid-022",
+  "topic": "analogy",
+  "difficulty": "mid",
+  "sub_type": "sound",
+  "skill_codes": [
+    "analogy-sound"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "左邊是「動物跟牠的叫聲」,右邊也要對!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "馬"
+        },
+        "b": {
+          "text": "嘶"
+        }
+      },
+      {
+        "a": {
+          "text": "牛"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "咩"
+    },
+    {
+      "text": "草"
+    },
+    {
+      "text": "哞"
+    },
+    {
+      "text": "牛奶"
+    }
+  ],
+  "answer": 2,
+  "hint": "馬的叫聲是嘶。那牛的叫聲呢?",
+  "explanation": "<strong>馬</strong>的叫聲是「<strong>嘶</strong>」,所以同樣的關係,<strong>牛</strong>的叫聲是「<strong>哞</strong>」。題目在問的是<strong>動物發出的聲音</strong>。",
+  "skill": "動物叫聲類比"
+}

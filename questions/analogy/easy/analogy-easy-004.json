@@ -1,0 +1,51 @@
+{
+  "id": "analogy-easy-004",
+  "topic": "analogy",
+  "difficulty": "easy",
+  "sub_type": "function-body-sense",
+  "skill_codes": [
+    "analogy-function"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "左邊是「器官跟它的動作」,右邊也要對!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "手指"
+        },
+        "b": {
+          "text": "摸"
+        }
+      },
+      {
+        "a": {
+          "text": "耳朵"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "聲音"
+    },
+    {
+      "text": "頭"
+    },
+    {
+      "text": "看"
+    },
+    {
+      "text": "聽"
+    }
+  ],
+  "answer": 3,
+  "hint": "手指是用來做什麼?那耳朵呢?",
+  "explanation": "<strong>手指</strong>是用來<strong>摸</strong>的,<strong>耳朵</strong>是用來<strong>聽</strong>的。題目在問「<strong>器官的主要動作</strong>」。",
+  "skill": "感官功能類比"
+}

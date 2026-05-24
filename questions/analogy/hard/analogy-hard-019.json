@@ -1,0 +1,51 @@
+{
+  "id": "analogy-hard-019",
+  "topic": "analogy",
+  "difficulty": "hard",
+  "sub_type": "degree-intensity",
+  "skill_codes": [
+    "analogy-degree"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "前面兩個是「同一件事,但右邊更強烈」,後面也要對!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "走"
+        },
+        "b": {
+          "text": "跑"
+        }
+      },
+      {
+        "a": {
+          "text": "微笑"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "大笑"
+    },
+    {
+      "text": "涼"
+    },
+    {
+      "text": "盯"
+    },
+    {
+      "text": "看"
+    }
+  ],
+  "answer": 0,
+  "hint": "走跟跑是同一類,但跑更強。微笑更強的版本是什麼?",
+  "explanation": "<strong>跑</strong>比<strong>走</strong>速度更快(同樣是腳的動作)。<strong>大笑</strong>比<strong>微笑</strong>更開心、聲音更大(同樣是笑的動作)。注意:這不是同義詞,而是「程度更強」。",
+  "skill": "程度副詞類比"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "analogy-mid-023",
+  "topic": "analogy",
+  "difficulty": "mid",
+  "sub_type": "causal",
+  "skill_codes": [
+    "analogy-causal"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "前面是「先發生跟結果」,後面也要對應!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "跑步"
+        },
+        "b": {
+          "text": "流汗"
+        }
+      },
+      {
+        "a": {
+          "text": "雨"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "濕"
+    },
+    {
+      "text": "亮"
+    },
+    {
+      "text": "雲"
+    },
+    {
+      "text": "雨傘"
+    }
+  ],
+  "answer": 0,
+  "hint": "跑步會造成流汗。那雨會造成什麼?",
+  "explanation": "<strong>跑步</strong>會造成<strong>流汗</strong>,<strong>雨</strong>會造成<strong>濕</strong>。兩組都是「<strong>原因 → 結果</strong>」的關係,要找直接造成的那個結果。",
+  "skill": "因果關係類比"
+}

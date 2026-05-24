@@ -1,0 +1,51 @@
+{
+  "id": "analogy-mid-019",
+  "topic": "analogy",
+  "difficulty": "mid",
+  "sub_type": "sound",
+  "skill_codes": [
+    "analogy-sound"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "左邊是「動物跟牠的叫聲」,右邊也要對!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "青蛙"
+        },
+        "b": {
+          "text": "呱呱"
+        }
+      },
+      {
+        "a": {
+          "text": "鴨"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "池塘"
+    },
+    {
+      "text": "蹼"
+    },
+    {
+      "text": "哞"
+    },
+    {
+      "text": "嘎嘎"
+    }
+  ],
+  "answer": 3,
+  "hint": "青蛙的叫聲是呱呱。那鴨的叫聲呢?",
+  "explanation": "<strong>青蛙</strong>的叫聲是「<strong>呱呱</strong>」,所以同樣的關係,<strong>鴨</strong>的叫聲是「<strong>嘎嘎</strong>」。題目在問的是<strong>動物發出的聲音</strong>。",
+  "skill": "動物叫聲類比"
+}

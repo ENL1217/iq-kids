@@ -1,0 +1,51 @@
+{
+  "id": "analogy-mid-009",
+  "topic": "analogy",
+  "difficulty": "mid",
+  "sub_type": "location-workplace",
+  "skill_codes": [
+    "analogy-location"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "左邊是「人或動物跟牠常在的地方」,右邊也要對!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "農夫"
+        },
+        "b": {
+          "text": "農田"
+        }
+      },
+      {
+        "a": {
+          "text": "飛行員"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "教室"
+    },
+    {
+      "text": "飛機"
+    },
+    {
+      "text": "天空"
+    },
+    {
+      "text": "機票"
+    }
+  ],
+  "answer": 1,
+  "hint": "農夫常在農田。那飛行員常在哪裡?",
+  "explanation": "<strong>農夫</strong>常待的地方是<strong>農田</strong>,<strong>飛行員</strong>常待的地方是<strong>飛機</strong>。題目在問「<strong>地方</strong>」,不是工具或對象。",
+  "skill": "工作/生活地點類比"
+}

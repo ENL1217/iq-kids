@@ -1,0 +1,51 @@
+{
+  "id": "analogy-easy-030",
+  "topic": "analogy",
+  "difficulty": "easy",
+  "sub_type": "antonym",
+  "skill_codes": [
+    "analogy-antonym"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "前面兩個是相反詞,後面也要找相反詞!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "新"
+        },
+        "b": {
+          "text": "舊"
+        }
+      },
+      {
+        "a": {
+          "text": "乾"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "大"
+    },
+    {
+      "text": "冷"
+    },
+    {
+      "text": "小"
+    },
+    {
+      "text": "濕"
+    }
+  ],
+  "answer": 3,
+  "hint": "新跟舊是相反詞。那乾的相反是什麼?",
+  "explanation": "<strong>新</strong>跟<strong>舊</strong>是相反詞,意思剛好相反。同樣的,<strong>乾</strong>的相反就是<strong>濕</strong>。找相反詞要找<strong>意思對立</strong>的那一個。",
+  "skill": "反義詞類比"
+}
