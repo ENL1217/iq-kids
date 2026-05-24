@@ -2,27 +2,27 @@
   "id": "analogy-easy-010",
   "topic": "analogy",
   "difficulty": "easy",
-  "sub_type": "function",
+  "sub_type": "function-animal-part",
   "skill_codes": [
     "analogy-function"
   ],
   "created_at": "2026-05-24",
   "author": "claude-generated",
-  "prompt": "左邊是「東西跟它的用途」,右邊也要一樣!",
+  "prompt": "左邊是「動物跟牠最特別的身體部位」,右邊也要對!",
   "visual": {
     "type": "analogy-row",
     "pairs": [
       {
         "a": {
-          "text": "湯匙"
+          "text": "兔子"
         },
         "b": {
-          "text": "舀"
+          "text": "長耳朵"
         }
       },
       {
         "a": {
-          "text": "嘴巴"
+          "text": "螃蟹"
         },
         "b": {
           "unknown": true
@@ -32,20 +32,20 @@
   },
   "options": [
     {
-      "text": "吃"
+      "text": "鉗子"
     },
     {
-      "text": "看"
+      "text": "長鼻子"
     },
     {
-      "text": "食物"
+      "text": "夾"
     },
     {
-      "text": "舌頭"
+      "text": "殼"
     }
   ],
   "answer": 0,
-  "hint": "湯匙是用來做什麼?那嘴巴呢?",
-  "explanation": "<strong>湯匙</strong>是用來<strong>舀</strong>的,<strong>嘴巴</strong>是用來<strong>吃</strong>的。兩組都在說「東西的<strong>用途</strong>」,要找那個動作。",
-  "skill": "功能類比"
+  "hint": "兔子的特別身體部位是長耳朵。那螃蟹的特別部位是什麼?",
+  "explanation": "<strong>兔子</strong>最特別的身體部位是<strong>長耳朵</strong>,<strong>螃蟹</strong>最特別的身體部位是<strong>鉗子</strong>。題目在問「<strong>動物身上最顯眼的部位</strong>」。",
+  "skill": "動物特徵類比"
 }

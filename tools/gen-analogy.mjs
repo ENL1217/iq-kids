@@ -20,14 +20,19 @@ const TODAY = new Date().toISOString().slice(0, 10);
 // ─── PROMPTS (per Q1: 同 sub_type 統一) ────────────────────────────────
 // Key 必須 EXACTLY 等於 sub_type 字串 (不要轉 camelCase)
 const PROMPTS = {
-  'function':            '左邊是「東西跟它的用途」,右邊也要一樣!',
-  'antonym':             '前面兩個是相反詞,後面也要找相反詞!',
-  'location-workplace':  '左邊是「人或動物跟牠常在的地方」,右邊也要對!',
-  'sound':               '左邊是「動物跟牠的叫聲」,右邊也要對!',
-  'causal':              '前面是「先發生跟結果」,後面也要對應!',
-  'material-source':     '前面是「成品跟它的原料」,後面也要找原料!',
-  'part-whole':          '前面是「小部分跟整體」,後面也要對應!',
-  'degree-intensity':    '前面兩個是「同一件事,但右邊更強烈」,後面也要對!'
+  // (legacy function — 拆 sub-pool 後不再使用,留著當保險)
+  'function':              '左邊是「東西跟它的用途」,右邊也要一樣!',
+  // v2 split:
+  'function-body-sense':   '左邊是「器官跟它的動作」,右邊也要對!',
+  'function-animal-part':  '左邊是「動物跟牠最特別的身體部位」,右邊也要對!',
+  'function-tool':         '左邊是「工具跟它的用途」,右邊也要對!',
+  'antonym':               '前面兩個是相反詞,後面也要找相反詞!',
+  'location-workplace':    '左邊是「人或動物跟牠常在的地方」,右邊也要對!',
+  'sound':                 '左邊是「動物跟牠的叫聲」,右邊也要對!',
+  'causal':                '前面是「先發生跟結果」,後面也要對應!',
+  'material-source':       '前面是「成品跟它的原料」,後面也要找原料!',
+  'part-whole':            '前面是「小部分跟整體」,後面也要對應!',
+  'degree-intensity':      '前面兩個是「同一件事,但右邊更強烈」,後面也要對!'
 };
 
 // ─── POOLS ──────────────────────────────────────────────────────────────
@@ -36,23 +41,42 @@ const PROMPTS = {
 // (b) 反方向 distractor:用「action 的對象/結果」這種反推會卡住的詞
 // (c) 跨類別 distractor:跟 a 在主題上有關但關係錯誤的詞
 
-const FUNCTION_POOL = [
-  // a=工具/器官, b=用途動詞
+// function 拆 3 sub-pool (per reviewer v2):身體部位→感官 / 動物→身體部位 / 工具→用途
+// 每個 sub-pool 各 5 題,合計 15 (保 easy bucket = 30 per authoring.md;
+// reviewer 提的 10 each = 30 函數 + 15 antonym 會讓 easy 變 45,等 reviewer 拍板要不要擴)
+
+const FUNCTION_BODY_SENSE_POOL = [
+  // a=感官器官, b=該器官的主要動作
   { a: '眼睛',   b: '看',   reverse: '影像', cross: '臉' },
   { a: '耳朵',   b: '聽',   reverse: '聲音', cross: '頭' },
-  { a: '鼻子',   b: '聞',   reverse: '味道', cross: '臉' },
-  { a: '嘴巴',   b: '吃',   reverse: '食物', cross: '舌頭' },
-  { a: '牙齒',   b: '咬',   reverse: '骨頭', cross: '嘴巴' },
-  { a: '手',     b: '拿',   reverse: '東西', cross: '手指' },
-  { a: '腳',     b: '走',   reverse: '路',   cross: '鞋子' },
-  { a: '鉛筆',   b: '寫',   reverse: '字',   cross: '紙' },
+  { a: '鼻子',   b: '聞',   reverse: '味道', cross: '臉頰' },
+  { a: '舌頭',   b: '嚐',   reverse: '味道', cross: '嘴巴' },
+  { a: '手指',   b: '摸',   reverse: '質感', cross: '指甲' },
+  { a: '牙齒',   b: '咬',   reverse: '骨頭', cross: '嘴唇' },
+  { a: '腳',     b: '走',   reverse: '路',   cross: '鞋子' }
+];
+
+const FUNCTION_ANIMAL_PART_POOL = [
+  // a=動物, b=該動物特徵的身體部位 (鳥:翅膀, 魚:鰭 是 -001 保留,不放)
+  { a: '兔子',     b: '長耳朵', reverse: '草',     cross: '尾巴' },
+  { a: '大象',     b: '長鼻子', reverse: '水',     cross: '耳朵' },
+  { a: '長頸鹿',   b: '長脖子', reverse: '葉子',   cross: '斑點' },
+  { a: '袋鼠',     b: '袋子',   reverse: '寶寶',   cross: '腳' },
+  { a: '烏龜',     b: '硬殼',   reverse: '保護',   cross: '小腳' },
+  { a: '螃蟹',     b: '鉗子',   reverse: '夾',     cross: '殼' },
+  { a: '蝸牛',     b: '殼',     reverse: '黏液',   cross: '觸角' },
+  { a: '刺蝟',     b: '尖刺',   reverse: '敵人',   cross: '小腳' }
+];
+
+const FUNCTION_TOOL_POOL = [
+  // a=工具, b=工具的用途動作
   { a: '剪刀',   b: '剪',   reverse: '紙',   cross: '刀' },
+  { a: '鎚子',   b: '敲',   reverse: '釘子', cross: '木板' },
+  { a: '鉛筆',   b: '寫',   reverse: '字',   cross: '紙' },
   { a: '鑰匙',   b: '開',   reverse: '門',   cross: '鎖' },
   { a: '掃把',   b: '掃',   reverse: '灰塵', cross: '畚箕' },
-  { a: '鎚子',   b: '敲',   reverse: '釘子', cross: '木板' },
   { a: '雨傘',   b: '擋雨', reverse: '水珠', cross: '雨衣' },
   { a: '吸管',   b: '吸',   reverse: '果汁', cross: '杯子' },
-  { a: '叉子',   b: '叉',   reverse: '麵',   cross: '湯匙' },
   { a: '湯匙',   b: '舀',   reverse: '湯',   cross: '碗' },
   { a: '橡皮擦', b: '擦',   reverse: '錯字', cross: '鉛筆盒' },
   { a: '繩子',   b: '綁',   reverse: '結',   cross: '蝴蝶結' }
@@ -101,7 +125,7 @@ const SOUND_POOL = [
   { a: '牛',     b: '哞',     reverse: '草',     cross: '牛奶' },
   { a: '羊',     b: '咩',     reverse: '草原',   cross: '羊毛' },
   { a: '雞',     b: '咕咕',   reverse: '蛋',     cross: '雞冠' },
-  { a: '鴨',     b: '呱',     reverse: '池塘',   cross: '蹼' },
+  { a: '鴨',     b: '嘎嘎',   reverse: '池塘',   cross: '蹼' },
   { a: '豬',     b: '噗噗',   reverse: '泥巴',   cross: '尾巴' },
   { a: '馬',     b: '嘶',     reverse: '草原',   cross: '馬鞍' },
   { a: '蜜蜂',   b: '嗡',     reverse: '花',     cross: '蜂蜜' },
@@ -211,21 +235,41 @@ function hashSeed(id) {
   return [...id].reduce((s, c) => (s * 31 + c.charCodeAt(0)) >>> 0, 0);
 }
 
-// ─── EASY:function (15 題) ─────────────────────────────────────────────
-function genFunction(id, p1, p2) {
-  const otherB = FUNCTION_POOL.find(p => p.b !== p1.b && p.b !== p2.b).b;
-  const { options, answer } = placeOptions(
-    p2.b,
-    otherB,        // (a/d) same-pool: 別組的 b,類型對配對錯
-    p2.reverse,    // (b) 反方向:用途的對象/結果
-    p2.cross,      // (c) 跨類別:跟 p2.a 相關但關係不對
-    hashSeed(id)
-  );
+// ─── EASY:function 三個 sub-pool 各自的 generator (v2 per reviewer) ──────
+
+// (1) 身體部位 → 感官動作
+function genFunctionBodySense(id, p1, p2) {
+  const otherB = FUNCTION_BODY_SENSE_POOL.find(p => p.b !== p1.b && p.b !== p2.b).b;
+  const { options, answer } = placeOptions(p2.b, otherB, p2.reverse, p2.cross, hashSeed(id));
   return makeBaseQuestion(
-    id, 'easy', 'function', 'analogy-function', '功能類比',
+    id, 'easy', 'function-body-sense', 'analogy-function', '感官功能類比',
     p1, p2, options, answer,
     `${p1.a}是用來做什麼?那${p2.a}呢?`,
-    `<strong>${p1.a}</strong>是用來<strong>${p1.b}</strong>的,<strong>${p2.a}</strong>是用來<strong>${p2.b}</strong>的。兩組都在說「東西的<strong>用途</strong>」,要找那個動作。`
+    `<strong>${p1.a}</strong>是用來<strong>${p1.b}</strong>的,<strong>${p2.a}</strong>是用來<strong>${p2.b}</strong>的。題目在問「<strong>器官的主要動作</strong>」。`
+  );
+}
+
+// (2) 動物 → 特徵身體部位
+function genFunctionAnimalPart(id, p1, p2) {
+  const otherB = FUNCTION_ANIMAL_PART_POOL.find(p => p.b !== p1.b && p.b !== p2.b).b;
+  const { options, answer } = placeOptions(p2.b, otherB, p2.reverse, p2.cross, hashSeed(id));
+  return makeBaseQuestion(
+    id, 'easy', 'function-animal-part', 'analogy-function', '動物特徵類比',
+    p1, p2, options, answer,
+    `${p1.a}的特別身體部位是${p1.b}。那${p2.a}的特別部位是什麼?`,
+    `<strong>${p1.a}</strong>最特別的身體部位是<strong>${p1.b}</strong>,<strong>${p2.a}</strong>最特別的身體部位是<strong>${p2.b}</strong>。題目在問「<strong>動物身上最顯眼的部位</strong>」。`
+  );
+}
+
+// (3) 工具 → 用途
+function genFunctionTool(id, p1, p2) {
+  const otherB = FUNCTION_TOOL_POOL.find(p => p.b !== p1.b && p.b !== p2.b).b;
+  const { options, answer } = placeOptions(p2.b, otherB, p2.reverse, p2.cross, hashSeed(id));
+  return makeBaseQuestion(
+    id, 'easy', 'function-tool', 'analogy-function', '工具用途類比',
+    p1, p2, options, answer,
+    `${p1.a}是用來${p1.b}的。那${p2.a}是用來做什麼?`,
+    `<strong>${p1.a}</strong>是用來<strong>${p1.b}</strong>的,<strong>${p2.a}</strong>是用來<strong>${p2.b}</strong>的。題目在問「<strong>工具的用途</strong>」。`
   );
 }
 
@@ -317,15 +361,18 @@ function genPartWhole(id, p1, p2) {
 }
 
 // ─── HARD:degree (6 題) ────────────────────────────────────────────────
-// 干擾:
-//   (a) 同類:別組 b (同樣是「強烈版」但屬於不同類動作)
-//   (b) synonym 陷阱:p2.a 本身 (把「程度更強」誤判為「同義詞」會選回 a)
-//   (c) 別類動作:別組 a (完全不同類型的詞)
+// 干擾 v2 (per reviewer:不可用 p2.a 自己當干擾,孩子會覺得 confusing):
+//   (a) 同類:別組 b (其他類型的「強烈版」動作)
+//   (b) 別組 a #1 (其他類型的「微弱版」動作)
+//   (c) 別組 a #2 (再另一個類型的「微弱版」動作)
 function genDegree(id, p1, p2) {
   const otherB = DEGREE_POOL.find(p => p.b !== p1.b && p.b !== p2.b).b;
-  const otherA = DEGREE_POOL.find(p => p.a !== p1.a && p.a !== p2.a && p.a !== otherB).a;
+  const otherA1 = DEGREE_POOL.find(p => p.a !== p1.a && p.a !== p2.a && p.a !== otherB).a;
+  const otherA2 = DEGREE_POOL.find(p =>
+    p.a !== p1.a && p.a !== p2.a && p.a !== otherB && p.a !== otherA1
+  ).a;
   const { options, answer } = placeOptions(
-    p2.b, otherB, p2.a, otherA, hashSeed(id)
+    p2.b, otherB, otherA1, otherA2, hashSeed(id)
   );
   return makeBaseQuestion(
     id, 'hard', 'degree-intensity', 'analogy-degree', '程度副詞類比',
@@ -361,14 +408,16 @@ function pickPairs(pool, count, rngSeed) {
 
 const RUNS = [
   // [difficulty, gen function, pool, count, seed offset]
-  ['easy', genFunction,     FUNCTION_POOL,    15, 11],
-  ['easy', genAntonym,      ANTONYM_POOL,     15, 22],
-  ['mid',  genLocation,     LOCATION_POOL,    10, 33],
-  ['mid',  genSound,        SOUND_POOL,       10, 44],
-  ['mid',  genCausal,       CAUSAL_POOL,       5, 55],
-  ['hard', genMaterial,     MATERIAL_POOL,     8, 66],
-  ['hard', genPartWhole,    PART_WHOLE_POOL,   6, 77],
-  ['hard', genDegree,       DEGREE_POOL,       6, 88]
+  ['easy', genFunctionBodySense,  FUNCTION_BODY_SENSE_POOL,  5,  11],
+  ['easy', genFunctionAnimalPart, FUNCTION_ANIMAL_PART_POOL, 5,  12],
+  ['easy', genFunctionTool,       FUNCTION_TOOL_POOL,        5,  13],
+  ['easy', genAntonym,            ANTONYM_POOL,              15, 22],
+  ['mid',  genLocation,           LOCATION_POOL,             10, 33],
+  ['mid',  genSound,              SOUND_POOL,                10, 44],
+  ['mid',  genCausal,             CAUSAL_POOL,                5, 55],
+  ['hard', genMaterial,           MATERIAL_POOL,              8, 66],
+  ['hard', genPartWhole,          PART_WHOLE_POOL,            6, 77],
+  ['hard', genDegree,             DEGREE_POOL,                6, 88]
 ];
 
 const startCounter = { easy: 3, mid: 3, hard: 3 };  // 從 -003 起跳 (-001/-002 是 spec 保留)

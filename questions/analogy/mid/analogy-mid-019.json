@@ -41,11 +41,11 @@
       "text": "哞"
     },
     {
-      "text": "呱"
+      "text": "嘎嘎"
     }
   ],
   "answer": 3,
   "hint": "青蛙的叫聲是呱呱。那鴨的叫聲呢?",
-  "explanation": "<strong>青蛙</strong>的叫聲是「<strong>呱呱</strong>」,所以同樣的關係,<strong>鴨</strong>的叫聲是「<strong>呱</strong>」。題目在問的是<strong>動物發出的聲音</strong>。",
+  "explanation": "<strong>青蛙</strong>的叫聲是「<strong>呱呱</strong>」,所以同樣的關係,<strong>鴨</strong>的叫聲是「<strong>嘎嘎</strong>」。題目在問的是<strong>動物發出的聲音</strong>。",
   "skill": "動物叫聲類比"
 }

@@ -169,6 +169,40 @@ analogy-hard-020: 微笑:大笑 :: 摸:?
 
 ---
 
+### v2 修正 (2026-05-24, 同 PR #4 內第二 commit)
+
+Reviewer 對 batch 2 給了 3 個調整,本次全部修完:
+
+**1. function 拆 3 sub-pool**(避免同類器官互配的單調感)
+- 舊:`function` 15 題,pool 內混器官/工具/動物
+- 新:拆成 3 個 sub_type 各 5 題(總計 15 不變,保 easy bucket = 30):
+  - `function-body-sense` (5 題):眼睛/耳朵/鼻子/舌頭/手指/牙齒/腳
+  - `function-animal-part` (5 題):兔子:長耳朵 / 大象:長鼻子 / 長頸鹿/袋鼠/烏龜/螃蟹/蝸牛/刺蝟
+  - `function-tool` (5 題):剪刀/鎚子/鉛筆/鑰匙/掃把/雨傘/吸管/湯匙/橡皮擦/繩子
+- 3 個 sub_type 都用同個 skill_code `analogy-function`(雷達圖維度不變,純內部多樣化)
+- ⚠️ **與 reviewer 提的「10 題 each = 30 total」不同**:那會讓 easy bucket = function 30 + antonym 15 = 45,超過 authoring.md §3 的 easy=30。我採 5+5+5 保 easy=30。**若 reviewer 想擴 easy 至 45 我可以再加 15 題,等拍板**
+
+**2. 鴨:呱 → 鴨:嘎嘎**(避免跟 青蛙:呱呱 混淆)
+- 純 pool 一行改:`{ a: '鴨', b: '嘎嘎', ... }`
+
+**3. degree 拿掉「p2.a 自己」當干擾**
+- 舊:distractor (b) 用 `p2.a` 作同義詞陷阱 → reviewer 認為對 7-12 歲是 confusing 而非 pedagogical
+- 新:改用「別組 a #1」+「別組 a #2」(兩個不同類別的「微弱版」動作)
+- 驗證:6 題 degree 用 Python 腳本逐項檢查 `p2.a in options`,**全部 False**
+- 範例 analogy-hard-020: 微笑:大笑 :: 摸:抓
+  - 舊 options: 盯 / 摸 / 看 / [抓] ← 摸 = p2.a 自指
+  - 新 options: 盯 / 看 / 涼 / [抓] ← 全部別組 a 或 b,無自指
+
+### v2 三層自驗
+- Layer 1:`node tools/validate.mjs questions/analogy` → 81/81 pass(同 v1)
+- Layer 2:重新跑 spot-check 3 個 function sub_type + 鴨題 + 全 6 degree 題,prompts/answers/distractors 都對
+- Layer 3:degree 6 題自動腳本驗證 `p2.a` 不出現在 options
+
+### v2 修 bug 過程
+- `Missing PROMPT for sub_type: function-body-sense` — 拆 sub_type 後忘了加新 PROMPTS key,被 `throw` 抓到(就是上次加的防後備在發揮作用)。補 3 個新 key 修完
+
+---
+
 ## (舊)Batch 2 — analogy (planning, 已 by-passed) 📝
 
 ### 目標

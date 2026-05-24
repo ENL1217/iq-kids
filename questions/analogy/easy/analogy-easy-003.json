@@ -2,27 +2,27 @@
   "id": "analogy-easy-003",
   "topic": "analogy",
   "difficulty": "easy",
-  "sub_type": "function",
+  "sub_type": "function-body-sense",
   "skill_codes": [
     "analogy-function"
   ],
   "created_at": "2026-05-24",
   "author": "claude-generated",
-  "prompt": "左邊是「東西跟它的用途」,右邊也要一樣!",
+  "prompt": "左邊是「器官跟它的動作」,右邊也要對!",
   "visual": {
     "type": "analogy-row",
     "pairs": [
       {
         "a": {
-          "text": "牙齒"
+          "text": "舌頭"
         },
         "b": {
-          "text": "咬"
+          "text": "嚐"
         }
       },
       {
         "a": {
-          "text": "耳朵"
+          "text": "眼睛"
         },
         "b": {
           "unknown": true
@@ -32,20 +32,20 @@
   },
   "options": [
     {
-      "text": "看"
-    },
-    {
-      "text": "頭"
-    },
-    {
-      "text": "聲音"
-    },
-    {
       "text": "聽"
+    },
+    {
+      "text": "臉"
+    },
+    {
+      "text": "影像"
+    },
+    {
+      "text": "看"
     }
   ],
   "answer": 3,
-  "hint": "牙齒是用來做什麼?那耳朵呢?",
-  "explanation": "<strong>牙齒</strong>是用來<strong>咬</strong>的,<strong>耳朵</strong>是用來<strong>聽</strong>的。兩組都在說「東西的<strong>用途</strong>」,要找那個動作。",
-  "skill": "功能類比"
+  "hint": "舌頭是用來做什麼?那眼睛呢?",
+  "explanation": "<strong>舌頭</strong>是用來<strong>嚐</strong>的,<strong>眼睛</strong>是用來<strong>看</strong>的。題目在問「<strong>器官的主要動作</strong>」。",
+  "skill": "感官功能類比"
 }
