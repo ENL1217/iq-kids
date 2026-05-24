@@ -57,7 +57,12 @@
 
 ```javascript
 // =============================================================
-// IQ-Kids feedback endpoint — security-hardened
+// IQ-Kids feedback endpoint — security-hardened v2
+//
+// 設計筆記:
+//   - 此 script 為 container-bound (從 Sheet 內建立),所以用
+//     getActiveSpreadsheet() 不需要 SHEET_ID 常數
+//   - 欄位順序 + 名稱必須對齊 web/js/feedback-form.js buildPayload()
 //
 // Protections:
 //   1. Origin/Referer 白名單 — 只接受 GitHub Pages 站點
@@ -67,24 +72,18 @@
 //   5. 最小化 response — 不洩露內部狀態
 // =============================================================
 
-// ⚠️ 把這裡換成你的 Sheet ID (從 sheet URL 抓)
-const SHEET_ID = 'YOUR_GOOGLE_SHEET_ID_HERE';
-const SHEET_NAME = 'Feedback';
+const ALLOWED_ORIGINS = ['https://enl1217.github.io'];
 
-// 允許的 Origin (你的 GitHub Pages 站點)
-const ALLOWED_ORIGINS = [
-  'https://enl1217.github.io'
-];
-
-// 欄位上限 (字元數)
+// 欄位上限 (字元數) — key 對應前端 buildPayload 欄位名稱
 const LIMITS = {
-  id: 50,
+  question_id: 50,
   topic: 30,
   difficulty: 10,
-  type: 30,        // wrong-a, wrong-b, ... or 'system'
+  status: 20,
+  mode: 20,
   comment: 500,
-  ua: 200,
-  mode: 20
+  user_agent: 200,
+  viewport: 20
 };
 
 // Rate limit: 同一 client hash 在 RATE_WINDOW_SEC 秒內最多 RATE_MAX 筆
@@ -94,21 +93,17 @@ const RATE_MAX = 5;
 function doPost(e) {
   try {
     // ① Origin / Referer 檢查
-    const headers = e.parameter || {};
     const origin = (e.headers && (e.headers.Origin || e.headers.origin)) || '';
     const referer = (e.headers && (e.headers.Referer || e.headers.referer)) || '';
-
-    // Apps Script 不一定能拿到 headers,所以用 referer fallback
     const sourceOk = ALLOWED_ORIGINS.some(allowed =>
       origin.startsWith(allowed) || referer.startsWith(allowed)
     );
-
-    // 本地測試可能沒 origin,先 warn 但放行 — 上線後可以改成 reject
+    // 本地測試可能沒 origin,放行;有 origin 但不在白名單則 reject
     if (!sourceOk && origin) {
       return jsonResponse({ status: 'rejected', reason: 'origin' });
     }
 
-    // ② Parse payload (前端送 JSON body)
+    // ② Parse payload
     let payload;
     try {
       payload = JSON.parse(e.postData.contents);
@@ -116,9 +111,9 @@ function doPost(e) {
       return jsonResponse({ status: 'rejected', reason: 'parse' });
     }
 
-    // ③ Honeypot 檢查 — 'website' 是 bot 容易填的欄位,正常使用者不會填
+    // ③ Honeypot (bot 會填,真使用者看不到)
     if (payload.website && payload.website.length > 0) {
-      return jsonResponse({ status: 'ok' }); // 假裝成功,讓 bot 以為過了
+      return jsonResponse({ status: 'ok' });
     }
 
     // ④ 欄位白名單 + 長度檢查
@@ -129,21 +124,25 @@ function doPost(e) {
         cleaned[key] = val.substring(0, max);
       }
     }
+    // types 是 array,轉成 comma-joined string
+    if (Array.isArray(payload.types)) {
+      cleaned.types = payload.types.slice(0, 5)
+        .map(t => String(t).substring(0, 30))
+        .join(',');
+    }
 
-    // 必要欄位至少要有 type (system feedback) 或 id (per-question feedback)
-    if (!cleaned.type && !cleaned.id) {
+    // 必要欄位:至少要有 question_id (單題回饋) 或 comment (system feedback)
+    if (!cleaned.question_id && !cleaned.comment) {
       return jsonResponse({ status: 'rejected', reason: 'missing_field' });
     }
 
-    // ⑤ Rate limit (per-IP hash via UserCache token)
+    // ⑤ Rate limit (per-client hash via UA + referer)
     const props = PropertiesService.getScriptProperties();
     const clientHash = hashClient(payload, e);
     const rateKey = 'rate:' + clientHash;
     const now = Math.floor(Date.now() / 1000);
-
     const rateData = JSON.parse(props.getProperty(rateKey) || '{"count":0,"windowStart":0}');
     if (now - rateData.windowStart > RATE_WINDOW_SEC) {
-      // 新時段,重置
       rateData.windowStart = now;
       rateData.count = 0;
     }
@@ -154,56 +153,39 @@ function doPost(e) {
     }
     props.setProperty(rateKey, JSON.stringify(rateData));
 
-    // ⑥ 寫入 Sheet
-    const ss = SpreadsheetApp.openById(SHEET_ID);
-    const sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
-
-    // 第一次寫入,建立 header row
-    if (sheet.getLastRow() === 0) {
-      sheet.appendRow([
-        'timestamp', 'id', 'type', 'topic', 'difficulty',
-        'mode', 'comment', 'user_agent', 'viewport'
-      ]);
-    }
-
-    sheet.appendRow([
-      new Date().toISOString(),
-      cleaned.id || '',
-      cleaned.type || '',
+    // ⑥ 寫入 Sheet (沿用 getActiveSpreadsheet,欄位順序對齊舊資料)
+    SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().appendRow([
+      new Date(),
+      cleaned.question_id || '',
+      cleaned.types || '',
+      cleaned.comment || '',
       cleaned.topic || '',
       cleaned.difficulty || '',
-      cleaned.mode || '',
-      cleaned.comment || '',
-      cleaned.ua || '',
-      payload.viewport ? String(payload.viewport).substring(0, 20) : ''
+      cleaned.status || '',
+      cleaned.user_agent || '',
+      cleaned.viewport || '',
+      cleaned.mode || ''
     ]);
 
     return jsonResponse({ status: 'ok' });
   } catch (err) {
-    // 任何例外都不洩露細節給前端
     return jsonResponse({ status: 'error' });
   }
 }
 
-// 不顯示 GET — 訪問 endpoint 時不要洩露任何資訊
 function doGet(e) {
-  return jsonResponse({ status: 'not_found' }, 404);
+  return jsonResponse({ status: 'not_found' });
 }
 
-// Helpers
-function jsonResponse(obj, code) {
-  const out = ContentService.createTextOutput(JSON.stringify(obj));
-  out.setMimeType(ContentService.MimeType.JSON);
-  return out;
+function jsonResponse(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 function hashClient(payload, e) {
-  // Apps Script doPost 拿不到真實 IP,用 UA + referer 簡單 hash
-  // 不是完美 rate limit 但能擋 dumb bot
-  const ua = (payload.ua || '').substring(0, 50);
+  const ua = (payload.user_agent || '').substring(0, 50);
   const ref = (e.headers && e.headers.Referer) || '';
   const raw = ua + '|' + ref;
-  // 簡單 hash (Apps Script 沒內建 hash function,用 charCode sum)
   let h = 0;
   for (let i = 0; i < raw.length; i++) {
     h = ((h << 5) - h) + raw.charCodeAt(i);
