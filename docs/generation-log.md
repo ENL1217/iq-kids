@@ -972,3 +972,54 @@ mid-034 (horiz,0.7,0.5): D1=(0.4,0.5) — x 不同 ✓
 1. **每個 sub_type generator 都該用 placeOptions / 等價 assertion** — 不要 inline shuffle bypass。批量檢查 batch 7 其他 generator (genCubeNetOpposite / genCubeNetInvalid) 也有 inline shuffle 但因 distractor pool 結構不會撞 correct,沒踩雷
 2. **half-paper render 沒標 fold edge → kid 可解讀任一側** — 設計 distractor 時要把這當「合法解讀」一起算,不只看 generator 內的 mathematical unfold。Renderer 改 (system Claude 領地) 是更好的長期解法 (例如 fold edge 畫粗黑線或加箭頭),但目前用 generator-side 約束處理
 3. **物理等價 ≠ 數值相等** — 同一個物理 fold-and-punch 可以有多種數值表示 (因 half-paper side 解讀)。distractor 必須跟 correct 在「全部物理表示」都不同,不能只看一個
+
+### v5 fix — mirror-arrow 全 5 題答案標錯軸 + D2/D3 duplicate
+
+**問題**:reviewer 試玩 mid-037 (axis=horizontal, 225°=↙) 跟 hard-028 (axis=vertical, 45°=↗) 都回報「題目誤導 / 不清楚」。檢查發現:
+
+#### Bug 1: mirrorRotation 公式整個 SWAP
+我原本寫:
+```js
+if (axis === 'horizontal') return (360 - rotation) % 360;  // ← 這是 vertical 公式
+else                       return (180 - rotation + 360) % 360;  // ← 這是 horizontal
+```
+
+但物理上:
+- **水平軸鏡射 (上下翻 / flip Y)**: cos(θ′) = -cos(θ) → θ′ = 180° - θ
+- **垂直軸鏡射 (左右翻 / flip X)**: sin(θ′) = -sin(θ) → θ′ = 360° - θ
+
+mid-037 (上下翻 225°): 我算 135° (↘),正解 315° (↖)。
+hard-028 (左右翻 45°): 我算 135° (↘),正解 315° (↖)。
+**全部 5 題答案標錯軸**(雖然 unfold 字面數值是對的,但被指派到錯誤的 axis label,所以 user 看到題目敘述上下翻而答案是左右翻的結果)。
+
+#### Bug 2: D2/D3 duplicate
+D2 = (correctMirror + 90) % 360, D3 = cfg.rotation。某些 config 兩者撞:
+- mid-037: D2 = (135+90)%360 = 225° = cfg.rotation = D3 → mid-037 options [A]↘ [B]↙ [C]↖ [D]↙(B 跟 D 都 ↙ 重複)
+- inline shuffle bypass 了 placeOptions 所以沒擋
+
+#### Fix
+1. **mirrorRotation 兩公式對調** + 更新 explanation 文字
+2. **distractor 用 candidate priority list**:wrongMirror → original → (correct+90/180/45/135/...),逐個試,只取 3 個跟 correctMirror 跟 cfg.rotation 都不重複的
+3. **改用 placeOptions assertion** 替 inline shuffle
+
+#### Verified (Python truth-table 5/5 PASS)
+```
+mid-035 axis=horizontal rot=45  expected=135 got=135  opts=[315,45,135,225]
+mid-036 axis=horizontal rot=135 expected=45  got=45   opts=[225,45,135,90]
+mid-037 axis=horizontal rot=225 expected=315 got=315  opts=[315,45,135,225]
+hard-028 axis=vertical  rot=45  expected=315 got=315  opts=[315,45,0,135]
+hard-029 axis=vertical  rot=90  expected=270 got=270  opts=[90,315,0,270]
+```
+0 duplicate,answer 都對 axis 跟物理正確。
+
+#### 內化教訓 (跨 v3/v4/v5 三輪 fix 累積)
+1. **inline shuffle = anti-pattern**,所有 generator 都該用 placeOptions
+2. **物理推導 > 字面類比** — 我寫 `mirrorRotation` 時用「直覺看起來像」分軸,沒推 cos/sin。寫物理時要從第一性原理 (這次 cos/sin → 鏡射方向) 推
+3. **生完即驗** — 三輪 fix 都是 reviewer 試玩抓的。我應該在 generator 內加 truth-table sanity test (每個 generator 內建 5-10 個 hard-coded (input, expected output) pair,跑完 assert)
+
+對應 batch 7 spatial-hard-001 (seed,非我的):
+- author = human-george,**不在我管轄區**
+- 視覺是 raw-html 自繪 SVG,內容是 cube-net-invalid type
+- 答案邏輯看起來正確 (「★和黃■在相對的面」是假陳述,因為他們在展開圖中央列相鄰,折起來是相鄰不是相對)
+- user 「怪怪的」可能是:1) raw-html 視覺不清, 2)「相對/相鄰」對小學生抽象, 3) 折立方體 mental 操作對 5-6 年級也偏難
+- **建議 human-george / reviewer 自己 review 這題的視覺跟難度定位**

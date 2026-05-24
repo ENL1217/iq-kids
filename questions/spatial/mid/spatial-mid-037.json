@@ -29,6 +29,24 @@
   },
   "options": [
     {
+      "text": "↖",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "rotation": 315,
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "↗",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "rotation": 45,
+        "color": "yellow"
+      }
+    },
+    {
       "text": "↘",
       "visual": {
         "type": "single-shape",
@@ -45,28 +63,10 @@
         "rotation": 225,
         "color": "yellow"
       }
-    },
-    {
-      "text": "↖",
-      "visual": {
-        "type": "single-shape",
-        "shape": "arrow",
-        "rotation": 315,
-        "color": "yellow"
-      }
-    },
-    {
-      "text": "↙",
-      "visual": {
-        "type": "single-shape",
-        "shape": "arrow",
-        "rotation": 225,
-        "color": "yellow"
-      }
     }
   ],
   "answer": 0,
   "hint": "上下翻 (沿橫軸鏡射)。原箭頭指 ↙。鏡像後指?",
-  "explanation": "上下翻 (橫軸鏡射): rotation 變 (360 − 原角度) mod 360。225° 鏡射後是 <strong>135°</strong> (↘)。",
+  "explanation": "上下翻 (橫軸鏡射): 上下顛倒,左右不變。公式 θ′ = 180° − θ。原本 225° (↙) → 鏡射後 <strong>315°</strong> (↖)。",
   "skill": "箭頭鏡像"
 }

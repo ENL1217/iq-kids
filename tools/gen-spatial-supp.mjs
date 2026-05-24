@@ -490,29 +490,27 @@ function genSymmetryFold(id, configIdx) {
 // ─── 6. mirror-arrow (3 mid + 2 hard) ─────────────────────────────────
 // sub_type 統一 'mirror-arrow',visual 加 mirrorAxis 欄位 (per Q3)
 //
-// horizontal mirror (across horizontal axis = 上下翻):
-//   0° (↑) → 180° (↓)
-//   45° (↗) → 135° (↘)
-//   90° (→) → 90° (→)  # 不變
-//   135° (↘) → 45° (↗)
-//   180° (↓) → 0° (↑)
-//   270° (←) → 270° (←)
+// ⚠️ v2 fix:之前 horizontal/vertical 兩個公式整個 swap,
+// 造成全部 5 題答案標錯軸。reviewer 試玩 mid-037 + hard-028 抓到。
 //
-// vertical mirror (across vertical axis = 左右翻):
-//   0° (↑) → 0° (↑)  # 不變
-//   45° (↗) → 315° (↖)
-//   90° (→) → 270° (←)
-//   135° (↘) → 225° (↙)
-//   180° (↓) → 180° (↓)  # 不變
-//   270° (←) → 90° (→)
+// 物理推導 (rotation = CW from up):
+//   North 分量 = cos(θ), East 分量 = sin(θ)
+//
+// horizontal axis mirror (上下翻 = 翻 Y 分量 = 翻 North 分量):
+//   cos(θ') = -cos(θ) → θ' = 180° - θ
+//   0° (↑) ↔ 180° (↓);  45° (↗) ↔ 135° (↘);  90° (→) 不變;  225° (↙) ↔ 315° (↖)
+//
+// vertical axis mirror (左右翻 = 翻 X 分量 = 翻 East 分量):
+//   sin(θ') = -sin(θ) → θ' = -θ = 360° - θ
+//   0° (↑) 不變;  45° (↗) ↔ 315° (↖);  90° (→) ↔ 270° (←);  135° (↘) ↔ 225° (↙)
 
 function mirrorRotation(rotation, axis) {
   if (axis === 'horizontal') {
-    // 上下翻: 0↔180, 45↔135, 90↔90 (不變), 270↔270 (不變)
-    return (360 - rotation) % 360;
-  } else {
-    // 左右翻: 0↔0 (不變), 90↔270, 45↔315, 135↔225, 180↔180 (不變)
+    // 上下翻: 翻 Y 分量, θ' = 180 - θ
     return (180 - rotation + 360) % 360;
+  } else {
+    // 左右翻: 翻 X 分量, θ' = 360 - θ
+    return (360 - rotation) % 360;
   }
 }
 
@@ -547,19 +545,36 @@ function genMirrorArrow(id, difficulty, configIdx) {
   const correctMirror = mirrorRotation(cfg.rotation, cfg.axis);
   const correctOpt = { type: 'single-shape', shape: 'arrow', rotation: correctMirror, color };
 
-  // 干擾:
-  //  D1 (規則內錯位): 用錯誤對稱軸的鏡像
+  // v2 fix:distractor 選 3 個跟 correctMirror 跟 cfg.rotation 都不一樣的角度
+  // 之前 D2/D3 偶爾撞 (e.g. mid-037 因為 (135+90)%360 = 225 = cfg.rotation)
+  // 改成 candidate priority list:wrong-axis-mirror > original > +90 > +180 > 其他
   const wrongMirror = mirrorRotation(cfg.rotation, cfg.axis === 'horizontal' ? 'vertical' : 'horizontal');
-  //  D2: 對的軸但 +90° 偏移
-  //  D3: 原始 (沒做鏡像)
-  const D1 = { type: 'single-shape', shape: 'arrow', rotation: wrongMirror, color };
-  const D2 = { type: 'single-shape', shape: 'arrow', rotation: (correctMirror + 90) % 360, color };
-  const D3 = { type: 'single-shape', shape: 'arrow', rotation: cfg.rotation, color };
+  const candidates = [
+    wrongMirror,                              // 規則內錯位:用錯軸鏡像 (canonical misconception)
+    cfg.rotation,                             // 部分對:沒做鏡像 (kid 忘了翻)
+    (correctMirror + 90) % 360,
+    (correctMirror + 180) % 360,
+    (correctMirror + 45) % 360,
+    (correctMirror + 135) % 360,
+    (correctMirror + 270) % 360,
+    (correctMirror + 225) % 360,
+    (correctMirror + 315) % 360
+  ];
+  const seen = new Set([correctMirror]);
+  const distractorRots = [];
+  for (const r of candidates) {
+    if (distractorRots.length >= 3) break;
+    if (!seen.has(r)) { distractorRots.push(r); seen.add(r); }
+  }
+  if (distractorRots.length < 3) {
+    throw new Error(`genMirrorArrow ${id}: only ${distractorRots.length} unique distractors`);
+  }
+  const D1 = { type: 'single-shape', shape: 'arrow', rotation: distractorRots[0], color };
+  const D2 = { type: 'single-shape', shape: 'arrow', rotation: distractorRots[1], color };
+  const D3 = { type: 'single-shape', shape: 'arrow', rotation: distractorRots[2], color };
 
-  const allOpts = [correctOpt, D1, D2, D3];
-  const seed = [...id].reduce((s, c) => (s * 31 + c.charCodeAt(0)) >>> 0, 0);
-  const shuffled = rngShuffle(makeRng(seed), allOpts);
-  const answerIdx = shuffled.findIndex(o => o.rotation === correctMirror);
+  // 用 placeOptions assertion 保險 (lesson 已內化:不再 inline shuffle bypass)
+  const { options: shuffled, answerIdx } = placeOptions(correctOpt, [D1, D2, D3], id);
 
   const dirText = { 0: '↑', 45: '↗', 90: '→', 135: '↘', 180: '↓', 225: '↙', 270: '←', 315: '↖' };
   return makeQ(id, difficulty, 'mirror-arrow', 'spatial-mirror', '箭頭鏡像',
@@ -567,7 +582,7 @@ function genMirrorArrow(id, difficulty, configIdx) {
     shuffled.map(o => ({ text: dirText[o.rotation] || `${o.rotation}°`, visual: o })),
     answerIdx,
     `${cfg.axis === 'horizontal' ? '上下翻 (沿橫軸鏡射)' : '左右翻 (沿直軸鏡射)'}。原箭頭指 ${dirText[cfg.rotation]}。鏡像後指?`,
-    `${cfg.axis === 'horizontal' ? '上下翻 (橫軸鏡射): rotation 變 (360 − 原角度) mod 360' : '左右翻 (直軸鏡射): rotation 變 (180 − 原角度 + 360) mod 360'}。${cfg.rotation}° 鏡射後是 <strong>${correctMirror}°</strong> (${dirText[correctMirror]})。`
+    `${cfg.axis === 'horizontal' ? '上下翻 (橫軸鏡射): 上下顛倒,左右不變。公式 θ′ = 180° − θ' : '左右翻 (直軸鏡射): 左右顛倒,上下不變。公式 θ′ = 360° − θ'}。原本 ${cfg.rotation}° (${dirText[cfg.rotation]}) → 鏡射後 <strong>${correctMirror}°</strong> (${dirText[correctMirror]})。`
   );
 }
 
