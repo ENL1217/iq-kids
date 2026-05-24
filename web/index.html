@@ -65,10 +65,24 @@
         <div class="stat-box"><div class="stat-value" id="statTotal">0</div><div class="stat-label">總題數</div></div>
         <div class="stat-box"><div class="stat-value" id="statRate">0%</div><div class="stat-label">正確率</div></div>
       </div>
+
+      <!-- 累計能力雷達圖 + 圖例 -->
+      <div id="radarSlot"></div>
+
+      <!-- 這關錯題回顧 -->
+      <div id="wrongSlot"></div>
+
       <div class="actions">
         <button class="btn btn-ghost" onclick="restartLevel()">重玩這關 🔁</button>
         <button class="btn btn-primary" onclick="goMenu()">挑戰其他關 →</button>
       </div>
+
+      <!-- 紀錄管理 -->
+      <div class="record-tools">
+        <button class="record-btn" onclick="onExportRecords()">📤 匯出我的紀錄</button>
+        <button class="record-btn danger" onclick="onClearRecords()">🗑 清除紀錄</button>
+      </div>
+      <div class="record-privacy">資料只存在這個瀏覽器,不會上傳。換手機或清瀏覽器資料會歸零。</div>
     </div>
   </div>
 </div>

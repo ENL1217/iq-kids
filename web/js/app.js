@@ -9,6 +9,11 @@ import {
   soundEnabled, toggleSound, unlockAudio
 } from './feedback.js';
 import { openFeedbackForm } from './feedback-form.js';
+import {
+  recordAttempt, aggregateByTopic, getWrongSince,
+  lifetimeStats, exportAttempts, clearAttempts
+} from './recorder.js';
+import { radarChart, radarLegend } from './radar.js';
 import { QUESTIONS_PER_LEVEL } from './config.js';
 
 const TOPICS = {
@@ -31,7 +36,9 @@ const state = {
   correct: 0,
   answered: false,
   lastPicked: null,
-  manifest: null
+  manifest: null,
+  questionStartTs: null,   // 計算 duration_ms 用
+  sessionStartTs: null     // 這 round 開始的時間,讓結算頁能 query 本次錯題
 };
 
 // ──────────────────────────────────────────────────────────────
@@ -48,7 +55,8 @@ async function init() {
   // 把流程函數掛上 window 供 inline onclick 呼叫
   Object.assign(window, {
     startLevel, goMenu, restartLevel, selectAnswer, nextQuestion,
-    onMuteClick, onFeedbackClick
+    onMuteClick, onFeedbackClick,
+    onExportRecords, onClearRecords, onReviewWrong
   });
 
   // 任意 user gesture 後解鎖 audio (iOS Safari)
@@ -122,6 +130,7 @@ async function startLevel(topic, level) {
   state.idx = 0;
   state.correct = 0;
   state.answered = false;
+  state.sessionStartTs = Date.now();
 
   document.getElementById('menuScreen').classList.add('hide');
   document.getElementById('finalScreen').classList.add('hide');
@@ -152,6 +161,7 @@ async function startLevel(topic, level) {
 // ──────────────────────────────────────────────────────────────
 function renderQuestion() {
   state.answered = false;
+  state.questionStartTs = Date.now();
   const q = state.qList[state.idx];
   const topic = TOPICS[state.topic];
   const levelLabel = LEVEL_LABEL[state.level];
@@ -202,6 +212,18 @@ function selectAnswer(idx) {
   const q = state.qList[state.idx];
   const correct = idx === q.answer;
   if (correct) state.correct++;
+
+  // 紀錄答題 (localStorage,完全本地,匿名)
+  recordAttempt({
+    question_id: q.id,
+    topic: q.topic,
+    difficulty: q.difficulty,
+    skill_codes: q.skill_codes || [],
+    answer_idx: idx,
+    correct,
+    duration_ms: Date.now() - state.questionStartTs,
+    mode: 'learn'
+  });
 
   const optionEls = document.querySelectorAll('.option');
   optionEls.forEach((btn, i) => {
@@ -263,6 +285,67 @@ function showFinal() {
   document.getElementById('statCorrect').textContent = state.correct;
   document.getElementById('statTotal').textContent = state.qList.length;
   document.getElementById('statRate').textContent = rate + '%';
+
+  // 累計雷達圖 + 圖例 + 錯題回顧 + 紀錄管理
+  renderRadarSection();
+  renderWrongReview();
+}
+
+function renderRadarSection() {
+  const lifetime = lifetimeStats();
+  const byTopic = aggregateByTopic();
+  const slot = document.getElementById('radarSlot');
+  if (!slot) return;
+  slot.innerHTML = `
+    <div class="radar-section">
+      <div class="radar-section-title">🌈 你的能力雷達</div>
+      <div class="radar-section-sub">累計答對 ${lifetime.correct} 題 / 共 ${lifetime.total} 題 · 換瀏覽器/清紀錄會歸零</div>
+      <div class="radar-wrap">${radarChart(byTopic, { size: 300 })}</div>
+      ${radarLegend(byTopic)}
+    </div>
+  `;
+}
+
+function renderWrongReview() {
+  const wrongs = getWrongSince(state.sessionStartTs || 0);
+  const slot = document.getElementById('wrongSlot');
+  if (!slot) return;
+  if (wrongs.length === 0) {
+    slot.innerHTML = `<div class="wrong-review-empty">這關全對 🎉</div>`;
+    return;
+  }
+  const items = wrongs.map(w => {
+    const t = TOPICS[w.topic];
+    return `<div class="wrong-item">
+      <span class="wrong-tag" style="background:${{matrix:'#FF6B9D',sequence:'#4ECDC4',spatial:'#9B7EDE',numseries:'#FFD93D',analogy:'#FF9F45',multivar:'#5B9DEC'}[w.topic] || '#FF6B9D'}">${t ? t.emoji : ''}</span>
+      <span class="wrong-id">${w.question_id}</span>
+      <span class="wrong-meta">${LEVEL_SHORT[w.difficulty] || ''} · 用了 ${Math.round((w.duration_ms || 0) / 1000)} 秒</span>
+    </div>`;
+  }).join('');
+  slot.innerHTML = `
+    <div class="wrong-review">
+      <div class="wrong-review-title">💪 這關答錯了 ${wrongs.length} 題,可以再挑戰</div>
+      ${items}
+    </div>
+  `;
+}
+
+// 紀錄管理動作 (掛 window 給 onclick 用)
+function onExportRecords() {
+  const r = exportAttempts();
+  if (!r.ok) alert('還沒有紀錄可匯出。先玩幾題吧!');
+}
+
+function onClearRecords() {
+  if (!confirm('確定要清除所有答題紀錄嗎?這個動作無法復原。')) return;
+  clearAttempts();
+  renderRadarSection();
+  alert('紀錄已清除。');
+}
+
+function onReviewWrong() {
+  // 預留:之後可彈出完整的歷史錯題清單。目前先 alert。
+  alert('歷史錯題回顧功能近期上線。目前你可以「匯出我的紀錄」自己看 JSON。');
 }
 
 // ──────────────────────────────────────────────────────────────

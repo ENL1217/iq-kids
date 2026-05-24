@@ -820,3 +820,169 @@ body {
 
 /* card 加 position:relative 讓 feedback-btn 能 absolute 定位 */
 .card { position: relative; }
+
+/* ============ RADAR CHART (final screen) ============ */
+.radar-section {
+  background: white;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  padding: 20px 16px 14px;
+  box-shadow: var(--shadow-sm);
+  margin: 22px 0;
+}
+.radar-section-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 4px;
+}
+.radar-section-sub {
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.radar-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0 12px;
+}
+.radar-chart .radar-data-polygon {
+  animation: radarGrow 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+}
+@keyframes radarGrow {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.radar-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 4px 12px;
+  padding: 8px 4px 0;
+  border-top: 1px dashed var(--ink-soft);
+}
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  flex-shrink: 0;
+}
+.legend-name { flex: 1; }
+.legend-stat { color: var(--ink-soft); font-weight: 700; }
+.legend-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 13px;
+  padding: 6px;
+}
+
+/* ============ WRONG REVIEW (final screen) ============ */
+.wrong-review {
+  background: #FFFBF0;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  padding: 16px 14px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 18px;
+}
+.wrong-review-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--primary-deep);
+  margin-bottom: 10px;
+}
+.wrong-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: white;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+.wrong-tag {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.wrong-id {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 12px;
+}
+.wrong-meta {
+  margin-left: auto;
+  color: var(--ink-soft);
+  font-size: 12px;
+  font-weight: 500;
+}
+.wrong-review-empty {
+  text-align: center;
+  padding: 14px;
+  color: var(--success);
+  font-weight: 800;
+  font-size: 15px;
+  background: #F0FCEF;
+  border: 2px dashed var(--success);
+  border-radius: 14px;
+  margin-bottom: 18px;
+}
+
+/* ============ RECORD TOOLS (final screen) ============ */
+.record-tools {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+.record-btn {
+  background: white;
+  border: 2.5px solid var(--ink);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s;
+}
+.record-btn:hover {
+  background: #FFFBF0;
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 rgba(45, 42, 74, 0.15);
+}
+.record-btn.danger { color: var(--error); border-color: var(--error); }
+.record-btn.danger:hover { background: #FFEFEF; }
+.record-privacy {
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-top: 8px;
+  font-weight: 500;
+  opacity: 0.8;
+}
