@@ -95,6 +95,36 @@ export function lifetimeStats() {
   };
 }
 
+/**
+ * 找「未練過」的題型(answer 數 = 0 的題型)
+ * @param {string[]} allTopics - 全部題型列表 (從 TOPICS 物件來)
+ * @returns 題型 key 或 null
+ */
+export function findUnpracticedTopic(allTopics) {
+  const agg = aggregateByTopic();
+  for (const topic of allTopics) {
+    if (!agg[topic] || agg[topic].total === 0) return topic;
+  }
+  return null;
+}
+
+/**
+ * 找「答對率最低」的題型 (至少答過 minSamples 題,且 rate < threshold)
+ * @returns { topic, total, correct, rate } 或 null
+ */
+export function findWeakestTopic(minSamples = 3, rateThreshold = 0.7) {
+  const agg = aggregateByTopic();
+  let weakest = null;
+  for (const [topic, stats] of Object.entries(agg)) {
+    if (stats.total < minSamples) continue;
+    if (stats.rate >= rateThreshold) continue;
+    if (!weakest || stats.rate < weakest.rate) {
+      weakest = { topic, ...stats };
+    }
+  }
+  return weakest;
+}
+
 /** 匯出成下載 JSON */
 export function exportAttempts() {
   const data = getAttempts();

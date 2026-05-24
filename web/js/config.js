@@ -16,12 +16,18 @@ export const FEEDBACK_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzgCxJ
 export const QUESTIONS_PER_LEVEL = 5;
 
 /** 音效預設音量 (0-1)。
+ *  使用者可在設定頁的 slider 調整 (存 localStorage iq-kids:vol-correct / vol-wrong)。
  *  playCorrect/playWrong 內部還會再乘 1.3-1.4 倍 (因為 user feedback 認為太小聲)。
  *  之後想再調大,改這裡或 feedback.js 的 multiplier 都可以。 */
 export const SOUND_VOLUME = {
   correct: 0.4,
   wrong:   0.32
 };
+
+/** 弱項推薦的 minimum sample size — 答過 ≥ N 題才會被判斷為弱項 */
+export const WEAKNESS_MIN_SAMPLES = 3;
+/** 弱項推薦的 rate threshold — 答對率 < N 才推薦再練 */
+export const WEAKNESS_RATE_THRESHOLD = 0.7;
 
 /** localStorage key prefix */
 export const LS_PREFIX = 'iq-kids:';

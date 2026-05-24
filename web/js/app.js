@@ -11,14 +11,16 @@ import {
 import { openFeedbackForm, openSystemFeedback } from './feedback-form.js';
 import {
   recordAttempt, aggregateByTopic, getWrongSince,
-  lifetimeStats, exportAttempts, clearAttempts
+  lifetimeStats, exportAttempts, clearAttempts,
+  findUnpracticedTopic, findWeakestTopic
 } from './recorder.js';
 import { radarChart, radarLegend } from './radar.js';
 import {
   openTestSetup, startTest, confirmExitTest, startNewTest,
   onTestSelect, onTestPrev, onTestSkip, onTestNext
 } from './test-mode.js';
-import { QUESTIONS_PER_LEVEL } from './config.js';
+import { openSettings } from './settings.js';
+import { QUESTIONS_PER_LEVEL, WEAKNESS_MIN_SAMPLES, WEAKNESS_RATE_THRESHOLD } from './config.js';
 
 const TOPICS = {
   matrix:    { emoji: '🎯', name: '矩陣推理',   desc: '3×3 經典題型,找出橫和直的規律', cls: 'matrix' },
@@ -59,8 +61,9 @@ async function init() {
   // 把流程函數掛上 window 供 inline onclick 呼叫
   Object.assign(window, {
     startLevel, goMenu, restartLevel, selectAnswer, nextQuestion,
-    onMuteClick, onFeedbackClick, openSystemFeedback,
+    onMuteClick, onFeedbackClick, openSystemFeedback, openSettings,
     onExportRecords, onClearRecords, onReviewWrong,
+    onWeakSpotClick,
     // 測驗模式
     openTestSetup, startTest, confirmExitTest, startNewTest,
     onTestSelect, onTestPrev, onTestSkip, onTestNext
@@ -293,9 +296,65 @@ function showFinal() {
   document.getElementById('statTotal').textContent = state.qList.length;
   document.getElementById('statRate').textContent = rate + '%';
 
-  // 累計雷達圖 + 圖例 + 錯題回顧 + 紀錄管理
+  // 累計雷達圖 + 圖例 + 錯題回顧 + 弱項推薦
   renderRadarSection();
   renderWrongReview();
+  renderWeakSpotCTA();
+}
+
+function renderWeakSpotCTA() {
+  const slot = document.getElementById('weakSpotSlot');
+  if (!slot) return;
+
+  const allTopics = Object.keys(TOPICS);
+  // 優先1:有沒有完全沒練過的題型?
+  const unpracticed = findUnpracticedTopic(allTopics);
+  // 優先2:有沒有答對率明顯偏低的題型?
+  const weakest = findWeakestTopic(WEAKNESS_MIN_SAMPLES, WEAKNESS_RATE_THRESHOLD);
+
+  let suggestion = null;
+  if (unpracticed && unpracticed !== state.topic) {
+    const t = TOPICS[unpracticed];
+    suggestion = {
+      topic: unpracticed,
+      level: 'easy',
+      kind: 'unpracticed',
+      headline: `${t.emoji} ${t.name} 你還沒玩過`,
+      sub: `要不要試一下 ⭐ 入門?新題型可能會打開新的思路`,
+      btnText: `挑戰 ${t.name} 入門 →`
+    };
+  } else if (weakest && weakest.topic !== state.topic) {
+    const t = TOPICS[weakest.topic];
+    const rate = Math.round(weakest.rate * 100);
+    suggestion = {
+      topic: weakest.topic,
+      level: 'easy',
+      kind: 'weak',
+      headline: `${t.emoji} ${t.name} 想再練一下嗎?`,
+      sub: `你練了 ${weakest.total} 題,答對率 ${rate}%。多練幾題,規律會越來越熟`,
+      btnText: `再練 ${t.name} →`
+    };
+  }
+
+  if (!suggestion) {
+    slot.innerHTML = '';
+    return;
+  }
+
+  slot.innerHTML = `
+    <div class="weak-spot-cta weak-spot-${suggestion.kind}">
+      <div class="weak-spot-icon">💡</div>
+      <div class="weak-spot-body">
+        <div class="weak-spot-headline">${suggestion.headline}</div>
+        <div class="weak-spot-sub">${suggestion.sub}</div>
+      </div>
+      <button class="btn btn-primary weak-spot-btn" onclick="onWeakSpotClick('${suggestion.topic}','${suggestion.level}')">${suggestion.btnText}</button>
+    </div>
+  `;
+}
+
+function onWeakSpotClick(topic, level) {
+  startLevel(topic, level);
 }
 
 function renderRadarSection() {

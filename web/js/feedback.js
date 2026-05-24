@@ -59,12 +59,32 @@ function playTone(freqStart, duration, volume, freqEnd = null, type = 'sine') {
 }
 
 /**
+ * 取得當前實際音量 (從 localStorage 讀,沒設過就用 config 預設)。
+ * @param {'correct'|'wrong'} kind
+ * @returns {number} 0-1
+ */
+export function getVolume(kind) {
+  const key = `${LS_PREFIX}vol-${kind}`;
+  const raw = localStorage.getItem(key);
+  if (raw === null) return SOUND_VOLUME[kind];
+  const n = parseFloat(raw);
+  if (isNaN(n) || n < 0 || n > 1) return SOUND_VOLUME[kind];
+  return n;
+}
+
+/** 設定音量 (0-1,寫進 localStorage) */
+export function setVolume(kind, volume) {
+  const clamped = Math.max(0, Math.min(1, volume));
+  localStorage.setItem(`${LS_PREFIX}vol-${kind}`, String(clamped));
+}
+
+/**
  * 答對:C 大三和弦琶音 + 拍手雜訊
- * 總時長 ~700ms,音量是舊版的 ~1.7 倍。給孩子鼓勵感。
+ * 總時長 ~700ms。音量讀 localStorage (使用者可在設定頁調)。
  */
 export function playCorrect() {
   if (!soundEnabled()) return;
-  const baseVol = SOUND_VOLUME.correct;
+  const baseVol = getVolume('correct');
 
   // C5 → E5 → G5 → C6 上行琶音 (bell-like 三角波)
   // 每音 220ms,稍微重疊讓它連貫成一個「升起」的感覺
@@ -137,9 +157,10 @@ function playApplause(duration = 400, volume = 0.18) {
 /** 答錯:溫和兩聲下行,不刺耳但讓孩子知道要重新想 */
 export function playWrong() {
   if (!soundEnabled()) return;
+  const baseVol = getVolume('wrong');
   // 兩個音:稍高 → 較低,間隔短
-  playTone(440, 160, SOUND_VOLUME.wrong * 1.4, 360, 'sine');
-  setTimeout(() => playTone(360, 220, SOUND_VOLUME.wrong * 1.3, 280, 'sine'), 140);
+  playTone(440, 160, baseVol * 1.4, 360, 'sine');
+  setTimeout(() => playTone(360, 220, baseVol * 1.3, 280, 'sine'), 140);
 }
 
 /** 點擊聲(輕、不會打斷思考) */
