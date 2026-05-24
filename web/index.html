@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>腦力探險家 · IQ 練習場</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF8E7;
+    --bg-paper: #FFFFFF;
+    --ink: #2D2A4A;
+    --ink-soft: #6B6890;
+    --primary: #FF6B9D;
+    --primary-deep: #E84A82;
+    --secondary: #4ECDC4;
+    --accent: #FFD93D;
+    --purple: #9B7EDE;
+    --orange: #FF9F45;
+    --success: #6BCB77;
+    --error: #FF8C8C;
+    --shadow: 0 6px 0 rgba(45, 42, 74, 0.15);
+    --shadow-hover: 0 4px 0 rgba(45, 42, 74, 0.15);
+    --shadow-sm: 0 3px 0 rgba(45, 42, 74, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(255, 217, 61, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(78, 205, 196, 0.12) 0%, transparent 40%),
+      radial-gradient(circle at 50% 100%, rgba(255, 107, 157, 0.1) 0%, transparent 50%);
+    min-height: 100vh;
+    color: var(--ink);
+    padding: 20px;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 24px 16px 24px;
+  }
+
+  .title {
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 900;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .title-emoji {
+    font-size: 1.2em;
+    display: inline-block;
+    animation: wiggle 3s ease-in-out infinite;
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+
+  .subtitle {
+    color: var(--ink-soft);
+    font-size: 16px;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  /* ============ MENU ============ */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+  }
+
+  .topic-card {
+    background: var(--bg-paper);
+    border: 4px solid var(--ink);
+    border-radius: 24px;
+    padding: 22px 20px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topic-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 0 rgba(45, 42, 74, 0.15);
+  }
+
+  .topic-card .topic-emoji {
+    font-size: 44px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .topic-card .topic-name {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .topic-card .topic-desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .difficulty-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .diff-btn {
+    flex: 1;
+    background: white;
+    border: 2.5px solid var(--ink);
+    border-radius: 12px;
+    padding: 8px 4px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--ink);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.15s;
+  }
+
+  .diff-btn:hover {
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 rgba(45, 42, 74, 0.15);
+  }
+
+  .diff-btn.easy { background: #E8F8E0; }
+  .diff-btn.mid  { background: #FFF3D6; }
+  .diff-btn.hard { background: #FFE0E8; }
+
+  .topic-card.matrix     { background: linear-gradient(135deg, #FFFFFF 0%, #FFF0F5 100%); }
+  .topic-card.sequence   { background: linear-gradient(135deg, #FFFFFF 0%, #E8FCFB 100%); }
+  .topic-card.spatial    { background: linear-gradient(135deg, #FFFFFF 0%, #F0EAFB 100%); }
+  .topic-card.numseries  { background: linear-gradient(135deg, #FFFFFF 0%, #FFFAE0 100%); }
+  .topic-card.analogy    { background: linear-gradient(135deg, #FFFFFF 0%, #FFEFE0 100%); }
+  .topic-card.multivar   { background: linear-gradient(135deg, #FFFFFF 0%, #EFEDFA 100%); }
+
+  /* ============ QUIZ ============ */
+  .back-btn {
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--ink);
+    box-shadow: var(--shadow-sm);
+    font-family: inherit;
+    margin-bottom: 16px;
+  }
+
+  .back-btn:hover { transform: translateY(1px); box-shadow: 0 2px 0 rgba(45, 42, 74, 0.15); }
+
+  .progress-bar {
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    height: 18px;
+    margin-bottom: 6px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 999px;
+    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 0%;
+  }
+
+  .progress-text {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--bg-paper);
+    border: 4px solid var(--ink);
+    border-radius: 28px;
+    padding: 32px 24px 24px;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+
+  .card-badge {
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background: var(--accent);
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    padding: 4px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .card-stars {
+    position: absolute;
+    top: -14px;
+    right: 24px;
+    background: var(--purple);
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .question-text {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.6;
+    margin-top: 8px;
+    margin-bottom: 22px;
+    color: var(--ink);
+  }
+
+  .question-visual {
+    background: #FAFAFF;
+    border: 2px dashed #D5D2EC;
+    border-radius: 20px;
+    padding: 24px 16px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 140px;
+  }
+
+  /* ============ MATRIX 3x3 ============ */
+  .matrix-3x3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: 320px;
+  }
+  .matrix-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-width: 220px;
+  }
+  .matrix-cell {
+    aspect-ratio: 1;
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .matrix-cell.unknown {
+    background: var(--accent);
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--ink);
+  }
+
+  /* ============ SEQUENCE ============ */
+  .shape-sequence {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .shape-cell {
+    width: 64px;
+    height: 64px;
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .shape-cell.unknown {
+    background: var(--accent);
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--ink);
+  }
+  .arrow {
+    font-size: 20px;
+    color: var(--ink-soft);
+    font-weight: 700;
+  }
+
+  /* ============ NUMBER ============ */
+  .number-sequence {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .num-cell {
+    min-width: 56px;
+    height: 56px;
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    padding: 0 12px;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .num-cell.unknown { background: var(--accent); color: var(--ink); }
+
+  /* ============ ANALOGY ============ */
+  .analogy-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .analogy-row .arr { color: var(--ink-soft); }
+  .analogy-row .term {
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    padding: 10px 16px;
+    box-shadow: 2px 2px 0 var(--ink);
+    min-width: 70px;
+    text-align: center;
+  }
+  .analogy-row .term.unknown { background: var(--accent); }
+
+  /* ============ OPTIONS ============ */
+  .options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .options.shape-options { grid-template-columns: repeat(4, 1fr); }
+  .options.text-options  { grid-template-columns: repeat(2, 1fr); }
+
+  .option {
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    padding: 14px 12px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 64px;
+    font-family: inherit;
+    flex-direction: column;
+  }
+
+  .option:hover:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(45, 42, 74, 0.15);
+    background: #FFFBF0;
+  }
+  .option:active:not(:disabled) {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 rgba(45, 42, 74, 0.15);
+  }
+  .option .label {
+    background: var(--secondary);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .option .opt-text {
+    font-size: 14px;
+  }
+  .option.correct {
+    background: var(--success);
+    color: white;
+    border-color: #4FAF5C;
+    animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .option.correct .label { background: white; color: var(--success); }
+  .option.incorrect {
+    background: var(--error);
+    color: white;
+    border-color: #E66B6B;
+    animation: shake 0.5s;
+  }
+  .option.incorrect .label { background: white; color: var(--error); }
+  .option:disabled { cursor: not-allowed; }
+
+  @keyframes pop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.06); }
+    100% { transform: scale(1); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+  }
+
+  /* ============ FEEDBACK ============ */
+  .feedback {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 18px;
+    border: 3px solid var(--ink);
+    background: #FFFBF0;
+    box-shadow: var(--shadow-sm);
+    display: none;
+    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .feedback.show { display: block; }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .feedback-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 12px;
+  }
+  .feedback.correct .feedback-header { color: var(--success); }
+  .feedback.incorrect .feedback-header { color: var(--primary-deep); }
+  .feedback-emoji { font-size: 26px; }
+
+  .hint-question {
+    background: white;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  .hint-question::before { content: '🤔 '; }
+
+  .explanation {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink);
+    margin: 10px 0;
+    font-weight: 500;
+  }
+  .explanation strong {
+    background: var(--accent);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-weight: 700;
+  }
+  .skill-tag {
+    display: inline-block;
+    background: var(--secondary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 10px;
+  }
+
+  /* ============ ACTIONS ============ */
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 14px 18px;
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.15s;
+    font-family: inherit;
+    color: var(--ink);
+  }
+  .btn:hover { transform: translateY(1px); box-shadow: 0 2px 0 rgba(45, 42, 74, 0.15); }
+  .btn:active { transform: translateY(4px); box-shadow: 0 0 0 rgba(45, 42, 74, 0.15); }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-ghost { background: white; }
+
+  /* ============ FINAL ============ */
+  .final-screen {
+    text-align: center;
+    padding: 30px 20px;
+    background: var(--bg-paper);
+    border: 4px solid var(--ink);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+  }
+  .trophy {
+    font-size: 70px;
+    animation: bounce 1.5s ease-in-out infinite;
+    display: inline-block;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .final-title { font-size: 28px; font-weight: 900; margin: 16px 0 4px; color: var(--ink); }
+  .score-display { font-size: 16px; color: var(--ink-soft); margin-bottom: 22px; font-weight: 600; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 22px 0;
+  }
+  .stat-box {
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    padding: 14px 6px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-value { font-size: 26px; font-weight: 900; color: var(--primary); }
+  .stat-label { font-size: 12px; color: var(--ink-soft); font-weight: 600; margin-top: 4px; }
+
+  .celebration {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 100;
+    font-size: 70px;
+    opacity: 0;
+  }
+  .celebration.show {
+    animation: celebrate 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes celebrate {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3) rotate(-30deg); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.3) rotate(15deg); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+  }
+
+  @media (max-width: 520px) {
+    .options.shape-options { grid-template-columns: repeat(2, 1fr); }
+    .question-text { font-size: 16px; }
+    .matrix-3x3 { max-width: 260px; }
+    .matrix-cell svg { width: 80%; height: 80%; }
+    .shape-cell { width: 52px; height: 52px; }
+    .num-cell { min-width: 48px; height: 48px; font-size: 18px; padding: 0 10px; }
+  }
+
+  .hide { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="celebration" id="celebration">🎉</div>
+
+<div class="container">
+  <div class="header">
+    <h1 class="title"><span class="title-emoji">🧠</span>腦力探險家</h1>
+    <p class="subtitle">六大題型 × 三種難度 · IQ 練習場</p>
+  </div>
+
+  <!-- MENU -->
+  <div id="menuScreen">
+    <div class="menu-grid" id="menuGrid"></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quizScreen" class="hide">
+    <button class="back-btn" onclick="goMenu()">← 回主選單</button>
+    <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+    <div class="progress-text" id="progressText"></div>
+    <div id="quizArea"></div>
+  </div>
+
+  <!-- FINAL -->
+  <div id="finalScreen" class="hide">
+    <button class="back-btn" onclick="goMenu()">← 回主選單</button>
+    <div class="final-screen">
+      <div class="trophy">🏆</div>
+      <h2 class="final-title">這一關完成!</h2>
+      <p class="score-display" id="finalScore"></p>
+      <div class="stats">
+        <div class="stat-box"><div class="stat-value" id="statCorrect">0</div><div class="stat-label">答對</div></div>
+        <div class="stat-box"><div class="stat-value" id="statTotal">0</div><div class="stat-label">總題數</div></div>
+        <div class="stat-box"><div class="stat-value" id="statRate">0%</div><div class="stat-label">正確率</div></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost" onclick="restartLevel()">重玩這關 🔁</button>
+        <button class="btn btn-primary" onclick="goMenu()">挑戰其他關 →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   SVG HELPERS
+   ============================================================ */
+function svg(content, size = 50) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">${content}</svg>`;
+}
+function circle(c, r=16, cx=25, cy=25, stroke='#2D2A4A') {
+  return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${c}" stroke="${stroke}" stroke-width="2.5"/>`;
+}
+function square(c, side=28, x=11, y=11) {
+  return `<rect x="${x}" y="${y}" width="${side}" height="${side}" rx="3" fill="${c}" stroke="#2D2A4A" stroke-width="2.5"/>`;
+}
+function triangle(c) {
+  return `<polygon points="25,8 42,38 8,38" fill="${c}" stroke="#2D2A4A" stroke-width="2.5" stroke-linejoin="round"/>`;
+}
+function star(c) {
+  return `<polygon points="25,6 30,19 44,19 33,28 37,42 25,34 13,42 17,28 6,19 20,19" fill="${c}" stroke="#2D2A4A" stroke-width="2" stroke-linejoin="round"/>`;
+}
+function diamond(c) {
+  return `<polygon points="25,6 42,25 25,44 8,25" fill="${c}" stroke="#2D2A4A" stroke-width="2.5" stroke-linejoin="round"/>`;
+}
+function hex(c) {
+  return `<polygon points="25,6 41,15 41,35 25,44 9,35 9,15" fill="${c}" stroke="#2D2A4A" stroke-width="2.5" stroke-linejoin="round"/>`;
+}
+function arrow(deg, c='#FF6B9D') {
+  return `<g transform="rotate(${deg} 25 25)"><path d="M 25 8 L 25 40 M 14 19 L 25 8 L 36 19" stroke="${c}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g>`;
+}
+function dots(n) {
+  const positions = {
+    1: [[25,25]],
+    2: [[15,25],[35,25]],
+    3: [[15,15],[25,35],[35,15]],
+    4: [[15,15],[35,15],[15,35],[35,35]],
+    5: [[15,15],[35,15],[25,25],[15,35],[35,35]],
+    6: [[15,12],[35,12],[15,25],[35,25],[15,38],[35,38]]
+  };
+  if (!positions[n]) return '';
+  return positions[n].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="3.5" fill="#2D2A4A"/>`).join('');
+}
+function multiShape(shape, n, c) {
+  if (n === 1) return shape(c);
+  if (n === 2) return `<g transform="translate(-9,0) scale(0.6) translate(8,15)">${shape(c)}</g><g transform="translate(9,0) scale(0.6) translate(8,15)">${shape(c)}</g>`;
+  if (n === 3) return `<g transform="scale(0.5) translate(0,10)">${shape(c)}</g><g transform="scale(0.5) translate(50,10)">${shape(c)}</g><g transform="scale(0.5) translate(25,50)">${shape(c)}</g>`;
+  if (n === 4) return `<g transform="scale(0.45) translate(5,5)">${shape(c)}</g><g transform="scale(0.45) translate(55,5)">${shape(c)}</g><g transform="scale(0.45) translate(5,55)">${shape(c)}</g><g transform="scale(0.45) translate(55,55)">${shape(c)}</g>`;
+  return shape(c);
+}
+/* ============================================================
+   ISOMETRIC CUBE STACK
+   ------------------------------------------------------------
+   cubeStack(layout, options?) — 畫等角投影立方體堆
+   layout:
+     1D [n]                       → 一列
+     2D [[1,1,1],[0,1,0]]         → 平面圖 z=0 一層
+     3D [[[],[]],[[],[]]]         → 多層 layout[z][y][x]
+   options:
+     size: 單位邊長 px (預設 24)
+     colors: { top, left, right, edge }
+     padding: SVG 邊距 (預設 10)
+   ============================================================ */
+const ISO_COLORS = {
+  top:   '#FFD93D',   // yellow
+  left:  '#FF9F45',   // orange
+  right: '#FF6B9D',   // pink
+  edge:  '#2D2A4A'
+};
+function isoProject(x, y, z, s) {
+  const cos30 = Math.cos(Math.PI / 6);  // ≈ 0.866
+  const sin30 = Math.sin(Math.PI / 6);  // = 0.5
+  return {
+    sx: (x - y) * cos30 * s,
+    sy: (x + y) * sin30 * s - z * s
+  };
+}
+function isoCube(x, y, z, s, neighbors, colors) {
+  const p = {
+    blf: isoProject(x,   y,   z,   s),
+    brf: isoProject(x+1, y,   z,   s),
+    blb: isoProject(x,   y+1, z,   s),
+    brb: isoProject(x+1, y+1, z,   s),
+    tlf: isoProject(x,   y,   z+1, s),
+    trf: isoProject(x+1, y,   z+1, s),
+    tlb: isoProject(x,   y+1, z+1, s),
+    trb: isoProject(x+1, y+1, z+1, s)
+  };
+  const poly = (pts, fill) => {
+    const d = pts.map(pt => `${pt.sx.toFixed(2)},${pt.sy.toFixed(2)}`).join(' ');
+    return `<polygon points="${d}" fill="${fill}" stroke="${colors.edge}" stroke-width="1.5" stroke-linejoin="round"/>`;
+  };
+  const faces = [];
+  if (!neighbors.px) faces.push(poly([p.brf, p.brb, p.trb, p.trf], colors.right));
+  if (!neighbors.py) faces.push(poly([p.blb, p.brb, p.trb, p.tlb], colors.left));
+  if (!neighbors.pz) faces.push(poly([p.tlf, p.trf, p.trb, p.tlb], colors.top));
+  return faces.join('');
+}
+function cubeStack(layout, options = {}) {
+  const s = options.size || 24;
+  const colors = options.colors || ISO_COLORS;
+  const padding = options.padding || 10;
+
+  // 正規化成 3D
+  let l3;
+  if (typeof layout[0] === 'number')          l3 = [[layout]];
+  else if (typeof layout[0][0] === 'number')  l3 = [layout];
+  else                                        l3 = layout;
+
+  // 蒐集 cells + 建鄰居索引
+  const cells = [];
+  const set = new Set();
+  for (let z = 0; z < l3.length; z++)
+    for (let y = 0; y < l3[z].length; y++)
+      for (let x = 0; x < l3[z][y].length; x++)
+        if (l3[z][y][x]) { cells.push({x, y, z}); set.add(`${x},${y},${z}`); }
+  if (cells.length === 0) return `<svg width="60" height="60"></svg>`;
+  const has = (x, y, z) => set.has(`${x},${y},${z}`);
+
+  // Painter sort: 等角投影下「遠」= x+y 小,「近」= x+y 大
+  cells.sort((a, b) => (a.x + a.y) - (b.x + b.y) || a.z - b.z);
+
+  // Bounding box
+  const pts = [];
+  cells.forEach(({x, y, z}) => {
+    for (const dx of [0,1]) for (const dy of [0,1]) for (const dz of [0,1])
+      pts.push(isoProject(x+dx, y+dy, z+dz, s));
+  });
+  const minX = Math.min(...pts.map(p => p.sx));
+  const maxX = Math.max(...pts.map(p => p.sx));
+  const minY = Math.min(...pts.map(p => p.sy));
+  const maxY = Math.max(...pts.map(p => p.sy));
+  const W = maxX - minX + padding * 2;
+  const H = maxY - minY + padding * 2;
+  const tx = -minX + padding;
+  const ty = -minY + padding;
+
+  const body = cells.map(c => isoCube(c.x, c.y, c.z, s, {
+    px: has(c.x + 1, c.y, c.z),
+    py: has(c.x, c.y + 1, c.z),
+    pz: has(c.x, c.y, c.z + 1)
+  }, colors)).join('');
+
+  return `<svg width="${W.toFixed(0)}" height="${H.toFixed(0)}" viewBox="0 0 ${W.toFixed(0)} ${H.toFixed(0)}" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(${tx.toFixed(2)}, ${ty.toFixed(2)})">${body}</g>
+  </svg>`;
+}
+// Color palette
+const COLORS = {
+  pink: '#FF6B9D',
+  teal: '#4ECDC4',
+  yellow: '#FFD93D',
+  purple: '#9B7EDE',
+  orange: '#FF9F45',
+  blue: '#5B9DEC',
+  white: '#FFFFFF'
+};
+
+// Matrix cell builder
+function mc(content, isUnknown = false) {
+  return `<div class="matrix-cell${isUnknown ? ' unknown' : ''}">${isUnknown ? '?' : content}</div>`;
+}
+
+/* ============================================================
+   QUESTION BANK
+   每題 type, level, prompt, visual, options, answer, hint, explanation, skill
+   ============================================================ */
+
+const QUESTIONS = {
+
+  // ============= 矩陣推理 =============
+  matrix: {
+    easy: [
+      {
+        prompt: '橫向看一下,每一排有什麼規律?',
+        visual: `<div class="matrix-3x3">
+          ${mc(svg(circle(COLORS.pink, 14)))}
+          ${mc(svg(circle(COLORS.pink, 14)))}
+          ${mc(svg(circle(COLORS.pink, 14)))}
+          ${mc(svg(square(COLORS.teal)))}
+          ${mc(svg(square(COLORS.teal)))}
+          ${mc(svg(square(COLORS.teal)))}
+          ${mc(svg(triangle(COLORS.yellow)))}
+          ${mc(svg(triangle(COLORS.yellow)))}
+          ${mc('', true)}
+        </div>`,
+        options: [
+          { html: svg(circle(COLORS.pink, 14)), text: '粉紅圓' },
+          { html: svg(triangle(COLORS.yellow)), text: '黃三角' },
+          { html: svg(square(COLORS.teal)), text: '藍綠方' },
+          { html: svg(star(COLORS.pink)), text: '粉紅星' }
+        ],
+        answer: 1,
+        hint: '看橫的:第一排都是粉紅圓、第二排都是藍綠方,第三排前兩個是什麼?',
+        explanation: '每一排的三格是<strong>同樣的東西</strong>。第三排前兩格是黃色三角形,所以第三格也要是<strong>黃色三角形</strong>。',
+        skill: '橫向規律識別'
+      },
+      {
+        prompt: '直的和橫的都看一下,有什麼變化?',
+        visual: `<div class="matrix-3x3">
+          ${mc(svg(circle(COLORS.pink, 14)))}
+          ${mc(svg(square(COLORS.pink)))}
+          ${mc(svg(triangle(COLORS.pink)))}
+          ${mc(svg(circle(COLORS.teal, 14)))}
+          ${mc(svg(square(COLORS.teal)))}
+          ${mc(svg(triangle(COLORS.teal)))}
+          ${mc(svg(circle(COLORS.yellow, 14)))}
+          ${mc(svg(square(COLORS.yellow)))}
+          ${mc('', true)}
+        </div>`,
+        options: [
+          { html: svg(triangle(COLORS.yellow)), text: '黃三角' },
+          { html: svg(triangle(COLORS.pink)), text: '粉紅三角' },
+          { html: svg(square(COLORS.yellow)), text: '黃方形' },
+          { html: svg(triangle(COLORS.teal)), text: '藍綠三角' }
+        ],
+        answer: 0,
+        hint: '橫向:形狀變(圓→方→三角)。直向:顏色變(粉→綠→黃)。最後一格要同時滿足兩個規律。',
+        explanation: '同時看兩個方向:<strong>橫</strong>是形狀變化(圓→方→三角),<strong>直</strong>是顏色變化(粉→綠→黃)。所以最後一格 = 第三排的形狀 + 第三列的顏色 = <strong>黃色三角形</strong>。',
+        skill: '雙向規律推理'
+      }
+    ],
+    mid: [
+      {
+        prompt: '形狀和點點數量都在變,觀察一下!',
+        visual: `<div class="matrix-3x3">
+          ${mc(svg(`${circle(COLORS.white, 18)}${dots(1)}`))}
+          ${mc(svg(`${circle(COLORS.white, 18)}${dots(2)}`))}
+          ${mc(svg(`${circle(COLORS.white, 18)}${dots(3)}`))}
+          ${mc(svg(`${square(COLORS.white)}${dots(1)}`))}
+          ${mc(svg(`${square(COLORS.white)}${dots(2)}`))}
+          ${mc(svg(`${square(COLORS.white)}${dots(3)}`))}
+          ${mc(svg(`${triangle(COLORS.white)}${dots(1)}`))}
+          ${mc(svg(`${triangle(COLORS.white)}${dots(2)}`))}
+          ${mc('', true)}
+        </div>`,
+        options: [
+          { html: svg(`${triangle(COLORS.white)}${dots(3)}`), text: '三角+3點' },
+          { html: svg(`${triangle(COLORS.white)}${dots(4)}`), text: '三角+4點' },
+          { html: svg(`${circle(COLORS.white, 18)}${dots(3)}`), text: '圓+3點' },
+          { html: svg(`${square(COLORS.white)}${dots(3)}`), text: '方+3點' }
+        ],
+        answer: 0,
+        hint: '一格裡有兩個變化:形狀(直向變)+ 點點數量(橫向變)。你要追蹤兩個變化。',
+        explanation: '兩個獨立規律同時運作:<strong>形狀</strong>每排相同(這排都是三角形),<strong>點數</strong>每列依 1→2→3 增加。所以答案是 <strong>三角形 + 3 個點</strong>。',
+        skill: '雙變數獨立追蹤'
+      },
+      {
+        prompt: '橫向和直向都看!兩個方向都有規律。',
+        visual: `<div class="matrix-3x3">
+          ${mc(svg(multiShape(c => circle(c, 12), 1, COLORS.pink)))}
+          ${mc(svg(multiShape(c => circle(c, 12), 2, COLORS.pink)))}
+          ${mc(svg(multiShape(c => circle(c, 12), 3, COLORS.pink)))}
+          ${mc(svg(multiShape(c => square(c, 18, 16, 16), 1, COLORS.teal)))}
+          ${mc(svg(multiShape(c => square(c, 18, 16, 16), 2, COLORS.teal)))}
+          ${mc(svg(multiShape(c => square(c, 18, 16, 16), 3, COLORS.teal)))}
+          ${mc(svg(multiShape(c => triangle(c), 1, COLORS.yellow)))}
+          ${mc(svg(multiShape(c => triangle(c), 2, COLORS.yellow)))}
+          ${mc('', true)}
+        </div>`,
+        options: [
+          { html: svg(multiShape(c => triangle(c), 3, COLORS.yellow)), text: '3 個黃三角' },
+          { html: svg(multiShape(c => triangle(c), 2, COLORS.yellow)), text: '2 個黃三角' },
+          { html: svg(multiShape(c => circle(c, 12), 3, COLORS.yellow)), text: '3 個黃圓' },
+          { html: svg(multiShape(c => triangle(c), 3, COLORS.pink)), text: '3 個粉三角' }
+        ],
+        answer: 0,
+        hint: '<strong>形狀+顏色</strong>每排都一樣(第三排都是黃三角)。<strong>數量</strong>每排是 1→2→3 遞增。',
+        explanation: '<strong>形狀</strong>(每排相同):第一排都是粉圓,第二排都是綠方,第三排都是黃三角。<strong>數量</strong>(每排遞增):1→2→3。第三排已有 1 個、2 個,所以第三格是 <strong>3 個黃三角</strong>。',
+        skill: '形狀×顏色×數量三變數'
+      }
+    ],
+    hard: [
+      {
+        prompt: '這題比較難!三個元素都在變化,你能全部抓出來嗎?',
+        visual: `<div class="matrix-3x3">
+          ${mc(svg(`${circle(COLORS.pink, 13)}${dots(1)}`))}
+          ${mc(svg(`${square(COLORS.teal)}${dots(2)}`))}
+          ${mc(svg(`${triangle(COLORS.yellow)}${dots(3)}`))}
+          ${mc(svg(`${circle(COLORS.teal, 13)}${dots(2)}`))}
+          ${mc(svg(`${square(COLORS.yellow)}${dots(3)}`))}
+          ${mc(svg(`${triangle(COLORS.pink)}${dots(1)}`))}
+          ${mc(svg(`${circle(COLORS.yellow, 13)}${dots(3)}`))}
+          ${mc(svg(`${square(COLORS.pink)}${dots(1)}`))}
+          ${mc('', true)}
+        </div>`,
+        options: [
+          { html: svg(`${triangle(COLORS.teal)}${dots(2)}`), text: '綠三角+2點' },
+          { html: svg(`${triangle(COLORS.pink)}${dots(2)}`), text: '粉三角+2點' },
+          { html: svg(`${triangle(COLORS.yellow)}${dots(2)}`), text: '黃三角+2點' },
+          { html: svg(`${circle(COLORS.teal, 13)}${dots(2)}`), text: '綠圓+2點' }
+        ],
+        answer: 0,
+        hint: '橫向看:形狀都是圓→方→三角。但顏色和點數每排都「<strong>輪換</strong>」!第三排第三格的顏色和點數是什麼?',
+        explanation: '形狀:每排都是圓→方→三角。顏色:每排是粉/綠/黃輪換,第三排第三格是<strong>綠色</strong>。點數:每排是 1/2/3 輪換,第三排第三格是 <strong>2 點</strong>。所以是 <strong>綠色三角形 + 2 點</strong>。',
+        skill: '三變數同時推理(顏色×形狀×數量)'
+      },
+      {
+        prompt: '注意!這題的規律是「橫向相加」,你能找出來嗎?',
+        visual: `<div class="matrix-3x3">
+          ${mc(svg(dots(1)))}
+          ${mc(svg(dots(2)))}
+          ${mc(svg(dots(3)))}
+          ${mc(svg(dots(2)))}
+          ${mc(svg(dots(3)))}
+          ${mc(svg(dots(5)))}
+          ${mc(svg(dots(3)))}
+          ${mc(svg(dots(2)))}
+          ${mc('', true)}
+        </div>`,
+        options: [
+          { html: svg(dots(4)), text: '4 點' },
+          { html: svg(dots(5)), text: '5 點' },
+          { html: svg(dots(6)), text: '6 點' },
+          { html: svg(dots(7)), text: '7 點' }
+        ],
+        answer: 1,
+        hint: '看第一排:1 + 2 = 3 ✓。看第二排:2 + 3 = 5 ✓。那第三排:3 + 2 = ?',
+        explanation: '規律是<strong>「前兩格相加 = 第三格」</strong>!第一排:1+2=3 ✓,第二排:2+3=5 ✓,第三排:3+2=<strong>5</strong>。',
+        skill: '矩陣中的算術規律'
+      }
+    ]
+  },
+
+  // ============= 圖形序列 =============
+  sequence: {
+    easy: [
+      {
+        prompt: '看看箭頭的方向,下一個會指向哪裡?',
+        visual: `<div class="shape-sequence">
+          <div class="shape-cell">${svg(arrow(0), 40)}</div>
+          <div class="shape-cell">${svg(arrow(45), 40)}</div>
+          <div class="shape-cell">${svg(arrow(90), 40)}</div>
+          <div class="shape-cell">${svg(arrow(135), 40)}</div>
+          <div class="arrow">→</div>
+          <div class="shape-cell unknown">?</div>
+        </div>`,
+        options: [
+          { html: svg(arrow(180), 40), text: '指下' },
+          { html: svg(arrow(270), 40), text: '指左' },
+          { html: svg(arrow(0), 40), text: '指上' },
+          { html: svg(arrow(90), 40), text: '指右' }
+        ],
+        answer: 0,
+        hint: '箭頭每次都<strong>順時針</strong>轉一點點(45 度)。上→右上→右→右下→?',
+        explanation: '箭頭每次<strong>順時針旋轉 45 度</strong>。上(0°)→右上(45°)→右(90°)→右下(135°)→<strong>下(180°)</strong>。',
+        skill: '等角度旋轉追蹤'
+      },
+      {
+        prompt: '形狀和顏色都在輪換,下一個是什麼?',
+        visual: `<div class="shape-sequence">
+          <div class="shape-cell">${svg(circle(COLORS.pink, 16), 40)}</div>
+          <div class="shape-cell">${svg(square(COLORS.teal), 40)}</div>
+          <div class="shape-cell">${svg(triangle(COLORS.yellow), 40)}</div>
+          <div class="shape-cell">${svg(circle(COLORS.pink, 16), 40)}</div>
+          <div class="shape-cell">${svg(square(COLORS.teal), 40)}</div>
+          <div class="arrow">→</div>
+          <div class="shape-cell unknown">?</div>
+        </div>`,
+        options: [
+          { html: svg(circle(COLORS.pink, 16), 40), text: '粉紅圓' },
+          { html: svg(triangle(COLORS.yellow), 40), text: '黃三角' },
+          { html: svg(star(COLORS.pink), 40), text: '粉紅星' },
+          { html: svg(square(COLORS.teal), 40), text: '藍綠方' }
+        ],
+        answer: 1,
+        hint: '三個一組重複:粉圓→綠方→黃三角→粉圓→綠方→?',
+        explanation: '這是<strong>三項循環(ABC ABC)</strong>:粉圓→綠方→黃三角→粉圓→綠方→<strong>黃三角</strong>。',
+        skill: 'ABC 循環識別'
+      }
+    ],
+    mid: [
+      {
+        prompt: '兩個規律一起跑:數量和顏色',
+        visual: `<div class="shape-sequence">
+          <div class="shape-cell">${svg(multiShape(c => circle(c, 12), 1, COLORS.pink), 40)}</div>
+          <div class="shape-cell">${svg(multiShape(c => circle(c, 12), 2, COLORS.teal), 40)}</div>
+          <div class="shape-cell">${svg(multiShape(c => circle(c, 12), 3, COLORS.yellow), 40)}</div>
+          <div class="shape-cell">${svg(multiShape(c => circle(c, 12), 1, COLORS.pink), 40)}</div>
+          <div class="arrow">→</div>
+          <div class="shape-cell unknown">?</div>
+        </div>`,
+        options: [
+          { html: svg(multiShape(c => circle(c, 12), 2, COLORS.teal), 40), text: '2 個綠圓' },
+          { html: svg(multiShape(c => circle(c, 12), 1, COLORS.teal), 40), text: '1 個綠圓' },
+          { html: svg(multiShape(c => circle(c, 12), 3, COLORS.teal), 40), text: '3 個綠圓' },
+          { html: svg(multiShape(c => circle(c, 12), 2, COLORS.yellow), 40), text: '2 個黃圓' }
+        ],
+        answer: 0,
+        hint: '把序列<strong>三個一組</strong>看:(1粉 2綠 3黃)→(1粉 ? ?)。整組會重複!',
+        explanation: '這是<strong>三項循環</strong>:1 粉圓 → 2 綠圓 → 3 黃圓,然後重新開始。第 4 個 = 1 個粉圓 ✓,所以第 5 個 = <strong>2 個綠圓</strong>。',
+        skill: 'ABC 三項循環'
+      },
+      {
+        prompt: '裡面的小圖和外框都在變,你能同時追蹤嗎?',
+        visual: `<div class="shape-sequence">
+          <div class="shape-cell">${svg(`${circle(COLORS.white, 20, 25, 25)}${circle(COLORS.pink, 8, 25, 25)}`, 40)}</div>
+          <div class="shape-cell">${svg(`${square(COLORS.white, 32, 9, 9)}${circle(COLORS.teal, 8, 25, 25)}`, 40)}</div>
+          <div class="shape-cell">${svg(`${triangle(COLORS.white)}${circle(COLORS.yellow, 7, 25, 30)}`, 40)}</div>
+          <div class="shape-cell">${svg(`${circle(COLORS.white, 20, 25, 25)}${square(COLORS.pink, 10, 20, 20)}`, 40)}</div>
+          <div class="arrow">→</div>
+          <div class="shape-cell unknown">?</div>
+        </div>`,
+        options: [
+          { html: svg(`${square(COLORS.white, 32, 9, 9)}${square(COLORS.teal, 10, 20, 20)}`, 40), text: '方中方' },
+          { html: svg(`${triangle(COLORS.white)}${square(COLORS.teal, 10, 20, 22)}`, 40), text: '三角中方' },
+          { html: svg(`${circle(COLORS.white, 20, 25, 25)}${triangle(COLORS.teal)}`, 40), text: '圓中三角' },
+          { html: svg(`${square(COLORS.white, 32, 9, 9)}${circle(COLORS.teal, 8, 25, 25)}`, 40), text: '方中圓' }
+        ],
+        answer: 0,
+        hint: '外框依序是:圓→方→三角→圓→? 應該回到方。裡面顏色:粉→綠→黃→粉→?',
+        explanation: '<strong>外框</strong>循環:圓→方→三角→圓→<strong>方</strong>。<strong>內部</strong>顏色循環:粉→綠→黃→粉→<strong>綠</strong>。<strong>內部形狀</strong>:圓→圓→圓→方→<strong>方</strong>。綜合是 <strong>外方 + 內綠方</strong>。',
+        skill: '巢狀元素同步追蹤'
+      }
+    ],
+    hard: [
+      {
+        prompt: '注意箭頭的旋轉和顏色變化都不一樣速度!',
+        visual: `<div class="shape-sequence">
+          <div class="shape-cell">${svg(arrow(0, COLORS.pink), 40)}</div>
+          <div class="shape-cell">${svg(arrow(90, COLORS.pink), 40)}</div>
+          <div class="shape-cell">${svg(arrow(180, COLORS.teal), 40)}</div>
+          <div class="shape-cell">${svg(arrow(270, COLORS.teal), 40)}</div>
+          <div class="arrow">→</div>
+          <div class="shape-cell unknown">?</div>
+        </div>`,
+        options: [
+          { html: svg(arrow(0, COLORS.yellow), 40), text: '黃↑' },
+          { html: svg(arrow(0, COLORS.pink), 40), text: '粉↑' },
+          { html: svg(arrow(90, COLORS.yellow), 40), text: '黃→' },
+          { html: svg(arrow(180, COLORS.yellow), 40), text: '黃↓' }
+        ],
+        answer: 0,
+        hint: '箭頭每次轉 90 度。顏色是<strong>「兩個一組」</strong>變一次:粉粉→綠綠→?',
+        explanation: '<strong>箭頭</strong>每次順時針轉 90°:0→90→180→270→<strong>360(=0)</strong>,所以指<strong>上</strong>。<strong>顏色</strong>是「兩兩一組」變:粉粉→綠綠→<strong>黃黃</strong>。所以是<strong>黃色 ↑</strong>。',
+        skill: '不同步變化追蹤'
+      },
+      {
+        prompt: '這題的規律不只是看一個方向,試試看分組!',
+        visual: `<div class="shape-sequence">
+          <div class="shape-cell">${svg(circle(COLORS.pink, 16), 40)}</div>
+          <div class="shape-cell">${svg(square(COLORS.pink), 40)}</div>
+          <div class="shape-cell">${svg(triangle(COLORS.teal), 40)}</div>
+          <div class="shape-cell">${svg(diamond(COLORS.teal), 40)}</div>
+          <div class="shape-cell">${svg(star(COLORS.yellow), 40)}</div>
+          <div class="arrow">→</div>
+          <div class="shape-cell unknown">?</div>
+        </div>`,
+        options: [
+          { html: svg(hex(COLORS.yellow), 40), text: '黃六邊形' },
+          { html: svg(star(COLORS.yellow), 40), text: '黃星星' },
+          { html: svg(circle(COLORS.yellow, 16), 40), text: '黃圓' },
+          { html: svg(star(COLORS.pink), 40), text: '粉星星' }
+        ],
+        answer: 0,
+        hint: '把它<strong>兩兩分組</strong>看:(粉圓 粉方)(綠三角 綠菱形)(黃星 ?)。每組顏色一樣,形狀都不同。',
+        explanation: '<strong>分組看</strong>:第 1-2 個都是粉色但不同形狀,第 3-4 個都是綠色但不同形狀,第 5-6 個應該都是<strong>黃色但不同形狀</strong>。第 5 是黃星,第 6 必須是黃色但<strong>不是星</strong>——選 <strong>黃六邊形</strong>。',
+        skill: '分組模式辨識'
+      }
+    ]
+  },
+
+  // ============= 空間能力 =============
+  spatial: {
+    easy: [
+      {
+        prompt: '這是把紙摺起來再剪洞,展開後會是哪個樣子?',
+        visual: `<div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:center;">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <rect x="10" y="10" width="60" height="60" fill="white" stroke="#2D2A4A" stroke-width="2.5"/>
+            <line x1="10" y1="40" x2="70" y2="40" stroke="#2D2A4A" stroke-width="1.5" stroke-dasharray="3,3"/>
+            <text x="40" y="60" text-anchor="middle" font-size="11" font-weight="700" fill="#2D2A4A">對摺線</text>
+          </svg>
+          <div style="font-size: 22px; color: #6B6890;">→</div>
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <rect x="10" y="10" width="60" height="30" fill="white" stroke="#2D2A4A" stroke-width="2.5"/>
+            <circle cx="30" cy="25" r="5" fill="#FF6B9D" stroke="#2D2A4A" stroke-width="1.5"/>
+          </svg>
+          <div style="font-size: 14px; font-weight: 700; color: #6B6890;">展開?</div>
+        </div>`,
+        options: [
+          { html: `<svg width="60" height="60" viewBox="0 0 80 80"><rect x="10" y="10" width="60" height="60" fill="white" stroke="#2D2A4A" stroke-width="2.5"/><circle cx="30" cy="25" r="5" fill="#FF6B9D" stroke="#2D2A4A" stroke-width="1.5"/><circle cx="30" cy="55" r="5" fill="#FF6B9D" stroke="#2D2A4A" stroke-width="1.5"/></svg>`, text: '上下對稱' },
+          { html: `<svg width="60" height="60" viewBox="0 0 80 80"><rect x="10" y="10" width="60" height="60" fill="white" stroke="#2D2A4A" stroke-width="2.5"/><circle cx="30" cy="25" r="5" fill="#FF6B9D" stroke="#2D2A4A" stroke-width="1.5"/></svg>`, text: '只有一個洞' },
+          { html: `<svg width="60" height="60" viewBox="0 0 80 80"><rect x="10" y="10" width="60" height="60" fill="white" stroke="#2D2A4A" stroke-width="2.5"/><circle cx="30" cy="25" r="5" fill="#FF6B9D" stroke="#2D2A4A" stroke-width="1.5"/><circle cx="50" cy="25" r="5" fill="#FF6B9D" stroke="#2D2A4A" stroke-width="1.5"/></svg>`, text: '左右對稱' },
+          { html: `<svg width="60" height="60" viewBox="0 0 80 80"><rect x="10" y="10" width="60" height="60" fill="white" stroke="#2D2A4A" stroke-width="2.5"/><circle cx="40" cy="40" r="5" fill="#FF6B9D" stroke="#2D2A4A" stroke-width="1.5"/></svg>`, text: '中間一個' }
+        ],
+        answer: 0,
+        hint: '紙是<strong>橫向</strong>對摺的(上面摺到下面),所以打洞時其實打了兩層。展開後洞會出現在「摺線的<strong>上下</strong>對稱位置」。',
+        explanation: '紙橫向對摺後,一個洞會穿過<strong>兩層</strong>紙。展開時,洞會出現在摺線的<strong>上下兩個對稱位置</strong>。',
+        skill: '對稱折紙還原'
+      },
+      {
+        prompt: '下面這堆積木,總共有幾塊?(包括看不到、被擋住的)',
+        visual: cubeStack([
+          [[1, 1, 1]],   // z=0: 底層三顆
+          [[0, 0, 1]]    // z=1: 上層一顆在最右邊
+        ], { size: 28 }),
+        options: [
+          { text: '3 塊' }, { text: '4 塊' }, { text: '5 塊' }, { text: '6 塊' }
+        ],
+        answer: 1,
+        hint: '底層看得到 3 塊方塊。上面還有<strong>第 4 塊</strong>。沒有被擋住的喔!',
+        explanation: '底層有 <strong>3 塊</strong>方塊排成一排,上層有 <strong>1 塊</strong>疊在最右邊那塊上面。總共 <strong>3 + 1 = 4 塊</strong>。這題沒有「被擋住」的方塊,但你還是要仔細數!',
+        skill: '立體方塊計數'
+      }
+    ],
+    mid: [
+      {
+        prompt: '把紙對摺兩次(上下、左右各一次)再打一個洞,展開會有幾個洞?',
+        visual: `<div style="font-size: 16px; font-weight: 700; color: #2D2A4A; padding: 20px;">
+          📄 → 上下對摺 → 左右對摺 → ✂️ 在角落打一個洞 → 展開 → ?
+        </div>`,
+        options: [
+          { text: '1 個洞' }, { text: '2 個洞' }, { text: '4 個洞' }, { text: '8 個洞' }
+        ],
+        answer: 2,
+        hint: '每對摺一次,紙就<strong>多一層</strong>。打一個洞會穿過<strong>所有層</strong>。摺兩次有幾層?',
+        explanation: '對摺一次 = 2 層,對摺兩次 = 4 層。打一個洞會穿過全部 <strong>4 層</strong>,展開後就有 <strong>4 個洞</strong>(對稱分布在四個角落)。',
+        skill: '層數×對稱推理'
+      },
+      {
+        prompt: '這個立方體展開圖,折起來後哪兩個面是相對的?',
+        visual: `<svg width="240" height="180" viewBox="0 0 240 180">
+          <g transform="translate(20,20)">
+            <rect x="40" y="0" width="40" height="40" fill="#FFD93D" stroke="#2D2A4A" stroke-width="2.5"/>
+            <text x="60" y="26" text-anchor="middle" font-size="18" font-weight="900" fill="#2D2A4A">1</text>
+            <rect x="0" y="40" width="40" height="40" fill="#4ECDC4" stroke="#2D2A4A" stroke-width="2.5"/>
+            <text x="20" y="66" text-anchor="middle" font-size="18" font-weight="900" fill="#2D2A4A">2</text>
+            <rect x="40" y="40" width="40" height="40" fill="#FF6B9D" stroke="#2D2A4A" stroke-width="2.5"/>
+            <text x="60" y="66" text-anchor="middle" font-size="18" font-weight="900" fill="#2D2A4A">3</text>
+            <rect x="80" y="40" width="40" height="40" fill="#9B7EDE" stroke="#2D2A4A" stroke-width="2.5"/>
+            <text x="100" y="66" text-anchor="middle" font-size="18" font-weight="900" fill="white">4</text>
+            <rect x="120" y="40" width="40" height="40" fill="#FF9F45" stroke="#2D2A4A" stroke-width="2.5"/>
+            <text x="140" y="66" text-anchor="middle" font-size="18" font-weight="900" fill="#2D2A4A">5</text>
+            <rect x="40" y="80" width="40" height="40" fill="#5B9DEC" stroke="#2D2A4A" stroke-width="2.5"/>
+            <text x="60" y="106" text-anchor="middle" font-size="18" font-weight="900" fill="#2D2A4A">6</text>
+          </g>
+        </svg>`,
+        options: [
+          { text: '1 和 6' }, { text: '2 和 5' }, { text: '3 和 4' }, { text: '1 和 3' }
+        ],
+        answer: 0,
+        hint: '想像把它折起來:中間那排(2-3-4-5)會圍成一圈,變成四個側面。上面的 1 和下面的 6 會變成?',
+        explanation: '中間那一排(2-3-4-5)摺起來後變成立方體的<strong>四個側面</strong>。<strong>1</strong> 在中央那行的上面,會變成<strong>頂面</strong>;<strong>6</strong> 在中央那行的下面,會變成<strong>底面</strong>。頂面和底面互為對面,所以是 <strong>1 和 6</strong>。',
+        skill: '立方體展開想像'
+      }
+    ],
+    hard: [
+      {
+        prompt: '把這個立方體展開圖折起來,哪一個圖是錯的?(只有一個不可能)',
+        visual: `<svg width="160" height="200" viewBox="0 0 160 200">
+          <g transform="translate(20,20)">
+            <rect x="40" y="0" width="40" height="40" fill="white" stroke="#2D2A4A" stroke-width="2.5"/>
+            <circle cx="60" cy="20" r="6" fill="#FF6B9D"/>
+            <rect x="40" y="40" width="40" height="40" fill="white" stroke="#2D2A4A" stroke-width="2.5"/>
+            <text x="60" y="68" text-anchor="middle" font-size="22" font-weight="900" fill="#4ECDC4">★</text>
+            <rect x="40" y="80" width="40" height="40" fill="white" stroke="#2D2A4A" stroke-width="2.5"/>
+            <rect x="50" y="90" width="20" height="20" fill="#FFD93D"/>
+            <rect x="40" y="120" width="40" height="40" fill="white" stroke="#2D2A4A" stroke-width="2.5"/>
+            <text x="60" y="148" text-anchor="middle" font-size="22" font-weight="900" fill="#9B7EDE">▲</text>
+            <rect x="0" y="80" width="40" height="40" fill="white" stroke="#2D2A4A" stroke-width="2.5"/>
+            <text x="20" y="108" text-anchor="middle" font-size="20" fill="#FF9F45">●</text>
+            <rect x="80" y="80" width="40" height="40" fill="white" stroke="#2D2A4A" stroke-width="2.5"/>
+            <text x="100" y="108" text-anchor="middle" font-size="20" fill="#5B9DEC">◆</text>
+          </g>
+        </svg>`,
+        options: [
+          { text: '粉●在頂,★在前,▲在底 (前後相鄰)' },
+          { text: '橘●在左,藍◆在右,黃■在頂' },
+          { text: '粉●和▲在相對的面' },
+          { text: '★和黃■在相對的面' }
+        ],
+        answer: 3,
+        hint: '把展開圖每個面標位置:粉●在頂、▲在底,所以「粉●在頂、▲在底」是<strong>對的</strong>。中間那行有 4 個面:★、黃■、橘●、藍◆——這四個是四個側面。',
+        explanation: '展開後,<strong>頂面和底面互相對立</strong>(粉●對▲),<strong>側面四個圍成圈</strong>。中央列從上到下是 ★→黃■,它們相鄰<strong>不是相對</strong>;橘●和藍◆才是相對的(在中央列的左右兩端)。所以「★和黃■相對」是<strong>錯的</strong>。',
+        skill: '立方體面相對關係'
+      },
+      {
+        prompt: '一個立方體要堆成 4×4×4(總共 64 塊小立方),目前堆好了下面這層,還缺幾塊才能堆滿?',
+        visual: cubeStack([
+          [
+            [1, 1, 1, 1],
+            [1, 1, 1, 1],
+            [1, 1, 1, 1],
+            [1, 1, 1, 1]
+          ]
+        ], { size: 20 }),
+        options: [
+          { text: '16 塊' }, { text: '32 塊' }, { text: '48 塊' }, { text: '60 塊' }
+        ],
+        answer: 2,
+        hint: '4×4×4 = ?(總共)。最下面那一層有 4×4 = ?(已經堆好)。剩下要堆 ? 層,每層 ? 塊。',
+        explanation: '4×4×4 = <strong>64 塊</strong>(總目標)。最底層 = 4×4 = <strong>16 塊</strong>(已完成)。還要堆 3 層,每層 16 塊,所以 3×16 = <strong>48 塊</strong>。',
+        skill: '立體乘法概念'
+      }
+    ]
+  },
+
+  // ============= 進階數列 =============
+  numseries: {
+    easy: [
+      {
+        prompt: '看看每個數字之間差多少?',
+        visual: `<div class="number-sequence">
+          <div class="num-cell">3</div><div class="num-cell">6</div><div class="num-cell">9</div><div class="num-cell">12</div>
+          <div class="arrow">→</div><div class="num-cell unknown">?</div>
+        </div>`,
+        options: [{ text: '13' }, { text: '14' }, { text: '15' }, { text: '18' }],
+        answer: 2,
+        hint: '3→6 差 3,6→9 差 3,9→12 差 ? 每次都是<strong>+3</strong>!',
+        explanation: '這是<strong>3 的倍數</strong>:3, 6, 9, 12, <strong>15</strong>。每次都加 3。',
+        skill: '等差數列(+3)'
+      },
+      {
+        prompt: '這數列有什麼變化?',
+        visual: `<div class="number-sequence">
+          <div class="num-cell">1</div><div class="num-cell">4</div><div class="num-cell">9</div><div class="num-cell">16</div>
+          <div class="arrow">→</div><div class="num-cell unknown">?</div>
+        </div>`,
+        options: [{ text: '20' }, { text: '23' }, { text: '25' }, { text: '32' }],
+        answer: 2,
+        hint: '1=1×1, 4=2×2, 9=3×3, 16=4×4,接下來呢?',
+        explanation: '這是<strong>平方數</strong>:1²=1, 2²=4, 3²=9, 4²=16, <strong>5²=25</strong>。',
+        skill: '平方數識別'
+      }
+    ],
+    mid: [
+      {
+        prompt: '每次跳的格數都在變!',
+        visual: `<div class="number-sequence">
+          <div class="num-cell">2</div><div class="num-cell">3</div><div class="num-cell">5</div><div class="num-cell">8</div><div class="num-cell">12</div>
+          <div class="arrow">→</div><div class="num-cell unknown">?</div>
+        </div>`,
+        options: [{ text: '15' }, { text: '17' }, { text: '18' }, { text: '20' }],
+        answer: 1,
+        hint: '2→3 差 1,3→5 差 2,5→8 差 3,8→12 差 4。差距每次<strong>+1</strong>,下一次差 ?',
+        explanation: '差距是<strong>遞增的</strong>:+1, +2, +3, +4, <strong>+5</strong>。所以 12+5 = <strong>17</strong>。',
+        skill: '二階等差(差的差)'
+      },
+      {
+        prompt: '注意!這數列有兩種規律交錯',
+        visual: `<div class="number-sequence">
+          <div class="num-cell">2</div><div class="num-cell">10</div><div class="num-cell">4</div><div class="num-cell">20</div><div class="num-cell">6</div>
+          <div class="arrow">→</div><div class="num-cell unknown">?</div>
+        </div>`,
+        options: [{ text: '8' }, { text: '24' }, { text: '30' }, { text: '40' }],
+        answer: 3,
+        hint: '把<strong>奇數位</strong>(第1、3、5個)挑出來:2, 4, 6——每次<strong>+2</strong>。<strong>偶數位</strong>(第2、4、6個):10, 20, ?——每次<strong>×2</strong>。',
+        explanation: '兩串數字<strong>交錯出現</strong>:<br>• <strong>奇數位</strong>:2, 4, 6(每次 +2)<br>• <strong>偶數位</strong>:10, 20, ?(每次 ×2)<br>所以第 6 個 = 20 × 2 = <strong>40</strong>。',
+        skill: '交錯雙數列拆解'
+      }
+    ],
+    hard: [
+      {
+        prompt: '經典!這是著名的數列,你能認出來嗎?',
+        visual: `<div class="number-sequence">
+          <div class="num-cell">1</div><div class="num-cell">1</div><div class="num-cell">2</div><div class="num-cell">3</div><div class="num-cell">5</div><div class="num-cell">8</div>
+          <div class="arrow">→</div><div class="num-cell unknown">?</div>
+        </div>`,
+        options: [{ text: '11' }, { text: '12' }, { text: '13' }, { text: '16' }],
+        answer: 2,
+        hint: '把<strong>前兩個數字加起來</strong>就是下一個!1+1=2, 1+2=3, 2+3=5, 3+5=8, 5+8=?',
+        explanation: '這是<strong>費氏數列(Fibonacci)</strong>:每個數字 = 前兩個加起來。5+8 = <strong>13</strong>。這個數列在大自然中(花瓣、貝殼)到處都是喔!',
+        skill: '費氏數列(前兩項相加)'
+      },
+      {
+        prompt: '這個數列規律有點繞,試試看!',
+        visual: `<div class="number-sequence">
+          <div class="num-cell">1</div><div class="num-cell">2</div><div class="num-cell">6</div><div class="num-cell">24</div>
+          <div class="arrow">→</div><div class="num-cell unknown">?</div>
+        </div>`,
+        options: [{ text: '48' }, { text: '72' }, { text: '120' }, { text: '144' }],
+        answer: 2,
+        hint: '1×2=2 ✓, 2×3=6 ✓, 6×4=24 ✓,那 24×?=?',
+        explanation: '每次<strong>乘上遞增的數字</strong>:1×2=2, 2×3=6, 6×4=24, 24×<strong>5=120</strong>。這也叫<strong>階乘</strong>(1!, 2!, 3!, 4!, 5!)。',
+        skill: '遞增乘法(階乘)'
+      }
+    ]
+  },
+
+  // ============= 類比推理 =============
+  analogy: {
+    easy: [
+      {
+        prompt: '左邊兩個的關係,右邊也要一樣!',
+        visual: `<div class="analogy-row">
+          <div class="term">鳥</div><div class="arr">→</div><div class="term">翅膀</div>
+          <div class="arr" style="margin: 0 10px;">就像</div>
+          <div class="term">魚</div><div class="arr">→</div><div class="term unknown">?</div>
+        </div>`,
+        options: [{ text: '海' }, { text: '鰭' }, { text: '水' }, { text: '游泳' }],
+        answer: 1,
+        hint: '鳥用<strong>翅膀</strong>飛。魚用什麼游泳?',
+        explanation: '鳥的「飛行工具」是翅膀,魚的「游泳工具」是<strong>鰭</strong>。這是<strong>「身體部位的功能對應」</strong>。',
+        skill: '功能類比'
+      },
+      {
+        prompt: '想想看,前面兩個是怎麼變的?',
+        visual: `<div class="analogy-row">
+          <div class="term">熱</div><div class="arr">→</div><div class="term">冷</div>
+          <div class="arr" style="margin: 0 10px;">就像</div>
+          <div class="term">高</div><div class="arr">→</div><div class="term unknown">?</div>
+        </div>`,
+        options: [{ text: '矮' }, { text: '大' }, { text: '小' }, { text: '長' }],
+        answer: 0,
+        hint: '熱的相反是冷,高的相反是?',
+        explanation: '「熱 ↔ 冷」是<strong>相反詞</strong>,所以「高」對應的也應該是相反詞 = <strong>矮</strong>。',
+        skill: '反義詞類比'
+      }
+    ],
+    mid: [
+      {
+        prompt: '這次的關係比較細,動動腦!',
+        visual: `<div class="analogy-row">
+          <div class="term">廚師</div><div class="arr">→</div><div class="term">廚房</div>
+          <div class="arr" style="margin: 0 10px;">就像</div>
+          <div class="term">醫生</div><div class="arr">→</div><div class="term unknown">?</div>
+        </div>`,
+        options: [{ text: '病人' }, { text: '醫院' }, { text: '藥' }, { text: '聽診器' }],
+        answer: 1,
+        hint: '廚師<strong>工作的地方</strong>是廚房,那醫生工作的地方是?',
+        explanation: '「廚師 → 廚房」是<strong>「人 → 工作地點」</strong>,所以「醫生 →」應該是工作地點 = <strong>醫院</strong>。注意陷阱:聽診器是「工具」,病人是「對象」,都不是「地點」。',
+        skill: '排除干擾選項'
+      },
+      {
+        prompt: '這題要想兩層關係!',
+        visual: `<div class="analogy-row">
+          <div class="term">小狗</div><div class="arr">→</div><div class="term">汪</div>
+          <div class="arr" style="margin: 0 10px;">就像</div>
+          <div class="term">小貓</div><div class="arr">→</div><div class="term unknown">?</div>
+        </div>`,
+        options: [{ text: '魚' }, { text: '喵' }, { text: '可愛' }, { text: '抓老鼠' }],
+        answer: 1,
+        hint: '小狗的<strong>叫聲</strong>是「汪」,小貓的叫聲是?',
+        explanation: '「動物 → 叫聲」的對應。小狗叫「汪」,小貓叫「<strong>喵</strong>」。',
+        skill: '聲音類比'
+      }
+    ],
+    hard: [
+      {
+        prompt: '這題的關係很微妙,看你能不能抓到!',
+        visual: `<div class="analogy-row">
+          <div class="term">紙</div><div class="arr">→</div><div class="term">樹</div>
+          <div class="arr" style="margin: 0 10px;">就像</div>
+          <div class="term">麵包</div><div class="arr">→</div><div class="term unknown">?</div>
+        </div>`,
+        options: [{ text: '麵粉' }, { text: '小麥' }, { text: '吐司' }, { text: '麵包店' }],
+        answer: 1,
+        hint: '紙是由什麼<strong>原料</strong>做的?是<strong>樹</strong>。那麵包是由什麼<strong>原料</strong>做的?要追溯到「最源頭」!',
+        explanation: '「紙 → 樹」不是「成品→工廠」,而是<strong>「成品 → 最初的天然原料」</strong>。紙的最源頭是樹(不是木漿)。麵包的最源頭是<strong>小麥</strong>(不是麵粉,因為麵粉也是加工品)。這題的關鍵是追<strong>「最原始的天然來源」</strong>。',
+        skill: '原料追溯類比'
+      },
+      {
+        prompt: '比例關係!兩邊的「大小關係」要對應',
+        visual: `<div class="analogy-row">
+          <div class="term">手指</div><div class="arr">→</div><div class="term">手</div>
+          <div class="arr" style="margin: 0 10px;">就像</div>
+          <div class="term">花瓣</div><div class="arr">→</div><div class="term unknown">?</div>
+        </div>`,
+        options: [{ text: '葉子' }, { text: '香味' }, { text: '花' }, { text: '蜜蜂' }],
+        answer: 2,
+        hint: '手指是<strong>手的一部分</strong>。花瓣是什麼的一部分?',
+        explanation: '「手指 → 手」是<strong>「部分 → 整體」</strong>。花瓣是<strong>花</strong>的一部分,所以對應是<strong>花</strong>。',
+        skill: '部分與整體類比'
+      }
+    ]
+  },
+
+  // ============= 多元素變化矩陣 =============
+  multivar: {
+    easy: [
+      {
+        prompt: '形狀和顏色都在變化,觀察兩個變化!',
+        visual: `<div class="matrix-2x2">
+          ${mc(svg(circle(COLORS.pink, 16)))}
+          ${mc(svg(circle(COLORS.teal, 16)))}
+          ${mc(svg(square(COLORS.pink)))}
+          ${mc('', true)}
+        </div>`,
+        options: [
+          { html: svg(square(COLORS.teal)), text: '綠方' },
+          { html: svg(square(COLORS.pink)), text: '粉方' },
+          { html: svg(circle(COLORS.teal, 16)), text: '綠圓' },
+          { html: svg(triangle(COLORS.teal)), text: '綠三角' }
+        ],
+        answer: 0,
+        hint: '橫看:顏色從粉變綠。直看:形狀從圓變方。最後一格要同時滿足。',
+        explanation: '<strong>橫向</strong>:粉→綠(顏色改變)。<strong>直向</strong>:圓→方(形狀改變)。最後一格 = 綠色 + 方形 = <strong>綠方</strong>。',
+        skill: '2×2 雙變數推理'
+      },
+      {
+        prompt: '兩個變化:大小 + 顏色',
+        visual: `<div class="matrix-2x2">
+          ${mc(svg(circle(COLORS.pink, 8)))}
+          ${mc(svg(circle(COLORS.pink, 18)))}
+          ${mc(svg(circle(COLORS.teal, 8)))}
+          ${mc('', true)}
+        </div>`,
+        options: [
+          { html: svg(circle(COLORS.teal, 18)), text: '大綠圓' },
+          { html: svg(circle(COLORS.teal, 8)), text: '小綠圓' },
+          { html: svg(circle(COLORS.pink, 18)), text: '大粉圓' },
+          { html: svg(square(COLORS.teal)), text: '綠方' }
+        ],
+        answer: 0,
+        hint: '橫:小→大。直:粉→綠。最後一格是?',
+        explanation: '<strong>橫向</strong>變大,<strong>直向</strong>變綠。所以最後一格是<strong>大綠圓</strong>。',
+        skill: '大小×顏色'
+      }
+    ],
+    mid: [
+      {
+        prompt: '三個變化同時運作:形狀、顏色、數量。',
+        visual: `<div class="matrix-3x3">
+          ${mc(svg(multiShape(c => circle(c, 12), 1, COLORS.pink)))}
+          ${mc(svg(multiShape(c => square(c, 18, 16, 16), 2, COLORS.pink)))}
+          ${mc(svg(multiShape(c => triangle(c), 3, COLORS.pink)))}
+          ${mc(svg(multiShape(c => circle(c, 12), 2, COLORS.teal)))}
+          ${mc(svg(multiShape(c => square(c, 18, 16, 16), 3, COLORS.teal)))}
+          ${mc(svg(multiShape(c => triangle(c), 1, COLORS.teal)))}
+          ${mc(svg(multiShape(c => circle(c, 12), 3, COLORS.yellow)))}
+          ${mc(svg(multiShape(c => square(c, 18, 16, 16), 1, COLORS.yellow)))}
+          ${mc('', true)}
+        </div>`,
+        options: [
+          { html: svg(multiShape(c => triangle(c), 2, COLORS.yellow)), text: '2 個黃三角' },
+          { html: svg(multiShape(c => triangle(c), 3, COLORS.yellow)), text: '3 個黃三角' },
+          { html: svg(multiShape(c => circle(c, 12), 2, COLORS.yellow)), text: '2 個黃圓' },
+          { html: svg(multiShape(c => triangle(c), 1, COLORS.yellow)), text: '1 個黃三角' }
+        ],
+        answer: 0,
+        hint: '形狀(橫看):圓→方→三角。顏色(直看):粉→綠→黃。數量呢?每排是 1/2/3 的<strong>輪換</strong>。第三排前兩格數量是 3 和 1,所以第三格是?',
+        explanation: '<strong>形狀</strong>每排都是 圓→方→三角(橫向變)。<strong>顏色</strong>每列相同(粉/綠/黃)。<strong>數量</strong>每排都是 1/2/3 各出現一次(輪換)。第三排已有 3 個圓和 1 個方,還缺 <strong>2 個</strong>,所以是 <strong>2 個黃三角</strong>。',
+        skill: '三變數獨立變化'
+      },
+      {
+        prompt: '這題有「拉丁方陣」的味道,每個元素橫直都只出現一次!',
+        visual: `<div class="matrix-3x3">
+          ${mc(svg(circle(COLORS.pink, 16)))}
+          ${mc(svg(square(COLORS.teal)))}
+          ${mc(svg(triangle(COLORS.yellow)))}
+          ${mc(svg(square(COLORS.yellow)))}
+          ${mc(svg(triangle(COLORS.pink)))}
+          ${mc(svg(circle(COLORS.teal, 16)))}
+          ${mc(svg(triangle(COLORS.teal)))}
+          ${mc(svg(circle(COLORS.yellow, 16)))}
+          ${mc('', true)}
+        </div>`,
+        options: [
+          { html: svg(square(COLORS.pink)), text: '粉方' },
+          { html: svg(triangle(COLORS.yellow)), text: '黃三角' },
+          { html: svg(circle(COLORS.pink, 16)), text: '粉圓' },
+          { html: svg(square(COLORS.yellow)), text: '黃方' }
+        ],
+        answer: 0,
+        hint: '每一<strong>橫排</strong>三種形狀都出現一次,每一<strong>直列</strong>三種顏色也都出現一次。最後一格的橫排已有 三角 + 圓,還缺?直列已有 三角 + 圓,還缺?',
+        explanation: '<strong>拉丁方陣規律</strong>:每排每列都「三種形狀各 1 個、三種顏色各 1 個」。第三排已有三角(綠)和圓(黃),還缺<strong>方</strong>。第三列已有三角(黃)和圓(綠),還缺<strong>方</strong>顏色:第三排已有綠、黃,還缺<strong>粉</strong>。第三列已有黃、綠,還缺<strong>粉</strong>。所以是 <strong>粉方</strong>。',
+        skill: '拉丁方陣推理'
+      }
+    ],
+    hard: [
+      {
+        prompt: '挑戰級!四個變數同時運作:形狀、顏色、大小、內部點數。',
+        visual: `<div class="matrix-3x3">
+          ${mc(svg(`${circle(COLORS.pink, 18)}${dots(1)}`))}
+          ${mc(svg(`${circle(COLORS.pink, 12)}${dots(2)}`))}
+          ${mc(svg(`${circle(COLORS.pink, 8)}${dots(3)}`))}
+          ${mc(svg(`${square(COLORS.teal, 32, 9, 9)}${dots(2)}`))}
+          ${mc(svg(`${square(COLORS.teal, 24, 13, 13)}${dots(3)}`))}
+          ${mc(svg(`${square(COLORS.teal, 18, 16, 16)}${dots(1)}`))}
+          ${mc(svg(`${triangle(COLORS.yellow)}${dots(3)}`))}
+          ${mc(svg(`<g transform="scale(0.75) translate(8,8)">${triangle(COLORS.yellow)}</g>${dots(1)}`))}
+          ${mc('', true)}
+        </div>`,
+        options: [
+          { html: svg(`<g transform="scale(0.55) translate(13,13)">${triangle(COLORS.yellow)}</g>${dots(2)}`), text: '小黃三角+2點' },
+          { html: svg(`${triangle(COLORS.yellow)}${dots(2)}`), text: '大黃三角+2點' },
+          { html: svg(`<g transform="scale(0.55) translate(13,13)">${triangle(COLORS.pink)}</g>${dots(2)}`), text: '小粉三角+2點' },
+          { html: svg(`<g transform="scale(0.75) translate(8,8)">${triangle(COLORS.yellow)}</g>${dots(2)}`), text: '中黃三角+2點' }
+        ],
+        answer: 0,
+        hint: '形狀(每排)、顏色(每排)、大小(每排都是大→中→小)、點數(每排是 1/2/3 輪換)。第三排已有點 3、點 1,還缺?',
+        explanation: '<strong>形狀+顏色</strong>每排都一樣(第三排都是黃三角)。<strong>大小</strong>每排都是 大→中→小,所以第三格是<strong>小</strong>。<strong>點數</strong>每排是 1/2/3 各出現一次,第三排已有 3 和 1,還缺 <strong>2</strong>。答案:<strong>小黃三角 + 2 點</strong>。',
+        skill: '四變數同步推理'
+      },
+      {
+        prompt: '注意!這題的規律是「兩格<strong>互相影響</strong>」,不是純獨立變化',
+        visual: `<div class="matrix-3x3">
+          ${mc(svg(`${circle(COLORS.pink, 14, 18, 25)}${circle(COLORS.teal, 14, 32, 25)}`))}
+          ${mc(svg(`${circle(COLORS.teal, 14, 18, 25)}${circle(COLORS.pink, 14, 32, 25)}`))}
+          ${mc(svg(`${circle(COLORS.pink, 14, 18, 25)}${circle(COLORS.teal, 14, 32, 25)}`))}
+          ${mc(svg(`${circle(COLORS.yellow, 14, 18, 25)}${circle(COLORS.purple, 14, 32, 25)}`))}
+          ${mc(svg(`${circle(COLORS.purple, 14, 18, 25)}${circle(COLORS.yellow, 14, 32, 25)}`))}
+          ${mc(svg(`${circle(COLORS.yellow, 14, 18, 25)}${circle(COLORS.purple, 14, 32, 25)}`))}
+          ${mc(svg(`${circle(COLORS.orange, 14, 18, 25)}${circle(COLORS.blue, 14, 32, 25)}`))}
+          ${mc(svg(`${circle(COLORS.blue, 14, 18, 25)}${circle(COLORS.orange, 14, 32, 25)}`))}
+          ${mc('', true)}
+        </div>`,
+        options: [
+          { html: svg(`${circle(COLORS.orange, 14, 18, 25)}${circle(COLORS.blue, 14, 32, 25)}`), text: '橘左藍右' },
+          { html: svg(`${circle(COLORS.blue, 14, 18, 25)}${circle(COLORS.orange, 14, 32, 25)}`), text: '藍左橘右' },
+          { html: svg(`${circle(COLORS.pink, 14, 18, 25)}${circle(COLORS.teal, 14, 32, 25)}`), text: '粉左綠右' },
+          { html: svg(`${circle(COLORS.orange, 14, 18, 25)}${circle(COLORS.orange, 14, 32, 25)}`), text: '橘左橘右' }
+        ],
+        answer: 0,
+        hint: '每一排都是<strong>「A左B右 → B左A右 → A左B右」</strong>的模式(像在交換位置)。第三排的第一、二格已經是橘藍/藍橘,第三格回到?',
+        explanation: '每排的規律是<strong>「交換 → 還原」</strong>:第 1 格 A 左 B 右,第 2 格 B 左 A 右(交換),第 3 格回到 A 左 B 右(還原)。第三排已有 橘左藍右、藍左橘右,所以第三格回到 <strong>橘左藍右</strong>。',
+        skill: '位置交換模式'
+      }
+    ]
+  }
+};
+
+/* ============================================================
+   TOPIC METADATA
+   ============================================================ */
+const TOPICS = {
+  matrix:    { emoji: '🎯', name: '矩陣推理', desc: '3×3 經典題型,找出橫和直的規律', cls: 'matrix' },
+  sequence:  { emoji: '🔄', name: '圖形序列', desc: '形狀、顏色、旋轉的規律變化',  cls: 'sequence' },
+  spatial:   { emoji: '🧊', name: '空間能力', desc: '折紙、立方體展開、方塊計數', cls: 'spatial' },
+  numseries: { emoji: '🔢', name: '進階數列', desc: '從等差到費氏,數字裡的秘密', cls: 'numseries' },
+  analogy:   { emoji: '🔗', name: '類比推理', desc: 'A 之於 B,如同 C 之於?',     cls: 'analogy' },
+  multivar:  { emoji: '🌈', name: '多元素變化', desc: '同時追蹤形狀、顏色、數量等多個變數', cls: 'multivar' }
+};
+
+/* ============================================================
+   STATE & RENDER
+   ============================================================ */
+let state = {
+  topic: null,
+  level: null,
+  qList: [],
+  idx: 0,
+  correct: 0,
+  answered: false
+};
+
+function renderMenu() {
+  const grid = document.getElementById('menuGrid');
+  grid.innerHTML = Object.entries(TOPICS).map(([key, t]) => `
+    <div class="topic-card ${t.cls}">
+      <span class="topic-emoji">${t.emoji}</span>
+      <div class="topic-name">${t.name}</div>
+      <div class="topic-desc">${t.desc}</div>
+      <div class="difficulty-row">
+        <button class="diff-btn easy" onclick="startLevel('${key}','easy')">⭐ 入門</button>
+        <button class="diff-btn mid" onclick="startLevel('${key}','mid')">⭐⭐ 中階</button>
+        <button class="diff-btn hard" onclick="startLevel('${key}','hard')">⭐⭐⭐ 挑戰</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function startLevel(topic, level) {
+  state.topic = topic;
+  state.level = level;
+  state.qList = QUESTIONS[topic][level];
+  state.idx = 0;
+  state.correct = 0;
+  state.answered = false;
+  document.getElementById('menuScreen').classList.add('hide');
+  document.getElementById('finalScreen').classList.add('hide');
+  document.getElementById('quizScreen').classList.remove('hide');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  state.answered = false;
+  const q = state.qList[state.idx];
+  const topic = TOPICS[state.topic];
+  const levelLabel = { easy: '⭐ 入門', mid: '⭐⭐ 中階', hard: '⭐⭐⭐ 挑戰' }[state.level];
+
+  document.getElementById('progress').style.width = (state.idx / state.qList.length * 100) + '%';
+  document.getElementById('progressText').textContent = `${topic.name} · ${levelLabel} · 第 ${state.idx + 1} 題 / 共 ${state.qList.length} 題`;
+
+  // 決定選項格式
+  const hasHtml = q.options.some(o => o.html);
+  const optClass = hasHtml ? 'shape-options' : 'text-options';
+
+  document.getElementById('quizArea').innerHTML = `
+    <div class="card">
+      <span class="card-badge">${topic.emoji} ${topic.name}</span>
+      <span class="card-stars">${levelLabel}</span>
+      <div class="question-text">${q.prompt}</div>
+      <div class="question-visual">${q.visual}</div>
+      <div class="options ${optClass}">
+        ${q.options.map((opt, i) => `
+          <button class="option" data-idx="${i}" onclick="selectAnswer(${i})">
+            <span class="label">${['A','B','C','D'][i]}</span>
+            ${opt.html || ''}
+            <span class="opt-text">${opt.text}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="feedback" id="feedback"></div>
+      <div class="actions" id="actions" style="display:none;">
+        <button class="btn btn-primary" onclick="nextQuestion()">
+          ${state.idx < state.qList.length - 1 ? '下一題 →' : '看成績 🏁'}
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function selectAnswer(idx) {
+  if (state.answered) return;
+  state.answered = true;
+  const q = state.qList[state.idx];
+  const correct = idx === q.answer;
+  if (correct) state.correct++;
+
+  document.querySelectorAll('.option').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === idx) btn.classList.add(correct ? 'correct' : 'incorrect');
+    if (i === q.answer && !correct) btn.classList.add('correct');
+  });
+
+  const feedback = document.getElementById('feedback');
+  feedback.classList.add('show', correct ? 'correct' : 'incorrect');
+
+  if (correct) {
+    feedback.innerHTML = `
+      <div class="feedback-header"><span class="feedback-emoji">🎉</span>答對了!</div>
+      <div class="explanation">${q.explanation}</div>
+      <div class="skill-tag">✨ 練到的能力:${q.skill}</div>
+    `;
+    showCelebration();
+  } else {
+    feedback.innerHTML = `
+      <div class="feedback-header"><span class="feedback-emoji">💪</span>沒關係,我們一起想想!</div>
+      <div class="hint-question">${q.hint}</div>
+      <div class="explanation">${q.explanation}</div>
+      <div class="skill-tag">✨ 練習重點:${q.skill}</div>
+    `;
+  }
+  document.getElementById('actions').style.display = 'flex';
+}
+
+function nextQuestion() {
+  state.idx++;
+  if (state.idx >= state.qList.length) {
+    showFinal();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showFinal() {
+  document.getElementById('progress').style.width = '100%';
+  document.getElementById('quizScreen').classList.add('hide');
+  document.getElementById('finalScreen').classList.remove('hide');
+
+  const rate = Math.round(state.correct / state.qList.length * 100);
+  const topic = TOPICS[state.topic];
+  const levelLabel = { easy: '入門', mid: '中階', hard: '挑戰' }[state.level];
+  let comment;
+  if (rate === 100) comment = `${topic.name}·${levelLabel}關 完美通關!🌟`;
+  else if (rate >= 80) comment = `${topic.name}·${levelLabel}關 表現很棒!🚀`;
+  else if (rate >= 60) comment = `${topic.name}·${levelLabel}關 持續加油!💪`;
+  else comment = `${topic.name}·${levelLabel}關 多練幾次會更好!🌱`;
+
+  document.getElementById('finalScore').textContent = comment;
+  document.getElementById('statCorrect').textContent = state.correct;
+  document.getElementById('statTotal').textContent = state.qList.length;
+  document.getElementById('statRate').textContent = rate + '%';
+}
+
+function goMenu() {
+  document.getElementById('quizScreen').classList.add('hide');
+  document.getElementById('finalScreen').classList.add('hide');
+  document.getElementById('menuScreen').classList.remove('hide');
+}
+
+function restartLevel() {
+  startLevel(state.topic, state.level);
+}
+
+function showCelebration() {
+  const el = document.getElementById('celebration');
+  el.textContent = ['🎉', '⭐', '🌟', '✨', '🎊'][Math.floor(Math.random() * 5)];
+  el.classList.remove('show');
+  void el.offsetWidth;
+  el.classList.add('show');
+}
+
+renderMenu();
+</script>
+
+</body>
+</html>

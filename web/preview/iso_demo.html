@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>SVG Isometric 立方體 Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF8E7;
+    --ink: #2D2A4A;
+    --primary: #FF6B9D;
+    --secondary: #4ECDC4;
+    --accent: #FFD93D;
+    --purple: #9B7EDE;
+    --orange: #FF9F45;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 30px;
+  }
+  h1 { font-size: 28px; margin-bottom: 8px; }
+  .subtitle { color: #6B6890; margin-bottom: 24px; }
+  .demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+  }
+  .demo-card {
+    background: white;
+    border: 4px solid var(--ink);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 6px 0 rgba(45, 42, 74, 0.15);
+  }
+  .demo-card h3 { font-size: 16px; margin-bottom: 6px; }
+  .demo-card .meta { font-size: 13px; color: #6B6890; margin-bottom: 12px; }
+  .demo-svg-wrap {
+    background: #FFFCF0;
+    border: 2px dashed #D5D2E5;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+  }
+  .controls {
+    background: white;
+    border: 4px solid var(--ink);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 6px 0 rgba(45, 42, 74, 0.15);
+  }
+  .controls label { font-weight: 700; margin-right: 12px; }
+  .controls input[type=range] { vertical-align: middle; }
+  .controls .value { display: inline-block; min-width: 36px; font-weight: 700; color: var(--primary); }
+</style>
+</head>
+<body>
+  <h1>🧊 SVG Isometric 立方體 Demo</h1>
+  <p class="subtitle">純 SVG 算座標、無第三方函式庫。下面每個例子都是同一個 <code>cubeStack(layout)</code> helper 畫出來。</p>
+
+  <div class="controls">
+    <label>立方體大小</label>
+    <input type="range" id="sizeRange" min="14" max="40" value="24">
+    <span class="value" id="sizeValue">24</span>
+    <span style="margin-left:24px; color:#6B6890;">拖動 → 所有 demo 即時重畫,證明可任意縮放</span>
+  </div>
+
+  <div class="demo-grid" id="demoGrid"></div>
+
+<script>
+/* ============================================================
+   ISOMETRIC CUBE RENDERER
+   ------------------------------------------------------------
+   核心想法:
+   - 接受 3D 陣列 layout[z][y][x] (z=層數,y=深度,x=橫向)
+     1 = 有方塊, 0 = 空
+   - 用等角投影公式把 3D 座標轉成 2D 螢幕座標
+   - 從「最遠最低」開始畫,確保前景蓋住後景(painter's algorithm)
+   ============================================================ */
+
+const ISO_COLORS = {
+  top:   '#FFD93D',   // 上面 (亮)
+  left:  '#FF9F45',   // 左面 (中)
+  right: '#FF6B9D',   // 右面 (暗)
+  edge:  '#2D2A4A'
+};
+
+// 投影:把 (x, y, z) 立體格座標轉成 (sx, sy) SVG 座標
+// 等角投影:x 軸往右下 30°,y 軸往左下 30°,z 軸垂直
+function project(x, y, z, s) {
+  // s = 單位立方體在螢幕上的「邊長」
+  // cos(30°) ≈ 0.866, sin(30°) ≈ 0.5
+  const cos30 = Math.cos(Math.PI / 6);
+  const sin30 = Math.sin(Math.PI / 6);
+  return {
+    sx: (x - y) * cos30 * s,
+    sy: (x + y) * sin30 * s - z * s
+  };
+}
+
+// 畫一個位於 (x,y,z) 的單位立方體 (三個可見面)
+// neighbors: { px, py, pz } 是否有相鄰方塊 → 有的話就不畫該面 (遮擋剔除)
+function drawCube(x, y, z, s, neighbors, colors = ISO_COLORS) {
+  // 立方體 8 個頂點 (3D → 2D 投影)
+  const p = {
+    // 底面 (z 較小)
+    blf: project(x,   y,   z,   s),   // bottom, x=0, y=0
+    brf: project(x+1, y,   z,   s),   // bottom, x=1, y=0
+    blb: project(x,   y+1, z,   s),   // bottom, x=0, y=1
+    brb: project(x+1, y+1, z,   s),   // bottom, x=1, y=1
+    // 頂面 (z 較大)
+    tlf: project(x,   y,   z+1, s),
+    trf: project(x+1, y,   z+1, s),
+    tlb: project(x,   y+1, z+1, s),
+    trb: project(x+1, y+1, z+1, s)
+  };
+  const poly = (pts, fill) => {
+    const d = pts.map(pt => `${pt.sx.toFixed(2)},${pt.sy.toFixed(2)}`).join(' ');
+    return `<polygon points="${d}" fill="${fill}" stroke="${colors.edge}" stroke-width="1.5" stroke-linejoin="round"/>`;
+  };
+  const faces = [];
+  // 三個可見面在等角投影下:
+  //   +X 面 (右下): polygon (brf, brb, trb, trf) — 在輪廓的「右下方」
+  //   +Y 面 (左下): polygon (blb, brb, trb, tlb) — 在輪廓的「左下方」 ← 之前畫錯成 y=0 面
+  //   +Z 面 (頂):   polygon (tlf, trf, trb, tlb) — 頂部菱形
+  if (!neighbors.px) faces.push(poly([p.brf, p.brb, p.trb, p.trf], colors.right));
+  if (!neighbors.py) faces.push(poly([p.blb, p.brb, p.trb, p.tlb], colors.left));
+  if (!neighbors.pz) faces.push(poly([p.tlf, p.trf, p.trb, p.tlb], colors.top));
+  return faces.join('');
+}
+
+/* ============================================================
+   主 helper: cubeStack(layout, options)
+   ------------------------------------------------------------
+   layout:
+     - 1D: [n]                      → 直線排 n 個
+     - 2D: [[1,1,1],[0,1,0]]        → 平面圖,z=0 一層
+     - 3D: [ [[...],[...]], ... ]   → 多層,layout[z][y][x]
+   options:
+     - size: 單位立方體邊長 (px), 預設 24
+     - colors: 自訂三面顏色
+     - padding: SVG 邊距
+   ============================================================ */
+function cubeStack(layout, options = {}) {
+  const s = options.size || 24;
+  const colors = options.colors || ISO_COLORS;
+  const padding = options.padding || 10;
+
+  // 正規化成 3D
+  let layout3d;
+  if (typeof layout[0] === 'number') {
+    // 1D → 視為 z=0, y=0, 一列
+    layout3d = [[layout]];
+  } else if (typeof layout[0][0] === 'number') {
+    // 2D → 視為 z=0 一層
+    layout3d = [layout];
+  } else {
+    // 已是 3D
+    layout3d = layout;
+  }
+
+  // 蒐集所有有方塊的 cells + 建鄰居查表 (給遮擋剔除用)
+  const cells = [];
+  const cellSet = new Set();
+  for (let z = 0; z < layout3d.length; z++) {
+    for (let y = 0; y < layout3d[z].length; y++) {
+      for (let x = 0; x < layout3d[z][y].length; x++) {
+        if (layout3d[z][y][x]) {
+          cells.push({ x, y, z });
+          cellSet.add(`${x},${y},${z}`);
+        }
+      }
+    }
+  }
+  const has = (x, y, z) => cellSet.has(`${x},${y},${z}`);
+
+  // Painter's sort: 等角投影下「遠」= x+y 小 (左後方),「近」= x+y 大
+  // 所以由小到大繪製,後畫的會蓋在前面
+  cells.sort((a, b) => {
+    if ((a.x + a.y) !== (b.x + b.y)) return (a.x + a.y) - (b.x + b.y);
+    return a.z - b.z;  // 同 diagonal 時,下層先畫
+  });
+
+  // 計算 bounding box
+  if (cells.length === 0) {
+    return `<svg width="60" height="60"></svg>`;
+  }
+  const pts = [];
+  cells.forEach(({x, y, z}) => {
+    for (let dx = 0; dx <= 1; dx++)
+      for (let dy = 0; dy <= 1; dy++)
+        for (let dz = 0; dz <= 1; dz++)
+          pts.push(project(x+dx, y+dy, z+dz, s));
+  });
+  const minX = Math.min(...pts.map(p => p.sx));
+  const maxX = Math.max(...pts.map(p => p.sx));
+  const minY = Math.min(...pts.map(p => p.sy));
+  const maxY = Math.max(...pts.map(p => p.sy));
+  const W = maxX - minX + padding * 2;
+  const H = maxY - minY + padding * 2;
+  const tx = -minX + padding;
+  const ty = -minY + padding;
+
+  const body = cells.map(({x, y, z}) => {
+    const neighbors = {
+      px: has(x + 1, y, z),  // +X 方向有方塊? → 右面被擋
+      py: has(x, y + 1, z),  // +Y 方向有方塊? → 左面被擋
+      pz: has(x, y, z + 1)   // +Z 方向有方塊? → 頂面被擋
+    };
+    return drawCube(x, y, z, s, neighbors, colors);
+  }).join('');
+
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(${tx}, ${ty})">${body}</g>
+  </svg>`;
+}
+
+/* ============================================================
+   DEMO 案例
+   ============================================================ */
+const DEMOS = [
+  {
+    title: '單顆立方體',
+    meta: '入門 · 確認三個面顏色正確',
+    layout: [[[1]]]
+  },
+  {
+    title: '一排三顆',
+    meta: '入門 · 數方塊題的最基本版',
+    layout: [[[1, 1, 1]]]
+  },
+  {
+    title: '2×2 平面',
+    meta: '入門 · 4 顆方塊鋪成正方形',
+    layout: [[[1, 1], [1, 1]]]
+  },
+  {
+    title: 'L 形排列',
+    meta: '入門 · 缺一角的 2×2',
+    layout: [[[1, 1], [1, 0]]]
+  },
+  {
+    title: '兩層金字塔',
+    meta: '中階 · 下層 2×2 + 上層 1 顆',
+    layout: [
+      [[1, 1], [1, 1]],
+      [[1, 0], [0, 0]]
+    ]
+  },
+  {
+    title: '三階階梯',
+    meta: '中階 · 經典「數方塊」題,共 6 顆',
+    layout: [
+      [[1, 1, 1]],
+      [[1, 1, 0]],
+      [[1, 0, 0]]
+    ]
+  },
+  {
+    title: '3×3×3 完整立方',
+    meta: '挑戰 · 27 顆方塊的完整 3D 立方體',
+    layout: (() => {
+      const cube = [];
+      for (let z = 0; z < 3; z++) {
+        const layer = [];
+        for (let y = 0; y < 3; y++) {
+          layer.push([1, 1, 1]);
+        }
+        cube.push(layer);
+      }
+      return cube;
+    })()
+  },
+  {
+    title: '挖洞的 3×3×3',
+    meta: '挑戰 · 中心被挖掉一顆,問共幾顆',
+    layout: (() => {
+      const cube = [];
+      for (let z = 0; z < 3; z++) {
+        const layer = [];
+        for (let y = 0; y < 3; y++) {
+          const row = [];
+          for (let x = 0; x < 3; x++) {
+            // 挖掉正中心
+            if (x === 1 && y === 1 && z === 1) row.push(0);
+            else row.push(1);
+          }
+          layer.push(row);
+        }
+        cube.push(layer);
+      }
+      return cube;
+    })()
+  },
+  {
+    title: '不規則堆疊',
+    meta: '挑戰 · 有被擋住的方塊,需腦補',
+    layout: [
+      [[1, 1, 1], [1, 1, 0], [1, 0, 0]],
+      [[1, 1, 0], [1, 0, 0], [0, 0, 0]],
+      [[1, 0, 0], [0, 0, 0], [0, 0, 0]]
+    ]
+  },
+  {
+    title: '不同配色 (藍綠系)',
+    meta: '彈性 · 同 helper 換配色',
+    layout: [
+      [[1, 1], [1, 1]],
+      [[1, 1], [0, 0]]
+    ],
+    colors: { top: '#7DDDD3', left: '#4ECDC4', right: '#3AA89E', edge: '#1F4E48' }
+  },
+  {
+    title: '單柱高塔',
+    meta: '空間 · 一柱 5 層',
+    layout: [
+      [[1]], [[1]], [[1]], [[1]], [[1]]
+    ]
+  },
+  {
+    title: '展開圖預告 (十字)',
+    meta: '下一步 · 立方體 6 面展開,需另寫 helper',
+    layout: [[[0]]],
+    note: '需要 cubeNet() helper,本 demo 還沒做'
+  }
+];
+
+const grid = document.getElementById('demoGrid');
+const sizeRange = document.getElementById('sizeRange');
+const sizeValue = document.getElementById('sizeValue');
+
+function renderAll() {
+  const size = parseInt(sizeRange.value, 10);
+  sizeValue.textContent = size;
+  grid.innerHTML = DEMOS.map(d => {
+    const cellCount = countCells(d.layout);
+    const svg = d.note
+      ? `<div style="color:#999; text-align:center; padding: 20px;">⏳ ${d.note}</div>`
+      : cubeStack(d.layout, { size, colors: d.colors });
+    return `
+      <div class="demo-card">
+        <h3>${d.title}</h3>
+        <div class="meta">${d.meta} · 方塊數: ${cellCount}</div>
+        <div class="demo-svg-wrap">${svg}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function countCells(layout) {
+  if (!Array.isArray(layout)) return 0;
+  if (typeof layout[0] === 'number') return layout.filter(v => v).length;
+  if (typeof layout[0][0] === 'number') return layout.flat().filter(v => v).length;
+  return layout.flat(2).filter(v => v).length;
+}
+
+sizeRange.addEventListener('input', renderAll);
+renderAll();
+</script>
+</body>
+</html>

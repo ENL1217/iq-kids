@@ -1,0 +1,38 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Claude / AI tooling
+.claude/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Build outputs (none yet, reserved)
+dist/
+build/
+
+# Local secrets (e.g., feedback endpoint if checked into local config)
+.env
+.env.local
+*.local.js
+
+# Logs
+*.log
+logs/
+
+# Temporary files from raw crawl / experiments
+questions/_raw/
+questions/_drafts/
+*.tmp
