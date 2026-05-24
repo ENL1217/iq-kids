@@ -1,0 +1,77 @@
+{
+  "id": "sequence-mid-010",
+  "topic": "sequence",
+  "difficulty": "mid",
+  "sub_type": "accumulative",
+  "skill_codes": [
+    "sequence-accumulative"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "東西的數量在變多,下一格有幾個?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "star",
+        "color": "purple",
+        "count": 1
+      },
+      {
+        "shape": "star",
+        "color": "purple",
+        "count": 2
+      },
+      {
+        "shape": "star",
+        "color": "purple",
+        "count": 3
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "4 個紫圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "purple",
+        "count": 4
+      }
+    },
+    {
+      "text": "4 個紫星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "purple",
+        "count": 4
+      }
+    },
+    {
+      "text": "3 個粉紅星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "pink",
+        "count": 3
+      }
+    },
+    {
+      "text": "2 個紫星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "purple",
+        "count": 2
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "每格的紫星星數量是 1, 2, 3,下一格應該幾個?",
+  "explanation": "每格<strong>多 1 個</strong>:1→2→3→<strong>4 個 紫星星</strong>。",
+  "skill": "累積數量追蹤"
+}

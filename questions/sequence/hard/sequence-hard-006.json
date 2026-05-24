@@ -1,0 +1,82 @@
+{
+  "id": "sequence-hard-006",
+  "topic": "sequence",
+  "difficulty": "hard",
+  "sub_type": "async-variation",
+  "skill_codes": [
+    "sequence-async"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "不同的東西用不同速度在變,下一個是?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "arrow",
+        "rotation": 0,
+        "color": "blue"
+      },
+      {
+        "shape": "arrow",
+        "rotation": 90,
+        "color": "blue"
+      },
+      {
+        "shape": "arrow",
+        "rotation": 180,
+        "color": "teal"
+      },
+      {
+        "shape": "arrow",
+        "rotation": 270,
+        "color": "teal"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍綠↑",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "teal",
+        "rotation": 0
+      }
+    },
+    {
+      "text": "藍綠←",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "teal",
+        "rotation": 270
+      }
+    },
+    {
+      "text": "藍↑",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "blue",
+        "rotation": 0
+      }
+    },
+    {
+      "text": "粉紅↑",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "pink",
+        "rotation": 0
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "箭頭每次轉 90°,顏色卻是<strong>兩個一組</strong>才換。第 5 格是?",
+  "explanation": "<strong>角度</strong>每格 +90°:0°→90°→180°→270°→<strong>0°</strong>。<strong>顏色</strong>兩兩一組:藍藍→藍綠藍綠→<strong>粉紅粉紅</strong>。合起來:<strong>粉紅↑</strong>。",
+  "skill": "不同步變化追蹤"
+}

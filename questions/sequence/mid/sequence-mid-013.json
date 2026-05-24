@@ -1,0 +1,78 @@
+{
+  "id": "sequence-mid-013",
+  "topic": "sequence",
+  "difficulty": "mid",
+  "sub_type": "dual-attribute-cycle",
+  "skill_codes": [
+    "sequence-cyclic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀跟顏色各有自己的節奏,下一個是?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "circle",
+        "color": "yellow"
+      },
+      {
+        "shape": "diamond",
+        "color": "orange"
+      },
+      {
+        "shape": "triangle",
+        "color": "yellow"
+      },
+      {
+        "shape": "circle",
+        "color": "orange"
+      },
+      {
+        "shape": "diamond",
+        "color": "yellow"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "黃菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "橘三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "橘方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "orange"
+      }
+    },
+    {
+      "text": "黃三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "yellow"
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "形狀依 圓→菱形→三角 三個一輪;顏色依 黃→橘 兩個一輪。第 6 格的形狀跟顏色各應該是什麼?",
+  "explanation": "<strong>形狀</strong>三個一輪 (週期 3):圓→菱形→三角→圓→菱形→<strong>三角</strong>。<strong>顏色</strong>兩個一輪 (週期 2):黃→橘→黃→橘→黃→<strong>橘</strong>。合起來:<strong>橘三角</strong>。",
+  "skill": "雙屬性異步循環"
+}

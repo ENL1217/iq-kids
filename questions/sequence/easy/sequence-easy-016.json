@@ -1,0 +1,78 @@
+{
+  "id": "sequence-easy-016",
+  "topic": "sequence",
+  "difficulty": "easy",
+  "sub_type": "cyclic-ABC",
+  "skill_codes": [
+    "sequence-cyclic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "三個一組重複,下一個應該是?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "triangle",
+        "color": "pink"
+      },
+      {
+        "shape": "star",
+        "color": "teal"
+      },
+      {
+        "shape": "circle",
+        "color": "yellow"
+      },
+      {
+        "shape": "triangle",
+        "color": "pink"
+      },
+      {
+        "shape": "star",
+        "color": "teal"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "黃圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "藍綠星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "黃三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "紫方",
+      "visual": {
+        "type": "single-shape",
+        "shape": "square",
+        "color": "purple"
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "三個一組重複:粉紅三角→藍綠星星→黃圓→粉紅三角→藍綠星星→?。下一個輪到哪一個?",
+  "explanation": "這是<strong>ABC ABC</strong> 三項循環:粉紅三角→藍綠星星→黃圓 一直重複。前 5 格走完 ABCAB,第 6 格輪到 <strong>黃圓</strong>。",
+  "skill": "ABC 循環追蹤"
+}

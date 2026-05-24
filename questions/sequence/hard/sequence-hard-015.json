@@ -1,0 +1,77 @@
+{
+  "id": "sequence-hard-015",
+  "topic": "sequence",
+  "difficulty": "hard",
+  "sub_type": "grouped-pattern",
+  "skill_codes": [
+    "sequence-grouped"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "把它兩兩分組看,下一個應該是?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "star",
+        "color": "purple"
+      },
+      {
+        "shape": "square",
+        "color": "purple"
+      },
+      {
+        "shape": "diamond",
+        "color": "pink"
+      },
+      {
+        "shape": "circle",
+        "color": "pink"
+      },
+      {
+        "shape": "triangle",
+        "color": "yellow"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "黃三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "yellow"
+      }
+    },
+    {
+      "text": "紫星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "purple"
+      }
+    },
+    {
+      "text": "藍綠undefined",
+      "visual": {
+        "type": "single-shape",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "黃六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "yellow"
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "兩兩分組看:(第1,2格同色)(第3,4格同色)(第5,6格也應該同色)。組內形狀都不同。第 6 格是?",
+  "explanation": "<strong>分組看</strong>:1-2 都是 紫 (但形狀不同),3-4 都是 粉紅 (但形狀不同),5-6 應該都是 <strong>黃</strong> 但形狀不同。第 5 已經是 黃三角,第 6 必須是 <strong>黃</strong> 但<strong>不是 三角</strong>:<strong>黃六邊形</strong>。",
+  "skill": "分組模式辨識"
+}

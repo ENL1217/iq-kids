@@ -1,0 +1,82 @@
+{
+  "id": "sequence-hard-020",
+  "topic": "sequence",
+  "difficulty": "hard",
+  "sub_type": "complex-rotation",
+  "skill_codes": [
+    "sequence-rotation"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "箭頭轉、顏色也在變,下一個是什麼?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "arrow",
+        "rotation": 0,
+        "color": "purple"
+      },
+      {
+        "shape": "arrow",
+        "rotation": 45,
+        "color": "pink"
+      },
+      {
+        "shape": "arrow",
+        "rotation": 90,
+        "color": "orange"
+      },
+      {
+        "shape": "arrow",
+        "rotation": 135,
+        "color": "purple"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍綠↓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "teal",
+        "rotation": 180
+      }
+    },
+    {
+      "text": "粉紅↘",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "pink",
+        "rotation": 135
+      }
+    },
+    {
+      "text": "紫↘",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "purple",
+        "rotation": 135
+      }
+    },
+    {
+      "text": "粉紅↓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "color": "pink",
+        "rotation": 180
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "箭頭每格 +45°,顏色 紫→粉紅→橘 三輪。下一格是?",
+  "explanation": "<strong>角度</strong>每格 +45°:0°→45°→90°→135°→<strong>180°</strong>。<strong>顏色</strong>三循環:紫→粉紅→橘→紫→<strong>粉紅</strong>。合起來:<strong>粉紅↓</strong>。",
+  "skill": "複合旋轉(轉+變色)"
+}

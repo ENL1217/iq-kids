@@ -1,0 +1,78 @@
+{
+  "id": "sequence-mid-020",
+  "topic": "sequence",
+  "difficulty": "mid",
+  "sub_type": "dual-attribute-cycle",
+  "skill_codes": [
+    "sequence-cyclic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀跟顏色各有自己的節奏,下一個是?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "square",
+        "color": "pink"
+      },
+      {
+        "shape": "triangle",
+        "color": "blue"
+      },
+      {
+        "shape": "star",
+        "color": "pink"
+      },
+      {
+        "shape": "square",
+        "color": "blue"
+      },
+      {
+        "shape": "triangle",
+        "color": "pink"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "粉紅星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "藍星星",
+      "visual": {
+        "type": "single-shape",
+        "shape": "star",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "粉紅三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "pink"
+      }
+    },
+    {
+      "text": "藍圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "blue"
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "形狀依 方→三角→星星 三個一輪;顏色依 粉紅→藍 兩個一輪。第 6 格的形狀跟顏色各應該是什麼?",
+  "explanation": "<strong>形狀</strong>三個一輪 (週期 3):方→三角→星星→方→三角→<strong>星星</strong>。<strong>顏色</strong>兩個一輪 (週期 2):粉紅→藍→粉紅→藍→粉紅→<strong>藍</strong>。合起來:<strong>藍星星</strong>。",
+  "skill": "雙屬性異步循環"
+}

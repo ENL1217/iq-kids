@@ -10,7 +10,85 @@
 
 ---
 
-## Batch 3 — sequence (planning, 2026-05-24) 📝 待 review
+## Batch 3 — sequence (2026-05-24) ✅ DONE
+
+### Reviewer 回覆 (PR #5)
+- **Q1 cyclic-count-color seed**: 不擴,seed 不動,我用 dual-attribute-cycle 自己的 label ✅
+- **Q2 nested-elements 數量**: 5 題,raw SVG 統一從 `nestedCellRaw()` helper 出 ✅
+- **Q3 命名**: 採 `dual-attribute-cycle` (不是 reviewer 原話的 triple-cycle) ✅
+- **加碼**: 「對」+「最像錯答」要 ≥ 2 attr 視覺差異,避免「靠看哪個最像就猜」 — 已實作 ✅
+
+### 統計
+| 難度 | 數量 | sub_type 分布 |
+|------|------|--------------|
+| easy | 30 | cyclic-AB 10 / cyclic-ABC 10 / rotation-equal-angle 10 |
+| mid  | 25 | accumulative 10 / dual-attribute-cycle 10 / nested-elements 5 |
+| hard | 20 | async-variation 8 / grouped-pattern 6 / complex-rotation 6 |
+| **總計** | **75** | 8 個 sub_type,覆蓋 schema §3 的 5 個 sequence-* canonical 集 |
+
+從 `sequence-easy-003.json` 起跳,**完全沒動 -001/-002**(spec 作者 seed)。
+
+### 生成器架構
+`tools/gen-sequence.mjs`:每 sub_type 一個 generator,共用 `gen-utils.mjs` 的 COLOR_ZH/SHAPE_ZH/makeRng/rngShuffle。
+新引入 `cellDistance(a, b)` 算兩 cell 的 attribute 距離,用來自驗 distractor 設計符合 I-RAVEN 約束。
+nested-elements 5 題的 raw SVG 全部從 `nestedCellRaw(outer, outerColor, inner, innerColor)` helper 出(per reviewer Q2 要求)。
+
+### 干擾選項 + I-RAVEN 視覺距離抽樣
+
+I-RAVEN 教訓:同題 4 個選項裡,「對」+「最像錯答」如果只差 1 個 attribute,孩子靠「看哪個最像」就能猜。
+要混合 distractor 距離:**至少 1 個 distractor 距 ≥ 2 attr**。
+
+自動腳本掃全部 70 題(扣 5 題 nested 用 raw,無法計算 cell distance),確認:
+- **0 題** 全部 distractor 都距 1(這是壞例,RAVEN 漏洞)
+- 每題至少有 1 個 distractor 距 ≥ 2
+
+抽樣 3 題列「對 vs 最像錯答」視覺距離:
+
+```
+sequence-easy-003 (cyclic-AB):  紫圓 :: 藍綠菱形 :: 紫圓 :: 藍綠菱形 :: ?
+  correct = 紫圓 (purple circle)
+  distances = [1, 2, 2]
+  最像錯答 = 「藍綠圓」 (距 1, color 不同 shape 同) — 但其他 2 個 distractor 都距 2,
+  整體選項組沒有「mode = 紫」這種統計漏洞
+
+sequence-mid-013 (dual-attribute-cycle): ... → ? = 橘三角
+  correct = 橘三角 (orange triangle)
+  distances = [2, 1, 1]
+  最像錯答 = 「橘方」 (距 1, shape 不同 color 同)
+  另一 distractor「黃三角」 (距 1, color 不同 shape 同)
+  「黃菱形」距 2
+  → 沒有單一 attribute 是 mode
+
+sequence-hard-011 (grouped-pattern):
+  correct = 黃 + 第6個shape (距前面5格的形狀都不同)
+  distances = [2, 2, 1]
+  最像錯答 = 上一格的形狀 (黃色但 shape 重複 → 違反組內形狀不同的規則)
+  其他 2 個 distractor 都距 2
+```
+
+### 三層自驗
+- **Layer 1 (schema)**: `node tools/validate.mjs --strict questions/sequence` → 80/81 pass (1 fail 是 seed mid-001 的 hint 結尾 `!`,不是我的)
+- **Layer 2 (答案重算)**: 抽 3 題手算 (easy-003 cyclic-AB / mid-013 dual-attribute-cycle / hard-003 async-variation),答案全對
+- **Layer 3 (干擾合理性 + I-RAVEN distance check)**: Python 腳本掃 70 結構化題,0 題踩 RAVEN「全 distractor 距 1」漏洞;3 題抽樣列上方
+
+### 修 bug 過程
+- 沒踩到 v2 bug,因為這次寫 PROMPTS 時直接用 sub_type 完整字串(吸取 analogy v1 的教訓)。 throw 沒被觸發 = 第一次跑就成功
+
+### 已知限制
+- **accumulative 兩個變體**(用 dots 1-5 或 count 1-4) 各佔 5 題左右,seed-based 隨機抽,可能某些 batch 偏向其中一種。若 reviewer 想要嚴格 5+5 分配可加 forced split
+- **rotation step 只用 45° 或 90°**,沒做 30°/60° (那些角度的箭頭視覺旋轉現在的 shapes helper 應該也支援,但保守起見限制在常見角度)
+- **dual-attribute-cycle 永遠是 shape 週期 3 + color 週期 2** (合週期 6),沒做其他組合 (e.g. 週期 2+3 或 2+4)。等 reviewer 要不要擴
+- **nested-elements 限制 outer ∈ {circle, square, triangle}, inner 同**,因為 raw SVG helper 只實作這 3 種。要支援 star/diamond/hex 需擴 helper
+
+### 提案下一批
+**Batch 4: matrix** (75 題)
+- 跟 sequence 邏輯接近,但展開成 3×3 矩陣
+- 已讀完 RAVEN 文獻 (在 batch 3 用上了),可直接套用「attribute combination」思路
+- 從 matrix-easy-003 起跳
+
+---
+
+## (舊) Batch 3 — sequence (planning, 已 by-passed) 📝
 
 ### 既存 6 seed (1/2 各難度,撈自 git 歷史) → 我從 -003 起跳
 | ID | sub_type | 視覺手法 |

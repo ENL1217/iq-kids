@@ -1,0 +1,74 @@
+{
+  "id": "sequence-easy-004",
+  "topic": "sequence",
+  "difficulty": "easy",
+  "sub_type": "cyclic-AB",
+  "skill_codes": [
+    "sequence-cyclic"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "形狀和顏色在輪換,下一個是什麼?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "diamond",
+        "color": "teal"
+      },
+      {
+        "shape": "hex",
+        "color": "blue"
+      },
+      {
+        "shape": "diamond",
+        "color": "teal"
+      },
+      {
+        "shape": "hex",
+        "color": "blue"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "藍菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "藍六邊形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "hex",
+        "color": "blue"
+      }
+    },
+    {
+      "text": "藍綠菱形",
+      "visual": {
+        "type": "single-shape",
+        "shape": "diamond",
+        "color": "teal"
+      }
+    },
+    {
+      "text": "粉紅圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "pink"
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "兩個一組重複:藍綠菱形→藍六邊形→藍綠菱形→藍六邊形→?。第 5 個應該回到哪一個?",
+  "explanation": "這是<strong>AB AB</strong> 循環:<strong>藍綠菱形</strong> 跟 <strong>藍六邊形</strong> 兩個輪流。前 4 格是 藍綠菱形→藍六邊形→藍綠菱形→藍六邊形,第 5 格輪到 <strong>藍綠菱形</strong>。",
+  "skill": "AB 循環追蹤"
+}

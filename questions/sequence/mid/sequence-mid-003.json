@@ -1,0 +1,77 @@
+{
+  "id": "sequence-mid-003",
+  "topic": "sequence",
+  "difficulty": "mid",
+  "sub_type": "accumulative",
+  "skill_codes": [
+    "sequence-accumulative"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "東西的數量在變多,下一格有幾個?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {
+        "shape": "triangle",
+        "color": "pink",
+        "count": 1
+      },
+      {
+        "shape": "triangle",
+        "color": "pink",
+        "count": 2
+      },
+      {
+        "shape": "triangle",
+        "color": "pink",
+        "count": 3
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "4 個粉紅圓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "circle",
+        "color": "pink",
+        "count": 4
+      }
+    },
+    {
+      "text": "3 個藍綠三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "teal",
+        "count": 3
+      }
+    },
+    {
+      "text": "2 個粉紅三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "pink",
+        "count": 2
+      }
+    },
+    {
+      "text": "4 個粉紅三角",
+      "visual": {
+        "type": "single-shape",
+        "shape": "triangle",
+        "color": "pink",
+        "count": 4
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "每格的粉紅三角數量是 1, 2, 3,下一格應該幾個?",
+  "explanation": "每格<strong>多 1 個</strong>:1→2→3→<strong>4 個 粉紅三角</strong>。",
+  "skill": "累積數量追蹤"
+}
