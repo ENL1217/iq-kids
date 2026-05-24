@@ -88,6 +88,34 @@ git checkout -b feat/question-bank-batch-3-sequence origin/main
 
 詳見 `git help worktree`。
 
+### 🔁 Sync feature branch with main:用 merge,不要 rebase
+
+從 batch 4 開始,feature 分支拉 main 用 `merge` 不要 `rebase`,理由:
+
+```bash
+# 在 worktree 內,要把 feature 分支同步到最新 main:
+cd D:\AI_Project\IQ-content
+git fetch origin
+git merge origin/main          # ✅ 用這個
+# 不要 git rebase origin/main  # ❌ 會改寫 commit chain → 強制 push
+```
+
+- `merge` 加一個 merge commit,你的 history 不變,普通 `git push` 即可
+- `rebase` 改寫 commit chain,push 必須 `--force` (有風險,需單獨授權)
+
+PR 合進 main 是用 squash 或 merge commit,所以 feature 分支 history 線性不線性
+其實不重要。merge 流程比較不會踩坑。
+
+### 🚫 Force-push 政策
+
+- ❌ **main 永遠零 force tolerance**。任何理由都不可 `git push --force` 到 main
+- ⚠️ feature 分支若 rebase 後需要 force-push:
+  - 必須用 `--force-with-lease` (safe variant,遠端被別人推過就拒絕)
+  - 必須是該分支的唯一作者
+  - 必須有 reviewer 明確授權 (不能自己決定)
+  - PR comment 或 commit message 註明「user-authorized force-with-lease」
+- 一般情況用 merge 流程避免 force-push 需求 (見上一段)
+
 ### 本地預覽
 靜態網頁,選一個方法:
 
