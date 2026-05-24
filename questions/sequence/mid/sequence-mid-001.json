@@ -1,0 +1,30 @@
+{
+  "id": "sequence-mid-001",
+  "topic": "sequence",
+  "difficulty": "mid",
+  "sub_type": "cyclic-count-color",
+  "skill_codes": ["sequence-cyclic"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "兩個規律一起跑:數量和顏色",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {"shape": "circle", "color": "pink",   "count": 1, "radius": 12},
+      {"shape": "circle", "color": "teal",   "count": 2, "radius": 12},
+      {"shape": "circle", "color": "yellow", "count": 3, "radius": 12},
+      {"shape": "circle", "color": "pink",   "count": 1, "radius": 12},
+      {"unknown": true}
+    ]
+  },
+  "options": [
+    {"text": "2 個綠圓", "visual": {"type": "single-shape", "shape": "circle", "color": "teal",   "count": 2, "radius": 12}},
+    {"text": "1 個綠圓", "visual": {"type": "single-shape", "shape": "circle", "color": "teal",   "count": 1, "radius": 12}},
+    {"text": "3 個綠圓", "visual": {"type": "single-shape", "shape": "circle", "color": "teal",   "count": 3, "radius": 12}},
+    {"text": "2 個黃圓", "visual": {"type": "single-shape", "shape": "circle", "color": "yellow", "count": 2, "radius": 12}}
+  ],
+  "answer": 0,
+  "hint": "把序列<strong>三個一組</strong>看:(1粉 2綠 3黃)→(1粉 ? ?)。整組會重複!",
+  "explanation": "這是<strong>三項循環</strong>:1 粉圓 → 2 綠圓 → 3 黃圓,然後重新開始。第 4 個 = 1 個粉圓 ✓,所以第 5 個 = <strong>2 個綠圓</strong>。",
+  "skill": "ABC 三項循環"
+}

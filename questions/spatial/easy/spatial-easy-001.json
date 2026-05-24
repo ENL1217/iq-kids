@@ -1,0 +1,24 @@
+{
+  "id": "spatial-easy-001",
+  "topic": "spatial",
+  "difficulty": "easy",
+  "sub_type": "paper-fold-once",
+  "skill_codes": ["spatial-paper-fold", "spatial-symmetry-fold"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "這是把紙摺起來再剪洞,展開後會是哪個樣子?",
+  "visual": {
+    "type": "raw-html",
+    "html": "<div style='display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:center;'><svg width='80' height='80' viewBox='0 0 80 80'><rect x='10' y='10' width='60' height='60' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><line x1='10' y1='40' x2='70' y2='40' stroke='#2D2A4A' stroke-width='1.5' stroke-dasharray='3,3'/><text x='40' y='60' text-anchor='middle' font-size='11' font-weight='700' fill='#2D2A4A'>對摺線</text></svg><div style='font-size:22px;color:#6B6890;'>→</div><svg width='80' height='80' viewBox='0 0 80 80'><rect x='10' y='10' width='60' height='30' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><circle cx='30' cy='25' r='5' fill='#FF6B9D' stroke='#2D2A4A' stroke-width='1.5'/></svg><div style='font-size:14px;font-weight:700;color:#6B6890;'>展開?</div></div>"
+  },
+  "options": [
+    {"text": "上下對稱", "visual": {"type": "raw-html", "html": "<svg width='60' height='60' viewBox='0 0 80 80'><rect x='10' y='10' width='60' height='60' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><circle cx='30' cy='25' r='5' fill='#FF6B9D' stroke='#2D2A4A' stroke-width='1.5'/><circle cx='30' cy='55' r='5' fill='#FF6B9D' stroke='#2D2A4A' stroke-width='1.5'/></svg>"}},
+    {"text": "只有一個洞", "visual": {"type": "raw-html", "html": "<svg width='60' height='60' viewBox='0 0 80 80'><rect x='10' y='10' width='60' height='60' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><circle cx='30' cy='25' r='5' fill='#FF6B9D' stroke='#2D2A4A' stroke-width='1.5'/></svg>"}},
+    {"text": "左右對稱", "visual": {"type": "raw-html", "html": "<svg width='60' height='60' viewBox='0 0 80 80'><rect x='10' y='10' width='60' height='60' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><circle cx='30' cy='25' r='5' fill='#FF6B9D' stroke='#2D2A4A' stroke-width='1.5'/><circle cx='50' cy='25' r='5' fill='#FF6B9D' stroke='#2D2A4A' stroke-width='1.5'/></svg>"}},
+    {"text": "中間一個", "visual": {"type": "raw-html", "html": "<svg width='60' height='60' viewBox='0 0 80 80'><rect x='10' y='10' width='60' height='60' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><circle cx='40' cy='40' r='5' fill='#FF6B9D' stroke='#2D2A4A' stroke-width='1.5'/></svg>"}}
+  ],
+  "answer": 0,
+  "hint": "紙是<strong>橫向</strong>對摺的(上面摺到下面),所以打洞時其實打了兩層。展開後洞會出現在「摺線的<strong>上下</strong>對稱位置」。",
+  "explanation": "紙橫向對摺後,一個洞會穿過<strong>兩層</strong>紙。展開時,洞會出現在摺線的<strong>上下兩個對稱位置</strong>。",
+  "skill": "對稱折紙還原"
+}

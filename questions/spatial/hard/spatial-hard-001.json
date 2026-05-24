@@ -1,0 +1,24 @@
+{
+  "id": "spatial-hard-001",
+  "topic": "spatial",
+  "difficulty": "hard",
+  "sub_type": "cube-net-invalid",
+  "skill_codes": ["spatial-cube-net-invalid"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "把這個立方體展開圖折起來,哪一個敘述是錯的?(只有一個不可能)",
+  "visual": {
+    "type": "raw-html",
+    "html": "<svg width='160' height='200' viewBox='0 0 160 200'><g transform='translate(20,20)'><rect x='40' y='0' width='40' height='40' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><circle cx='60' cy='20' r='6' fill='#FF6B9D'/><rect x='40' y='40' width='40' height='40' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><text x='60' y='68' text-anchor='middle' font-size='22' font-weight='900' fill='#4ECDC4'>★</text><rect x='40' y='80' width='40' height='40' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><rect x='50' y='90' width='20' height='20' fill='#FFD93D'/><rect x='40' y='120' width='40' height='40' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><text x='60' y='148' text-anchor='middle' font-size='22' font-weight='900' fill='#9B7EDE'>▲</text><rect x='0' y='80' width='40' height='40' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><text x='20' y='108' text-anchor='middle' font-size='20' fill='#FF9F45'>●</text><rect x='80' y='80' width='40' height='40' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><text x='100' y='108' text-anchor='middle' font-size='20' fill='#5B9DEC'>◆</text></g></svg>"
+  },
+  "options": [
+    {"text": "粉●在頂,★在前,▲在底 (前後相鄰)"},
+    {"text": "橘●在左,藍◆在右,黃■在頂"},
+    {"text": "粉●和▲在相對的面"},
+    {"text": "★和黃■在相對的面"}
+  ],
+  "answer": 3,
+  "hint": "把展開圖每個面標位置:粉●在頂、▲在底,所以「粉●在頂、▲在底」是<strong>對的</strong>。中間那行有 4 個面:★、黃■、橘●、藍◆——這四個是四個側面。",
+  "explanation": "展開後,<strong>頂面和底面互相對立</strong>(粉●對▲),<strong>側面四個圍成圈</strong>。中央列從上到下是 ★→黃■,它們相鄰<strong>不是相對</strong>;橘●和藍◆才是相對的(在中央列的左右兩端)。所以「★和黃■相對」是<strong>錯的</strong>。",
+  "skill": "立方體面相對關係"
+}

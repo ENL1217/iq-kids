@@ -1,0 +1,29 @@
+{
+  "id": "multivar-easy-001",
+  "topic": "multivar",
+  "difficulty": "easy",
+  "sub_type": "2var-2x2",
+  "skill_codes": ["multivar-2var"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "形狀和顏色都在變化,觀察兩個變化!",
+  "visual": {
+    "type": "matrix-2x2",
+    "cells": [
+      {"shape": "circle", "color": "pink", "radius": 16},
+      {"shape": "circle", "color": "teal", "radius": 16},
+      {"shape": "square", "color": "pink"},
+      {"unknown": true}
+    ]
+  },
+  "options": [
+    {"text": "綠方",   "visual": {"type": "single-shape", "shape": "square",   "color": "teal"}},
+    {"text": "粉方",   "visual": {"type": "single-shape", "shape": "square",   "color": "pink"}},
+    {"text": "綠圓",   "visual": {"type": "single-shape", "shape": "circle",   "color": "teal", "radius": 16}},
+    {"text": "綠三角", "visual": {"type": "single-shape", "shape": "triangle", "color": "teal"}}
+  ],
+  "answer": 0,
+  "hint": "橫看:顏色從粉變綠。直看:形狀從圓變方。最後一格要同時滿足。",
+  "explanation": "<strong>橫向</strong>:粉→綠(顏色改變)。<strong>直向</strong>:圓→方(形狀改變)。最後一格 = 綠色 + 方形 = <strong>綠方</strong>。",
+  "skill": "2×2 雙變數推理"
+}

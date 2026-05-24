@@ -1,0 +1,32 @@
+{
+  "id": "spatial-mid-002",
+  "topic": "spatial",
+  "difficulty": "mid",
+  "sub_type": "cube-net-opposite",
+  "skill_codes": ["spatial-cube-net"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "這個立方體展開圖,折起來後哪兩個面是相對的?",
+  "visual": {
+    "type": "cubeNet",
+    "layout": "cross",
+    "faces": [
+      {"position": "top",    "label": "1", "color": "yellow"},
+      {"position": "left",   "label": "2", "color": "teal"},
+      {"position": "front",  "label": "3", "color": "pink"},
+      {"position": "right",  "label": "4", "color": "purple"},
+      {"position": "back",   "label": "5", "color": "orange"},
+      {"position": "bottom", "label": "6", "color": "blue"}
+    ]
+  },
+  "options": [
+    {"text": "1 和 6"},
+    {"text": "2 和 5"},
+    {"text": "3 和 4"},
+    {"text": "1 和 3"}
+  ],
+  "answer": 0,
+  "hint": "想像把它折起來:中間那排(2-3-4-5)會圍成一圈,變成四個側面。上面的 1 和下面的 6 會變成?",
+  "explanation": "中間那一排(2-3-4-5)摺起來後變成立方體的<strong>四個側面</strong>。<strong>1</strong> 在中央那行的上面,會變成<strong>頂面</strong>;<strong>6</strong> 在中央那行的下面,會變成<strong>底面</strong>。頂面和底面互為對面,所以是 <strong>1 和 6</strong>。",
+  "skill": "立方體展開想像"
+}

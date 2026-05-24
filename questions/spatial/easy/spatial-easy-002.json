@@ -1,0 +1,28 @@
+{
+  "id": "spatial-easy-002",
+  "topic": "spatial",
+  "difficulty": "easy",
+  "sub_type": "cube-counting-flat",
+  "skill_codes": ["spatial-cube-counting"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "下面這堆積木,總共有幾塊?(包括看不到、被擋住的)",
+  "visual": {
+    "type": "cubeStack",
+    "layout": [
+      [[1, 1, 1]],
+      [[0, 0, 1]]
+    ],
+    "size": 28
+  },
+  "options": [
+    {"text": "3 塊"},
+    {"text": "4 塊"},
+    {"text": "5 塊"},
+    {"text": "6 塊"}
+  ],
+  "answer": 1,
+  "hint": "底層看得到 3 塊方塊。上面還有<strong>第 4 塊</strong>。沒有被擋住的喔!",
+  "explanation": "底層有 <strong>3 塊</strong>方塊排成一排,上層有 <strong>1 塊</strong>疊在最右邊那塊上面。總共 <strong>3 + 1 = 4 塊</strong>。這題沒有「被擋住」的方塊,但你還是要仔細數!",
+  "skill": "立體方塊計數"
+}

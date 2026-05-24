@@ -1,0 +1,30 @@
+{
+  "id": "sequence-hard-001",
+  "topic": "sequence",
+  "difficulty": "hard",
+  "sub_type": "async-variation",
+  "skill_codes": ["sequence-async"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "注意箭頭的旋轉和顏色變化都不一樣速度!",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {"shape": "arrow", "rotation": 0,   "color": "pink"},
+      {"shape": "arrow", "rotation": 90,  "color": "pink"},
+      {"shape": "arrow", "rotation": 180, "color": "teal"},
+      {"shape": "arrow", "rotation": 270, "color": "teal"},
+      {"unknown": true}
+    ]
+  },
+  "options": [
+    {"text": "黃↑", "visual": {"type": "single-shape", "shape": "arrow", "rotation": 0,   "color": "yellow"}},
+    {"text": "粉↑", "visual": {"type": "single-shape", "shape": "arrow", "rotation": 0,   "color": "pink"}},
+    {"text": "黃→", "visual": {"type": "single-shape", "shape": "arrow", "rotation": 90,  "color": "yellow"}},
+    {"text": "黃↓", "visual": {"type": "single-shape", "shape": "arrow", "rotation": 180, "color": "yellow"}}
+  ],
+  "answer": 0,
+  "hint": "箭頭每次轉 90 度。顏色是<strong>「兩個一組」</strong>變一次:粉粉→綠綠→?",
+  "explanation": "<strong>箭頭</strong>每次順時針轉 90°:0→90→180→270→<strong>360(=0)</strong>,所以指<strong>上</strong>。<strong>顏色</strong>是「兩兩一組」變:粉粉→綠綠→<strong>黃黃</strong>。所以是<strong>黃色 ↑</strong>。",
+  "skill": "不同步變化追蹤"
+}

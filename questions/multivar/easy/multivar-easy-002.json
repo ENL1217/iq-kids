@@ -1,0 +1,29 @@
+{
+  "id": "multivar-easy-002",
+  "topic": "multivar",
+  "difficulty": "easy",
+  "sub_type": "2var-size-color",
+  "skill_codes": ["multivar-2var"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "兩個變化:大小 + 顏色",
+  "visual": {
+    "type": "matrix-2x2",
+    "cells": [
+      {"shape": "circle", "color": "pink", "radius": 8},
+      {"shape": "circle", "color": "pink", "radius": 18},
+      {"shape": "circle", "color": "teal", "radius": 8},
+      {"unknown": true}
+    ]
+  },
+  "options": [
+    {"text": "大綠圓", "visual": {"type": "single-shape", "shape": "circle", "color": "teal", "radius": 18}},
+    {"text": "小綠圓", "visual": {"type": "single-shape", "shape": "circle", "color": "teal", "radius": 8}},
+    {"text": "大粉圓", "visual": {"type": "single-shape", "shape": "circle", "color": "pink", "radius": 18}},
+    {"text": "綠方",   "visual": {"type": "single-shape", "shape": "square", "color": "teal"}}
+  ],
+  "answer": 0,
+  "hint": "橫:小→大。直:粉→綠。最後一格是?",
+  "explanation": "<strong>橫向</strong>變大,<strong>直向</strong>變綠。所以最後一格是<strong>大綠圓</strong>。",
+  "skill": "大小×顏色"
+}

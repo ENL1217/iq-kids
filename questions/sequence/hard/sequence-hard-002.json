@@ -1,0 +1,31 @@
+{
+  "id": "sequence-hard-002",
+  "topic": "sequence",
+  "difficulty": "hard",
+  "sub_type": "grouped-pattern",
+  "skill_codes": ["sequence-grouped"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "這題的規律不只是看一個方向,試試看分組!",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {"shape": "circle",   "color": "pink",   "radius": 16},
+      {"shape": "square",   "color": "pink"},
+      {"shape": "triangle", "color": "teal"},
+      {"shape": "diamond",  "color": "teal"},
+      {"shape": "star",     "color": "yellow"},
+      {"unknown": true}
+    ]
+  },
+  "options": [
+    {"text": "黃六邊形", "visual": {"type": "single-shape", "shape": "hex",    "color": "yellow"}},
+    {"text": "黃星星",   "visual": {"type": "single-shape", "shape": "star",   "color": "yellow"}},
+    {"text": "黃圓",     "visual": {"type": "single-shape", "shape": "circle", "color": "yellow", "radius": 16}},
+    {"text": "粉星星",   "visual": {"type": "single-shape", "shape": "star",   "color": "pink"}}
+  ],
+  "answer": 0,
+  "hint": "把它<strong>兩兩分組</strong>看:(粉圓 粉方)(綠三角 綠菱形)(黃星 ?)。每組顏色一樣,形狀都不同。",
+  "explanation": "<strong>分組看</strong>:第 1-2 個都是粉色但不同形狀,第 3-4 個都是綠色但不同形狀,第 5-6 個應該都是<strong>黃色但不同形狀</strong>。第 5 是黃星,第 6 必須是黃色但<strong>不是星</strong>——選 <strong>黃六邊形</strong>。",
+  "skill": "分組模式辨識"
+}

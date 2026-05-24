@@ -1,0 +1,30 @@
+{
+  "id": "sequence-easy-001",
+  "topic": "sequence",
+  "difficulty": "easy",
+  "sub_type": "rotation-equal-angle",
+  "skill_codes": ["sequence-rotation"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "看看箭頭的方向,下一個會指向哪裡?",
+  "visual": {
+    "type": "sequence-row",
+    "items": [
+      {"shape": "arrow", "rotation": 0,   "color": "pink"},
+      {"shape": "arrow", "rotation": 45,  "color": "pink"},
+      {"shape": "arrow", "rotation": 90,  "color": "pink"},
+      {"shape": "arrow", "rotation": 135, "color": "pink"},
+      {"unknown": true}
+    ]
+  },
+  "options": [
+    {"text": "指下", "visual": {"type": "single-shape", "shape": "arrow", "rotation": 180, "color": "pink"}},
+    {"text": "指左", "visual": {"type": "single-shape", "shape": "arrow", "rotation": 270, "color": "pink"}},
+    {"text": "指上", "visual": {"type": "single-shape", "shape": "arrow", "rotation": 0,   "color": "pink"}},
+    {"text": "指右", "visual": {"type": "single-shape", "shape": "arrow", "rotation": 90,  "color": "pink"}}
+  ],
+  "answer": 0,
+  "hint": "箭頭每次都<strong>順時針</strong>轉一點點(45 度)。上→右上→右→右下→?",
+  "explanation": "箭頭每次<strong>順時針旋轉 45 度</strong>。上(0°)→右上(45°)→右(90°)→右下(135°)→<strong>下(180°)</strong>。",
+  "skill": "等角度旋轉追蹤"
+}

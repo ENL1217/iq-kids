@@ -1,0 +1,32 @@
+{
+  "id": "spatial-hard-002",
+  "topic": "spatial",
+  "difficulty": "hard",
+  "sub_type": "volume-arithmetic-big",
+  "skill_codes": ["spatial-volume-arithmetic"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "一個立方體要堆成 4×4×4(總共 64 塊小立方),目前堆好了下面這層,還缺幾塊才能堆滿?",
+  "visual": {
+    "type": "cubeStack",
+    "layout": [
+      [
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1]
+      ]
+    ],
+    "size": 20
+  },
+  "options": [
+    {"text": "16 塊"},
+    {"text": "32 塊"},
+    {"text": "48 塊"},
+    {"text": "60 塊"}
+  ],
+  "answer": 2,
+  "hint": "4×4×4 = ?(總共)。最下面那一層有 4×4 = ?(已經堆好)。剩下要堆 ? 層,每層 ? 塊。",
+  "explanation": "4×4×4 = <strong>64 塊</strong>(總目標)。最底層 = 4×4 = <strong>16 塊</strong>(已完成)。還要堆 3 層,每層 16 塊,所以 3×16 = <strong>48 塊</strong>。",
+  "skill": "立體乘法概念"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "spatial-mid-001",
+  "topic": "spatial",
+  "difficulty": "mid",
+  "sub_type": "paper-fold-twice",
+  "skill_codes": ["spatial-paper-fold"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "把紙對摺兩次(上下、左右各一次)再打一個洞,展開會有幾個洞?",
+  "visual": {
+    "type": "raw-html",
+    "html": "<div style='font-size:16px;font-weight:700;color:#2D2A4A;padding:20px;'>📄 → 上下對摺 → 左右對摺 → ✂️ 在角落打一個洞 → 展開 → ?</div>"
+  },
+  "options": [
+    {"text": "1 個洞"},
+    {"text": "2 個洞"},
+    {"text": "4 個洞"},
+    {"text": "8 個洞"}
+  ],
+  "answer": 2,
+  "hint": "每對摺一次,紙就<strong>多一層</strong>。打一個洞會穿過<strong>所有層</strong>。摺兩次有幾層?",
+  "explanation": "對摺一次 = 2 層,對摺兩次 = 4 層。打一個洞會穿過全部 <strong>4 層</strong>,展開後就有 <strong>4 個洞</strong>(對稱分布在四個角落)。",
+  "skill": "層數×對稱推理"
+}

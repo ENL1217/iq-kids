@@ -25,14 +25,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate questions
+        run: node tools/validate.mjs
+
+      - name: Build manifest
+        run: node tools/build-manifest.mjs
+
       - name: Stage deployable content
-        # We deploy web/ as the site root, but also include questions/ at the
-        # same level so the frontend can fetch ./questions/manifest.json etc.
+        # Deploy web/ as the site root, with questions/ alongside so the
+        # frontend can fetch ./questions/manifest.json at runtime.
+        # Manifest is freshly generated above so it always matches the JSON files.
         run: |
           mkdir -p _site
           cp -r web/* _site/
           cp -r questions _site/questions
           ls -la _site
+          echo "--- manifest summary ---"
+          node -e "const m=require('./questions/manifest.json'); const c=Object.entries(m.topics).map(([k,v])=>k+':'+(v.easy.length+v.mid.length+v.hard.length)).join(' '); console.log('Total topics:', c);"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

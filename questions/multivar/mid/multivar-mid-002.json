@@ -1,0 +1,34 @@
+{
+  "id": "multivar-mid-002",
+  "topic": "multivar",
+  "difficulty": "mid",
+  "sub_type": "latin-square-3var",
+  "skill_codes": ["multivar-latin"],
+  "created_at": "2026-05-24",
+  "author": "human-george",
+  "prompt": "這題有「拉丁方陣」的味道,每個元素橫直都只出現一次!",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {"shape": "circle",   "color": "pink",   "radius": 16},
+      {"shape": "square",   "color": "teal"},
+      {"shape": "triangle", "color": "yellow"},
+      {"shape": "square",   "color": "yellow"},
+      {"shape": "triangle", "color": "pink"},
+      {"shape": "circle",   "color": "teal",   "radius": 16},
+      {"shape": "triangle", "color": "teal"},
+      {"shape": "circle",   "color": "yellow", "radius": 16},
+      {"unknown": true}
+    ]
+  },
+  "options": [
+    {"text": "粉方",   "visual": {"type": "single-shape", "shape": "square",   "color": "pink"}},
+    {"text": "黃三角", "visual": {"type": "single-shape", "shape": "triangle", "color": "yellow"}},
+    {"text": "粉圓",   "visual": {"type": "single-shape", "shape": "circle",   "color": "pink",   "radius": 16}},
+    {"text": "黃方",   "visual": {"type": "single-shape", "shape": "square",   "color": "yellow"}}
+  ],
+  "answer": 0,
+  "hint": "每一<strong>橫排</strong>三種形狀都出現一次,每一<strong>直列</strong>三種顏色也都出現一次。最後一格的橫排已有 三角 + 圓,還缺?直列已有 三角 + 圓,還缺?",
+  "explanation": "<strong>拉丁方陣規律</strong>:每排每列都「三種形狀各 1 個、三種顏色各 1 個」。第三排已有三角(綠)和圓(黃),還缺<strong>方</strong>。第三列已有三角(黃)和圓(綠),還缺<strong>方</strong>。顏色:第三排已有綠、黃,還缺<strong>粉</strong>。第三列已有黃、綠,還缺<strong>粉</strong>。所以是 <strong>粉方</strong>。",
+  "skill": "拉丁方陣推理"
+}
