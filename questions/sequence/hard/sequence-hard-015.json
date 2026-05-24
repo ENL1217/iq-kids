@@ -55,9 +55,10 @@
       }
     },
     {
-      "text": "藍綠undefined",
+      "text": "藍綠星星",
       "visual": {
         "type": "single-shape",
+        "shape": "star",
         "color": "teal"
       }
     },

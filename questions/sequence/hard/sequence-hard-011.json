@@ -47,9 +47,10 @@
       }
     },
     {
-      "text": "藍綠undefined",
+      "text": "藍綠圓",
       "visual": {
         "type": "single-shape",
+        "shape": "circle",
         "color": "teal"
       }
     },

@@ -88,6 +88,28 @@ sequence-hard-011 (grouped-pattern):
 
 ---
 
+### v2 修正 (2026-05-24 reviewer reject 後,同 PR #5)
+
+**問題**:reviewer 抓到 6 題 grouped-pattern (hard-011~016) 的 distractor text 是 `"粉紅undefined"` / `"藍綠undefined"` 之類,visual 的 `single-shape` 缺 `shape` 欄位。原 validator 沒抓到(因為 "粉紅undefined" 不是空字串)。
+
+**Root cause**:`genGroupedPattern` 內 `SHAPES.find(s => !shapes.includes(s))` — 但 grouped-pattern 已經用了全部 6 個 SHAPES,find 回傳 `undefined`,組成 cell `{shape: undefined, color: co4}`,`describe()` 內 `SHAPE_ZH[undefined]` 也是 `undefined`,template 串成 `"橘undefined"`。
+
+**修法**:
+1. **修 generator (gen-sequence.mjs)**:`D3` 改用 `{shape: shapes[0], color: co4}` — 用已出現過的 shape + 新色,語義上是「冒出第 4 組」,仍屬「跳出規則」的誤解類型,跟 correct 視覺距離 ≥ 2
+2. **加 generator-side guard (describe)**:cell 缺 `shape`/`color` 時直接 throw,避免未來再有 silent undefined 流到 text
+3. **驗收**:
+   - rebase origin/main 拉新版 validator (b012bd5)
+   - `node tools/validate.mjs --strict questions/sequence` → 80/81 pass(僅 seed mid-001 hint 結尾 `!`)
+   - grep 「undefined」 在 hard-011~016 → 0 hit
+   - 抽 hard-013 第 4 個選項驗:現在是「粉紅圓」(有 shape + color 完整 visual)
+4. **沒 force-rebase**:單純加 fix commit 進 PR #5
+
+**教訓**:寫 generator 時假設 pool 永遠夠用,沒設想「pool 抽光」邊界。以後 generator 第一行要先 assert `POOL.length > totalNeeded`,或者用 with-fallback 的工具函數。新加的 describe() guard 已經堵住 silent undefined 流出。
+
+**reviewer 的 validator 補強值得記**:`text` 含「undefined / null / NaN」字面 + `single-shape` 缺 `shape` 欄位 — 這兩條規則我也應該在 lib.mjs 那邊吸收當常識,以後新題型 generator 出問題會立刻被抓。
+
+---
+
 ## (舊) Batch 3 — sequence (planning, 已 by-passed) 📝
 
 ### 既存 6 seed (1/2 各難度,撈自 git 歷史) → 我從 -003 起跳

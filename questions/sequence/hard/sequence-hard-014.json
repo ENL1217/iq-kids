@@ -47,9 +47,10 @@
       }
     },
     {
-      "text": "粉紅undefined",
+      "text": "粉紅菱形",
       "visual": {
         "type": "single-shape",
+        "shape": "diamond",
         "color": "pink"
       }
     },

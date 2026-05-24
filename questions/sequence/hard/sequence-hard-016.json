@@ -39,9 +39,10 @@
   },
   "options": [
     {
-      "text": "粉紅undefined",
+      "text": "粉紅星星",
       "visual": {
         "type": "single-shape",
+        "shape": "star",
         "color": "pink"
       }
     },

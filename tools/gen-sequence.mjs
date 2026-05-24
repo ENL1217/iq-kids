@@ -35,8 +35,17 @@ const COLORS = ['pink', 'teal', 'yellow', 'purple', 'orange', 'blue'];
 const ROT_STEPS = [45, 90];   // 等角度旋轉:每次 45° 或 90°
 
 // 描述一個 cell 給 option text 用
+// guard: 若 cell 缺 shape/color,throw — 避免靜默產生 "粉紅undefined" 這種 text
+// (前車之鑑:grouped-pattern v1 因 SHAPES pool 抽光,distractor 的 shape 變 undefined,
+//  describe 跑出 "粉紅undefined" 通過原 validator,造成 PR #5 6 題壞掉)
 function describe(cell) {
   if (cell.unknown) return '?';
+  if (cell.shape === undefined || cell.shape === null) {
+    throw new Error(`describe(): cell missing shape: ${JSON.stringify(cell)}`);
+  }
+  if (cell.color === undefined || cell.color === null) {
+    throw new Error(`describe(): cell missing color: ${JSON.stringify(cell)}`);
+  }
   const c = COLOR_ZH[cell.color] || cell.color;
   const s = SHAPE_ZH[cell.shape] || cell.shape;
   if (cell.shape === 'arrow') {
@@ -413,14 +422,18 @@ function genGroupedPattern(id, seed) {
   const correct = { shape: shapes[5], color: colors[2] };
 
   // 干擾:
-  //  D1 (規則內錯位): shape 對但色錯 (用 c0 而非 c2) → 距 1 attr;再讓 shape 也跟 D1 差 → 用 shape[0]+color[0] → 距 2 attr
-  //  D2 (部分對):     對的色 + 已經用過的 shape (shapes[4],重複)
-  //  D3 (跳出):       新色 + 新 shape
-  const sh6 = SHAPES.find(s => !shapes.includes(s));
+  //  D1 (規則內錯位): 拿第 1 格 (上一組的 cell) → 跟 correct 自然差 2 attr (shape + color)
+  //  D2 (部分對):     對的色 + 已經用過的 shape (組內違規)
+  //  D3 (跳出規則):   已用過的 shape + 新的色 (= 第 4 組,規則沒講過會出現第 4 組)
+  //
+  // BUG FIX (v2 per reviewer PR #5 comment): 原本 D3 用 sh6 = SHAPES.find(s => !shapes.includes(s)),
+  // 但 shapes 已經用滿 SHAPES 全部 6 個 → find 回 undefined → text 變 "粉紅undefined",
+  // 6 題 grouped-pattern 全爆。改用 shapes[0] 配 co4(已用 shape + 新色,語義上等於「冒出第 4 組」),
+  // 同樣具有「跳出規則」的誤解類型功能。
   const co4 = COLORS.find(c => !colors.includes(c));
   const D1 = { shape: shapes[0], color: colors[0] };       // 第 1 格 — 距 correct 2 attr
   const D2 = { shape: shapes[4], color: colors[2] };       // 顏色對但 shape 重複 (組內違規)
-  const D3 = { shape: sh6, color: co4 };                   // 完全新組
+  const D3 = { shape: shapes[0], color: co4 };             // 第 4 組(色新,shape 重複舊組)
   const { options, answerIdx } = placeCellOptions(correct, [D1, D2, D3], id);
 
   return makeQ(id, 'hard', 'grouped-pattern', 'sequence-grouped', '分組模式辨識',
