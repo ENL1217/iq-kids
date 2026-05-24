@@ -1,0 +1,51 @@
+{
+  "id": "analogy-mid-024",
+  "topic": "analogy",
+  "difficulty": "mid",
+  "sub_type": "causal",
+  "skill_codes": [
+    "analogy-causal"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "前面是「先發生跟結果」,後面也要對應!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "太陽"
+        },
+        "b": {
+          "text": "亮"
+        }
+      },
+      {
+        "a": {
+          "text": "火"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "煙"
+    },
+    {
+      "text": "熱"
+    },
+    {
+      "text": "木柴"
+    },
+    {
+      "text": "濕"
+    }
+  ],
+  "answer": 1,
+  "hint": "太陽會造成亮。那火會造成什麼?",
+  "explanation": "<strong>太陽</strong>會造成<strong>亮</strong>,<strong>火</strong>會造成<strong>熱</strong>。兩組都是「<strong>原因 → 結果</strong>」的關係,要找直接造成的那個結果。",
+  "skill": "因果關係類比"
+}

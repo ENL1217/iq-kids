@@ -1,0 +1,51 @@
+{
+  "id": "analogy-hard-016",
+  "topic": "analogy",
+  "difficulty": "hard",
+  "sub_type": "part-whole",
+  "skill_codes": [
+    "analogy-part-whole"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "前面是「小部分跟整體」,後面也要對應!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "輪子"
+        },
+        "b": {
+          "text": "車子"
+        }
+      },
+      {
+        "a": {
+          "text": "螢幕"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "樹"
+    },
+    {
+      "text": "滑鼠"
+    },
+    {
+      "text": "電腦"
+    },
+    {
+      "text": "桌子"
+    }
+  ],
+  "answer": 2,
+  "hint": "輪子是車子的一部分。那螢幕是什麼的一部分?",
+  "explanation": "<strong>輪子</strong>是<strong>車子</strong>的一個小部分,合起來才是完整的<strong>車子</strong>。同樣的,<strong>螢幕</strong>是<strong>電腦</strong>的一個小部分。題目在問「整體」是什麼。",
+  "skill": "部分與整體類比"
+}

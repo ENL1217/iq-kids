@@ -1,0 +1,51 @@
+{
+  "id": "analogy-hard-017",
+  "topic": "analogy",
+  "difficulty": "hard",
+  "sub_type": "degree-intensity",
+  "skill_codes": [
+    "analogy-degree"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "前面兩個是「同一件事,但右邊更強烈」,後面也要對!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "走"
+        },
+        "b": {
+          "text": "跑"
+        }
+      },
+      {
+        "a": {
+          "text": "喜歡"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "微笑"
+    },
+    {
+      "text": "大笑"
+    },
+    {
+      "text": "愛"
+    },
+    {
+      "text": "喜歡"
+    }
+  ],
+  "answer": 2,
+  "hint": "走跟跑是同一類,但跑更強。喜歡更強的版本是什麼?",
+  "explanation": "<strong>跑</strong>比<strong>走</strong>速度更快(同樣是腳的動作)。<strong>愛</strong>比<strong>喜歡</strong>感情更深(同樣是正面情感)。注意:這不是同義詞,而是「程度更強」。",
+  "skill": "程度副詞類比"
+}

@@ -51,7 +51,125 @@
 
 ---
 
-## Batch 2 — analogy (planning, 2026-05-24) 📝 待 review
+## Batch 2 — analogy (2026-05-24) ✅ DONE
+
+### Reviewer 回覆(Q1/Q2/Q3)
+- **Q1 prompt**: 採 (B) 同 sub_type 統一 ✅
+- **Q2 干擾**: 拿掉「隨機」,改為 4 種「結構對但語義錯」 ✅
+- **Q3 degree**: 維持 6 題 hard,explanation 必須點明「程度差異」非「同義」 ✅
+
+### 統計
+| 難度 | 數量 | sub_type 分布 |
+|------|------|--------------|
+| easy | 30 | function 15 / antonym 15 |
+| mid  | 25 | location-workplace 10 / sound 10 / causal 5 |
+| hard | 20 | material-source 8 / part-whole 6 / degree-intensity 6 |
+| **總計** | **75** | 8 個 sub_type 全覆蓋 |
+
+從 `analogy-easy-003.json` 起跳,**完全沒動 -001/-002**(spec 作者保留題)。
+
+### 生成器
+`tools/gen-analogy.mjs`:每個 sub_type 一個 word-pair pool(8 個 pool,~90 對),從 pool 抽兩對組成 (p1, p2) 題目。共用 `tools/gen-utils.mjs`。
+
+### 干擾選項設計(per Q2 review)
+四類分配到每個 sub_type,**無任何隨機 distractor**,每個錯答都「為什麼錯」說得出來:
+
+| 類型 | function/location/sound/causal/material/part-whole | antonym/degree |
+|------|---|---|
+| (a) 同類 B | pool 內別組的 b(關係型對,具體配對錯) | 同 |
+| (b) 反方向 | entry.reverse(動作的對象/結果) | (antonym) 同類 A;(degree) p2.a 本身(同義詞陷阱) |
+| (c) 跨類別 | entry.cross(主題相關但關係錯) | (antonym) entry.related;(degree) 別組 a |
+
+### 抽樣干擾分析(8 題逐項說明)
+
+```
+analogy-easy-003: 牙齒:咬 :: 耳朵:?
+  options: 看 / 頭 / 聲音 / [聽]✓
+    看   = function pool 別組 b
+    聲音 = 反方向 (耳朵的「結果」是聲音,不是用途)
+    頭   = 跨類別 (耳朵在頭上,部位非功能)
+
+analogy-easy-018: 黑:白 :: 開心:?
+  options: 小 / 大 / 安靜 / [難過]✓
+    小   = antonym pool 別組 b
+    大   = antonym pool 別組 a (反義詞但跟「開心」無關)
+    安靜 = 跨類別 (開心跟安靜同情緒領域但非反義)
+
+analogy-mid-003: 消防員:消防局 :: 蜘蛛:?
+  options: 八隻腳 / 蟲子 / [蜘蛛網]✓ / 教室
+    八隻腳 = 跨類別 (蜘蛛特徵非地點)
+    蟲子   = 反方向 (蜘蛛吃的對象,非住處)
+    教室   = 別組 b (老師的地點)
+
+analogy-mid-013: 牛:哞 :: 豬:?
+  options: 泥巴 / 尾巴 / 咩 / [噗噗]✓
+    泥巴 = 反方向 (豬常在的東西,非叫聲)
+    尾巴 = 跨類別 (豬的身體部位)
+    咩   = 別組 b (羊的叫聲)
+
+analogy-mid-022: 馬:嘶 :: 牛:?
+  options: 咩 / 草 / [哞]✓ / 牛奶
+    咩   = 別組 b (羊的叫聲)
+    草   = 反方向 (牛吃的東西)
+    牛奶 = 跨類別 (牛的產出)
+
+analogy-hard-003: 牛奶:乳牛 :: 糖:?
+  options: [甘蔗]✓ / 甜 / 糖罐 / 蜜蜂
+    甜   = 跨類別 (糖的特性非原料)
+    糖罐 = 反方向 (裝糖的容器)
+    蜜蜂 = 別組 b (蜂蜜的原料)
+
+analogy-hard-015: 葉子:樹 :: 鏡頭:?
+  options: [相機]✓ / 照片 / 車子 / 腳架
+    照片 = 反方向 (鏡頭的產出非整體)
+    車子 = 別組 b (輪子的整體)
+    腳架 = 跨類別 (相機配件,跟鏡頭並列非整體)
+
+analogy-hard-020: 微笑:大笑 :: 摸:?
+  options: 盯 / 摸 / 看 / [抓]✓
+    盯 = 別組 b (看的強烈版)
+    摸 = 同義詞陷阱 (p2.a 本身,測試「程度更強」是否被誤判成「同義」)
+    看 = 別組 a (完全不同類動作)
+```
+
+### 三層自驗
+- Layer 1 (schema):`node tools/validate.mjs questions/analogy` → 81/81 pass(其中 6 題是 -001/-002 seed,我的 75 題全 pass 無 errors 無 warnings)
+- Layer 2 (答案重算):上面 8 題已逐項列出,全部正確
+- Layer 3 (干擾合理性):同上 8 題已寫出每個錯答的誤解類型
+
+### 修 bug 過程(透明 log)
+1. **function pool 太小**:原 12 對抽不出 15 題 → 加到 18 對(雨傘/吸管/叉子/湯匙/橡皮擦/繩子)
+2. **中文短詞 explanation 過短**:antonym 1-char 詞題 strip-HTML 後 < 20 字觸發 warning → 加描述變 30+ 字
+3. **PROMPTS lookup bug (critical)**:key 寫 `material`/`partWhole`/`degree` 但 sub_type 字串是 `material-source`/`part-whole`/`degree-intensity`,30 題 mid+hard 全部 fallback 到 function prompt。改 key 跟 sub_type 字串一致 + 加 `throw` 防 silent 後備
+
+### 外部閱讀清單
+
+| # | 來源 | 學到什麼 | 是否擷取題目 |
+|---|------|---------|-------------|
+| 1 | [ReasonEra 47 datasets](https://reasonera.medium.com/47-open-source-datasets-for-abstract-logical-and-inductive-reasoning-puzzles-plus-the-tool-that-117ea4fdfb44) | 47 個資料集多為 matrix/spatial/LLM training,**沒有兒童 verbal analogy 專屬資料集** | 無 |
+| 2 | [github.com/topics/iq-test](https://github.com/topics/iq-test) | 主流專案幾乎都做 RPM 視覺,沒人切細 sub_type,我們的雙標記比業界精細 | 無 |
+| 3 | [GeeksforGeeks Verbal Analogies](https://www.geeksforgeeks.org/aptitude/verbal-analogies-types-with-examples/) | 6 大類:Synonym/Antonym, Group, Function, Degree, Item-to-Category, Cause-Effect。**Group / Item-to-Category 我們沒有**,未來可加 | 無 |
+| 4 | [Unstop 9-subtype](https://unstop.com/blog/verbal-analogy-explained) | 9 子型(serial-reasoning/conditional 等)對 7-12 歲太抽象,**不採用** | 無 |
+| 5 | [CogAT K-2 sample](https://elmacademyprep.com/cogat-verbal/) | K-2 用 2×2 picture matrix,我們 A:B::C:? 結構合適 7+ | 無 |
+
+**RAVEN / WellyZhang**:留到 Batch 3 (matrix) 才讀。
+
+### 已知限制 / 留給 reviewer 判斷
+1. **同類器官互相配對**:function pool 有「眼睛/耳朵/鼻子/嘴巴/牙齒」5 個頭部器官,若 p1/p2 都從這 5 個抽,題目像「眼睛:看 :: 耳朵:?」— 兩個都是頭部器官。若覺得太單調可加 sub-pool 區隔(器官 vs 工具)
+2. **sound pool 鴨呱 / 青蛙呱呱**:1 字 vs 2 字差異,小朋友能分辨;若想避免重疊感可移其一
+3. **degree 題 p2.a 出現在選項**(如 hard-020 的「摸」):這是 pedagogical 設計(同義詞陷阱)還是看起來怪?要 reviewer 拍板
+
+### 提案下一批
+**Batch 3:sequence** (75 題)
+- easy 30:cyclic-AB / cyclic-ABC / rotation-equal-angle
+- mid 25:nested-elements / accumulative / triple-cycle
+- hard 20:async-variation / grouped-pattern / complex-rotation
+- 不讀外部資源(視覺序列規律是公開概念)
+- 從 sequence-easy-003 起跳
+
+---
+
+## (舊)Batch 2 — analogy (planning, 已 by-passed) 📝
 
 ### 目標
 75 題,從 `analogy-easy-003.json` 起跳(-001/-002 是 spec 作者保留題,不動)。

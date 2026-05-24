@@ -1,0 +1,51 @@
+{
+  "id": "analogy-mid-007",
+  "topic": "analogy",
+  "difficulty": "mid",
+  "sub_type": "location-workplace",
+  "skill_codes": [
+    "analogy-location"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "左邊是「人或動物跟牠常在的地方」,右邊也要對!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "警察"
+        },
+        "b": {
+          "text": "警察局"
+        }
+      },
+      {
+        "a": {
+          "text": "消防員"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "教室"
+    },
+    {
+      "text": "火災"
+    },
+    {
+      "text": "水管"
+    },
+    {
+      "text": "消防局"
+    }
+  ],
+  "answer": 3,
+  "hint": "警察常在警察局。那消防員常在哪裡?",
+  "explanation": "<strong>警察</strong>常待的地方是<strong>警察局</strong>,<strong>消防員</strong>常待的地方是<strong>消防局</strong>。題目在問「<strong>地方</strong>」,不是工具或對象。",
+  "skill": "工作/生活地點類比"
+}

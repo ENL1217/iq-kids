@@ -1,0 +1,51 @@
+{
+  "id": "analogy-hard-011",
+  "topic": "analogy",
+  "difficulty": "hard",
+  "sub_type": "part-whole",
+  "skill_codes": [
+    "analogy-part-whole"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "前面是「小部分跟整體」,後面也要對應!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "鏡頭"
+        },
+        "b": {
+          "text": "相機"
+        }
+      },
+      {
+        "a": {
+          "text": "輪子"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "樹"
+    },
+    {
+      "text": "車子"
+    },
+    {
+      "text": "馬路"
+    },
+    {
+      "text": "汽油"
+    }
+  ],
+  "answer": 1,
+  "hint": "鏡頭是相機的一部分。那輪子是什麼的一部分?",
+  "explanation": "<strong>鏡頭</strong>是<strong>相機</strong>的一個小部分,合起來才是完整的<strong>相機</strong>。同樣的,<strong>輪子</strong>是<strong>車子</strong>的一個小部分。題目在問「整體」是什麼。",
+  "skill": "部分與整體類比"
+}

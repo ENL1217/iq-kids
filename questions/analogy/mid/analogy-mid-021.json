@@ -1,0 +1,51 @@
+{
+  "id": "analogy-mid-021",
+  "topic": "analogy",
+  "difficulty": "mid",
+  "sub_type": "sound",
+  "skill_codes": [
+    "analogy-sound"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "左邊是「動物跟牠的叫聲」,右邊也要對!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "蜜蜂"
+        },
+        "b": {
+          "text": "嗡"
+        }
+      },
+      {
+        "a": {
+          "text": "青蛙"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "哞"
+    },
+    {
+      "text": "池塘"
+    },
+    {
+      "text": "荷葉"
+    },
+    {
+      "text": "呱呱"
+    }
+  ],
+  "answer": 3,
+  "hint": "蜜蜂的叫聲是嗡。那青蛙的叫聲呢?",
+  "explanation": "<strong>蜜蜂</strong>的叫聲是「<strong>嗡</strong>」,所以同樣的關係,<strong>青蛙</strong>的叫聲是「<strong>呱呱</strong>」。題目在問的是<strong>動物發出的聲音</strong>。",
+  "skill": "動物叫聲類比"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "analogy-easy-031",
+  "topic": "analogy",
+  "difficulty": "easy",
+  "sub_type": "antonym",
+  "skill_codes": [
+    "analogy-antonym"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "前面兩個是相反詞,後面也要找相反詞!",
+  "visual": {
+    "type": "analogy-row",
+    "pairs": [
+      {
+        "a": {
+          "text": "高"
+        },
+        "b": {
+          "text": "矮"
+        }
+      },
+      {
+        "a": {
+          "text": "多"
+        },
+        "b": {
+          "unknown": true
+        }
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "大"
+    },
+    {
+      "text": "小"
+    },
+    {
+      "text": "少"
+    },
+    {
+      "text": "滿"
+    }
+  ],
+  "answer": 2,
+  "hint": "高跟矮是相反詞。那多的相反是什麼?",
+  "explanation": "<strong>高</strong>跟<strong>矮</strong>是相反詞,意思剛好相反。同樣的,<strong>多</strong>的相反就是<strong>少</strong>。找相反詞要找<strong>意思對立</strong>的那一個。",
+  "skill": "反義詞類比"
+}
