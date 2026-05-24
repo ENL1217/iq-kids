@@ -40,8 +40,95 @@
 
   <!-- MENU -->
   <div id="menuScreen">
+    <!-- 測驗模式入口 (banner,跟學習卡片區隔) -->
+    <button class="test-mode-banner" onclick="openTestSetup()">
+      <span class="banner-emoji">📝</span>
+      <span class="banner-text">
+        <span class="banner-title">綜合測驗</span>
+        <span class="banner-sub">沒有提示,做完才看答案。挑戰自己 ✨</span>
+      </span>
+      <span class="banner-arrow">→</span>
+    </button>
+
+    <div class="menu-section-label">📚 學習模式 · 練習六大題型</div>
     <div class="menu-grid" id="menuGrid">
       <div class="loading">載入題庫中</div>
+    </div>
+  </div>
+
+  <!-- TEST SETUP -->
+  <div id="testSetupScreen" class="hide">
+    <button class="back-btn" onclick="goMenu()">← 回主選單</button>
+    <div class="card test-setup-card">
+      <span class="card-badge">📝 測驗設定</span>
+      <h2 class="setup-h2">準備好挑戰自己嗎?</h2>
+      <p class="setup-intro">測驗模式<strong>沒有提示</strong>、選了不能改、做完才看答案。盡力試試看!</p>
+
+      <div class="setup-section">
+        <div class="setup-h3">① 選題型 (可多選)</div>
+        <div class="chip-row" id="setupTopics"></div>
+      </div>
+
+      <div class="setup-section">
+        <div class="setup-h3">② 難度</div>
+        <div class="chip-row" id="setupLevels"></div>
+      </div>
+
+      <div class="setup-section">
+        <div class="setup-h3">③ 題數</div>
+        <div class="chip-row" id="setupCount"></div>
+      </div>
+
+      <div class="setup-section">
+        <div class="setup-h3">④ 時限</div>
+        <div class="chip-row" id="setupTime"></div>
+      </div>
+
+      <div class="setup-summary" id="setupSummary"></div>
+
+      <div class="actions">
+        <button class="btn btn-ghost" onclick="goMenu()">取消</button>
+        <button class="btn btn-primary" id="startTestBtn" onclick="startTest()">開始測驗 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEST QUIZ -->
+  <div id="testQuizScreen" class="hide">
+    <div class="test-header-row">
+      <button class="back-btn" onclick="confirmExitTest()">← 中途離開</button>
+      <div class="test-timer" id="testTimer">⏱ —</div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="testProgress"></div></div>
+    <div class="progress-text" id="testProgressText"></div>
+    <div id="testQuizArea"></div>
+  </div>
+
+  <!-- TEST RESULT -->
+  <div id="testResultScreen" class="hide">
+    <button class="back-btn" onclick="goMenu()">← 回主選單</button>
+    <div class="final-screen test-result">
+      <div class="trophy">🏆</div>
+      <h2 class="final-title">測驗完成!</h2>
+      <p class="score-display" id="testFinalScore"></p>
+      <div class="stats stats-4">
+        <div class="stat-box"><div class="stat-value" id="testStatCorrect">0</div><div class="stat-label">答對</div></div>
+        <div class="stat-box"><div class="stat-value" id="testStatTotal">0</div><div class="stat-label">總題</div></div>
+        <div class="stat-box"><div class="stat-value" id="testStatRate">0%</div><div class="stat-label">正確率</div></div>
+        <div class="stat-box"><div class="stat-value" id="testStatTime">0:00</div><div class="stat-label">用時</div></div>
+      </div>
+
+      <div id="testRadarSlot"></div>
+
+      <div class="test-review-section">
+        <div class="test-review-title">📋 逐題回顧</div>
+        <div id="testReviewList"></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-ghost" onclick="goMenu()">回主選單</button>
+        <button class="btn btn-primary" onclick="startNewTest()">再測一次 🔁</button>
+      </div>
     </div>
   </div>
 

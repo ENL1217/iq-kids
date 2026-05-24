@@ -14,6 +14,10 @@ import {
   lifetimeStats, exportAttempts, clearAttempts
 } from './recorder.js';
 import { radarChart, radarLegend } from './radar.js';
+import {
+  openTestSetup, startTest, confirmExitTest, startNewTest,
+  onTestSelect, onTestPrev, onTestSkip, onTestNext
+} from './test-mode.js';
 import { QUESTIONS_PER_LEVEL } from './config.js';
 
 const TOPICS = {
@@ -56,7 +60,10 @@ async function init() {
   Object.assign(window, {
     startLevel, goMenu, restartLevel, selectAnswer, nextQuestion,
     onMuteClick, onFeedbackClick,
-    onExportRecords, onClearRecords, onReviewWrong
+    onExportRecords, onClearRecords, onReviewWrong,
+    // 測驗模式
+    openTestSetup, startTest, confirmExitTest, startNewTest,
+    onTestSelect, onTestPrev, onTestSkip, onTestNext
   });
 
   // 任意 user gesture 後解鎖 audio (iOS Safari)
@@ -350,8 +357,12 @@ function onReviewWrong() {
 
 // ──────────────────────────────────────────────────────────────
 function goMenu() {
-  document.getElementById('quizScreen').classList.add('hide');
-  document.getElementById('finalScreen').classList.add('hide');
+  // 隱藏所有可能的 screen
+  ['quizScreen', 'finalScreen', 'testSetupScreen', 'testQuizScreen', 'testResultScreen']
+    .forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('hide');
+    });
   document.getElementById('menuScreen').classList.remove('hide');
 }
 
