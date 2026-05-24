@@ -1,0 +1,66 @@
+{
+  "id": "spatial-hard-027",
+  "topic": "spatial",
+  "difficulty": "hard",
+  "sub_type": "cube-net-invalid",
+  "skill_codes": [
+    "spatial-cube-net-invalid"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看這個展開圖,下面說法哪個是正確的?",
+  "visual": {
+    "type": "cubeNet",
+    "layout": "cross",
+    "faces": [
+      {
+        "position": "top",
+        "label": "1",
+        "color": "white"
+      },
+      {
+        "position": "front",
+        "label": "2",
+        "color": "white"
+      },
+      {
+        "position": "right",
+        "label": "3",
+        "color": "white"
+      },
+      {
+        "position": "back",
+        "label": "4",
+        "color": "white"
+      },
+      {
+        "position": "left",
+        "label": "5",
+        "color": "white"
+      },
+      {
+        "position": "bottom",
+        "label": "6",
+        "color": "white"
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "這個展開圖無法折成立方體"
+    },
+    {
+      "text": "3 號與 5 號是相對面"
+    },
+    {
+      "text": "折好後從上方看,1 在頂面,2 在底面"
+    },
+    {
+      "text": "3 號與 5 號在折成立方體後相鄰"
+    }
+  ],
+  "answer": 1,
+  "hint": "cross 展開圖摺起來後,top-bottom / front-back / left-right 各組是相對的。仔細想想哪個陳述跟摺起來的事實一致。",
+  "explanation": "這是 cross 展開圖,合法。中間排 (2-3-4-5) 摺成側面,top (1) 跟 bottom (6) 為頂底面。本題 <strong>3 跟 5</strong> 確實是相對面 (cross 的標準配對)。",
+  "skill": "立方體展開圖判斷"
+}

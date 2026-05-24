@@ -320,6 +320,20 @@ emoji 選填,有的話畫面更豐富。
 }
 ```
 
+**選用欄位** (rotation 鏡像題用):
+- `mirrorAxis`: `"horizontal"` | `"vertical"` — 標明這個 arrow 是某個鏡像問題裡「原始」或「鏡像」cell 的對稱軸。**純 metadata,renderer 不顯示**;用於未來雷達圖 / 弱項分析 group by 方向。
+
+例:
+```json
+{
+  "type": "single-shape",
+  "shape": "arrow",
+  "rotation": 45,
+  "color": "pink",
+  "mirrorAxis": "horizontal"
+}
+```
+
 ### 4.10 `composite` (組合)
 多個視覺水平排列。
 

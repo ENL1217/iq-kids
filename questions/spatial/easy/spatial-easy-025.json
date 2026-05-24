@@ -1,0 +1,118 @@
+{
+  "id": "spatial-easy-025",
+  "topic": "spatial",
+  "difficulty": "easy",
+  "sub_type": "paper-fold-once",
+  "skill_codes": [
+    "spatial-paper-fold"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "對摺一次,在指定位置打洞。展開後紙上會有什麼樣的洞?",
+  "visual": {
+    "type": "composite",
+    "arrangement": "horizontal",
+    "items": [
+      {
+        "type": "foldedPaper",
+        "layout": "flat",
+        "foldHint": "vertical",
+        "label": "對摺線"
+      },
+      {
+        "type": "text",
+        "content": "→"
+      },
+      {
+        "type": "foldedPaper",
+        "layout": "half-v",
+        "holes": [
+          {
+            "x": 0.4,
+            "y": 0.3
+          }
+        ],
+        "label": "打洞"
+      },
+      {
+        "type": "text",
+        "content": "展開?"
+      }
+    ],
+    "gap": 10
+  },
+  "options": [
+    {
+      "text": "選項 A",
+      "visual": {
+        "type": "foldedPaper",
+        "layout": "flat",
+        "holes": [
+          {
+            "x": 0.2,
+            "y": 0.3
+          },
+          {
+            "x": 0.2,
+            "y": 0.7
+          }
+        ]
+      }
+    },
+    {
+      "text": "選項 B",
+      "visual": {
+        "type": "foldedPaper",
+        "layout": "flat",
+        "holes": [
+          {
+            "x": 0.2,
+            "y": 0.3
+          },
+          {
+            "x": 0.8,
+            "y": 0.3
+          }
+        ]
+      }
+    },
+    {
+      "text": "選項 C",
+      "visual": {
+        "type": "foldedPaper",
+        "layout": "flat",
+        "holes": [
+          {
+            "x": 0.2,
+            "y": 0.3
+          }
+        ]
+      }
+    },
+    {
+      "text": "選項 D",
+      "visual": {
+        "type": "foldedPaper",
+        "layout": "flat",
+        "holes": [
+          {
+            "x": 0.2,
+            "y": 0.3
+          },
+          {
+            "x": 0.8,
+            "y": 0.3
+          },
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ]
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "紙沿 直 摺線對摺後,在半張紙上打了 1 個洞。展開後對摺線兩側會各有 1 個洞 (鏡像對稱)。哪張紙是對的?",
+  "explanation": "對摺後打 1 個洞,展開時兩層紙都會有洞,對稱在<strong>直向對摺線</strong>兩側。所以展開後共 <strong>2 個洞</strong>,位置鏡像對稱。",
+  "skill": "對摺打洞展開"
+}

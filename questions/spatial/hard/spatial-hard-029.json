@@ -1,0 +1,72 @@
+{
+  "id": "spatial-hard-029",
+  "topic": "spatial",
+  "difficulty": "hard",
+  "sub_type": "mirror-arrow",
+  "skill_codes": [
+    "spatial-mirror"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "下面這個箭頭的鏡像是哪一個?",
+  "visual": {
+    "type": "composite",
+    "arrangement": "horizontal",
+    "items": [
+      {
+        "type": "single-shape",
+        "shape": "arrow",
+        "rotation": 90,
+        "color": "orange",
+        "mirrorAxis": "vertical"
+      },
+      {
+        "type": "text",
+        "content": "│(左右翻)│→"
+      }
+    ],
+    "gap": 12
+  },
+  "options": [
+    {
+      "text": "←",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "rotation": 270,
+        "color": "orange"
+      }
+    },
+    {
+      "text": "→",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "rotation": 90,
+        "color": "orange"
+      }
+    },
+    {
+      "text": "↓",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "rotation": 180,
+        "color": "orange"
+      }
+    },
+    {
+      "text": "→",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "rotation": 90,
+        "color": "orange"
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "左右翻 (沿直軸鏡射)。原箭頭指 →。鏡像後指?",
+  "explanation": "左右翻 (直軸鏡射): rotation 變 (180 − 原角度 + 360) mod 360。90° 鏡射後是 <strong>90°</strong> (→)。",
+  "skill": "箭頭鏡像"
+}

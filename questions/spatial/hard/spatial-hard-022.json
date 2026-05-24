@@ -1,0 +1,34 @@
+{
+  "id": "spatial-hard-022",
+  "topic": "spatial",
+  "difficulty": "hard",
+  "sub_type": "cube-net-invalid",
+  "skill_codes": [
+    "spatial-cube-net-invalid"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看這個展開圖,下面說法哪個是正確的?",
+  "visual": {
+    "type": "raw-html",
+    "html": "<svg width=\"260\" height=\"60\" viewBox=\"0 0 260 60\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"40\" height=\"40\" fill=\"#FFFFFF\" stroke=\"#2D2A4A\" stroke-width=\"2.5\"/><text x=\"30\" y=\"36\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"900\" fill=\"#2D2A4A\">1</text><rect x=\"50\" y=\"10\" width=\"40\" height=\"40\" fill=\"#FFFFFF\" stroke=\"#2D2A4A\" stroke-width=\"2.5\"/><text x=\"70\" y=\"36\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"900\" fill=\"#2D2A4A\">2</text><rect x=\"90\" y=\"10\" width=\"40\" height=\"40\" fill=\"#FFFFFF\" stroke=\"#2D2A4A\" stroke-width=\"2.5\"/><text x=\"110\" y=\"36\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"900\" fill=\"#2D2A4A\">3</text><rect x=\"130\" y=\"10\" width=\"40\" height=\"40\" fill=\"#FFFFFF\" stroke=\"#2D2A4A\" stroke-width=\"2.5\"/><text x=\"150\" y=\"36\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"900\" fill=\"#2D2A4A\">4</text><rect x=\"170\" y=\"10\" width=\"40\" height=\"40\" fill=\"#FFFFFF\" stroke=\"#2D2A4A\" stroke-width=\"2.5\"/><text x=\"190\" y=\"36\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"900\" fill=\"#2D2A4A\">5</text><rect x=\"210\" y=\"10\" width=\"40\" height=\"40\" fill=\"#FFFFFF\" stroke=\"#2D2A4A\" stroke-width=\"2.5\"/><text x=\"230\" y=\"36\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"900\" fill=\"#2D2A4A\">6</text></svg>"
+  },
+  "options": [
+    {
+      "text": "折好後從上方看,1 在頂面,6 在底面"
+    },
+    {
+      "text": "1 號與 6 號是相對面"
+    },
+    {
+      "text": "這個展開圖無法折成立方體"
+    },
+    {
+      "text": "2 號與 3 號在折成立方體後相鄰"
+    }
+  ],
+  "answer": 2,
+  "hint": "看這個展開圖的形狀,6 個方格的排列方式能不能折成立方體?有沒有相鄰但不該相鄰的方格?",
+  "explanation": "這個展開圖<strong>不能</strong>折成立方體 — 6 個方格的排列方式違反了 cube net 的拓樸結構。立方體的展開圖必須是 11 種特定 hexomino 之一,「row-of-6」不在其中。所以正解是 <strong>這個展開圖無法折成立方體</strong>。",
+  "skill": "立方體展開圖判斷"
+}

@@ -1,0 +1,124 @@
+{
+  "id": "spatial-mid-034",
+  "topic": "spatial",
+  "difficulty": "mid",
+  "sub_type": "symmetry-fold",
+  "skill_codes": [
+    "spatial-symmetry-fold"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "看展開後的結果,猜猜原本是怎麼折跟打洞的?",
+  "visual": {
+    "type": "composite",
+    "arrangement": "horizontal",
+    "items": [
+      {
+        "type": "foldedPaper",
+        "layout": "flat",
+        "holes": [
+          {
+            "x": 0.7,
+            "y": 0.25
+          },
+          {
+            "x": 0.7,
+            "y": 0.75
+          }
+        ],
+        "label": "展開後"
+      },
+      {
+        "type": "text",
+        "content": "← 原本怎麼折+打洞?"
+      }
+    ],
+    "gap": 10
+  },
+  "options": [
+    {
+      "text": "選項 A",
+      "visual": {
+        "type": "composite",
+        "arrangement": "horizontal",
+        "items": [
+          {
+            "type": "foldedPaper",
+            "layout": "half-v",
+            "holes": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ],
+            "label": "直摺"
+          }
+        ]
+      }
+    },
+    {
+      "text": "選項 B",
+      "visual": {
+        "type": "composite",
+        "arrangement": "horizontal",
+        "items": [
+          {
+            "type": "foldedPaper",
+            "layout": "half-v",
+            "holes": [
+              {
+                "x": 0.7,
+                "y": 0.5
+              }
+            ],
+            "label": "直摺"
+          }
+        ]
+      }
+    },
+    {
+      "text": "選項 C",
+      "visual": {
+        "type": "composite",
+        "arrangement": "horizontal",
+        "items": [
+          {
+            "type": "foldedPaper",
+            "layout": "half-h",
+            "holes": [
+              {
+                "x": 0.7,
+                "y": 0.5
+              }
+            ],
+            "label": "橫摺"
+          }
+        ]
+      }
+    },
+    {
+      "text": "選項 D",
+      "visual": {
+        "type": "composite",
+        "arrangement": "horizontal",
+        "items": [
+          {
+            "type": "foldedPaper",
+            "layout": "half-h",
+            "holes": [
+              {
+                "x": 0.30000000000000004,
+                "y": 0.5
+              }
+            ],
+            "label": "橫摺"
+          }
+        ]
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "展開後有 2 個洞,它們是怎麼對稱的?橫的對稱(上下鏡像)還是直的對稱(左右鏡像)?從這個提示判斷原本怎麼折。",
+  "explanation": "展開後 2 個洞如果是<strong>上下鏡像</strong>,代表原本沿<strong>橫向</strong>對摺。摺起來後紙是 上下對齊,打 1 個洞穿透 2 層,展開就還原成 2 個對稱洞。",
+  "skill": "對稱折紙還原"
+}
