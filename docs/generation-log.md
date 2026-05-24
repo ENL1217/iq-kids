@@ -854,3 +854,59 @@ options: 4 個 flat foldedPaper,各自 holes 不同
 
 push 後等回覆。OK 後再生 31 題、跑三層自驗、push 同 PR add commit。
 
+
+---
+
+### Batch 7 v2 — 生成完成 (同 PR #9 add commit)
+
+### 三項決策實作
+| Reviewer Q | 決策 | 實作 |
+|---|---|---|
+| Q1 paper-fold render | 用 composite (renderer.js:285 verified — `renderComposite` 內建 `flex-wrap: wrap`,小螢幕自動 2×2) | paper-fold-once + twice + symmetry-fold 全用 composite |
+| Q2 cube-net-invalid 句型 | 5 句型 rotation,#5「無法折成」當 invalid 題正解 | `STATEMENT_TYPES` const 5 種句型 helper,6 題分 3 invalid (#5 正解) + 3 valid (#5 當 distractor 陷阱) |
+| Q3 mirror 命名 | `mirror-arrow` 統一,visual 加 `mirrorAxis` | schema.md §4.9 加 mirrorAxis 欄位文檔 + generator output |
+
+### 31 題分布
+| 難度 | 數量 | sub_type | visual.type |
+|---|---|---|---|
+| easy | 4 | paper-fold-once | composite |
+| mid | 4 | paper-fold-twice | composite |
+| mid | 3 | cube-net-opposite | cubeNet |
+| mid | 5 | symmetry-fold | composite |
+| mid | 3 | mirror-arrow (mirrorAxis=horizontal) | composite |
+| hard | 4 | cube-net-opposite | cubeNet |
+| hard | 6 | cube-net-invalid (3 invalid + 3 valid) | raw-html / cubeNet 混用 |
+| hard | 2 | mirror-arrow (mirrorAxis=vertical) | composite |
+
+### 自驗
+- L1 strict validate: 92/93 pass(僅 seed easy-002 hint `!` 非我的)
+- L2 spot-check 5 sub_type 各 1 題,answer 邏輯正確
+- L3 distractor (per I-RAVEN 約束 + Q2 句型 mix):全部 6 cube-net-invalid 用 4 不同句型;mirror 用「錯軸 / +90°偏 / 沒做鏡像」三類
+
+### invalid layout 視覺 (cube-net-invalid 3 題)
+用 `customCubeNetSvg(squares)` helper 自繪,3 種非法形狀:
+- `row-of-6`:6 格全一排,topologically 不能折立方體
+- `L-broken`:4 格一排 + 2 格垂直懸掛,正方數對但配置錯
+- `T-broken`:3 格一排 + 3 格垂直懸掛從錯位起點
+
+### 改 schema.md §4.9 (一個小擴充,user 明確要求)
+加 `single-shape.mirrorAxis` metadata 欄位,純 metadata,renderer 不顯示。
+這是 cross-territory 改動 (schema 是 system Claude 領地),user 明確指示寫進去。
+
+### spatial canonical skill code 覆蓋達成 ✅
+| skill code | Batch 1-6 | Batch 7 | 全覆蓋 |
+|---|---|---|---|
+| spatial-cube-counting | ✅ 40 | — | ✅ |
+| spatial-volume-arithmetic | ✅ 15 | — | ✅ |
+| spatial-paper-fold | ❌ | ✅ 8 | ✅ |
+| spatial-cube-net | ✅ seed 2 | ✅ 7 | ✅ |
+| spatial-cube-net-invalid | ❌ | ✅ 6 | ✅ |
+| spatial-symmetry-fold | ❌ | ✅ 5 | ✅ |
+| spatial-mirror | ❌ | ✅ 5 | ✅ |
+
+雷達圖 spatial 軸 7 維度齊。
+
+### 未來增強建議
+- paper-fold 目前 hole 數限 1-3。若擴 hard 用 4-5 個洞 + 三次對摺 (eighth) 可加 5-10 題
+- mirror sub-pool 可擴 horizontal/vertical 各 10 題 (現只 5 題);需更多 (角度, axis) 組合
+- cube-net 可考慮多面對應陳述題型 (除了 opposite/adjacent,還有「哪 3 個面圍著 X」)

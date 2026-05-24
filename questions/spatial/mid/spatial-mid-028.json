@@ -1,0 +1,66 @@
+{
+  "id": "spatial-mid-028",
+  "topic": "spatial",
+  "difficulty": "mid",
+  "sub_type": "cube-net-opposite",
+  "skill_codes": [
+    "spatial-cube-net"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "這個立方體展開圖,折起來後哪兩個面是相對的?",
+  "visual": {
+    "type": "cubeNet",
+    "layout": "cross",
+    "faces": [
+      {
+        "position": "top",
+        "label": "1",
+        "color": "teal"
+      },
+      {
+        "position": "front",
+        "label": "2",
+        "color": "yellow"
+      },
+      {
+        "position": "right",
+        "label": "3",
+        "color": "purple"
+      },
+      {
+        "position": "back",
+        "label": "4",
+        "color": "orange"
+      },
+      {
+        "position": "left",
+        "label": "5",
+        "color": "blue"
+      },
+      {
+        "position": "bottom",
+        "label": "6",
+        "color": "pink"
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "2 號與 4 號相對"
+    },
+    {
+      "text": "3 號與 5 號相對"
+    },
+    {
+      "text": "1 號與 6 號相對"
+    },
+    {
+      "text": "1 號與 3 號相對"
+    }
+  ],
+  "answer": 0,
+  "hint": "cross 展開圖中,中間那排折起來變成<strong>四個側面</strong>。最上面的 face 跟最下面的 face 折起來是相對的。哪兩個是?",
+  "explanation": "cross 展開圖摺起來後:中間 4 個 (位置 left/front/right/back) 變成<strong>四個側面</strong>,上面那個 (top) 跟下面那個 (bottom) 變成<strong>頂面跟底面</strong>。頂面跟底面互為對面。其他相對組:left 跟 right,front 跟 back。本題正解:<strong>2 號與 4 號相對</strong>。",
+  "skill": "立方體展開想像 (相對面)"
+}

@@ -1,0 +1,149 @@
+{
+  "id": "spatial-mid-025",
+  "topic": "spatial",
+  "difficulty": "mid",
+  "sub_type": "paper-fold-twice",
+  "skill_codes": [
+    "spatial-paper-fold"
+  ],
+  "created_at": "2026-05-24",
+  "author": "claude-generated",
+  "prompt": "對摺兩次,在指定位置打洞。展開後是什麼樣子?",
+  "visual": {
+    "type": "composite",
+    "arrangement": "horizontal",
+    "items": [
+      {
+        "type": "foldedPaper",
+        "layout": "flat",
+        "foldHint": [
+          "horizontal",
+          "vertical"
+        ],
+        "label": "兩條摺線"
+      },
+      {
+        "type": "text",
+        "content": "→"
+      },
+      {
+        "type": "foldedPaper",
+        "layout": "quarter",
+        "holes": [
+          {
+            "x": 0.4,
+            "y": 0.3
+          }
+        ],
+        "label": "打洞"
+      },
+      {
+        "type": "text",
+        "content": "展開?"
+      }
+    ],
+    "gap": 10
+  },
+  "options": [
+    {
+      "text": "選項 A",
+      "visual": {
+        "type": "foldedPaper",
+        "layout": "flat",
+        "holes": [
+          {
+            "x": 0.2,
+            "y": 0.15
+          },
+          {
+            "x": 0.8,
+            "y": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "text": "選項 B",
+      "visual": {
+        "type": "foldedPaper",
+        "layout": "flat",
+        "holes": [
+          {
+            "x": 0.2,
+            "y": 0.15
+          },
+          {
+            "x": 0.8,
+            "y": 0.15
+          },
+          {
+            "x": 0.2,
+            "y": 0.85
+          },
+          {
+            "x": 0.8,
+            "y": 0.85
+          },
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "text": "選項 C",
+      "visual": {
+        "type": "foldedPaper",
+        "layout": "flat",
+        "holes": [
+          {
+            "x": 0.2,
+            "y": 0.15
+          },
+          {
+            "x": 0.30000000000000004,
+            "y": 0.25
+          },
+          {
+            "x": 0.2,
+            "y": 0.35
+          },
+          {
+            "x": 0.4,
+            "y": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "text": "選項 D",
+      "visual": {
+        "type": "foldedPaper",
+        "layout": "flat",
+        "holes": [
+          {
+            "x": 0.2,
+            "y": 0.15
+          },
+          {
+            "x": 0.8,
+            "y": 0.15
+          },
+          {
+            "x": 0.2,
+            "y": 0.85
+          },
+          {
+            "x": 0.8,
+            "y": 0.85
+          }
+        ]
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "兩次對摺 (橫一次 + 直一次) 後紙變成原來的 1/4。在這 1/4 上打 1 個洞,展開後會有幾個洞?它們會怎麼分布?",
+  "explanation": "兩次對摺後紙疊成 <strong>4 層</strong>,打 1 個洞穿透 4 層。展開後有 <strong>4 個對稱洞</strong>,分布在橫摺線跟直摺線各兩側 (4 個象限各 1 個)。",
+  "skill": "兩次對摺打洞展開"
+}
