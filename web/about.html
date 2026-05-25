@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- CSP: 限制可載入來源，降低 XSS 注入影響面。GitHub Pages 無法設 HTTP header，meta tag 為唯一管道。 -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://translate.google.com https://translate.googleapis.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; frame-src https://translate.google.com https://www.google.com; connect-src 'self' https://script.google.com https://translate.googleapis.com; form-action 'self' https://script.google.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://*.google.com https://*.googleapis.com https://*.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.googleapis.com https://*.gstatic.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; frame-src https://*.google.com https://*.googleusercontent.com; connect-src 'self' https://script.google.com https://*.googleapis.com https://*.google.com; form-action 'self' https://script.google.com">
 <title>讓孩子在日常裡多一點思考的甜味 · 腦力探險家</title>
 <meta name="description" content="一個從家庭出發的兒童腦力練習網站。不只給分數，而是陪孩子打開更多思考的門。">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
@@ -531,7 +531,7 @@
     </div>
     <p>這件事情也讓我對 AI 時代有更深的感受。</p>
 
-    <p>以前，一個父母如果突然想到：「我想幫孩子做一個簡單的腦力練習網站」，多半只是想想而已。因為真的要做出來，需要會設計、會寫程式、會整理題庫、會畫圖、會處理介面，還要有時間慢慢實作。對多數人來說，這個門檻不算低。</p>
+    <p>以前，一個父母如果突然想到：「我想幫孩子做一個簡單的腦力練習網站」，多半只是想想而已。因為真的要做出來，需要會設計、會寫程式、會整理題庫、會畫圖、會處理介面、會做<em>測試與除錯</em>、會處理<em>網路傳輸與前後端佈署</em>、會接<em>資料庫</em>、還要懂一點<em>資安檢測</em>，再加上要有時間慢慢實作。對多數人來說，這個門檻其實相當高，常常不是不想做，而是<strong>做不到</strong>。</p>
 
     <p>可是現在不一樣了。透過各種數位工具與 AI 輔助，一個原本很小、很生活化的需求，可以很快變成一個可以使用的雛形。當然，工具不會自動知道我們真正想要的是什麼。<em>人還是要負責觀察需求、描述問題、判斷方向、檢查結果、取捨功能</em>。很多複雜的事情也不是一次就能完成，而是需要反覆討論、修正與迭代。</p>
 

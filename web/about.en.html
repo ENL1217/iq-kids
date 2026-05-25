@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- CSP: limit allowed sources to reduce XSS impact. GitHub Pages can't set HTTP headers; meta tag is the only channel. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://translate.google.com https://translate.googleapis.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; frame-src https://translate.google.com https://www.google.com; connect-src 'self' https://script.google.com https://translate.googleapis.com; form-action 'self' https://script.google.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://*.google.com https://*.googleapis.com https://*.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.googleapis.com https://*.gstatic.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; frame-src https://*.google.com https://*.googleusercontent.com; connect-src 'self' https://script.google.com https://*.googleapis.com https://*.google.com; form-action 'self' https://script.google.com">
 <title>A little dessert of thinking, in everyday life · Brain Explorer</title>
 <meta name="description" content="An open-source brain practice site for kids — built from a family, for families. Not just a score, but a chance to open more doors of thinking.">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
@@ -515,7 +515,7 @@
     </div>
     <p>This whole experience has also deepened how I feel about the AI era.</p>
 
-    <p>In the past, if a parent suddenly thought, "I want to build a small brain-practice website for my kid," that usually stayed a thought. To actually do it, you'd need design skills, programming skills, content curation, drawing, UI work — plus a lot of time. For most people, the bar was too high.</p>
+    <p>In the past, if a parent suddenly thought, "I want to build a small brain-practice website for my kid," that usually stayed a thought. To actually do it, you'd need design skills, programming skills, content curation, drawing, UI work, <em>testing and debugging</em>, <em>networking and front-end / back-end deployment</em>, <em>database wiring</em>, and even <em>basic security review</em> — plus a lot of time on top of all that. For most people, the bar was simply too high. Often it wasn't a lack of will — it was a lack of capability.</p>
 
     <p>Now it's different. With modern digital tools and AI assistance, a tiny, very personal need can become a working prototype surprisingly fast. Of course, the tools don't automatically know what we really want. <em>A human still has to observe the need, articulate the problem, choose a direction, check the results, and make trade-offs.</em> Most non-trivial things still need many rounds of discussion, correction, and iteration.</p>
 
