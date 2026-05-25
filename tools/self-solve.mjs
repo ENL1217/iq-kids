@@ -21,6 +21,7 @@ import { solvers as rotContSolvers }  from './gen-matrix-rotation-cont.mjs';
 import { solvers as dirFillSolvers }  from './gen-multivar-direction-fill.mjs';
 import { solvers as logicalSolvers }  from './gen-matrix-logical.mjs';
 import { solvers as twoVarExtSolvers } from './gen-multivar-2var-ext.mjs';
+import { solvers as orbitSolvers }    from './gen-multivar-orbit.mjs';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -31,7 +32,8 @@ const SOLVERS = {
   ...rotContSolvers,
   ...dirFillSolvers,
   ...logicalSolvers,
-  ...twoVarExtSolvers
+  ...twoVarExtSolvers,
+  ...orbitSolvers
 };
 
 const args = process.argv.slice(2);

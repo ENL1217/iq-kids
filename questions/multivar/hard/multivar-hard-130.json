@@ -1,0 +1,96 @@
+{
+  "id": "multivar-hard-130",
+  "topic": "multivar",
+  "difficulty": "hard",
+  "sub_type": "3var-position-orbit",
+  "skill_codes": [
+    "multivar-3var"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "3 個小圓繞中心轉,? 應該是哪個位置安排?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "raw": "<circle cx=\"25\" cy=\"25\" r=\"1.5\" fill=\"#CCC\"/><circle cx=\"25\" cy=\"13\" r=\"5.5\" fill=\"#5B9DEC\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"31\" r=\"5.5\" fill=\"#FF6B9D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"15\" cy=\"31\" r=\"5.5\" fill=\"#FFD93D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/>"
+      },
+      {
+        "raw": "<circle cx=\"25\" cy=\"25\" r=\"1.5\" fill=\"#CCC\"/><circle cx=\"25\" cy=\"13\" r=\"5.5\" fill=\"#5B9DEC\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"31\" r=\"5.5\" fill=\"#FF6B9D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"15\" cy=\"31\" r=\"5.5\" fill=\"#FFD93D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/>"
+      },
+      {
+        "unknown": true
+      },
+      {
+        "raw": "<circle cx=\"25\" cy=\"25\" r=\"1.5\" fill=\"#CCC\"/><circle cx=\"25\" cy=\"13\" r=\"5.5\" fill=\"#FFD93D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"31\" r=\"5.5\" fill=\"#5B9DEC\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"15\" cy=\"31\" r=\"5.5\" fill=\"#FF6B9D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/>"
+      },
+      {
+        "raw": "<circle cx=\"25\" cy=\"25\" r=\"1.5\" fill=\"#CCC\"/><circle cx=\"25\" cy=\"13\" r=\"5.5\" fill=\"#FFD93D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"31\" r=\"5.5\" fill=\"#5B9DEC\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"15\" cy=\"31\" r=\"5.5\" fill=\"#FF6B9D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/>"
+      },
+      {
+        "raw": "<circle cx=\"25\" cy=\"25\" r=\"1.5\" fill=\"#CCC\"/><circle cx=\"25\" cy=\"13\" r=\"5.5\" fill=\"#FFD93D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"31\" r=\"5.5\" fill=\"#5B9DEC\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"15\" cy=\"31\" r=\"5.5\" fill=\"#FF6B9D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/>"
+      },
+      {
+        "raw": "<circle cx=\"25\" cy=\"25\" r=\"1.5\" fill=\"#CCC\"/><circle cx=\"25\" cy=\"13\" r=\"5.5\" fill=\"#FF6B9D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"31\" r=\"5.5\" fill=\"#FFD93D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"15\" cy=\"31\" r=\"5.5\" fill=\"#5B9DEC\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/>"
+      },
+      {
+        "raw": "<circle cx=\"25\" cy=\"25\" r=\"1.5\" fill=\"#CCC\"/><circle cx=\"25\" cy=\"13\" r=\"5.5\" fill=\"#FF6B9D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"31\" r=\"5.5\" fill=\"#FFD93D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"15\" cy=\"31\" r=\"5.5\" fill=\"#5B9DEC\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/>"
+      },
+      {
+        "raw": "<circle cx=\"25\" cy=\"25\" r=\"1.5\" fill=\"#CCC\"/><circle cx=\"25\" cy=\"13\" r=\"5.5\" fill=\"#FF6B9D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"31\" r=\"5.5\" fill=\"#FFD93D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"15\" cy=\"31\" r=\"5.5\" fill=\"#5B9DEC\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/>"
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "blue/yellow/pink",
+      "visual": {
+        "type": "raw-html",
+        "html": "<svg width=\"50\" height=\"50\" viewBox=\"0 0 50 50\"><circle cx=\"25\" cy=\"25\" r=\"1.5\" fill=\"#CCC\"/><circle cx=\"25\" cy=\"13\" r=\"5.5\" fill=\"#5B9DEC\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"31\" r=\"5.5\" fill=\"#FFD93D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"15\" cy=\"31\" r=\"5.5\" fill=\"#FF6B9D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/></svg>"
+      }
+    },
+    {
+      "text": "blue/pink/yellow",
+      "visual": {
+        "type": "raw-html",
+        "html": "<svg width=\"50\" height=\"50\" viewBox=\"0 0 50 50\"><circle cx=\"25\" cy=\"25\" r=\"1.5\" fill=\"#CCC\"/><circle cx=\"25\" cy=\"13\" r=\"5.5\" fill=\"#5B9DEC\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"31\" r=\"5.5\" fill=\"#FF6B9D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"15\" cy=\"31\" r=\"5.5\" fill=\"#FFD93D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/></svg>"
+      }
+    },
+    {
+      "text": "pink/yellow/blue",
+      "visual": {
+        "type": "raw-html",
+        "html": "<svg width=\"50\" height=\"50\" viewBox=\"0 0 50 50\"><circle cx=\"25\" cy=\"25\" r=\"1.5\" fill=\"#CCC\"/><circle cx=\"25\" cy=\"13\" r=\"5.5\" fill=\"#FF6B9D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"31\" r=\"5.5\" fill=\"#FFD93D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"15\" cy=\"31\" r=\"5.5\" fill=\"#5B9DEC\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/></svg>"
+      }
+    },
+    {
+      "text": "pink/blue/yellow",
+      "visual": {
+        "type": "raw-html",
+        "html": "<svg width=\"50\" height=\"50\" viewBox=\"0 0 50 50\"><circle cx=\"25\" cy=\"25\" r=\"1.5\" fill=\"#CCC\"/><circle cx=\"25\" cy=\"13\" r=\"5.5\" fill=\"#FF6B9D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"35\" cy=\"31\" r=\"5.5\" fill=\"#5B9DEC\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/><circle cx=\"15\" cy=\"31\" r=\"5.5\" fill=\"#FFD93D\" stroke=\"#2D2A4A\" stroke-width=\"1.5\"/></svg>"
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "3 個小圓的位置會按照規律旋轉。每往下一排轉 2×120° = 240°,每往右一格轉 0×120° = 0°。",
+  "explanation": "公式:cell(r,c) 旋轉 = (r×2 + c×0 + 2) mod 3。? 在 (0,2),旋轉 = (0×2 + 2×0 + 2) mod 3 = <strong>2</strong>,對應 3 色順序 <strong>blue/pink/yellow</strong>。",
+  "skill": "三元素旋轉位置",
+  "distractor_meta": [
+    {
+      "colors": "pink/yellow/blue",
+      "rot": 0,
+      "source": "axis-swap"
+    },
+    {
+      "colors": "blue/yellow/pink",
+      "rot": 2,
+      "source": "reverse"
+    },
+    {
+      "colors": "yellow/pink/blue",
+      "rot": 2,
+      "source": "swap-colors-01"
+    }
+  ],
+  "signature": "6e12aa69149a"
+}
