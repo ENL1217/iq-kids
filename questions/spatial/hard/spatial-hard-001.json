@@ -12,13 +12,13 @@
     "html": "<svg width='160' height='200' viewBox='0 0 160 200'><g transform='translate(20,20)'><rect x='40' y='0' width='40' height='40' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><circle cx='60' cy='20' r='6' fill='#FF6B9D'/><rect x='40' y='40' width='40' height='40' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><text x='60' y='68' text-anchor='middle' font-size='22' font-weight='900' fill='#4ECDC4'>★</text><rect x='40' y='80' width='40' height='40' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><rect x='50' y='90' width='20' height='20' fill='#FFD93D'/><rect x='40' y='120' width='40' height='40' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><text x='60' y='148' text-anchor='middle' font-size='22' font-weight='900' fill='#9B7EDE'>▲</text><rect x='0' y='80' width='40' height='40' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><text x='20' y='108' text-anchor='middle' font-size='20' fill='#FF9F45'>●</text><rect x='80' y='80' width='40' height='40' fill='white' stroke='#2D2A4A' stroke-width='2.5'/><text x='100' y='108' text-anchor='middle' font-size='20' fill='#5B9DEC'>◆</text></g></svg>"
   },
   "options": [
-    {"text": "粉●在頂,★在前,▲在底 (前後相鄰)"},
+    {"text": "粉●在頂,★在後,▲在前 (前後相對)"},
     {"text": "橘●在左,藍◆在右,黃■在頂"},
-    {"text": "粉●和▲在相對的面"},
+    {"text": "粉●和黃■在相對的面"},
     {"text": "★和黃■在相對的面"}
   ],
   "answer": 3,
-  "hint": "把展開圖每個面標位置:粉●在頂、▲在底,所以「粉●在頂、▲在底」是<strong>對的</strong>。中間那行有 4 個面:★、黃■、橘●、藍◆——這四個是四個側面。",
-  "explanation": "展開後,<strong>頂面和底面互相對立</strong>(粉●對▲),<strong>側面四個圍成圈</strong>。中央列從上到下是 ★→黃■,它們相鄰<strong>不是相對</strong>;橘●和藍◆才是相對的(在中央列的左右兩端)。所以「★和黃■相對」是<strong>錯的</strong>。",
+  "hint": "找展開圖的<strong>十字交叉</strong>:黃■在中央,周圍是★(上)、▲(下)、橘●(左)、藍◆(右)。折起來時黃■是<strong>底面</strong>,周圍 4 個變成<strong>四個側面</strong>。最上面的粉●呢?跟著★一起再折一次,會落到<strong>頂面</strong>。",
+  "explanation": "折起來後:中央的<strong>黃■</strong>是底面、最上面的<strong>粉●</strong>是頂面(粉●和黃■相對 ✓)。圍著黃■的四個側面是 ★、▲、橘●、藍◆。其中<strong>★和▲</strong>相對(它們在中央列的上下兩端,折起來變成前後牆)、<strong>橘●和藍◆</strong>相對(在中央列的左右兩端,折起來變成左右牆)。所以「★和黃■相對」是<strong>錯的</strong>——它們在展開圖上其實是<strong>相鄰</strong>(共用一條摺邊)。",
   "skill": "立方體面相對關係"
 }
