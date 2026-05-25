@@ -12,22 +12,23 @@
 Open the link and start playing. **No signup, no download, no install.**
 
 > 💗 Curious why this project exists? (It started with a workbook in a stationery shop.)
-> Read the [About page](https://enl1217.github.io/iq-kids/about.html)
-> (Chinese only for now — English version coming after content rewrite)
+> Read the about page — [English](https://enl1217.github.io/iq-kids/about.en.html) · [繁體中文](https://enl1217.github.io/iq-kids/about.html)
 
 ## 📊 Current Question Bank
 
-**440 questions** across six topics and three difficulty levels, growing:
+**471 questions** across six topics and three difficulty levels, growing:
 
 | Topic | Easy ⭐ | Mid ⭐⭐ | Hard ⭐⭐⭐ | Total |
 |-------|---------|---------|----------|-------|
 | 🎯 Matrix Reasoning   | 32 | 27 | 22 | 81 |
 | 🔄 Visual Sequence    | 32 | 27 | 22 | 81 |
-| 🧊 Spatial Reasoning  | 22 | 22 | 17 | 61 |
+| 🧊 Spatial Reasoning  | 26 | 37 | 29 | 92 |
 | 🔢 Number Series      | 30 | 25 | 20 | 75 |
 | 🔗 Verbal Analogy     | 32 | 27 | 22 | 81 |
 | 🌈 Multi-attribute    | 22 | 22 | 17 | 61 |
-| **Total**             | | | | **440** |
+| **Total**             | | | | **471** |
+
+> Spatial sub-types cover: isometric cube-stack counting, cube-net opposite/invalid-net detection, paper-fold-and-punch, symmetry unfolding, and mirror-arrow reasoning.
 
 > All questions are **original** — generated procedurally with attention to cognitive science principles. We never copy from copyrighted IQ test banks.
 

@@ -45,12 +45,9 @@
 
 ## 內容類
 
-### 題庫擴充至 v2 規模 (300+ 題)  `P1` 💭
-v1 目標 100 題,v1.1 目標 200 題,v2 目標 300+ 題
-
-### 程序化題目生成器  `P1` 💭
-numseries、simple matrix 可程序化生成,搭配難度參數
-**注意**:生成題的解析品質要等同手刻,不能罐頭
+### 題庫擴充至 v3 規模 (1000+ 題)  `P1` 💭
+v2 目標已達 (471 題)。新目標見 `docs/generation-log.md` Phase A-E roadmap
+**進度**:matrix 81、sequence 81、spatial 92、numseries 75、analogy 81、multivar 61 = **471**
 
 ### 多語言題庫  `P3` 💭
 英文版 / 簡體中文版 / 日文版
@@ -62,13 +59,6 @@ numseries、simple matrix 可程序化生成,搭配難度參數
 ---
 
 ## 視覺 / 互動類
-
-### 立方體展開圖 helper (cubeNet)  `P1` 💭
-立方體展開圖題型用的 helper,類似 cubeStack 但畫十字展開
-**對應 spec**:`spec.md §7.3`
-
-### 折紙打洞 helper (foldedPaper)  `P1` 💭
-折紙題用的視覺化,自動處理對摺次數跟洞位置
 
 ### 色盲友善模式  `P1` 💭
 形狀+紋理區分,不只靠顏色
@@ -113,21 +103,17 @@ SVG 折線圖,每題型在時間軸上的答對率
 測驗結束可下載一張漂亮的 PDF 給家長/老師
 **注意**:不要只是 html2canvas 截圖,要真的 PDF (jsPDF / pdfkit)
 
-### 多語言介面切換  `P1` 💭
-**結合瀏覽器 `navigator.language` 偵測 + localStorage 記偏好**
+### 多語言介面切換 (Phase 2 原生 i18n)  `P2` 💭
+**Phase 1 已完成** (Google Translate widget + 手寫英文 about 頁,見 §完成紀錄)。
+Phase 2 才是真正原生 i18n:
 
-設計建議:
-- Phase 1 (P1): UI 文字 i18n (主選單 / 按鈕 / modal labels / 設定頁 / about 頁)
-  - 新增 `web/js/i18n.js`,定義 `messages = { 'zh-TW': {...}, 'en': {...} }`
-  - 偵測順序:localStorage `iq-kids:lang` > URL `?lang=` > `navigator.language` > 'zh-TW' 預設
-  - HTML 標 `data-i18n="key"` 自動翻譯
-  - 設定頁加語言下拉選單
-- Phase 2 (P2): 題庫內容 i18n
-  - 題目 JSON 加 `prompt_en` / `hint_en` / `explanation_en` 欄位
-  - 或 build 時透過翻譯 pipeline 自動產生
+- 新增 `web/js/i18n.js`,定義 `messages = { 'zh-TW': {...}, 'en': {...} }`
+- 偵測順序:localStorage `iq-kids:lang` > URL `?lang=` > `navigator.language` > 'zh-TW' 預設
+- HTML 標 `data-i18n="key"` 自動翻譯
+- 設定頁加語言下拉選單
+- 題目 JSON 加 `prompt_en` / `hint_en` / `explanation_en` 欄位
 
-**為什麼放 P1**:程式碼面成本不高(主要是 UI 字串集中化),但對國際擴散影響大。
-不結合 `<html lang>` 自動切換而是用 localStorage 是因為瀏覽器語言不一定代表使用者偏好(e.g. 在英文系統上看中文網站)
+**為什麼降到 P2**:Phase 1 (Google Translate + 手翻 about) 已經涵蓋了 80% 使用情境。Phase 2 工作量大 (題庫內容 i18n 是 471 題 × 4 個 field),且現在沒有英文使用者反映迫切需求。等真有需求再做。
 
 ---
 
@@ -140,9 +126,6 @@ Service Worker + manifest.json,可加到桌面當 app 用
 ### 題庫匯入工具 (從外部來源)  `P1` 💭
 寫 `tools/import.mjs`,把符合著作權的外部來源轉成本系統 schema
 **前提**:逐個來源確認授權 (公版 / CC / 自製)
-
-### CI 自動驗證題庫  `P1` 💭
-GitHub Actions,PR 時跑 `tools/validate.mjs`
 
 ### 題目分享連結  `P2` 💭
 「我覺得這題很有趣,分享給朋友」→ 產生短連結直達該題
@@ -176,7 +159,15 @@ GitHub Actions,PR 時跑 `tools/validate.mjs`
 
 (此區記錄已實作的 wishlist 項目。格式:`[YYYY-MM-DD] item — 對應 commit / PR`)
 
-(尚無項目)
+- `[2026-05-24]` **立方體展開圖 helper (cubeNet)** P1 — `7a5b73e` 等 (helper 在 renderer.js + cubeNet.js,Batch 6/7 全部用上)
+- `[2026-05-24]` **折紙打洞 helper (foldedPaper)** P1 — `565a758` (renderer.js renderFoldedPaper)
+- `[2026-05-24]` **程序化題目生成器** P1 — 各 topic 都有 `tools/gen-<topic>.mjs`,batch 2-7 共產生 ~450 題
+- `[2026-05-24]` **題庫擴充至 v2 規模 (300+ 題)** P1 — 達 **471 題**,新目標見 docs/generation-log.md Phase A-E roadmap
+- `[2026-05-24]` **CI 自動驗證題庫** P1 — `pages.yml` workflow 在 deploy 前跑 `node tools/validate.mjs` (strict)
+- `[2026-05-25]` **多語言介面切換 Phase 1** P1 — `9bb2770` Google Translate widget 嵌主頁 + about 頁 / `0e75070` LLM 品質英文 about.en.html / `8d9f806` 隱私強化拿掉 user_agent 收集。Phase 2 (原生 i18n) 降為 P2 候選
+- `[2026-05-25]` **設定頁整合 + 弱項推薦 CTA** (沒在 backlog 但作為 Tier 1 完成) — `8f50703` web/js/settings.js + recorder.js findWeakest
+- `[2026-05-25]` **單題預覽工具 web/preview/q.html** (沒在 backlog,後來需求發現) — `a7a8667`
+- `[2026-05-25]` **安全強化 (Apps Script rate limit + CSP + Actions SHA pin)** (沒在 backlog,security audit 後加) — `311324b` / `e35810f` / `8d9f806`
 
 ---
 
