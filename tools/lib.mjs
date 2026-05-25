@@ -19,7 +19,28 @@ export const VALID_VISUAL_TYPES = [
   'single-shape',
   'composite',
   'text',     // 純文字節點 (組合視覺中使用)
-  'raw-html'  // 過渡用 escape hatch (折紙、custom 立方體展開圖等手刻 SVG)。新題目應優先用結構化 type
+  'raw-html', // 過渡用 escape hatch (折紙、custom 立方體展開圖等手刻 SVG)。新題目應優先用結構化 type
+  // Batch +1000 新增 (option-layer single-visual,可直接當 option.visual.type)
+  'clock-hand',
+  'angle-v',
+  'triangle-split',
+  'tally-lines',
+  'bowtie',
+  'nested-grid'
+];
+
+// ─── Batch +1000 新增 ──────────────────────────────────────────────────
+// VALID_CELL_TYPES:matrix-3x3 / matrix-2x2 / sequence-row 內,
+// 個別 cell 的 cell.type 值。跟 VALID_VISUAL_TYPES 分開,用途不同層。
+// renderer.js 的 renderCellContent() 會 dispatch on cell.type 優先,
+// 沒指定才 fallback 到既有的 cell.shape 路徑(向後相容)。
+export const VALID_CELL_TYPES = [
+  'clock-hand',
+  'angle-v',
+  'triangle-split',
+  'tally-lines',
+  'bowtie',
+  'nested-grid'
 ];
 
 // 從 schema.md §3 同步而來。新增 skill code 要先更新 schema.md。
@@ -31,6 +52,11 @@ export const VALID_SKILL_CODES = new Set([
   'pattern-arithmetic',
   'pattern-latin-square',
   'pattern-rotation',
+  // matrix - Batch +1000 新增
+  'pattern-logical-overlay',     // logical-overlay-{or,and,xor} 線條集合的布林運算
+  'pattern-continuous-rotation', // clockwise-row-step / col-step / dual-axis-rotation 等差角度
+  'pattern-position-mapping',    // direct-position-mapping / inverted-mapping / row-col-swap 巢狀位置追蹤
+  'pattern-tally-add',           // tally-{h,v,cross}-add / dots-pattern-add 線條/點陣加法 (perceptual grouping)
   // sequence
   'sequence-cyclic',
   'sequence-rotation',
@@ -191,8 +217,12 @@ export function validateQuestion(q, opts = {}) {
             return;
           }
           if (c.unknown) return;
-          if (!c.shape && !c.raw) {
-            errors.push(`visual.cells[${i}] has no shape, raw, or unknown — empty cell will render blank`);
+          if (!c.shape && !c.raw && !c.type) {
+            errors.push(`visual.cells[${i}] has no shape, raw, type, or unknown — empty cell will render blank`);
+          }
+          // cell.type 必須是 VALID_CELL_TYPES 內的值
+          if (c.type && !VALID_CELL_TYPES.includes(c.type)) {
+            errors.push(`visual.cells[${i}].type "${c.type}" not in VALID_CELL_TYPES`);
           }
         });
       }
@@ -211,8 +241,11 @@ export function validateQuestion(q, opts = {}) {
             return;
           }
           if (it.unknown) return;
-          if (!it.shape && !it.raw) {
-            errors.push(`visual.items[${i}] has no shape, raw, or unknown`);
+          if (!it.shape && !it.raw && !it.type) {
+            errors.push(`visual.items[${i}] has no shape, raw, type, or unknown`);
+          }
+          if (it.type && !VALID_CELL_TYPES.includes(it.type)) {
+            errors.push(`visual.items[${i}].type "${it.type}" not in VALID_CELL_TYPES`);
           }
         });
       }
