@@ -29,20 +29,11 @@
   },
   "options": [
     {
-      "text": "↘",
+      "text": "↖",
       "visual": {
         "type": "single-shape",
         "shape": "arrow",
-        "rotation": 135,
-        "color": "purple"
-      }
-    },
-    {
-      "text": "↙",
-      "visual": {
-        "type": "single-shape",
-        "shape": "arrow",
-        "rotation": 225,
+        "rotation": 315,
         "color": "purple"
       }
     },
@@ -56,17 +47,26 @@
       }
     },
     {
-      "text": "↖",
+      "text": "↑",
       "visual": {
         "type": "single-shape",
         "shape": "arrow",
-        "rotation": 315,
+        "rotation": 0,
+        "color": "purple"
+      }
+    },
+    {
+      "text": "↘",
+      "visual": {
+        "type": "single-shape",
+        "shape": "arrow",
+        "rotation": 135,
         "color": "purple"
       }
     }
   ],
   "answer": 0,
   "hint": "左右翻 (沿直軸鏡射)。原箭頭指 ↗。鏡像後指?",
-  "explanation": "左右翻 (直軸鏡射): rotation 變 (180 − 原角度 + 360) mod 360。45° 鏡射後是 <strong>135°</strong> (↘)。",
+  "explanation": "左右翻 (直軸鏡射): 左右顛倒,上下不變。公式 θ′ = 360° − θ。原本 45° (↗) → 鏡射後 <strong>315°</strong> (↖)。",
   "skill": "箭頭鏡像"
 }
