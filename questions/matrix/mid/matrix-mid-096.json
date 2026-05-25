@@ -1,0 +1,161 @@
+{
+  "id": "matrix-mid-096",
+  "topic": "matrix",
+  "difficulty": "mid",
+  "sub_type": "inverted-mapping",
+  "skill_codes": [
+    "pattern-position-mapping"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "黑塊位置跟大格位置左右上下對稱。? 裡黑塊在哪?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          8
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          7
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          6
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          5
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          4
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          3
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "unknown": true
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          1
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          0
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "中右",
+      "visual": {
+        "type": "nested-grid",
+        "filled_cells": [
+          5
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      }
+    },
+    {
+      "text": "左下",
+      "visual": {
+        "type": "nested-grid",
+        "filled_cells": [
+          6
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      }
+    },
+    {
+      "text": "上中",
+      "visual": {
+        "type": "nested-grid",
+        "filled_cells": [
+          1
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      }
+    },
+    {
+      "text": "右上",
+      "visual": {
+        "type": "nested-grid",
+        "filled_cells": [
+          2
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "小 grid 黑塊位置跟大格位置「上下左右都對稱」(180° 旋轉)。? 在 左下。",
+  "explanation": "黑塊位置 = 8 − (r*3+c) = 8 − 6 = <strong>2</strong>(右上)。",
+  "skill": "位置反向對應",
+  "distractor_meta": [
+    {
+      "pos": 6,
+      "source": "wrong-mapping-direct-position-mapping"
+    },
+    {
+      "pos": 5,
+      "source": "off-by-one-down"
+    },
+    {
+      "pos": 1,
+      "source": "off-by-one-left"
+    }
+  ],
+  "signature": "fa89c4aa6f3f"
+}

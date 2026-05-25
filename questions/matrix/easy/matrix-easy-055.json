@@ -1,0 +1,113 @@
+{
+  "id": "matrix-easy-055",
+  "topic": "matrix",
+  "difficulty": "easy",
+  "sub_type": "tally-v-add",
+  "skill_codes": [
+    "pattern-tally-add"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "直線數量在加,?裡有幾條直線?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 0
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 1
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 1
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 2
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 1
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 3
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 2
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 0
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "2 條直線",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 2
+      }
+    },
+    {
+      "text": "空白",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 0
+      }
+    },
+    {
+      "text": "3 條直線",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 3
+      }
+    },
+    {
+      "text": "1 條直線",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 1
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "把第 3 排前兩格的直線數加起來。前兩格是 2 跟 0 條,?應該是?",
+  "explanation": "每一排:<strong>前兩格相加 = 第三格</strong>。Row1 0+1=1。Row2 2+1=3。Row3 2+0=<strong>2</strong>。所以 ? = <strong>2 條直線</strong>。",
+  "skill": "直線加法",
+  "distractor_meta": [
+    {
+      "value": 1,
+      "source": "off-by-one -1"
+    },
+    {
+      "value": 3,
+      "source": "off-by-one 1"
+    },
+    {
+      "value": 0,
+      "source": "copy-row1"
+    }
+  ],
+  "signature": "2a33ff1e6538"
+}
