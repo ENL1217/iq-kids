@@ -1023,3 +1023,71 @@ hard-029 axis=vertical  rot=90  expected=270 got=270  opts=[90,315,0,270]
 - 答案邏輯看起來正確 (「★和黃■在相對的面」是假陳述,因為他們在展開圖中央列相鄰,折起來是相鄰不是相對)
 - user 「怪怪的」可能是:1) raw-html 視覺不清, 2)「相對/相鄰」對小學生抽象, 3) 折立方體 mental 操作對 5-6 年級也偏難
 - **建議 human-george / reviewer 自己 review 這題的視覺跟難度定位**
+
+---
+
+## Batch 8 — spatial-cube-combine (2026-05-25) ✅ DONE
+
+### 觸發
+Reviewer 拍照丟「奧林匹克小學數學考前特訓」第 42 頁問題 10 — 「左邊兩堆方塊拼起來 = 右邊哪一堆」。掃了現有 spatial 7 個 canonical skill code,沒有覆蓋這個。Reviewer 拍板做 cube-combine (純 spatial 補強,不擴新 topic)。
+
+### 統計
+| 難度 | 數量 | sub_type | visual |
+|------|------|----------|--------|
+| mid  | 8 | cube-combine-match | composite[ cubeStack A + "+" + cubeStack B + "=" + "?" ] |
+| hard | 7 | cube-combine-match | 同上 |
+| **總計** | **15** | 1 新 sub_type | options 4 個 cubeStack |
+
+### 新 skill_code
+`spatial-cube-combination` 加進 `lib.mjs` VALID_SKILL_CODES + `schema.md` §3。spatial 軸現在 8 個 skill_code 覆蓋。
+
+### Generator 設計
+`tools/gen-spatial-combine.mjs`:每題手動 curate (A_layout, B_layout, correct, d1, d2, d3),無 procedural generation (combination 規則複雜,手 curate 控制品質)。
+
+**Distractor 設計 (一致套路)**:
+- D1: 對的數,錯的形 (心智組合錯位)
+- D2: correct - 1 塊 (漏算)
+- D3: correct + 1 塊 (多算)
+
+### Truth-table sanity check (新做法,值得保留)
+generator 內建 assert:
+```js
+if (cN !== aN + bN) throw new Error(`${id}: correct ${cN} != A(${aN}) + B(${bN})`);
+if (d1N !== cN)      throw new Error(`d1 should match correct count`);
+if (d2N !== cN - 1)  throw new Error(`d2 should be correct-1`);
+if (d3N !== cN + 1)  throw new Error(`d3 should be correct+1`);
+```
+
+**第一次跑就抓到 2 個 config 數錯**:
+- mid-042 (我寫的 d3 只 4 塊,該 5 塊)
+- mid-045 (我宣稱 correct 4 塊,A+B 應該 5 塊)
+
+兩個都改完才能 gen。**這就是 mirror-arrow v5 fix 提的「generator 內建 sanity check 」做法,batch 8 首發。**
+
+### 三層自驗
+- L1 strict validate: 107/108 pass (僅 seed easy-002 hint `!`,非我的)
+- L2 cube count: 全部 15 題自動 assert 對得起來
+- L3 distractor: 每題 D1/D2/D3 三類具體誤解 + placeOptions assertion (4 unique)
+
+### 已知限制 / 設計取捨
+- **Option text 都標「N 塊」**:有時 D1 跟 correct 同數(D1 是對的數錯的形),text 看起來重複。**這是故意的** — 強制 kid 看 visual 區分形狀,不能靠 text 數字偷答。對視障 user 不友善 (screen reader 念兩個「2 塊」),但這 sub_type 本質是空間視覺題,沒視覺等於沒辦法做
+- 15 題各自手 curate,**沒有 procedural generation**。要擴到 50+ 題需要設計通用 combine 演算法 (兩 layout overlay + collision check),目前手 curate 夠用
+- 「兩堆怎麼拼」的物理規則沒明確指定 (kid 要看 4 個 options 推回去)。書上原題用箭頭暗示拼法,我用「總個數對 + 形狀對」雙條件,實質一樣
+
+### 內化教訓 (batch 8 帶到 batch 9+ 的工作流)
+**Truth-table sanity check 第一性實踐**:寫 generator 時,**先想清楚「correct 跟 distractor 之間的數學關係該滿足什麼」,寫進 assert**。這次 cube-combine 我用:
+- `cN = aN + bN` (combination 數學恆等)
+- `d1N = cN` (D1 同數)
+- `d2N = cN - 1`, `d3N = cN + 1` (相差 1 的常見誤解)
+
+future generator 都該想清楚這類 invariant,寫進 assert。reviewer 試玩抓的 bug (cube-net-opposite multi-answer / symmetry-fold ambiguity / mirror-arrow axis swap) 都是因為**沒寫這類 invariant assert**,讓 silent bug 流出。
+
+### 提案下一批 (假設批准)
+**Batch 9 候選** (回到 Phase A — 既有 generator 擴量):
+- numseries 75 → 200 (拓對數型 / 2 階等比 / 雙串差等差)
+- matrix 75 → 150 (更多 shape×color)
+- sequence / multivar 類似擴
+- 預期 +400 題,總 ~880
+
+或 Phase B 補 `analogy-group` / `analogy-category-member` (~50 題)。
+

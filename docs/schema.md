@@ -119,6 +119,7 @@ questions/matrix/easy/matrix-easy-001.json
 - `spatial-volume-arithmetic` — 立體乘法
 - `spatial-mirror` — 鏡像
 - `spatial-symmetry-fold` — 對稱折紙還原
+- `spatial-cube-combination` — 立方體組合(兩堆方塊合起來等於哪一堆)
 
 ### 數列 (number-*)
 - `number-arithmetic-series` — 等差數列

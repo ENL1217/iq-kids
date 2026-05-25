@@ -46,6 +46,7 @@ export const VALID_SKILL_CODES = new Set([
   'spatial-volume-arithmetic',
   'spatial-mirror',
   'spatial-symmetry-fold',
+  'spatial-cube-combination',
   // number
   'number-arithmetic-series',
   'number-geometric-series',
