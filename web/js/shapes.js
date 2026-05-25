@@ -219,6 +219,64 @@ export function bowtie(orientation = 'horizontal', left_fill = 'white', right_fi
   return defs + leftTri + rightTri;
 }
 
+/** B.8 frame + count:外層框 (square/circle/none),內部 1-3 小圓 (2var-count-frame 用)。 */
+export function countFrame(frame = 'square', count = 1) {
+  let out = '';
+  if (frame === 'square') {
+    out += `<rect x="5" y="5" width="40" height="40" rx="3" fill="none" stroke="${INK}" stroke-width="2.5"/>`;
+  } else if (frame === 'circle') {
+    out += `<circle cx="25" cy="25" r="20" fill="none" stroke="${INK}" stroke-width="2.5"/>`;
+  }
+  const positions = {
+    1: [[25, 25]],
+    2: [[18, 25], [32, 25]],
+    3: [[25, 16], [18, 33], [32, 33]]
+  };
+  const dots = positions[count] || [];
+  for (const [x, y] of dots) out += `<circle cx="${x}" cy="${y}" r="3.5" fill="${INK}"/>`;
+  return out;
+}
+
+/** B.9 shape + line:形狀(不填色)疊一條穿過的線 (2var-shape-line 用)。 */
+export function shapeLine(shape = 'circle', line = 'horizontal') {
+  const linePaths = {
+    horizontal: 'M 5 25 L 45 25',
+    vertical:   'M 25 5 L 25 45',
+    'diag-1':   'M 7 7 L 43 43',
+    'diag-2':   'M 43 7 L 7 43'
+  };
+  let shapeSvg = '';
+  if (shape === 'circle')         shapeSvg = `<circle cx="25" cy="25" r="16" fill="white" stroke="${INK}" stroke-width="2.5"/>`;
+  else if (shape === 'square')    shapeSvg = `<rect x="9" y="9" width="32" height="32" rx="3" fill="white" stroke="${INK}" stroke-width="2.5"/>`;
+  else if (shape === 'triangle')  shapeSvg = `<polygon points="25,8 42,38 8,38" fill="white" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  else if (shape === 'diamond')   shapeSvg = `<polygon points="25,6 42,25 25,44 8,25" fill="white" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  else if (shape === 'hex')       shapeSvg = `<polygon points="25,6 41,15 41,35 25,44 9,35 9,15" fill="white" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  const lineSvg = linePaths[line] ? `<path d="${linePaths[line]}" stroke="${INK}" stroke-width="2.5" stroke-linecap="round" fill="none"/>` : '';
+  return shapeSvg + lineSvg;
+}
+
+/** B.7 線條集合 (logical-overlay 題型用)。
+ *  lines 是 ['top_h', 'bottom_h', 'left_v', 'right_v', 'diag_main', 'diag_anti'] 的子集。
+ *  6 個固定位置,各為一條 30 單位長線。stroke 2.5 with linecap round。 */
+const LINE_OVERLAY_POS = {
+  top_h:     [10, 15, 40, 15],
+  bottom_h:  [10, 35, 40, 35],
+  left_v:    [15, 10, 15, 40],
+  right_v:   [35, 10, 35, 40],
+  diag_main: [10, 10, 40, 40],
+  diag_anti: [40, 10, 10, 40]
+};
+export function lineOverlay(lines = []) {
+  // outer frame faint to show "this is a cell"
+  let out = `<rect x="2" y="2" width="46" height="46" fill="none" stroke="#CCC" stroke-width="0.5"/>`;
+  for (const l of lines) {
+    const p = LINE_OVERLAY_POS[l];
+    if (!p) continue;
+    out += `<line x1="${p[0]}" y1="${p[1]}" x2="${p[2]}" y2="${p[3]}" stroke="${INK}" stroke-width="2.5" stroke-linecap="round"/>`;
+  }
+  return out;
+}
+
 /** B.6 巢狀 9 宮格。filled_cells 是 0-8 的索引陣列;black_cell_size 'normal'|'large'。
  *  另支援 'fill_color' 跟 'fill_shape' 兩個可選 (direct-position-mapping easy 20 題用)。 */
 export function nestedGrid(filled_cells = [], black_cell_size = 'normal', opts = {}) {

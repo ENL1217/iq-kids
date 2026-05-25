@@ -1,0 +1,174 @@
+{
+  "id": "matrix-easy-118",
+  "topic": "matrix",
+  "difficulty": "easy",
+  "sub_type": "logical-overlay-or",
+  "skill_codes": [
+    "pattern-logical-overlay"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "把前兩格的線疊起來,? 應該有哪些線?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "line-overlay",
+        "lines": [
+          "left_v",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "left_v",
+          "diag_main",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "left_v",
+          "diag_main",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "right_v",
+          "diag_main",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "bottom_h",
+          "right_v",
+          "diag_main",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "bottom_h",
+          "right_v",
+          "diag_main",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "right_v",
+          "diag_main",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "bottom_h",
+          "left_v",
+          "right_v",
+          "diag_main"
+        ]
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "下橫+左直+右直+主對角+副對角",
+      "visual": {
+        "type": "line-overlay",
+        "lines": [
+          "bottom_h",
+          "left_v",
+          "right_v",
+          "diag_main",
+          "diag_anti"
+        ]
+      }
+    },
+    {
+      "text": "右直+主對角",
+      "visual": {
+        "type": "line-overlay",
+        "lines": [
+          "right_v",
+          "diag_main"
+        ]
+      }
+    },
+    {
+      "text": "右直+主對角+副對角",
+      "visual": {
+        "type": "line-overlay",
+        "lines": [
+          "right_v",
+          "diag_main",
+          "diag_anti"
+        ]
+      }
+    },
+    {
+      "text": "上橫+下橫+左直+右直+主對角+副對角",
+      "visual": {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "bottom_h",
+          "left_v",
+          "right_v",
+          "diag_main",
+          "diag_anti"
+        ]
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "第 3 排前兩格是 右直+主對角+副對角 跟 下橫+左直+右直+主對角。聯集 (兩格的線都加進來)。",
+  "explanation": "每一排前兩格用 <strong>OR</strong>(聯集 (兩格的線都加進來))得第三格。Row1: 左直+副對角 OR 上橫+左直+主對角+副對角 = 上橫+左直+主對角+副對角。Row2: 上橫+右直+主對角+副對角 OR 上橫+下橫+右直+主對角+副對角 = 上橫+下橫+右直+主對角+副對角。Row3: 右直+主對角+副對角 OR 下橫+左直+右直+主對角 = <strong>下橫+左直+右直+主對角+副對角</strong>。",
+  "skill": "線條聯集 (OR)",
+  "distractor_meta": [
+    {
+      "set": [
+        "right_v",
+        "diag_main"
+      ],
+      "source": "wrong-op-and"
+    },
+    {
+      "set": [
+        "top_h",
+        "bottom_h",
+        "left_v",
+        "right_v",
+        "diag_main",
+        "diag_anti"
+      ],
+      "source": "one-off-top_h"
+    },
+    {
+      "set": [
+        "right_v",
+        "diag_main",
+        "diag_anti"
+      ],
+      "source": "copy-a"
+    }
+  ],
+  "signature": "8dd6142cc312"
+}

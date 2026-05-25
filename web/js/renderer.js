@@ -5,7 +5,8 @@
 import {
   svg, circle, square, triangle, star, diamond, hex, arrow, dots,
   multiShape, mc, shapeByName, COLORS,
-  clockHand, angleV, triangleSplit, tallyLines, bowtie, nestedGrid
+  clockHand, angleV, triangleSplit, tallyLines, bowtie, nestedGrid,
+  lineOverlay, countFrame, shapeLine
 } from './shapes.js';
 import { cubeStack } from './iso.js';
 
@@ -19,7 +20,10 @@ const CELL_TYPE_RENDERERS = {
   'bowtie':         (s) => bowtie(s.orientation, s.left_fill, s.right_fill),
   'nested-grid':    (s) => nestedGrid(s.filled_cells, s.black_cell_size, {
     fill_color: s.fill_color, fill_shape: s.fill_shape, border_color: s.border_color
-  })
+  }),
+  'line-overlay':   (s) => lineOverlay(s.lines),
+  'count-frame':    (s) => countFrame(s.frame, s.count),
+  'shape-line':     (s) => shapeLine(s.shape, s.line)
 };
 
 /**

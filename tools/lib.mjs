@@ -26,7 +26,10 @@ export const VALID_VISUAL_TYPES = [
   'triangle-split',
   'tally-lines',
   'bowtie',
-  'nested-grid'
+  'nested-grid',
+  'line-overlay',  // logical-overlay 題型用 (6 個 line element 的子集)
+  'count-frame',   // 2var-count-frame 用 (外框 + 內部 1-3 小圓)
+  'shape-line'     // 2var-shape-line 用 (形狀 + 穿過的線)
 ];
 
 // ─── Batch +1000 新增 ──────────────────────────────────────────────────
@@ -40,7 +43,10 @@ export const VALID_CELL_TYPES = [
   'triangle-split',
   'tally-lines',
   'bowtie',
-  'nested-grid'
+  'nested-grid',
+  'line-overlay',
+  'count-frame',
+  'shape-line'
 ];
 
 // 從 schema.md §3 同步而來。新增 skill code 要先更新 schema.md。

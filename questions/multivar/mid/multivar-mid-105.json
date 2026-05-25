@@ -1,0 +1,116 @@
+{
+  "id": "multivar-mid-105",
+  "topic": "multivar",
+  "difficulty": "mid",
+  "sub_type": "2var-count-frame",
+  "skill_codes": [
+    "multivar-2var"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫向跟直向看不同的東西(框跟點數),? 是哪個?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "count-frame",
+        "frame": "square",
+        "count": 3
+      },
+      {
+        "unknown": true
+      },
+      {
+        "type": "count-frame",
+        "frame": "circle",
+        "count": 3
+      },
+      {
+        "type": "count-frame",
+        "frame": "square",
+        "count": 1
+      },
+      {
+        "type": "count-frame",
+        "frame": "none",
+        "count": 1
+      },
+      {
+        "type": "count-frame",
+        "frame": "circle",
+        "count": 1
+      },
+      {
+        "type": "count-frame",
+        "frame": "square",
+        "count": 2
+      },
+      {
+        "type": "count-frame",
+        "frame": "none",
+        "count": 2
+      },
+      {
+        "type": "count-frame",
+        "frame": "circle",
+        "count": 2
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "無框+1點",
+      "visual": {
+        "type": "count-frame",
+        "frame": "none",
+        "count": 1
+      }
+    },
+    {
+      "text": "無框+3點",
+      "visual": {
+        "type": "count-frame",
+        "frame": "none",
+        "count": 3
+      }
+    },
+    {
+      "text": "方框+1點",
+      "visual": {
+        "type": "count-frame",
+        "frame": "square",
+        "count": 1
+      }
+    },
+    {
+      "text": "圓框+3點",
+      "visual": {
+        "type": "count-frame",
+        "frame": "circle",
+        "count": 3
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "橫向看點數,直向看外框。? 在第 1 排第 2 行。",
+  "explanation": "<strong>橫向看點數,直向看外框</strong>:該排 3 點、該行 無框。? = <strong>無框 + 3 點</strong>。",
+  "skill": "外框+數量雙變數",
+  "distractor_meta": [
+    {
+      "frame": "square",
+      "count": 1,
+      "source": "axis-swap"
+    },
+    {
+      "frame": "circle",
+      "count": 3,
+      "source": "wrong-frame-circle"
+    },
+    {
+      "frame": "none",
+      "count": 1,
+      "source": "wrong-count-1"
+    }
+  ],
+  "signature": "c27d94856c5d"
+}
