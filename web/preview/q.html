@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>單題預覽 · 腦力探險家 (preview tool)</title>
+<meta name="description" content="開發用工具:輸入題碼即時查看單題渲染結果。不對玩家公開。">
+<!-- CSP: 比主站更鬆,因為這是 dev tool 且要 fetch JSON -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self'">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css?v=__VERSION__">
+<style>
+  body {
+    background: linear-gradient(135deg, #f9fafe 0%, #f0f4ff 100%);
+    min-height: 100vh;
+  }
+  .pv-container {
+    max-width: 760px;
+    margin: 16px auto;
+    padding: 0 16px 40px;
+  }
+  .pv-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 3px dashed var(--ink-soft);
+  }
+  .pv-header h1 {
+    font-size: 22px;
+    flex: 1;
+    margin: 0;
+  }
+  .pv-header .back-link {
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-weight: 700;
+  }
+  .pv-input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .pv-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 14px;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    background: white;
+    font-family: 'Courier New', monospace;
+  }
+  .pv-btn {
+    padding: 10px 16px;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: var(--shadow-sm);
+  }
+  .pv-btn:hover { background: var(--primary-deep); }
+  .pv-btn.nav {
+    background: white;
+    color: var(--ink);
+    padding: 10px 12px;
+  }
+  .pv-btn.nav:hover { background: #FFFBF0; }
+  .pv-help {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .pv-help code {
+    background: #FFFCF0;
+    border: 1px solid var(--ink-soft);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+  }
+  .pv-meta {
+    background: #FFFCF0;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .pv-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .pv-tag {
+    display: inline-block;
+    background: white;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .pv-tag.skill { background: #E8FCFB; }
+  .pv-section {
+    background: var(--bg-paper);
+    border: 2.5px solid var(--ink);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .pv-section-label {
+    font-size: 11px;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .pv-prompt {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .pv-visual-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    background: white;
+    border-radius: 10px;
+    min-height: 60px;
+  }
+  .pv-options {
+    display: grid;
+    gap: 8px;
+  }
+  .pv-option {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 14px;
+    background: white;
+    border: 2.5px solid var(--ink);
+    border-radius: 12px;
+    font-size: 14px;
+  }
+  .pv-option.correct {
+    background: #E8F8E0;
+    border-color: var(--success);
+  }
+  .pv-option-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--ink-soft);
+    color: white;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .pv-option.correct .pv-option-label {
+    background: var(--success);
+  }
+  .pv-option-content {
+    flex: 1;
+    word-break: break-word;
+  }
+  .pv-option-visual {
+    margin-top: 6px;
+    display: flex;
+    justify-content: center;
+  }
+  .pv-correct-mark {
+    color: var(--success);
+    font-weight: 900;
+    font-size: 20px;
+  }
+  .pv-empty, .pv-loading, .pv-error {
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 14px;
+    font-weight: 600;
+  }
+  .pv-empty {
+    background: white;
+    color: var(--ink-soft);
+    border: 2px dashed var(--ink-soft);
+  }
+  .pv-loading {
+    background: #FFFCF0;
+    border: 2px solid var(--ink-soft);
+    color: var(--ink);
+  }
+  .pv-error {
+    background: #FFF0F0;
+    border: 2px solid #FF6B6B;
+    color: #C82828;
+    text-align: left;
+  }
+  .pv-multi-match {
+    display: grid;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .pv-multi-match button {
+    padding: 8px 14px;
+    border: 2.5px solid var(--ink);
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .pv-multi-match button:hover { background: #FFFBF0; }
+  @media (max-width: 520px) {
+    .pv-container { padding: 0 10px 24px; }
+    .pv-header h1 { font-size: 18px; }
+    .pv-input { font-size: 14px; }
+    .pv-section { padding: 12px; }
+    .pv-prompt { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="pv-container">
+  <div class="pv-header">
+    <h1>🔍 單題預覽工具</h1>
+    <a href="../index.html" class="back-link">← 回主站</a>
+  </div>
+
+  <div class="pv-input-row">
+    <input class="pv-input" id="qInput" placeholder="輸入題碼,例:spatial-hard-028" autofocus spellcheck="false">
+    <button class="pv-btn" id="loadBtn">載入</button>
+    <button class="pv-btn nav" id="prevBtn" title="上一題">←</button>
+    <button class="pv-btn nav" id="nextBtn" title="下一題">→</button>
+  </div>
+  <div class="pv-help">
+    支援格式:完整 ID <code>spatial-hard-028</code> /
+    省略 topic <code>hard-028</code>(自動掃 6 個 topic) /
+    URL 帶 ID <code>?id=spatial-hard-028</code> 直接跳。
+    <br>正解標<strong style="color:var(--success)">綠色 ✓</strong>。
+  </div>
+
+  <div id="qContent">
+    <div class="pv-empty">輸入題碼按「載入」開始 🔍</div>
+  </div>
+</div>
+
+<script type="module">
+  import { renderVisual } from '../js/renderer.js?v=__VERSION__';
+
+  const TOPICS = ['matrix', 'sequence', 'spatial', 'analogy', 'multivar', 'numseries'];
+  const ANSWER_LABELS = ['A', 'B', 'C', 'D', 'E'];
+
+  // ────────────────────────────────────────────
+  // Path resolution — try ../questions (deploy) and ../../questions (local dev)
+  // ────────────────────────────────────────────
+  let _baseCache = null;
+  async function findBase() {
+    if (_baseCache) return _baseCache;
+    const candidates = ['../questions', '../../questions'];
+    for (const base of candidates) {
+      try {
+        const r = await fetch(`${base}/spatial/easy/spatial-easy-001.json`);
+        if (r.ok) { _baseCache = base; return base; }
+      } catch {}
+    }
+    throw new Error('找不到 questions/ 資料夾。本地預覽請從專案根目錄 serve (例:cd D:\\AI_Project\\IQ && python -m http.server,然後開 /web/preview/q.html)');
+  }
+
+  // ────────────────────────────────────────────
+  // Fetch question — supports full or partial ID
+  // ────────────────────────────────────────────
+  async function fetchQuestion(input) {
+    const trimmed = input.trim().toLowerCase();
+    if (!trimmed) throw new Error('題碼空白');
+
+    const base = await findBase();
+    const parts = trimmed.split('-');
+
+    // Case 1: full ID (3 parts: topic-difficulty-num)
+    if (parts.length >= 3) {
+      const topic = parts[0];
+      const difficulty = parts[1];
+      const url = `${base}/${topic}/${difficulty}/${trimmed}.json`;
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(`找不到 ${trimmed} (HTTP ${r.status})\n試過:${url}`);
+      return await r.json();
+    }
+
+    // Case 2: partial (2 parts: difficulty-num) — try all topics
+    if (parts.length === 2) {
+      const [difficulty, num] = parts;
+      const candidates = [];
+      for (const topic of TOPICS) {
+        const fullId = `${topic}-${difficulty}-${num}`;
+        const url = `${base}/${topic}/${difficulty}/${fullId}.json`;
+        try {
+          const r = await fetch(url);
+          if (r.ok) candidates.push({ id: fullId, data: await r.json() });
+        } catch {}
+      }
+      if (candidates.length === 0) {
+        throw new Error(`找不到 ${trimmed} (掃過 6 個 topic 都沒中)`);
+      }
+      if (candidates.length === 1) return candidates[0].data;
+      // Multiple matches — let UI handle
+      return { _multipleMatches: candidates.map(c => c.id) };
+    }
+
+    throw new Error(`題碼格式不對:應為 topic-difficulty-num (例:spatial-hard-028) 或 difficulty-num (例:hard-028)`);
+  }
+
+  // ────────────────────────────────────────────
+  // Render
+  // ────────────────────────────────────────────
+  function renderQuestion(q) {
+    const root = document.getElementById('qContent');
+
+    const optionsHtml = (q.options || []).map((opt, idx) => {
+      const isCorrect = idx === q.answer;
+      const optVisual = opt.visual ? `<div class="pv-option-visual">${renderVisual(opt.visual)}</div>` : '';
+      return `
+        <div class="pv-option${isCorrect ? ' correct' : ''}">
+          <span class="pv-option-label">${ANSWER_LABELS[idx]}</span>
+          <div class="pv-option-content">
+            ${opt.text ? `<div>${escapeHtml(opt.text)}</div>` : ''}
+            ${optVisual}
+          </div>
+          ${isCorrect ? '<span class="pv-correct-mark">✓</span>' : ''}
+        </div>
+      `;
+    }).join('');
+
+    const skillTags = (q.skill_codes || []).map(s => `<span class="pv-tag skill">${escapeHtml(s)}</span>`).join('');
+
+    root.innerHTML = `
+      <div class="pv-meta">
+        <div class="pv-tags">
+          <span class="pv-tag">${escapeHtml(q.topic || '?')}</span>
+          <span class="pv-tag">${escapeHtml(q.difficulty || '?')}</span>
+          <span class="pv-tag">${escapeHtml(q.sub_type || 'no-subtype')}</span>
+          ${skillTags}
+        </div>
+        <div><strong>ID:</strong> <code>${escapeHtml(q.id)}</code></div>
+        <div><strong>author:</strong> ${escapeHtml(q.author || '?')} · <strong>created:</strong> ${escapeHtml(q.created_at || '?')}</div>
+        ${q.skill ? `<div><strong>skill:</strong> ${escapeHtml(q.skill)}</div>` : ''}
+      </div>
+
+      <div class="pv-section">
+        <div class="pv-section-label">📋 題目 (prompt)</div>
+        <div class="pv-prompt">${q.prompt || '(無 prompt)'}</div>
+      </div>
+
+      ${q.visual ? `
+        <div class="pv-section">
+          <div class="pv-section-label">🎨 視覺 (visual)</div>
+          <div class="pv-visual-wrap">${renderVisual(q.visual)}</div>
+        </div>
+      ` : ''}
+
+      <div class="pv-section">
+        <div class="pv-section-label">✅ 選項 (正解標綠色)</div>
+        <div class="pv-options">${optionsHtml}</div>
+      </div>
+
+      ${q.hint ? `
+        <div class="pv-section">
+          <div class="pv-section-label">💡 提示 (hint)</div>
+          <div>${q.hint}</div>
+        </div>
+      ` : ''}
+
+      ${q.explanation ? `
+        <div class="pv-section">
+          <div class="pv-section-label">📖 解釋 (explanation)</div>
+          <div>${q.explanation}</div>
+        </div>
+      ` : ''}
+    `;
+  }
+
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function renderMultipleMatches(ids) {
+    const root = document.getElementById('qContent');
+    const buttons = ids.map(id => `<button data-id="${escapeHtml(id)}">${escapeHtml(id)}</button>`).join('');
+    root.innerHTML = `
+      <div class="pv-error">
+        找到多個符合的題目,請選一個:
+        <div class="pv-multi-match">${buttons}</div>
+      </div>
+    `;
+    root.querySelectorAll('.pv-multi-match button').forEach(btn => {
+      btn.addEventListener('click', () => loadQuestion(btn.dataset.id));
+    });
+  }
+
+  function renderError(msg) {
+    document.getElementById('qContent').innerHTML = `<div class="pv-error">⚠️ ${escapeHtml(msg).replace(/\n/g, '<br>')}</div>`;
+  }
+
+  // ────────────────────────────────────────────
+  // Main load flow
+  // ────────────────────────────────────────────
+  async function loadQuestion(input) {
+    document.getElementById('qContent').innerHTML = '<div class="pv-loading">載入中... 🔄</div>';
+    try {
+      const q = await fetchQuestion(input);
+      if (q._multipleMatches) {
+        renderMultipleMatches(q._multipleMatches);
+        return;
+      }
+      renderQuestion(q);
+      // Update URL + input to canonical full ID
+      const url = new URL(window.location);
+      url.searchParams.set('id', q.id);
+      window.history.replaceState({}, '', url);
+      document.getElementById('qInput').value = q.id;
+    } catch (err) {
+      renderError(err.message);
+    }
+  }
+
+  function getNeighborId(currentId, delta) {
+    const parts = currentId.trim().toLowerCase().split('-');
+    if (parts.length < 3) return null;
+    const num = parseInt(parts[parts.length - 1], 10);
+    if (isNaN(num)) return null;
+    const newNum = num + delta;
+    if (newNum < 1) return null;
+    parts[parts.length - 1] = String(newNum).padStart(3, '0');
+    return parts.join('-');
+  }
+
+  // ────────────────────────────────────────────
+  // Event wiring
+  // ────────────────────────────────────────────
+  document.getElementById('loadBtn').addEventListener('click', () => {
+    loadQuestion(document.getElementById('qInput').value);
+  });
+  document.getElementById('qInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') loadQuestion(e.target.value);
+  });
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    const prev = getNeighborId(document.getElementById('qInput').value, -1);
+    if (prev) loadQuestion(prev);
+  });
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    const next = getNeighborId(document.getElementById('qInput').value, +1);
+    if (next) loadQuestion(next);
+  });
+
+  // Auto-load from URL ?id=...
+  const params = new URLSearchParams(window.location.search);
+  const initialId = params.get('id');
+  if (initialId) {
+    document.getElementById('qInput').value = initialId;
+    loadQuestion(initialId);
+  }
+</script>
+
+</body>
+</html>
