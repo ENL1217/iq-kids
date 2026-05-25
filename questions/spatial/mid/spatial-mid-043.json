@@ -1,0 +1,144 @@
+{
+  "id": "spatial-mid-043",
+  "topic": "spatial",
+  "difficulty": "mid",
+  "sub_type": "cube-combine-match",
+  "skill_codes": [
+    "spatial-cube-combination"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "左邊兩堆方塊拼起來,等於右邊哪一堆?",
+  "visual": {
+    "type": "composite",
+    "arrangement": "horizontal",
+    "items": [
+      {
+        "type": "cubeStack",
+        "layout": [
+          [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "size": 22
+      },
+      {
+        "type": "text",
+        "content": "+"
+      },
+      {
+        "type": "cubeStack",
+        "layout": [
+          [
+            [
+              1
+            ]
+          ]
+        ],
+        "size": 22
+      },
+      {
+        "type": "text",
+        "content": "="
+      },
+      {
+        "type": "text",
+        "content": "?"
+      }
+    ],
+    "gap": 8
+  },
+  "options": [
+    {
+      "text": "5 塊",
+      "visual": {
+        "type": "cubeStack",
+        "layout": [
+          [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ]
+        ],
+        "size": 22
+      }
+    },
+    {
+      "text": "4 塊",
+      "visual": {
+        "type": "cubeStack",
+        "layout": [
+          [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        ],
+        "size": 22
+      }
+    },
+    {
+      "text": "4 塊",
+      "visual": {
+        "type": "cubeStack",
+        "layout": [
+          [
+            [
+              1,
+              1
+            ]
+          ],
+          [
+            [
+              1,
+              1
+            ]
+          ]
+        ],
+        "size": 22
+      }
+    },
+    {
+      "text": "3 塊",
+      "visual": {
+        "type": "cubeStack",
+        "layout": [
+          [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "size": 22
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "左邊兩堆各有幾塊?A 有 <strong>3</strong> 塊,B 有 <strong>1</strong> 塊,拼起來 3+1=<strong>4</strong> 塊。再看哪一堆的形狀剛好可以從左邊兩堆組合出來。",
+  "explanation": "A 有 3 塊,B 有 1 塊,拼起來總共 <strong>3 + 1 = 4 塊</strong>。除了個數對,形狀也要對 — 拼起來剛好是「2×2 平面 4 塊」。對的數但形狀錯、漏一塊、多一塊都不是答案。",
+  "skill": "立方體組合配對"
+}
