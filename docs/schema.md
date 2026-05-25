@@ -399,6 +399,29 @@ V 字形。`orientation` 表示「開口方向」。
 - `fill_shape`: `"square" | "circle" | "triangle"` 填色形狀(預設 square)
 - `border_color`: 小 grid 邊框色,預設 `ink`
 
+#### 4.10.7 `line-overlay`
+6 個固定位置的線條子集合,用於 logical-overlay 題型。
+```json
+{ "type": "line-overlay", "lines": ["top_h", "left_v", "diag_main"] }
+```
+- `lines`: 子集,每元素 ∈ `top_h | bottom_h | left_v | right_v | diag_main | diag_anti`
+
+#### 4.10.8 `count-frame`
+外框 + 內部小圓數量。用於 2var-count-frame 題型。
+```json
+{ "type": "count-frame", "frame": "square", "count": 2 }
+```
+- `frame`: `"none" | "square" | "circle"`
+- `count`: 1-3 個內部小圓
+
+#### 4.10.9 `shape-line`
+形狀 + 穿過的線段方向。用於 2var-shape-line 題型。
+```json
+{ "type": "shape-line", "shape": "circle", "line": "horizontal" }
+```
+- `shape`: `"circle" | "square" | "triangle" | "diamond" | "hex"`
+- `line`: `"horizontal" | "vertical" | "diag-1" | "diag-2"`
+
 ---
 
 ### 4.11 cell.type dispatcher (batch +1000 新增介面)
