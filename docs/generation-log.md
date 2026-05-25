@@ -1091,3 +1091,39 @@ future generator 都該想清楚這類 invariant,寫進 assert。reviewer 試玩
 
 或 Phase B 補 `analogy-group` / `analogy-category-member` (~50 題)。
 
+
+### v2 fix — cube-combine 多解 (reviewer 試玩抓到)
+
+**問題**:reviewer 試 v1 後回報 — 拼合方向沒指定,所以 D1「對的數錯的形」實際是另一種合法拼法。例如 1+1=2,correct 是橫排 2 塊,D1 是直疊 2 塊 — 兩者都是 1+1 的合法拼法 (一個並排一個堆),都對。15 題全中。
+
+**Reviewer 提兩種解**:
+1. 題目明確指定拼合方向 (不能轉方向)
+2. 答案最好不要有一樣數量的方塊
+
+採 (2) 簡單可靠。
+
+**修法**:全部 15 題 distractor 重設計,**4 個 options cube count 全部不同**:
+- D1 = correct - 1 (漏算)
+- D2 = correct + 1 (多算)
+- D3 = correct ± 2 (更偏)
+
+Truth-check 升級成 `Set(counts).size === 4` assertion,自動擋 same-count 重出江湖。
+
+**驗證 (Python audit 全 15 題 distinct)**:
+```
+mid-038~045: counts [1,2,3,4] / [2,3,4,5] / ... 全 4 distinct
+hard-030~036: counts [4,5,6,7] / [3,4,5,6] / ... 全 4 distinct
+```
+0 多解,0 same-count。
+
+**取捨**:失去部分 spatial reasoning (kid 可純數 A+B 找對應數量選項,不需在「同數異形」之間判斷拼法方向),換零多解。Reviewer 偏好這 trade-off。
+
+**Explanation 更新**:從「對的數但形狀錯、漏一塊、多一塊都不是答案」改成「其他選項的個數都不對 — 先把兩堆方塊各數一遍,加起來就找得到答案」— 更符合新 distractor 設計。
+
+**累積 batch 7-8 教訓**:multi-answer bug 是 generator 第一大坑,跨 4 個 sub_type 都踩過:
+1. cube-net-opposite (v3): distractor 用其他「相對 pair」但那也是真陳述
+2. symmetry-fold (v4): D1 物理等價於 correct
+3. mirror-arrow (v5): D2 跟 D3 數值偶撞
+4. cube-combine (v8-v2): D1 是另一種合法拼法
+
+**統一防護**:寫 distractor 時除 placeOptions 4-unique assertion,還要驗 truth value (cube-combine 用 cube count distinct,cube-net 用 adjacent-pair pool,mirror 用 truth-table 公式)。
