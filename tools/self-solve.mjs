@@ -17,13 +17,17 @@ import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { solvers as tallySolvers }    from './gen-matrix-tally.mjs';
 import { solvers as nestedSolvers }   from './gen-matrix-nested.mjs';
+import { solvers as rotContSolvers }  from './gen-matrix-rotation-cont.mjs';
+import { solvers as dirFillSolvers }  from './gen-multivar-direction-fill.mjs';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = join(__dirname, '..');
 
 const SOLVERS = {
   ...tallySolvers,
-  ...nestedSolvers
+  ...nestedSolvers,
+  ...rotContSolvers,
+  ...dirFillSolvers
 };
 
 const args = process.argv.slice(2);

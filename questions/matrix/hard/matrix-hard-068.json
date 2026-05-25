@@ -1,0 +1,116 @@
+{
+  "id": "matrix-hard-068",
+  "topic": "matrix",
+  "difficulty": "hard",
+  "sub_type": "dual-axis-rotation",
+  "skill_codes": [
+    "pattern-continuous-rotation"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫向跟直向指針都在轉,? 指向哪邊?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "clock-hand",
+        "angle_deg": 300,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 345,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 30,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 330,
+        "length_ratio": 0.4
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 15,
+        "length_ratio": 0.4
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.4
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 0,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 45,
+        "length_ratio": 0.7
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "長指針 0° ↑",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 0,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "短指針 90° →",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 90,
+        "length_ratio": 0.4
+      }
+    },
+    {
+      "text": "長指針 15° 15°",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 15,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 90° →",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 90,
+        "length_ratio": 0.7
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "橫向每格 +45°,直向每排 +30°;指針長短也跟著 排變。右下角 = ?",
+  "explanation": "公式:angle = 300° + r × 30° + c × 45°。右下角 r=2, c=2:angle = 300° + 2×30° + 2×45° = <strong>90°</strong>(→),長度 = 0.7。",
+  "skill": "雙軸角度等差",
+  "distractor_meta": [
+    {
+      "angle": 0,
+      "length": 0.7,
+      "source": "only-row"
+    },
+    {
+      "angle": 15,
+      "length": 0.7,
+      "source": "repeat-cell-1-1"
+    },
+    {
+      "angle": 90,
+      "length": 0.4,
+      "source": "length-wrong"
+    }
+  ],
+  "signature": "cec31666dbab"
+}

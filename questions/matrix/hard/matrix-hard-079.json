@@ -1,0 +1,116 @@
+{
+  "id": "matrix-hard-079",
+  "topic": "matrix",
+  "difficulty": "hard",
+  "sub_type": "dual-axis-rotation",
+  "skill_codes": [
+    "pattern-continuous-rotation"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫向跟直向指針都在轉,? 指向哪邊?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "clock-hand",
+        "angle_deg": 300,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 330,
+        "length_ratio": 0.4
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 0,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 330,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 0,
+        "length_ratio": 0.4
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 30,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 0,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 30,
+        "length_ratio": 0.4
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "長指針 30° ↑↗",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 30,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "短指針 60° ↗→",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.4
+      }
+    },
+    {
+      "text": "長指針 60° ↗→",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 90° →",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 90,
+        "length_ratio": 0.7
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "橫向每格 +30°,直向每排 +30°;指針長短也跟著 行變。右下角 = ?",
+  "explanation": "公式:angle = 300° + r × 30° + c × 30°。右下角 r=2, c=2:angle = 300° + 2×30° + 2×30° = <strong>60°</strong>(↗→),長度 = 0.7。",
+  "skill": "雙軸角度等差",
+  "distractor_meta": [
+    {
+      "angle": 90,
+      "length": 0.7,
+      "source": "one-row-extra"
+    },
+    {
+      "angle": 60,
+      "length": 0.4,
+      "source": "length-wrong"
+    },
+    {
+      "angle": 30,
+      "length": 0.7,
+      "source": "one-col-short"
+    }
+  ],
+  "signature": "bdb0be00ee7f"
+}

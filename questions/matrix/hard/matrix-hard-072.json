@@ -1,0 +1,116 @@
+{
+  "id": "matrix-hard-072",
+  "topic": "matrix",
+  "difficulty": "hard",
+  "sub_type": "dual-axis-rotation",
+  "skill_codes": [
+    "pattern-continuous-rotation"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫向跟直向指針都在轉,? 指向哪邊?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "clock-hand",
+        "angle_deg": 0,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 120,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.4
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 120,
+        "length_ratio": 0.4
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 180,
+        "length_ratio": 0.4
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 120,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 180,
+        "length_ratio": 0.7
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "長指針 240° ↙←",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 240,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 180° ↓",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 180,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 120° →↘",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 120,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 300° ←↖",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 300,
+        "length_ratio": 0.7
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "橫向每格 +60°,直向每排 +60°;指針長短也跟著 排變。右下角 = ?",
+  "explanation": "公式:angle = 0° + r × 60° + c × 60°。右下角 r=2, c=2:angle = 0° + 2×60° + 2×60° = <strong>240°</strong>(↙←),長度 = 0.7。",
+  "skill": "雙軸角度等差",
+  "distractor_meta": [
+    {
+      "angle": 120,
+      "length": 0.7,
+      "source": "only-row"
+    },
+    {
+      "angle": 300,
+      "length": 0.7,
+      "source": "one-row-extra"
+    },
+    {
+      "angle": 180,
+      "length": 0.7,
+      "source": "one-col-short"
+    }
+  ],
+  "signature": "f519202853e6"
+}

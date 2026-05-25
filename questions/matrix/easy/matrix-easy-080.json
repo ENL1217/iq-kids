@@ -1,0 +1,113 @@
+{
+  "id": "matrix-easy-080",
+  "topic": "matrix",
+  "difficulty": "easy",
+  "sub_type": "clockwise-row-step",
+  "skill_codes": [
+    "pattern-continuous-rotation"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫向看每格指針轉的角度,? 指向哪邊?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "clock-hand",
+        "angle_deg": 180,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 225,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 270,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 315,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 0,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 45,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 90,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 135,
+        "length_ratio": 0.7
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "長指針 225° ↙",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 225,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 135° ↘",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 135,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 210° ↓↙",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 210,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 180° ↓",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 180,
+        "length_ratio": 0.7
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "每格的指針都比上一格再轉 45°,從左到右、再往下繼續。",
+  "explanation": "9 個格子按 row-major 順序,每格<strong>順時針轉 45°</strong>:第 1 格 180°,第 9 格 = 180° + 8×45° = <strong>180°</strong>(↓)。",
+  "skill": "橫向連續角度",
+  "distractor_meta": [
+    {
+      "angle": 225,
+      "source": "one-step-extra"
+    },
+    {
+      "angle": 135,
+      "source": "one-step-short"
+    },
+    {
+      "angle": 210,
+      "source": "fill"
+    }
+  ],
+  "signature": "328679a2f485"
+}

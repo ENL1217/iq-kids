@@ -1,0 +1,128 @@
+{
+  "id": "multivar-mid-075",
+  "topic": "multivar",
+  "difficulty": "mid",
+  "sub_type": "2var-direction-fill",
+  "skill_codes": [
+    "multivar-2var"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫向看方向、直向看點數(或反過來),? 是哪個?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "angle-v",
+        "orientation": "left",
+        "spread_deg": 60,
+        "dots": 3
+      },
+      {
+        "type": "angle-v",
+        "orientation": "up",
+        "spread_deg": 60,
+        "dots": 3
+      },
+      {
+        "type": "angle-v",
+        "orientation": "right",
+        "spread_deg": 60,
+        "dots": 3
+      },
+      {
+        "unknown": true
+      },
+      {
+        "type": "angle-v",
+        "orientation": "up",
+        "spread_deg": 60,
+        "dots": 1
+      },
+      {
+        "type": "angle-v",
+        "orientation": "right",
+        "spread_deg": 60,
+        "dots": 1
+      },
+      {
+        "type": "angle-v",
+        "orientation": "left",
+        "spread_deg": 60,
+        "dots": 0
+      },
+      {
+        "type": "angle-v",
+        "orientation": "up",
+        "spread_deg": 60,
+        "dots": 0
+      },
+      {
+        "type": "angle-v",
+        "orientation": "right",
+        "spread_deg": 60,
+        "dots": 0
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "開口朝右 < 1點",
+      "visual": {
+        "type": "angle-v",
+        "orientation": "right",
+        "spread_deg": 60,
+        "dots": 1
+      }
+    },
+    {
+      "text": "開口朝上 V 1點",
+      "visual": {
+        "type": "angle-v",
+        "orientation": "up",
+        "spread_deg": 60,
+        "dots": 1
+      }
+    },
+    {
+      "text": "開口朝左 > 1點",
+      "visual": {
+        "type": "angle-v",
+        "orientation": "left",
+        "spread_deg": 60,
+        "dots": 1
+      }
+    },
+    {
+      "text": "開口朝上 V 3點",
+      "visual": {
+        "type": "angle-v",
+        "orientation": "up",
+        "spread_deg": 60,
+        "dots": 3
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "直向看方向,橫向看點數。? 在第 2 排第 1 行,該排是 開口朝左 >,該行是 1 點。",
+  "explanation": "<strong>直向看方向,橫向看點數</strong>:每 行固定一個方向(開口朝左 >/開口朝上 V/開口朝右 <)、每 排固定一個點數(3/1/0)。? = <strong>開口朝左 > + 1 點</strong>。",
+  "skill": "方向+點數雙變數",
+  "distractor_meta": [
+    {
+      "o": "up",
+      "dots": 3,
+      "source": "axis-swap"
+    },
+    {
+      "o": "up",
+      "dots": 1,
+      "source": "wrong-orient-up"
+    },
+    {
+      "o": "right",
+      "dots": 1,
+      "source": "wrong-orient-right"
+    }
+  ],
+  "signature": "273073759f11"
+}
