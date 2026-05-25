@@ -16,19 +16,19 @@ Open the link and start playing. **No signup, no download, no install.**
 
 ## 📊 Current Question Bank
 
-**471 questions** across six topics and three difficulty levels, growing:
+**486 questions** across six topics and three difficulty levels, growing:
 
 | Topic | Easy ⭐ | Mid ⭐⭐ | Hard ⭐⭐⭐ | Total |
 |-------|---------|---------|----------|-------|
 | 🎯 Matrix Reasoning   | 32 | 27 | 22 | 81 |
 | 🔄 Visual Sequence    | 32 | 27 | 22 | 81 |
-| 🧊 Spatial Reasoning  | 26 | 37 | 29 | 92 |
+| 🧊 Spatial Reasoning  | 26 | 45 | 36 | 107 |
 | 🔢 Number Series      | 30 | 25 | 20 | 75 |
 | 🔗 Verbal Analogy     | 32 | 27 | 22 | 81 |
 | 🌈 Multi-attribute    | 22 | 22 | 17 | 61 |
-| **Total**             | | | | **471** |
+| **Total**             | | | | **486** |
 
-> Spatial sub-types cover: isometric cube-stack counting, cube-net opposite/invalid-net detection, paper-fold-and-punch, symmetry unfolding, and mirror-arrow reasoning.
+> Spatial sub-types cover: isometric cube-stack counting, cube-net opposite/invalid-net detection, paper-fold-and-punch, symmetry unfolding, mirror-arrow reasoning, and **cube-combination matching**.
 
 > All questions are **original** — generated procedurally with attention to cognitive science principles. We never copy from copyrighted IQ test banks.
 
