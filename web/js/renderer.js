@@ -4,9 +4,27 @@
 
 import {
   svg, circle, square, triangle, star, diamond, hex, arrow, dots,
-  multiShape, mc, shapeByName, COLORS
+  multiShape, mc, shapeByName, COLORS,
+  clockHand, angleV, triangleSplit, tallyLines, bowtie, nestedGrid,
+  lineOverlay, countFrame, shapeLine
 } from './shapes.js';
 import { cubeStack } from './iso.js';
+
+// Batch +1000 新增 primitive 的 inner-SVG 產生器。同時被 cell 層
+// (renderCellContent) 跟 option/top-level 層 (renderVisual switch) 共用。
+const CELL_TYPE_RENDERERS = {
+  'clock-hand':     (s) => clockHand(s.angle_deg, s.length_ratio, s.dot_radius),
+  'angle-v':        (s) => angleV(s.orientation, s.spread_deg, s.dots),
+  'triangle-split': (s) => triangleSplit(s.diagonal, s.top_fill, s.bottom_fill),
+  'tally-lines':    (s) => tallyLines(s.h_count, s.v_count),
+  'bowtie':         (s) => bowtie(s.orientation, s.left_fill, s.right_fill),
+  'nested-grid':    (s) => nestedGrid(s.filled_cells, s.black_cell_size, {
+    fill_color: s.fill_color, fill_shape: s.fill_shape, border_color: s.border_color
+  }),
+  'line-overlay':   (s) => lineOverlay(s.lines),
+  'count-frame':    (s) => countFrame(s.frame, s.count),
+  'shape-line':     (s) => shapeLine(s.shape, s.line)
+};
 
 /**
  * 主入口:接受任何 visual spec,回傳 HTML 字串。
@@ -29,6 +47,10 @@ export function renderVisual(spec) {
     case 'text':           return `<span class="vtext">${spec.content || ''}</span>`;
     case 'raw-html':       return spec.html || '';
     default:
+      // Batch +1000 primitive 統一從 CELL_TYPE_RENDERERS dispatch
+      if (CELL_TYPE_RENDERERS[spec.type]) {
+        return svg(CELL_TYPE_RENDERERS[spec.type](spec), spec.size || 50);
+      }
       return `<div class="render-error">Unknown visual type: ${spec.type}</div>`;
   }
 }
@@ -53,6 +75,12 @@ function renderMatrix(spec, size) {
 
 /** 一個 cell 的內部 SVG content (不含 <svg> 包裝)。 */
 function renderCellContent(cell) {
+  // Batch +1000:cell.type dispatch 優先 (新 primitive 走這條),
+  // 沒指定才 fallback 到既有的 cell.shape 路徑(向後相容)。
+  if (cell.type && CELL_TYPE_RENDERERS[cell.type]) {
+    return CELL_TYPE_RENDERERS[cell.type](cell);
+  }
+
   const colorHex = COLORS[cell.color] || cell.color || COLORS.pink;
 
   // 特殊形狀:arrow 用旋轉角度

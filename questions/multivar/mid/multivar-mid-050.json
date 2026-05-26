@@ -1,0 +1,128 @@
+{
+  "id": "multivar-mid-050",
+  "topic": "multivar",
+  "difficulty": "mid",
+  "sub_type": "2var-direction-fill",
+  "skill_codes": [
+    "multivar-2var"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫向看方向、直向看點數(或反過來),? 是哪個?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "angle-v",
+        "orientation": "up",
+        "spread_deg": 60,
+        "dots": 2
+      },
+      {
+        "type": "angle-v",
+        "orientation": "up",
+        "spread_deg": 60,
+        "dots": 1
+      },
+      {
+        "type": "angle-v",
+        "orientation": "up",
+        "spread_deg": 60,
+        "dots": 0
+      },
+      {
+        "type": "angle-v",
+        "orientation": "down",
+        "spread_deg": 60,
+        "dots": 2
+      },
+      {
+        "unknown": true
+      },
+      {
+        "type": "angle-v",
+        "orientation": "down",
+        "spread_deg": 60,
+        "dots": 0
+      },
+      {
+        "type": "angle-v",
+        "orientation": "left",
+        "spread_deg": 60,
+        "dots": 2
+      },
+      {
+        "type": "angle-v",
+        "orientation": "left",
+        "spread_deg": 60,
+        "dots": 1
+      },
+      {
+        "type": "angle-v",
+        "orientation": "left",
+        "spread_deg": 60,
+        "dots": 0
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "開口朝下 Λ 1點",
+      "visual": {
+        "type": "angle-v",
+        "orientation": "down",
+        "spread_deg": 60,
+        "dots": 1
+      }
+    },
+    {
+      "text": "開口朝上 V 2點",
+      "visual": {
+        "type": "angle-v",
+        "orientation": "up",
+        "spread_deg": 60,
+        "dots": 2
+      }
+    },
+    {
+      "text": "開口朝下 Λ 2點",
+      "visual": {
+        "type": "angle-v",
+        "orientation": "down",
+        "spread_deg": 60,
+        "dots": 2
+      }
+    },
+    {
+      "text": "開口朝上 V 1點",
+      "visual": {
+        "type": "angle-v",
+        "orientation": "up",
+        "spread_deg": 60,
+        "dots": 1
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "橫向看方向,直向看點數。? 在第 2 排第 2 行,該排是 開口朝下 Λ,該行是 1 點。",
+  "explanation": "<strong>橫向看方向,直向看點數</strong>:每 排固定一個方向(開口朝上 V/開口朝下 Λ/開口朝左 >)、每 行固定一個點數(2/1/0)。? = <strong>開口朝下 Λ + 1 點</strong>。",
+  "skill": "方向+點數雙變數",
+  "distractor_meta": [
+    {
+      "o": "up",
+      "dots": 2,
+      "source": "both-wrong-up-2"
+    },
+    {
+      "o": "up",
+      "dots": 1,
+      "source": "wrong-orient-up"
+    },
+    {
+      "o": "down",
+      "dots": 2,
+      "source": "wrong-dots-2"
+    }
+  ],
+  "signature": "2f7f7131f053"
+}

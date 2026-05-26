@@ -1,0 +1,116 @@
+{
+  "id": "multivar-easy-071",
+  "topic": "multivar",
+  "difficulty": "easy",
+  "sub_type": "2var-count-frame",
+  "skill_codes": [
+    "multivar-2var"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫向跟直向看不同的東西(框跟點數),? 是哪個?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "unknown": true
+      },
+      {
+        "type": "count-frame",
+        "frame": "square",
+        "count": 3
+      },
+      {
+        "type": "count-frame",
+        "frame": "square",
+        "count": 2
+      },
+      {
+        "type": "count-frame",
+        "frame": "none",
+        "count": 1
+      },
+      {
+        "type": "count-frame",
+        "frame": "none",
+        "count": 3
+      },
+      {
+        "type": "count-frame",
+        "frame": "none",
+        "count": 2
+      },
+      {
+        "type": "count-frame",
+        "frame": "circle",
+        "count": 1
+      },
+      {
+        "type": "count-frame",
+        "frame": "circle",
+        "count": 3
+      },
+      {
+        "type": "count-frame",
+        "frame": "circle",
+        "count": 2
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "方框+2點",
+      "visual": {
+        "type": "count-frame",
+        "frame": "square",
+        "count": 2
+      }
+    },
+    {
+      "text": "無框+1點",
+      "visual": {
+        "type": "count-frame",
+        "frame": "none",
+        "count": 1
+      }
+    },
+    {
+      "text": "方框+1點",
+      "visual": {
+        "type": "count-frame",
+        "frame": "square",
+        "count": 1
+      }
+    },
+    {
+      "text": "圓框+1點",
+      "visual": {
+        "type": "count-frame",
+        "frame": "circle",
+        "count": 1
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "直向看點數,橫向看外框。? 在第 1 排第 1 行。",
+  "explanation": "<strong>直向看點數,橫向看外框</strong>:該排 1 點、該行 方框。? = <strong>方框 + 1 點</strong>。",
+  "skill": "外框+數量雙變數",
+  "distractor_meta": [
+    {
+      "frame": "square",
+      "count": 2,
+      "source": "wrong-count-2"
+    },
+    {
+      "frame": "none",
+      "count": 1,
+      "source": "wrong-frame-none"
+    },
+    {
+      "frame": "circle",
+      "count": 1,
+      "source": "wrong-frame-circle"
+    }
+  ],
+  "signature": "57bd2f221501"
+}

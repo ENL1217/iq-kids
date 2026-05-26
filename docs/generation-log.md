@@ -10,6 +10,135 @@
 
 ---
 
+## Batch 9 — 邏輯/連續旋轉/巢狀/加法擴充 (2026-05-26) ✅ DONE
+
+### 規格來源
+`D:\AI_Project\prompt-for-tilibrary-claude.md`(operator brief)。批前對話釐清三個關鍵:
+- **§11 修正版**(commit 0 `d2434b5`):mid 允許多個「主規則軸」,只擋「裝飾性副屬性」(hand length 60% vs 80% 那類肉眼勉強分得出來的微調)。
+- **direct-position-mapping easy 20 的 signature 空間**:採「unknown 位置 9 種 × black_cell_size 2 段 × 邊框色 5 種」,實際只用前 18 + 2 個邊框色就湊到 20,沒動到 marker shape 備案。
+- **新 skill_code 授權**:4 個(`pattern-logical-overlay`, `pattern-continuous-rotation`, `pattern-position-mapping`, `pattern-tally-add`)— 全部進 `tools/lib.mjs` `VALID_SKILL_CODES` + `docs/schema.md` §3。
+
+### 新 sub_type(17 個,跨 6 個 phase 提交)
+
+| sub_type | topic | easy | mid | hard | total | generator |
+|---|---|---|---|---|---|---|
+| `tally-h-add` | matrix | 13 | 0 | 0 | 13 | `gen-matrix-tally.mjs` |
+| `tally-v-add` | matrix | 12 | 0 | 0 | 12 | 同 |
+| `tally-cross-add` | matrix | 0 | 55 | 0 | 55 | 同 |
+| `dots-pattern-add` | matrix | 0 | 0 | 25 | 25 | 同 |
+| `direct-position-mapping` | matrix | 20 | 0 | 0 | 20 | `gen-matrix-nested.mjs` |
+| `inverted-mapping` | matrix | 0 | 30 | 0 | 30 | 同 |
+| `row-col-swap` | matrix | 0 | 0 | 15 | 15 | 同 |
+| `clockwise-row-step` | matrix | 30 | 0 | 0 | 30 | `gen-matrix-rotation-cont.mjs` |
+| `clockwise-col-step` | matrix | 0 | 50 | 0 | 50 | 同 |
+| `dual-axis-rotation` | matrix | 0 | 0 | 25 | 25 | 同 |
+| `logical-overlay-or` | matrix | 25 | 0 | 0 | 25 | `gen-matrix-logical.mjs` |
+| `logical-overlay-and` | matrix | 15 | 50 | 10 | 75 | 同 |
+| `logical-overlay-xor` | matrix | 0 | 30 | 30 | 60 | 同 |
+| `2var-direction-fill` | multivar | 35 | 65 | 30 | 130 | `gen-multivar-direction-fill.mjs` |
+| `2var-count-frame` | multivar | 28 | 50 | 25 | 103 | `gen-multivar-2var-ext.mjs` |
+| `2var-shape-line` | multivar | 35 | 70 | 30 | 135 | 同 |
+| `3var-position-orbit` | multivar | 37 | 100 | 60 | 197 | `gen-multivar-orbit.mjs` |
+| **總計** |  | **250** | **500** | **250** | **1000** |  |
+
+### 新增 visual primitive(9 個,跨 Phase 1 + Phase 4 提交)
+
+Phase 1 (6 個):`clock-hand`, `angle-v`, `triangle-split`, `tally-lines`, `bowtie`, `nested-grid`
+Phase 4 (3 個):`line-overlay`, `count-frame`, `shape-line`
+
+全部進 `VALID_VISUAL_TYPES` + `VALID_CELL_TYPES`(新介面 — `cell.type` dispatcher,優先於 `cell.shape`),並寫進 `docs/schema.md` §4.10。
+
+### 新介面:`cell.type` dispatcher
+
+batch +1000 引入,寫進 `docs/schema.md` §4.11。
+
+```
+dispatch 順序(renderCellContent):
+  1. cell.unknown → "?"
+  2. cell.raw → 直接塞 SVG
+  3. cell.type ∈ VALID_CELL_TYPES → 走新 primitive (batch +1000)
+  4. cell.shape → fallback 到 single-shape 渲染(向後相容)
+```
+
+`VALID_VISUAL_TYPES` 跟 `VALID_CELL_TYPES` 分開兩個清單:前者是 option/top-level 用,後者是 matrix-cell-level 用。內容部分重疊,但 lint 用途不同。
+
+### 自驗 (`tools/self-solve.mjs` 新工具)
+
+新寫的批量驗證,支援 4 種 check:
+- 預設 → Layer 2 答案重算(每個 sub_type 寫 solver,跟 q.answer 比對)
+- `--check-options` → 每題 options.length === 4(batch +1000 hard requirement)
+- `--check-dup` → 同 (sub_type, difficulty) signature 唯一
+- `--check-balance` → answer index 0-3 χ² p > 0.5(uniformity test,df=3)
+
+整批通過:
+```
+[self-solve] scanned 1486 files
+  solver coverage: 1000 questions (sub_types with solvers: 17)
+  ✓ all 1000 solver-checked questions PASS
+[--check-options]  ✓ all batch +1000 questions have options.length === 4
+[--check-dup]      ✓ all batch +1000 (sub_type, difficulty) have unique signatures
+[--check-balance]  all 28 keys with χ² p > 0.93 (最低 logical-overlay-and:hard n=10 p=0.940)
+```
+
+### Distractor 設計策略(每 generator 內檔頭文件化)
+
+跨 generator 共享的 design language:
+- **off-by-one**(算術 / 旋轉題):±1 步、±1 個 line
+- **wrong-axis-value**(2var/3var):用對的 axis 算錯誤值
+- **axis-swap**(2var):用 row 規則套到 col(反之),刻意觸發「弄反規律」誤解
+- **wrong-OP**(logical):算 XOR 但給 AND 結果,反之
+- **mirror H/V**(logical):H 或 V 鏡射 correct(line element 翻轉)
+- **copy-row-input**(算術 / logical):複製 cell[0] 或 cell[1],「看起來像規律的一部分」
+- **repeat-visible**(算術 / 旋轉):複製矩陣內某可見 cell,觸發「填同樣」誤解
+- **wrong-mapping**(nested):用另一條 mapping rule(direct vs inverted vs row-col-swap)
+- **structural-error**(連續旋轉):reset-to-start、reverse-direction
+
+每題 `distractor_meta` 欄位記錄該題 3 個 distractor 各自的 source label。
+
+### 答案位置平衡器 (`BalancedAnswerPlacer`)
+
+新工具,放在 `gen-utils.mjs`。每題不再隨機 shuffle 4 個 options 後找 answerIdx,改成:
+1. 每個 (sub_type, difficulty) 維護一個 [0, 0, 0, 0] bucket
+2. 新題的 answerIdx = bucket 中「使用最少」的 index(平手隨機)
+3. 確保 χ² 4-bucket uniformity p > 0.93
+
+副效果:同 sub_type 內若 signature 衝突需 retry,placer 已經把 bucket++,造成微小過度平衡。實測 28 個 (sub_type, difficulty) 鍵 χ² p 全部 > 0.93,可接受。
+
+### ID 範圍
+
+| topic | difficulty | 起 | 迄 | 增加數 |
+|---|---|---|---|---|
+| matrix | easy | matrix-easy-033 | matrix-easy-147 | 115 |
+| matrix | mid | matrix-mid-028 | matrix-mid-242 | 215 |
+| matrix | hard | matrix-hard-023 | matrix-hard-127 | 105 |
+| multivar | easy | multivar-easy-023 | multivar-easy-157 | 135 |
+| multivar | mid | multivar-mid-023 | multivar-mid-307 | 285 |
+| multivar | hard | multivar-hard-018 | multivar-hard-162 | 145 |
+
+題庫總量 471(batch 8 結束)→ **1486**(batch 9 結束),增加 1015 包括 batch 8 cube-combine 15 題。Batch 9 純增加 1000。
+
+### 響應式 320px 驗收
+
+Phase 1 用 `web/preview/primitives.html` 在 320px viewport(iPhone SE portrait)截圖,6 個 primitive 全部:
+- stroke ≥ 2.5 (符合 spec §11 #8)
+- 線條對比、3 色填色、dot 點位都看得清楚
+- 修一個 `angle-v` dot radius 1.5 → 2 的視覺微調(spec 給 1.5,320px 下幾乎不可見)
+
+### 已知限制 / 未解項目
+
+1. **out-of-repo spec deprecation 標記**:operator brief `prompt-for-tilibrary-claude.md` 的 §C/§D 舊題量數字標記 deprecated 的編輯,被 auto-mode classifier 擋(理由「scope escalation」)。§11 主修正第一刀進去了,§C/§D 標記要 operator 手動加(或開 permission rule)。
+2. **3var-position-orbit 用 raw-html**:沒拉成獨立 primitive,因為這個 sub_type 的「3 dots on circle」結構特殊,獨立 primitive 不會被別的 sub_type 復用。若未來有 Q30/Q32 風格的變體 (4 dots / 不同位置),再抽出 primitive。
+3. **`angle-v` 3-dot 在 60° spread 偏緊**:測試頁顯示 3 dots 會碰到 V 的兩支線。本批沒題目用到 3-dot,但若後續 sub_type 需要,要重設 layout(或限定 spread ≥ 90°)。
+
+### 給接手 agent 的內化教訓
+
+- **`cell.type` dispatcher 是擴展題型的標準介面**:寫新 sub_type 時,新 primitive 進 `shapes.js` + `lib.mjs` + `renderer.js` 三處,即可在 matrix cell 跟 option 兩層通用。
+- **signature 唯一空間先算出來再開生成器**:本批兩個「天然窄」的 sub_type(`direct-position-mapping`, `tally-h-add`)在 Q2 階段就跟 operator 確認過擴充軸。
+- **平衡放置器是 χ² p > 0.5 的最便宜解法**:不依賴 RNG 運氣,顯式追蹤 bucket count,新題進最少使用的 index。
+- **self-solve.mjs 是 batch 唯一的客觀正確性 gate**:reviewer 試玩抓 bug 是 batch 7-8 的痛苦記憶;這批每個 sub_type 各寫 solver、整批 1000 題 100% pass 才算交付。
+
+---
+
 ## Batch 3 — sequence (2026-05-24) ✅ DONE
 
 ### Reviewer 回覆 (PR #5)

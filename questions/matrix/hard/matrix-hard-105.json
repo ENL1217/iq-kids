@@ -1,0 +1,148 @@
+{
+  "id": "matrix-hard-105",
+  "topic": "matrix",
+  "difficulty": "hard",
+  "sub_type": "logical-overlay-xor",
+  "skill_codes": [
+    "pattern-logical-overlay"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "前兩格相同的線消失、不同的線保留,? 應該有哪些線?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "bottom_h",
+          "left_v",
+          "diag_main"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "left_v"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "bottom_h",
+          "diag_main"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "bottom_h"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "bottom_h",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "bottom_h",
+          "right_v",
+          "diag_main"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "left_v",
+          "diag_main"
+        ]
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "空",
+      "visual": {
+        "type": "line-overlay",
+        "lines": []
+      }
+    },
+    {
+      "text": "左直+主對角",
+      "visual": {
+        "type": "line-overlay",
+        "lines": [
+          "left_v",
+          "diag_main"
+        ]
+      }
+    },
+    {
+      "text": "下橫+左直+右直",
+      "visual": {
+        "type": "line-overlay",
+        "lines": [
+          "bottom_h",
+          "left_v",
+          "right_v"
+        ]
+      }
+    },
+    {
+      "text": "下橫+左直+右直+主對角",
+      "visual": {
+        "type": "line-overlay",
+        "lines": [
+          "bottom_h",
+          "left_v",
+          "right_v",
+          "diag_main"
+        ]
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "第 3 排前兩格是 下橫+右直+主對角 跟 左直+主對角。對稱差 (兩格相同的消失,只有一格有的留)。",
+  "explanation": "每一排前兩格用 <strong>XOR</strong>(對稱差 (兩格相同的消失,只有一格有的留))得第三格。Row1: 上橫+下橫+左直+主對角 XOR 左直 = 上橫+下橫+主對角。Row2: 上橫+下橫 XOR 上橫+副對角 = 下橫+副對角。Row3: 下橫+右直+主對角 XOR 左直+主對角 = <strong>下橫+左直+右直</strong>。",
+  "skill": "線條對稱差 (XOR)",
+  "distractor_meta": [
+    {
+      "set": [],
+      "source": "extreme-empty"
+    },
+    {
+      "set": [
+        "left_v",
+        "diag_main"
+      ],
+      "source": "copy-b"
+    },
+    {
+      "set": [
+        "bottom_h",
+        "left_v",
+        "right_v",
+        "diag_main"
+      ],
+      "source": "wrong-op-or"
+    }
+  ],
+  "signature": "c9fa5dfbb149"
+}

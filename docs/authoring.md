@@ -73,6 +73,40 @@
 | **總計**  | 160 | 140 | 110 | **410** |
 
 > 這是建議數字。**先求品質再求數量**,如果某類型只能產出 10 題保證品質,那就 10 題,不要為了湊數降低標準。
+>
+> **2026-05 更新 (batch +1000):** 上表是 v1 啟動目標;實際每批的題量由 operator
+> 的 task brief 指定。截至 batch 9,題庫已擴充至 1486 題(matrix 516 +
+> sequence 81 + spatial 107 + numseries 75 + analogy 81 + multivar 626),
+> 其中 1000 題為 batch +1000 一次性產出(17 個新 sub_type)。
+
+---
+
+## 3.5 響應式視覺對比規則 (2026-05 修訂版)
+
+> 本節對應外部 spec `prompt-for-tilibrary-claude.md` 的 §11 第 10、11 條，2026-05 在 batch +1000 啟動會議中釐清。手機 320px 寬到桌面共用同一份題庫，視覺對比門檻是硬要求。
+
+### 3.5.1 每條主規則軸的「值之間視覺對比 ≥ 1.5×」
+
+每一條被當區分依據的主規則軸 (direction / fill / count / shape / size / stroke / length …)，其各值之間的視覺對比必須讓 7-12 歲孩童一眼能分辨。
+
+| 軸 | mid 可用 | hard 可用 | 備註 |
+|---|---|---|---|
+| `direction` (↑↓←→ 4 向) | ✅ | ✅ | 對比天然 ≥ 1.5× |
+| `fill` (filled vs empty / 黑白條紋 3 色) | ✅ | ✅ | OK |
+| `count` (1-4 物件) | ✅ | ✅ | mid 至少 1 vs 3 起跳；不可 2 vs 3 |
+| `shape` (circle/square/triangle 等三選二) | ✅ | ✅ | 輪廓差異足夠 |
+| `size` | ❌ | ✅ (≥ 1.5×) | mid 禁——容易被縮放吃掉 |
+| `stroke 粗細 / length 微調` | ❌ | ✅ | 僅限 hard |
+
+### 3.5.2 mid 多軸規則
+
+舊版規則「mid 只能 1 變量」**已作廢**。修訂後：
+
+- ✅ mid 可以用 row=主規則軸 A、col=主規則軸 B（如 row=direction、col=fill）
+- ✅ mid 可以 row_step + col_step 都改變同一變量（如都是角度）
+- ❌ mid 不可在主規則之上再疊「裝飾性副屬性」(hand length 60% vs 80%、stroke 2 vs 3、angle 30° vs 45° 這種肉眼勉強分得出來的微調)
+
+**判斷標準**：若移除某個軸後，整個 sub_type 的「規律」還能成立 → 該軸是裝飾性副屬性，mid 禁用。若移除後規律就崩潰 → 該軸是主規則軸，mid 可用。
 
 ---
 

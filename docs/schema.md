@@ -102,6 +102,10 @@ questions/matrix/easy/matrix-easy-001.json
 - `pattern-arithmetic` — 算術運算(相加/相減)
 - `pattern-latin-square` — 拉丁方陣
 - `pattern-rotation` — 旋轉規律
+- `pattern-logical-overlay` — 線條集合的布林運算 (XOR/OR/AND) ★ batch +1000
+- `pattern-continuous-rotation` — 連續角度等差旋轉 (時鐘指針) ★ batch +1000
+- `pattern-position-mapping` — 巢狀位置追蹤 (大 cell 索引 ↔ 小 grid 內位置) ★ batch +1000
+- `pattern-tally-add` — 線條/點陣加法 (perceptual grouping,跟 arithmetic 不同) ★ batch +1000
 
 ### 序列 (sequence-*)
 - `sequence-cyclic` — 循環規律 (ABAB / ABC)
@@ -335,7 +339,126 @@ emoji 選填,有的話畫面更豐富。
 }
 ```
 
-### 4.10 `composite` (組合)
+### 4.10 Batch +1000 新增 primitive (option-layer single-visual)
+
+下列 6 個 visual type 是 batch +1000 新增的「單一視覺元件」,viewBox 統一 `0 0 50 50`。
+**兩種使用層次**:
+- **option 層 (top-level visual.type)**:當作 `options[i].visual.type` 直接使用。
+- **matrix cell 層 (cell.type)**:在 `matrix-3x3` / `matrix-2x2` / `sequence-row` 的 cell 內,用 `cell.type` 取代 `cell.shape` 來指定這些 primitive(見 §4.11 cell.type dispatcher)。
+
+#### 4.10.1 `clock-hand`
+時鐘指針。0° = 12 點鐘,順時針為正。
+```json
+{ "type": "clock-hand", "angle_deg": 90, "length_ratio": 0.7, "dot_radius": 2 }
+```
+- `angle_deg`: 0-359
+- `length_ratio`: `0.4` (短指針,hard 第二屬性) 或 `0.7` (長指針,easy/mid 預設)
+- `dot_radius`: 圓心點半徑,預設 2
+
+#### 4.10.2 `angle-v`
+V 字形。`orientation` 表示「開口方向」。
+```json
+{ "type": "angle-v", "orientation": "up", "spread_deg": 60, "dots": 2 }
+```
+- `orientation`: `"up" | "down" | "left" | "right"` (開口朝哪邊;up = 頂點在下方 25,35,V 形)
+- `spread_deg`: 兩線間開角,30° (尖) / 60° (典型) / 120° (平)
+- `dots`: 0-3,凹側內的黑色實心圓數
+
+#### 4.10.3 `triangle-split`
+方形被對角線切成兩個三角形分別填色。
+```json
+{ "type": "triangle-split", "diagonal": "TL-BR", "top_fill": "white", "bottom_fill": "black" }
+```
+- `diagonal`: `"TL-BR"` (左上→右下) 或 `"TR-BL"` (右上→左下)
+- `top_fill`, `bottom_fill`: `"black" | "white" | "gray"`
+- **Convention**:從對角線起點起逆時針的第一個三角形 = `top`(視覺位置可能不在「上方」)
+
+#### 4.10.4 `tally-lines`
+線條數量(橫線、直線各 0-3,可同時)。
+```json
+{ "type": "tally-lines", "h_count": 2, "v_count": 1 }
+```
+
+#### 4.10.5 `bowtie`
+雙三角形(蝴蝶結)。
+```json
+{ "type": "bowtie", "orientation": "horizontal", "left_fill": "black", "right_fill": "striped" }
+```
+- `orientation`: `"horizontal" | "vertical"`
+- `left_fill`, `right_fill`: `"black" | "white" | "striped"`(striped 是 45° 斜紋)
+
+#### 4.10.6 `nested-grid`
+小 3×3 grid,某些格子填色。
+```json
+{ "type": "nested-grid", "filled_cells": [4], "black_cell_size": "normal",
+  "fill_color": "ink", "fill_shape": "square", "border_color": "ink" }
+```
+- `filled_cells`: 0-8 的索引陣列 (0=左上, 4=中, 8=右下)
+- `black_cell_size`: `"normal"` (60% cell) 或 `"large"` (80% cell)
+- `fill_color`: 填色,預設 `ink`(可用 `pink`/`teal` 等做 direct-position-mapping 變體)
+- `fill_shape`: `"square" | "circle" | "triangle"` 填色形狀(預設 square)
+- `border_color`: 小 grid 邊框色,預設 `ink`
+
+#### 4.10.7 `line-overlay`
+6 個固定位置的線條子集合,用於 logical-overlay 題型。
+```json
+{ "type": "line-overlay", "lines": ["top_h", "left_v", "diag_main"] }
+```
+- `lines`: 子集,每元素 ∈ `top_h | bottom_h | left_v | right_v | diag_main | diag_anti`
+
+#### 4.10.8 `count-frame`
+外框 + 內部小圓數量。用於 2var-count-frame 題型。
+```json
+{ "type": "count-frame", "frame": "square", "count": 2 }
+```
+- `frame`: `"none" | "square" | "circle"`
+- `count`: 1-3 個內部小圓
+
+#### 4.10.9 `shape-line`
+形狀 + 穿過的線段方向。用於 2var-shape-line 題型。
+```json
+{ "type": "shape-line", "shape": "circle", "line": "horizontal" }
+```
+- `shape`: `"circle" | "square" | "triangle" | "diamond" | "hex"`
+- `line`: `"horizontal" | "vertical" | "diag-1" | "diag-2"`
+
+---
+
+### 4.11 cell.type dispatcher (batch +1000 新增介面)
+
+`matrix-3x3` / `matrix-2x2` / `sequence-row` 的每個 cell 預設用 `cell.shape` 對應到 `single-shape`-style 渲染。**新介面**:cell 可指定 `cell.type` 從 §4.10 的 primitive 列表選一個 visual,renderer 會優先 dispatch 到該 primitive。
+
+```json
+{
+  "type": "matrix-3x3",
+  "cells": [
+    { "type": "clock-hand", "angle_deg": 0,   "length_ratio": 0.7 },
+    { "type": "clock-hand", "angle_deg": 30,  "length_ratio": 0.7 },
+    { "type": "clock-hand", "angle_deg": 60,  "length_ratio": 0.7 },
+    { "type": "clock-hand", "angle_deg": 90,  "length_ratio": 0.7 },
+    { "type": "clock-hand", "angle_deg": 120, "length_ratio": 0.7 },
+    { "type": "clock-hand", "angle_deg": 150, "length_ratio": 0.7 },
+    { "type": "clock-hand", "angle_deg": 180, "length_ratio": 0.7 },
+    { "type": "clock-hand", "angle_deg": 210, "length_ratio": 0.7 },
+    { "unknown": true }
+  ]
+}
+```
+
+**dispatch 順序**(`web/js/renderer.js` 的 `renderCellContent`):
+1. `cell.unknown` → 顯示「?」
+2. `cell.raw` → 直接塞 SVG 字串 (legacy escape hatch)
+3. **`cell.type` ∈ `VALID_CELL_TYPES` → 走新 primitive dispatch**(batch +1000)
+4. `cell.shape` → fallback 到舊 single-shape 渲染(向後相容)
+
+**為什麼分 `VALID_VISUAL_TYPES` 跟 `VALID_CELL_TYPES`**:
+- `VALID_VISUAL_TYPES` 是 top-level 的視覺類型(`q.visual.type` 跟 `options[i].visual.type`),包括 matrix-3x3、composite、single-shape 等 layout 型 + 6 個新 primitive。
+- `VALID_CELL_TYPES` 是 matrix/sequence cell 層的 primitive 列表(只有 6 個新 primitive,不會出現 matrix-3x3 這種 layout 型)。
+- 兩者目前內容部分重疊,但**用途不同**,分開有助於 lint 出「在 cell 裡誤用 layout 型」的錯誤。
+
+---
+
+### 4.12 `composite` (組合)
 多個視覺水平排列。
 
 ```json

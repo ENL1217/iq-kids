@@ -1,0 +1,113 @@
+{
+  "id": "matrix-easy-038",
+  "topic": "matrix",
+  "difficulty": "easy",
+  "sub_type": "tally-h-add",
+  "skill_codes": [
+    "pattern-tally-add"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫線數量在加,?裡有幾條橫線?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 0
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 3,
+        "v_count": 0
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 3,
+        "v_count": 0
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 0
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 1,
+        "v_count": 0
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 1,
+        "v_count": 0
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 1,
+        "v_count": 0
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 0
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "3 條橫線",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 3,
+        "v_count": 0
+      }
+    },
+    {
+      "text": "2 條橫線",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 2,
+        "v_count": 0
+      }
+    },
+    {
+      "text": "1 條橫線",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 1,
+        "v_count": 0
+      }
+    },
+    {
+      "text": "空白",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 0
+      }
+    }
+  ],
+  "answer": 2,
+  "hint": "把第 3 排前兩格的橫線數加起來。前兩格是 1 跟 0 條,?應該是?",
+  "explanation": "每一排:<strong>前兩格相加 = 第三格</strong>。Row1 0+3=3。Row2 0+1=1。Row3 1+0=<strong>1</strong>。所以 ? = <strong>1 條橫線</strong>。",
+  "skill": "橫線加法",
+  "distractor_meta": [
+    {
+      "value": 0,
+      "source": "off-by-one -1"
+    },
+    {
+      "value": 2,
+      "source": "off-by-one 1"
+    },
+    {
+      "value": 3,
+      "source": "fill"
+    }
+  ],
+  "signature": "2d8172103054"
+}

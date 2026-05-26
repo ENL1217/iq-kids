@@ -1,0 +1,113 @@
+{
+  "id": "matrix-easy-102",
+  "topic": "matrix",
+  "difficulty": "easy",
+  "sub_type": "clockwise-row-step",
+  "skill_codes": [
+    "pattern-continuous-rotation"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫向看每格指針轉的角度,? 指向哪邊?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "clock-hand",
+        "angle_deg": 210,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 270,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 330,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 30,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 90,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 150,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 210,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 270,
+        "length_ratio": 0.7
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "長指針 90° →",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 90,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 330° ↖↑",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 330,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 30° ↑↗",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 30,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 270° ←",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 270,
+        "length_ratio": 0.7
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "每格的指針都比上一格再轉 60°,從左到右、再往下繼續。",
+  "explanation": "9 個格子按 row-major 順序,每格<strong>順時針轉 60°</strong>:第 1 格 210°,第 9 格 = 210° + 8×60° = <strong>330°</strong>(↖↑)。",
+  "skill": "橫向連續角度",
+  "distractor_meta": [
+    {
+      "angle": 90,
+      "source": "reverse-direction"
+    },
+    {
+      "angle": 30,
+      "source": "one-step-extra"
+    },
+    {
+      "angle": 270,
+      "source": "repeat-visible-cell7"
+    }
+  ],
+  "signature": "68d75f67abd8"
+}

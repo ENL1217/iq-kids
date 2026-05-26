@@ -1,0 +1,116 @@
+{
+  "id": "matrix-hard-074",
+  "topic": "matrix",
+  "difficulty": "hard",
+  "sub_type": "dual-axis-rotation",
+  "skill_codes": [
+    "pattern-continuous-rotation"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫向跟直向指針都在轉,? 指向哪邊?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "clock-hand",
+        "angle_deg": 240,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 330,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 285,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 15,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 105,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 330,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.7
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "長指針 15° 15°",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 15,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 330° ↖↑",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 330,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 60° ↗→",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 150° ↘↓",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 150,
+        "length_ratio": 0.7
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "橫向每格 +90°,直向每排 +45°。右下角 = ?",
+  "explanation": "公式:angle = 240° + r × 45° + c × 90°。右下角 r=2, c=2:angle = 240° + 2×45° + 2×90° = <strong>150°</strong>(↘↓)。",
+  "skill": "雙軸角度等差",
+  "distractor_meta": [
+    {
+      "angle": 60,
+      "length": 0.7,
+      "source": "only-col"
+    },
+    {
+      "angle": 15,
+      "length": 0.7,
+      "source": "repeat-cell-1-1"
+    },
+    {
+      "angle": 330,
+      "length": 0.7,
+      "source": "reverse"
+    }
+  ],
+  "signature": "36bf979144e4"
+}

@@ -1,0 +1,116 @@
+{
+  "id": "matrix-mid-044",
+  "topic": "matrix",
+  "difficulty": "mid",
+  "sub_type": "tally-cross-add",
+  "skill_codes": [
+    "pattern-tally-add"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫線跟直線數量都在加,?是哪一格?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "tally-lines",
+        "h_count": 1,
+        "v_count": 0
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 2,
+        "v_count": 1
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 3,
+        "v_count": 1
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 2
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 2,
+        "v_count": 0
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 2,
+        "v_count": 2
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 2,
+        "v_count": 2
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 1
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "2 橫 3 直",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 2,
+        "v_count": 3
+      }
+    },
+    {
+      "text": "3 橫 3 直",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 3,
+        "v_count": 3
+      }
+    },
+    {
+      "text": "1 橫 3 直",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 1,
+        "v_count": 3
+      }
+    },
+    {
+      "text": "3 橫 2 直",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 3,
+        "v_count": 2
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "橫線:2+0=?,直線:2+1=?,兩個都要算。",
+  "explanation": "<strong>橫線</strong>每排前兩格相加:Row3 2+0=<strong>2</strong>。<strong>直線</strong>同理:Row3 2+1=<strong>3</strong>。所以 ? = <strong>2 橫 + 3 直</strong>。",
+  "skill": "橫直雙軸加法",
+  "distractor_meta": [
+    {
+      "h": 3,
+      "v": 2,
+      "source": "axis-swap"
+    },
+    {
+      "h": 3,
+      "v": 3,
+      "source": "h+1"
+    },
+    {
+      "h": 1,
+      "v": 3,
+      "source": "h-1"
+    }
+  ],
+  "signature": "da31844641fc"
+}

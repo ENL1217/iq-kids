@@ -1,0 +1,161 @@
+{
+  "id": "matrix-easy-077",
+  "topic": "matrix",
+  "difficulty": "easy",
+  "sub_type": "direct-position-mapping",
+  "skill_codes": [
+    "pattern-position-mapping"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "每個大格裡的黑塊位置,跟它在大 3×3 的位置一樣。? 裡黑塊在哪?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          0
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "unknown": true
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          2
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          3
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          4
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          5
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          6
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          7
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          8
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "左上",
+      "visual": {
+        "type": "nested-grid",
+        "filled_cells": [
+          0
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      }
+    },
+    {
+      "text": "中左",
+      "visual": {
+        "type": "nested-grid",
+        "filled_cells": [
+          3
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      }
+    },
+    {
+      "text": "中",
+      "visual": {
+        "type": "nested-grid",
+        "filled_cells": [
+          4
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      }
+    },
+    {
+      "text": "上中",
+      "visual": {
+        "type": "nested-grid",
+        "filled_cells": [
+          1
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "yellow"
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "每個大格內的小 grid,黑塊位置 = 該大格在 3×3 的位置。? 在 上中,所以黑塊應該在?",
+  "explanation": "每個大格 (r,c) 的小 grid 內,黑塊在第 r*3+c 格。? 在 上中 (r=0, c=1),所以黑塊在 <strong>上中</strong>(pos=1)。",
+  "skill": "位置直接對應",
+  "distractor_meta": [
+    {
+      "pos": 3,
+      "source": "wrong-mapping-row-col-swap"
+    },
+    {
+      "pos": 0,
+      "source": "off-by-one-left"
+    },
+    {
+      "pos": 4,
+      "source": "off-by-one-down"
+    }
+  ],
+  "signature": "7ac722abfe61"
+}

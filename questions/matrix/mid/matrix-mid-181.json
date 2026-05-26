@@ -1,0 +1,146 @@
+{
+  "id": "matrix-mid-181",
+  "topic": "matrix",
+  "difficulty": "mid",
+  "sub_type": "logical-overlay-and",
+  "skill_codes": [
+    "pattern-logical-overlay"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "前兩格都有的線才保留,? 應該有哪些線?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "bottom_h",
+          "right_v",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "bottom_h",
+          "left_v",
+          "diag_main"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "bottom_h",
+          "left_v",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "bottom_h",
+          "left_v"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "right_v",
+          "diag_anti"
+        ]
+      },
+      {
+        "type": "line-overlay",
+        "lines": [
+          "left_v",
+          "diag_anti"
+        ]
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "下橫+左直",
+      "visual": {
+        "type": "line-overlay",
+        "lines": [
+          "bottom_h",
+          "left_v"
+        ]
+      }
+    },
+    {
+      "text": "上橫+副對角",
+      "visual": {
+        "type": "line-overlay",
+        "lines": [
+          "top_h",
+          "diag_anti"
+        ]
+      }
+    },
+    {
+      "text": "主對角",
+      "visual": {
+        "type": "line-overlay",
+        "lines": [
+          "diag_main"
+        ]
+      }
+    },
+    {
+      "text": "副對角",
+      "visual": {
+        "type": "line-overlay",
+        "lines": [
+          "diag_anti"
+        ]
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "第 3 排前兩格是 右直+副對角 跟 左直+副對角。交集 (兩格都有的線才留)。",
+  "explanation": "每一排前兩格用 <strong>AND</strong>(交集 (兩格都有的線才留))得第三格。Row1: 上橫+副對角 AND 下橫+右直+副對角 = 副對角。Row2: 上橫+下橫+左直+主對角 AND 下橫+左直+副對角 = 下橫+左直。Row3: 右直+副對角 AND 左直+副對角 = <strong>副對角</strong>。",
+  "skill": "線條交集 (AND)",
+  "distractor_meta": [
+    {
+      "set": [
+        "diag_main"
+      ],
+      "source": "h-mirror"
+    },
+    {
+      "set": [
+        "top_h",
+        "diag_anti"
+      ],
+      "source": "one-off-top_h"
+    },
+    {
+      "set": [
+        "bottom_h",
+        "left_v"
+      ],
+      "source": "repeat-row1-c"
+    }
+  ],
+  "signature": "763ea495649f"
+}

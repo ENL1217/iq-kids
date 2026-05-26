@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Batch +1000 — 6 個新 primitive 視覺測試</title>
+  <style>
+    :root { --ink: #2D2A4A; --bg: #FFF8F0; --card: #FFFFFF; --accent: #FF6B9D; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, "Segoe UI", "Microsoft JhengHei", sans-serif;
+           background: var(--bg); color: var(--ink); padding: 12px; }
+    h1 { font-size: 1.05rem; margin: 4px 0 12px; }
+    h2 { font-size: 0.95rem; margin: 18px 0 6px; padding: 6px 10px;
+         background: var(--accent); color: white; border-radius: 6px; }
+    .grid { display: grid; gap: 8px;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 90px), 1fr)); }
+    .cell { background: var(--card); border: 2px solid var(--ink); border-radius: 8px;
+            padding: 6px 4px; text-align: center; }
+    .cell svg { width: 100%; height: auto; display: block; }
+    .cell .label { font-size: 0.65rem; margin-top: 4px; line-height: 1.1; color: var(--ink); }
+    .note { background: #FFEDD5; padding: 8px 10px; border-radius: 6px;
+            font-size: 0.8rem; margin: 8px 0; line-height: 1.4; }
+  </style>
+</head>
+<body>
+  <h1>📐 6 個新 primitive — 320px viewport 響應式驗收</h1>
+  <div class="note">
+    本頁列出 Batch +1000 新增的 6 個 visual primitive。<br>
+    驗收標準:在 viewport 寬 320px (iPhone SE portrait) 下,所有圖案 stroke ≥ 2.5/50,
+    線條清楚、3 種對比色 (黑/灰/條紋) 可辨。
+  </div>
+
+  <div id="root"></div>
+
+  <script type="module">
+    import {
+      svg, clockHand, angleV, triangleSplit, tallyLines, bowtie, nestedGrid
+    } from '../js/shapes.js';
+
+    const root = document.getElementById('root');
+
+    function section(title, items) {
+      const h = document.createElement('h2');
+      h.textContent = title;
+      root.appendChild(h);
+      const g = document.createElement('div');
+      g.className = 'grid';
+      items.forEach(({ label, content }) => {
+        const c = document.createElement('div');
+        c.className = 'cell';
+        c.innerHTML = svg(content) + `<div class="label">${label}</div>`;
+        g.appendChild(c);
+      });
+      root.appendChild(g);
+    }
+
+    // B.1 clock-hand:4 個方向 × 2 個長度
+    section('B.1 clock-hand (時鐘指針)', [
+      { label: '0° / 0.7', content: clockHand(0, 0.7) },
+      { label: '45° / 0.7', content: clockHand(45, 0.7) },
+      { label: '90° / 0.7', content: clockHand(90, 0.7) },
+      { label: '135° / 0.7', content: clockHand(135, 0.7) },
+      { label: '180° / 0.7', content: clockHand(180, 0.7) },
+      { label: '225° / 0.7', content: clockHand(225, 0.7) },
+      { label: '270° / 0.7', content: clockHand(270, 0.7) },
+      { label: '315° / 0.7', content: clockHand(315, 0.7) },
+      { label: '90° / 0.4', content: clockHand(90, 0.4) },
+      { label: '90° / 0.7', content: clockHand(90, 0.7) },
+      { label: '長短對比 1.75×', content: clockHand(45, 0.4) + clockHand(45, 0.7) }
+    ]);
+
+    // B.2 angle-v:4 個 orientation × 不同 spread × 不同 dots
+    section('B.2 angle-v (V 字)', [
+      { label: 'up / 60° / 0 dot', content: angleV('up', 60, 0) },
+      { label: 'up / 60° / 1 dot', content: angleV('up', 60, 1) },
+      { label: 'up / 60° / 2 dot', content: angleV('up', 60, 2) },
+      { label: 'up / 60° / 3 dot', content: angleV('up', 60, 3) },
+      { label: 'down / 60° / 2', content: angleV('down', 60, 2) },
+      { label: 'left / 60° / 2', content: angleV('left', 60, 2) },
+      { label: 'right / 60° / 2', content: angleV('right', 60, 2) },
+      { label: 'up / 30° (尖)', content: angleV('up', 30, 0) },
+      { label: 'up / 120° (平)', content: angleV('up', 120, 0) }
+    ]);
+
+    // B.3 triangle-split:2 diagonal × 3×3 fill 組合 (重點顏色組)
+    section('B.3 triangle-split (對角分割)', [
+      { label: 'TL-BR / W/B', content: triangleSplit('TL-BR', 'white', 'black') },
+      { label: 'TL-BR / B/W', content: triangleSplit('TL-BR', 'black', 'white') },
+      { label: 'TL-BR / G/B', content: triangleSplit('TL-BR', 'gray', 'black') },
+      { label: 'TL-BR / W/G', content: triangleSplit('TL-BR', 'white', 'gray') },
+      { label: 'TR-BL / W/B', content: triangleSplit('TR-BL', 'white', 'black') },
+      { label: 'TR-BL / B/W', content: triangleSplit('TR-BL', 'black', 'white') },
+      { label: 'TR-BL / G/W', content: triangleSplit('TR-BL', 'gray', 'white') },
+      { label: 'TR-BL / B/G', content: triangleSplit('TR-BL', 'black', 'gray') }
+    ]);
+
+    // B.4 tally-lines:h_count + v_count 各種組合
+    section('B.4 tally-lines (線數)', [
+      { label: 'h=1', content: tallyLines(1, 0) },
+      { label: 'h=2', content: tallyLines(2, 0) },
+      { label: 'h=3', content: tallyLines(3, 0) },
+      { label: 'v=1', content: tallyLines(0, 1) },
+      { label: 'v=2', content: tallyLines(0, 2) },
+      { label: 'v=3', content: tallyLines(0, 3) },
+      { label: 'h1+v1', content: tallyLines(1, 1) },
+      { label: 'h2+v2', content: tallyLines(2, 2) },
+      { label: 'h3+v3 (井字)', content: tallyLines(3, 3) }
+    ]);
+
+    // B.5 bowtie:2 orientation × 3 fill 組合
+    section('B.5 bowtie (蝴蝶結)', [
+      { label: 'H / W/W', content: bowtie('horizontal', 'white', 'white') },
+      { label: 'H / B/W', content: bowtie('horizontal', 'black', 'white') },
+      { label: 'H / W/B', content: bowtie('horizontal', 'white', 'black') },
+      { label: 'H / S/W', content: bowtie('horizontal', 'striped', 'white') },
+      { label: 'H / B/S', content: bowtie('horizontal', 'black', 'striped') },
+      { label: 'V / B/W', content: bowtie('vertical', 'black', 'white') },
+      { label: 'V / S/B', content: bowtie('vertical', 'striped', 'black') }
+    ]);
+
+    // B.6 nested-grid:9 個位置 + size + 邊框色 + marker shape
+    section('B.6 nested-grid (9 宮格)', [
+      { label: '[0]', content: nestedGrid([0]) },
+      { label: '[4]', content: nestedGrid([4]) },
+      { label: '[8] normal', content: nestedGrid([8], 'normal') },
+      { label: '[8] large', content: nestedGrid([8], 'large') },
+      { label: '[0,4,8] 對角', content: nestedGrid([0, 4, 8]) },
+      { label: '[3,4,5] 中排', content: nestedGrid([3, 4, 5]) },
+      { label: 'marker=circle', content: nestedGrid([4], 'normal', { fill_shape: 'circle' }) },
+      { label: 'marker=triangle', content: nestedGrid([4], 'normal', { fill_shape: 'triangle' }) },
+      { label: 'border=pink', content: nestedGrid([4], 'normal', { border_color: 'pink' }) },
+      { label: 'fill=teal', content: nestedGrid([4], 'normal', { fill_color: 'teal' }) }
+    ]);
+  </script>
+</body>
+</html>

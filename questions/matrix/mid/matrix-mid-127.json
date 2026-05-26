@@ -1,0 +1,113 @@
+{
+  "id": "matrix-mid-127",
+  "topic": "matrix",
+  "difficulty": "mid",
+  "sub_type": "clockwise-col-step",
+  "skill_codes": [
+    "pattern-continuous-rotation"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "直向看每格指針轉的角度,? 指向哪邊?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "unknown": true
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 195,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 330,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 105,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 240,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 15,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 150,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 285,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.7
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "長指針 60° ↗→",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 105° 105°",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 105,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 195° 195°",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 195,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 15° 15°",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 15,
+        "length_ratio": 0.7
+      }
+    }
+  ],
+  "answer": 0,
+  "hint": "這次是<strong>直向</strong>看:每往下一格指針轉 45°,每換一列也轉 45°(但走 column 順序)。",
+  "explanation": "9 個格子按 column-major 順序,每格<strong>順時針轉 45°</strong>:? 在第 1 排第 1 行,對應序號 0,角度 = 60° + 0×45° = <strong>60°</strong>(↗→)。",
+  "skill": "直向連續角度",
+  "distractor_meta": [
+    {
+      "angle": 105,
+      "source": "one-step-extra"
+    },
+    {
+      "angle": 195,
+      "source": "repeat-visible-1"
+    },
+    {
+      "angle": 15,
+      "source": "one-step-short"
+    }
+  ],
+  "signature": "928020895a3c"
+}

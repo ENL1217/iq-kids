@@ -1,0 +1,116 @@
+{
+  "id": "matrix-mid-051",
+  "topic": "matrix",
+  "difficulty": "mid",
+  "sub_type": "tally-cross-add",
+  "skill_codes": [
+    "pattern-tally-add"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "橫線跟直線數量都在加,?是哪一格?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 0
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 3
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 3
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 1,
+        "v_count": 0
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 2
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 1,
+        "v_count": 2
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 2
+      },
+      {
+        "type": "tally-lines",
+        "h_count": 1,
+        "v_count": 0
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "1 橫 1 直",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 1,
+        "v_count": 1
+      }
+    },
+    {
+      "text": "1 橫 2 直",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 1,
+        "v_count": 2
+      }
+    },
+    {
+      "text": "2 橫 1 直",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 2,
+        "v_count": 1
+      }
+    },
+    {
+      "text": "2 條直線",
+      "visual": {
+        "type": "tally-lines",
+        "h_count": 0,
+        "v_count": 2
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "橫線:0+1=?,直線:2+0=?,兩個都要算。",
+  "explanation": "<strong>橫線</strong>每排前兩格相加:Row3 0+1=<strong>1</strong>。<strong>直線</strong>同理:Row3 2+0=<strong>2</strong>。所以 ? = <strong>1 橫 + 2 直</strong>。",
+  "skill": "橫直雙軸加法",
+  "distractor_meta": [
+    {
+      "h": 1,
+      "v": 1,
+      "source": "v-1"
+    },
+    {
+      "h": 2,
+      "v": 1,
+      "source": "axis-swap"
+    },
+    {
+      "h": 0,
+      "v": 2,
+      "source": "copy-row0"
+    }
+  ],
+  "signature": "00b983f8db3b"
+}

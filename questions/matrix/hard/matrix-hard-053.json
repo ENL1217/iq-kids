@@ -1,0 +1,161 @@
+{
+  "id": "matrix-hard-053",
+  "topic": "matrix",
+  "difficulty": "hard",
+  "sub_type": "row-col-swap",
+  "skill_codes": [
+    "pattern-position-mapping"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "大格的橫直位置交換 = 小 grid 的位置。? 裡黑塊在哪?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          0
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "orange"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          3
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "orange"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          6
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "orange"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          1
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "orange"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          4
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "orange"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          7
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "orange"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          2
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "orange"
+      },
+      {
+        "type": "nested-grid",
+        "filled_cells": [
+          5
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "orange"
+      },
+      {
+        "unknown": true
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "左下",
+      "visual": {
+        "type": "nested-grid",
+        "filled_cells": [
+          6
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "orange"
+      }
+    },
+    {
+      "text": "右上",
+      "visual": {
+        "type": "nested-grid",
+        "filled_cells": [
+          2
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "orange"
+      }
+    },
+    {
+      "text": "左上",
+      "visual": {
+        "type": "nested-grid",
+        "filled_cells": [
+          0
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "orange"
+      }
+    },
+    {
+      "text": "右下",
+      "visual": {
+        "type": "nested-grid",
+        "filled_cells": [
+          8
+        ],
+        "black_cell_size": "normal",
+        "fill_shape": "square",
+        "border_color": "orange"
+      }
+    }
+  ],
+  "answer": 3,
+  "hint": "把大格的「橫直」對調當小 grid 位置。? 在 右下,橫直對調?",
+  "explanation": "大格 (r,c)=(2,2),交換後 (c,r)=(2,2),對應小 grid 位置 c*3+r = <strong>8</strong>(右下)。",
+  "skill": "行列交換對應",
+  "distractor_meta": [
+    {
+      "pos": 6,
+      "source": "mirror-H"
+    },
+    {
+      "pos": 0,
+      "source": "wrong-mapping-inverted-mapping"
+    },
+    {
+      "pos": 2,
+      "source": "mirror-V"
+    }
+  ],
+  "signature": "d561cdefc441"
+}

@@ -1,0 +1,116 @@
+{
+  "id": "multivar-easy-118",
+  "topic": "multivar",
+  "difficulty": "easy",
+  "sub_type": "2var-shape-line",
+  "skill_codes": [
+    "multivar-2var"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "形狀跟穿過的線都在變,? 是哪個?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "shape-line",
+        "shape": "circle",
+        "line": "vertical"
+      },
+      {
+        "type": "shape-line",
+        "shape": "circle",
+        "line": "diag-2"
+      },
+      {
+        "type": "shape-line",
+        "shape": "circle",
+        "line": "diag-1"
+      },
+      {
+        "type": "shape-line",
+        "shape": "square",
+        "line": "vertical"
+      },
+      {
+        "unknown": true
+      },
+      {
+        "type": "shape-line",
+        "shape": "square",
+        "line": "diag-1"
+      },
+      {
+        "type": "shape-line",
+        "shape": "triangle",
+        "line": "vertical"
+      },
+      {
+        "type": "shape-line",
+        "shape": "triangle",
+        "line": "diag-2"
+      },
+      {
+        "type": "shape-line",
+        "shape": "triangle",
+        "line": "diag-1"
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "圓穿直線",
+      "visual": {
+        "type": "shape-line",
+        "shape": "circle",
+        "line": "vertical"
+      }
+    },
+    {
+      "text": "方穿副對角線",
+      "visual": {
+        "type": "shape-line",
+        "shape": "square",
+        "line": "diag-2"
+      }
+    },
+    {
+      "text": "三角穿副對角線",
+      "visual": {
+        "type": "shape-line",
+        "shape": "triangle",
+        "line": "diag-2"
+      }
+    },
+    {
+      "text": "方穿直線",
+      "visual": {
+        "type": "shape-line",
+        "shape": "square",
+        "line": "vertical"
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "橫向看形狀,直向看穿過的線。? 在第 2 排第 2 行。",
+  "explanation": "<strong>橫向看形狀,直向看穿過的線</strong>:該排是 方,該行的線方向是 副對角線。? = <strong>方 穿 副對角線</strong>。",
+  "skill": "形狀+穿線方向雙變數",
+  "distractor_meta": [
+    {
+      "shape": "square",
+      "line": "vertical",
+      "source": "wrong-line-vertical"
+    },
+    {
+      "shape": "triangle",
+      "line": "diag-2",
+      "source": "wrong-shape-triangle"
+    },
+    {
+      "shape": "circle",
+      "line": "vertical",
+      "source": "both-wrong"
+    }
+  ],
+  "signature": "741fd381bd5f"
+}

@@ -1,0 +1,113 @@
+{
+  "id": "matrix-mid-117",
+  "topic": "matrix",
+  "difficulty": "mid",
+  "sub_type": "clockwise-col-step",
+  "skill_codes": [
+    "pattern-continuous-rotation"
+  ],
+  "created_at": "2026-05-25",
+  "author": "claude-generated",
+  "prompt": "直向看每格指針轉的角度,? 指向哪邊?",
+  "visual": {
+    "type": "matrix-3x3",
+    "cells": [
+      {
+        "type": "clock-hand",
+        "angle_deg": 0,
+        "length_ratio": 0.7
+      },
+      {
+        "unknown": true
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 0,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 240,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 120,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 300,
+        "length_ratio": 0.7
+      },
+      {
+        "type": "clock-hand",
+        "angle_deg": 120,
+        "length_ratio": 0.7
+      }
+    ]
+  },
+  "options": [
+    {
+      "text": "長指針 0° ↑",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 0,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 180° ↓",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 180,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 240° ↙←",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 240,
+        "length_ratio": 0.7
+      }
+    },
+    {
+      "text": "長指針 60° ↗→",
+      "visual": {
+        "type": "clock-hand",
+        "angle_deg": 60,
+        "length_ratio": 0.7
+      }
+    }
+  ],
+  "answer": 1,
+  "hint": "這次是<strong>直向</strong>看:每往下一格指針轉 60°,每換一列也轉 60°(但走 column 順序)。",
+  "explanation": "9 個格子按 column-major 順序,每格<strong>順時針轉 60°</strong>:? 在第 1 排第 2 行,對應序號 3,角度 = 0° + 3×60° = <strong>180°</strong>(↓)。",
+  "skill": "直向連續角度",
+  "distractor_meta": [
+    {
+      "angle": 60,
+      "source": "wrong-axis-row"
+    },
+    {
+      "angle": 0,
+      "source": "repeat-visible-0"
+    },
+    {
+      "angle": 240,
+      "source": "one-step-extra"
+    }
+  ],
+  "signature": "15f7683f923a"
+}
