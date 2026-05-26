@@ -1,0 +1,48 @@
+name: Auto-update README question counts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'questions/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    # Loop prevention: skip if last commit was already from this bot.
+    # Bot commits use a fixed message prefix that no human would type by hand.
+    if: "!startsWith(github.event.head_commit.message, 'chore(readme): auto-update counts')"
+    steps:
+      - name: Checkout
+        # Pinned to SHA for supply-chain safety.
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4.3.1
+        with:
+          # Use default GITHUB_TOKEN so the bot's push is attributed correctly
+          # and so the next push (the bot's own) doesn't re-trigger this workflow
+          # via the loop-prevention check above.
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+        with:
+          node-version: '20'
+
+      - name: Regenerate README counts
+        run: node tools/update-readme.mjs
+
+      - name: Commit + push if changed
+        run: |
+          if [[ -z "$(git status --porcelain README.md README.en.md)" ]]; then
+            echo "No README count changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md README.en.md
+          git commit -m "chore(readme): auto-update counts after questions/ change"
+          git push
+          echo "✓ README counts updated and pushed."

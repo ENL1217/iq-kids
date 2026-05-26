@@ -16,6 +16,7 @@ Open the link and start playing. **No signup, no download, no install.**
 
 ## 📊 Current Question Bank
 
+<!-- AUTO-COUNT-START -->
 **1486 questions** across six topics and three difficulty levels, growing:
 
 | Topic | Easy ⭐ | Mid ⭐⭐ | Hard ⭐⭐⭐ | Total |
@@ -27,6 +28,7 @@ Open the link and start playing. **No signup, no download, no install.**
 | 🔗 Verbal Analogy     | 32 | 27 | 22 | 81 |
 | 🌈 Multi-attribute    | 157 | 307 | 162 | 626 |
 | **Total**             | | | | **1486** |
+<!-- AUTO-COUNT-END -->
 
 > Matrix Reasoning covers: Latin square, tally-line addition, logical overlay (or/and/xor), continuous rotation, position mapping, and more.
 > Spatial Reasoning covers: isometric cube-stack counting, cube-net opposite/invalid-net detection, paper-fold-and-punch, symmetry unfolding, mirror-arrow reasoning, and cube-combination matching.
