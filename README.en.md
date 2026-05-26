@@ -16,19 +16,21 @@ Open the link and start playing. **No signup, no download, no install.**
 
 ## 📊 Current Question Bank
 
-**486 questions** across six topics and three difficulty levels, growing:
+**1486 questions** across six topics and three difficulty levels, growing:
 
 | Topic | Easy ⭐ | Mid ⭐⭐ | Hard ⭐⭐⭐ | Total |
 |-------|---------|---------|----------|-------|
-| 🎯 Matrix Reasoning   | 32 | 27 | 22 | 81 |
+| 🎯 Matrix Reasoning   | 147 | 242 | 127 | 516 |
 | 🔄 Visual Sequence    | 32 | 27 | 22 | 81 |
 | 🧊 Spatial Reasoning  | 26 | 45 | 36 | 107 |
 | 🔢 Number Series      | 30 | 25 | 20 | 75 |
 | 🔗 Verbal Analogy     | 32 | 27 | 22 | 81 |
-| 🌈 Multi-attribute    | 22 | 22 | 17 | 61 |
-| **Total**             | | | | **486** |
+| 🌈 Multi-attribute    | 157 | 307 | 162 | 626 |
+| **Total**             | | | | **1486** |
 
-> Spatial sub-types cover: isometric cube-stack counting, cube-net opposite/invalid-net detection, paper-fold-and-punch, symmetry unfolding, mirror-arrow reasoning, and **cube-combination matching**.
+> Matrix Reasoning covers: Latin square, tally-line addition, logical overlay (or/and/xor), continuous rotation, position mapping, and more.
+> Spatial Reasoning covers: isometric cube-stack counting, cube-net opposite/invalid-net detection, paper-fold-and-punch, symmetry unfolding, mirror-arrow reasoning, and cube-combination matching.
+> Multi-attribute covers: 2-variable direction-fill, count-frame, shape-line, 3-variable position-orbit, and more.
 
 > All questions are **original** — generated procedurally with attention to cognitive science principles. We never copy from copyrighted IQ test banks.
 
